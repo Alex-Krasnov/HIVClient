@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { HttpClient} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-home',
@@ -6,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent implements OnInit {
-  public homeString: string;
+export class HomeComponent implements OnInit{
 
-  constructor() { }
+  homeString: string = "2";
+  
 
-  ngOnInit(): void {
-    this.homeString = "Some text";
-  }
+
+  constructor(private http: HttpClient){  }
+
+  ngOnInit() { 
+    
+  }  
 }
