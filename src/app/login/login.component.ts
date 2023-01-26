@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit{
   }
   login = ( form: NgForm) => {
     if (form.valid) {
-      this.http.post<AuthenticatedResponse>("https://localhost:5001/Login?login=Краснов&password=4100", this.credentials, {
+      // console.log(this.credentials);
+      this.http.post<AuthenticatedResponse>("https://localhost:5001/Login", this.credentials, { 
         headers: new HttpHeaders({ "Content-Type": "application/json"})
       })
       .subscribe({
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit{
           const token = response.token;
           localStorage.setItem("jwt", token); 
           this.invalidLogin = false; 
-          this.router.navigate(["/"]);
+          this.router.navigate(["/main"]);
         },
         error: (err: HttpErrorResponse) => this.invalidLogin = true
       })
