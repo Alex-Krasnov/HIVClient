@@ -19,20 +19,19 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     
   }
+
   login = ( form: NgForm) => {
     if (form.valid) {
-      // console.log(this.credentials);
       this.http.post<AuthenticatedResponse>("https://localhost:5001/Login", this.credentials, { 
         headers: new HttpHeaders({ "Content-Type": "application/json"})
-      })
-      .subscribe({
+      }).subscribe({
         next: (response: AuthenticatedResponse) => {
           const token = response.token;
+          const refreshToken = response.refreshToken;
           localStorage.setItem("jwt", token); 
-          this.invalidLogin = false; 
-          console.log('1');
+          localStorage.setItem("refreshToken", refreshToken)
+          this.invalidLogin = false;
           this.router.navigate(["main"]);
-          console.log('2');
         },
         error: (err: HttpErrorResponse) => this.invalidLogin = true
       })

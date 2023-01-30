@@ -1,3 +1,31 @@
-.invise{
-    display: none;
+.form-btn-menu {
+    width: 800px;
+    padding-top: 5px;
 }
+.w-70 {
+    width: 70%;
+    margin-bottom: 2px;
+}
+.w-100 {
+    width: 100%;
+    margin-bottom: 2px;
+}
+.btn{
+    --bs-btn-padding-y: .25rem;
+    --bs-btn-padding-x: .5rem;
+    --bs-btn-font-size: 1rem;
+}
+.btn-w {
+    width: 15rem;
+}
+.left-col-m {
+    margin-left: auto;
+    margin-right: auto;
+}
+.border{
+    --bs-border-color: #ade8dd;
+    /* #ade8dd; */
+    border-radius: 0.5rem;
+    --bs-border-width: 1px;
+}
+
