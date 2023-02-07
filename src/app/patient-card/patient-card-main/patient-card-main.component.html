@@ -1,0 +1,384 @@
+<nav class="navbar navbar-expand-xxl bg-light" aria-label="Fourth navbar example">
+    <div class="container-fluid">
+        <img src="favicon.ico" width="35" height="35">
+        <p class="m-auto" style="padding-left: 0.25rem;">Общие данные</p>
+        <button class="navbar-toggler collapsed" type="button" (click)="openDropdown('Меню')">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" [class.show]="isVisibleMenu">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/patient_card/main']" routerLinkActive="disabled" >Общие данные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Эпид. данные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Лечение</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Явка на приём</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" (click)="openDropdown('Диагностика')">Диагностика</a>
+                    <ul [class.visibleDropdown]="isVisibleDiagn" class="dropdown-menu">
+                        <li><a class="dropdown-item">Диагностика общ.</a></li>
+                        <li><a class="dropdown-item">Резистентность</a></li>
+                        <li><a class="dropdown-item">Диагностика и сопут.</a></li>
+                        <li><a class="dropdown-item">Диагн. руч.</a></li>
+                        <li><a class="dropdown-item">ACL</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Рецепты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Беременные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Дети</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">COVID</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">СИЗО</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" (click)="openDropdown('Системные')">Системные</a>
+                    <ul [class.visibleDropdown]="isVisibleSystem" class="dropdown-menu">
+                        <li><a class="dropdown-item">setup_print</a></li>
+                        <li><a class="dropdown-item">print</a></li>
+                        <li><a class="dropdown-item">research_frm</a></li>
+                        <li><a class="dropdown-item">other_print</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/main']" routerLinkActive="disabled">Гл. меню</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div style="background-color: #ade8dd;">
+    <div class="row">
+        <div class="col-4">
+            <div class="row m-2">
+                <div class="col-xl  form-floating p-0 ps-1">
+                    <input type="text" class="form-control" disabled placeholder="ИД пациента" name="">
+                    <label for="floatingInput">ИД пациента</label>
+                </div>
+                <div class="col-xl -6 form-floating p-0">
+                    <input type="date" class="form-control" disabled placeholder="Дата внесения" name="">
+                    <label for="floatingInput">Дата внесения</label>
+                </div>
+            </div>
+            <div class="form-floating m-2">
+                <input type="text" class="form-control" placeholder="Фамилия" name="">
+                <label for="floatingInput">Фамилия</label>
+            </div>
+            <div class="form-floating m-2">
+                <input type="text" class="form-control" placeholder="Имя" name="">
+                <label for="floatingInput">Имя</label>
+            </div>
+            <div class="form-floating m-2">
+                <input type="text" class="form-control" placeholder="Отчество" name="">
+                <label for="floatingInput">Отчество</label>
+            </div>
+            <div class="form-floating m-2">
+                <input type="date" class="form-control" placeholder="Дата рождения" name="">
+                <label for="floatingInput">Дата рождения</label>
+            </div>
+            <div class="form-floating m-2">
+                <input type="text" class="form-control" placeholder="Пол" name="">
+                <label for="floatingInput">Пол</label>
+            </div>
+            <div class="form-floating m-2">
+                <input type="date" class="form-control" placeholder="Дата пост. на учет" name="">
+                <label for="floatingInput">Дата пост. на учет</label>
+            </div>
+            <div class="row m-2">
+                <div class="col-xl -6 form-floating p-0">
+                    <input type="date" class="form-control" placeholder="Дата снят. с учёта" name="">
+                    <label for="floatingInput">Дата снят. с учёта</label>
+                </div>
+                <div class="col-xl  form-floating p-0 ps-1">
+                    <input type="text" class="form-control" placeholder="Причина снят. с учёта" name="">
+                    <label for="floatingInput">Причина снят. с учёта</label>
+                </div>
+            </div>
+            <div class="form-floating m-2">
+                <input type="text" class="form-control" placeholder="УНРЗ" name="">
+                <label for="floatingInput">УНРЗ</label>
+            </div>
+        </div>
+        <div class="col-xl ">
+            <!-- компонент для блота -->
+        </div>
+    </div>
+    <br>
+    <p class="text-start ms-2 m-0">Место проживания</p>
+    <div class="border">
+        <div class="row">
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Регион" name="">
+                    <label for="floatingInput">Регион</label>
+                </div>
+            </div>
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Город" name="">
+                    <label for="floatingInput">Город</label>
+                </div>
+            </div>
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Населенный пункт" name="">
+                    <label for="floatingInput">Населенный пункт</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Телефон" name="">
+                    <label for="floatingInput">Телефон</label>
+                </div>
+            </div>
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Улица" name="">
+                    <label for="floatingInput">Улица</label>
+                </div>
+            </div>
+            <div class="col-xl -1 m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Дом" name="">
+                    <label for="floatingInput">Дом</label>
+                </div>
+            </div>
+            <div class="col-xl -1 m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Корпус" name="">
+                    <label for="floatingInput">Корпус</label>
+                </div>
+            </div>
+            <div class="col-xl -1 m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Квартира" name="">
+                    <label for="floatingInput">Квартира</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <p class="text-start ms-2 m-0">Место фактического проживания</p>
+    <div class="border">
+        <div class="row">
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Регион" name="">
+                    <label for="floatingInput">Регион</label>
+                </div>
+            </div>
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Город" name="">
+                    <label for="floatingInput">Город</label>
+                </div>
+            </div>
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Населенный пункт" name="">
+                    <label for="floatingInput">Населенный пункт</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Телефон" name="">
+                    <label for="floatingInput">Телефон</label>
+                </div>
+            </div>
+            <div class="col-xl  m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Улица" name="">
+                    <label for="floatingInput">Улица</label>
+                </div>
+            </div>
+            <div class="col-xl -1 m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Дом" name="">
+                    <label for="floatingInput">Дом</label>
+                </div>
+            </div>
+            <div class="col-xl -1 m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Корпус" name="">
+                    <label for="floatingInput">Корпус</label>
+                </div>
+            </div>
+            <div class="col-xl -1 m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Квартира" name="">
+                    <label for="floatingInput">Квартира</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xl m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Примечание" name="">
+                <label for="floatingInput">Примечание</label>
+            </div>
+        </div>
+        <div class="col-xl-3 m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Страна" name="">
+                <label for="floatingInput">Страна</label>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-xl m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Место выявления" name="">
+                <label for="floatingInput">Место выявления</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Кодировка МКБ 10" name="">
+                <label for="floatingInput">Кодировка МКБ 10</label>
+            </div>
+        </div>
+        <div class="col-xl m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="№ карты" name="">
+                <label for="floatingInput">№ карты</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Кат. уязвимой группы" name="">
+                <label for="floatingInput">Кат. уязвимой группы</label>
+            </div>
+        </div>
+        <div class="col-xl-1 m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Рост" name="">
+                <label for="floatingInput">Рост</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Вес" name="">
+                <label for="floatingInput">Вес</label>
+            </div>
+        </div>
+    </div>
+    <div class="row g-1 mt-1">
+        <div class="col-xl-1 m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Обращения" name="">
+                <label for="floatingInput">Обращения</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Заражения" name="">
+                <label for="floatingInput">Заражения</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="смерти" name="">
+                <label for="floatingInput">Смерти</label>
+            </div>
+        </div>
+        <div class="col-xl m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Причина обращения" name="">
+                <label for="floatingInput">Причина обращения</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Причина заражения" name="">
+                <label for="floatingInput">Причина заражения</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Причина смерти" name="">
+                <label for="floatingInput">Причина смерти</label>
+            </div>
+        </div>
+    </div>
+    <div class="row g-1 mt-1">
+        <div class="col-xl-2 m-1">
+            <div class="form-floating">
+                <input type="date" class="form-control" placeholder="Передан в район" name="">
+                <label for="floatingInput">Передан в район</label>
+            </div>
+            <div class="form-floating">
+                <input type="date" class="form-control" placeholder="Передан в Суб. Фед." name="">
+                <label for="floatingInput">Передан в Суб. Фед.</label>
+            </div>
+            <div class="form-floating">
+                <input type="date" class="form-control" placeholder="Передан в УФСИН" name="">
+                <label for="floatingInput">Передан в УФСИН</label>
+            </div>
+        </div>
+        <div class="col-xl-2 m-1">
+            <div class="form-floating">
+                <input type="date" class="form-control" disabled placeholder="Дата внесения смерти" name="">
+                <label for="floatingInput">Дата внесения смерти</label>
+            </div>
+            <div class="form-floating">
+                <input type="date" class="form-control" placeholder="Дата смерти" name="">
+                <label for="floatingInput">Дата смерти</label>
+            </div>
+            <div class="form-floating">
+                <input type="date" class="form-control" placeholder="Дата смерти от СПИДа" name="">
+                <label for="floatingInput">Дата смерти от СПИДа</label>
+            </div>
+        </div>
+        <div class="col-xl-2 m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="АРВТ" name="">
+                <label for="floatingInput">АРВТ</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Гр. инвалидности" name="">
+                <label for="floatingInput">Гр. инвалидности</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Архив" name="">
+                <label for="floatingInput">Архив</label>
+            </div>
+        </div>
+        <div class="col-xl-4 m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Кодовое слово" name="">
+                <label for="floatingInput">Кодовое слово</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="СНИЛС" name="">
+                <label for="floatingInput">СНИЛС</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Смена ФИО" name="">
+                <label for="floatingInput">Смена ФИО</label>
+            </div>
+        </div>
+        <div class="col-xl-1 m-1">
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Зав. АПО" name="">
+                <label for="floatingInput">Зав. АПО</label>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" placeholder="Внесен в ФР" name="">
+                <label for="floatingInput">Внесен в ФР</label>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+

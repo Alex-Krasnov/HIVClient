@@ -15,16 +15,17 @@ export class AuthGuard implements CanActivate  {
     if (token && !this.jwtHelper.isTokenExpired(token)){
       return true;
     }
+    console.log("try_refresh_token");
     const isRefreshSuccess = await this.tryRefreshingTokens(token); 
-    if (!isRefreshSuccess) { 
-      // this.router.navigate(["err"]); 
+    console.log("end_try");
+
+    if (!isRefreshSuccess) {
       console.log("unsuccessful refresh");
       this.router.navigate([""]);
-      return isRefreshSuccess;
-    } else{
+    } else
       console.log("success refresh");
-      return isRefreshSuccess;
-    }
+    
+    return isRefreshSuccess;
   }
 
   private async tryRefreshingTokens(token: string): Promise<boolean> {
@@ -32,17 +33,15 @@ export class AuthGuard implements CanActivate  {
     if (!token || !refreshToken) { 
       return false;
     }
-    
     const credentials = JSON.stringify({ accessToken: token, refreshToken: refreshToken });
     let isRefreshSuccess: boolean;
+    
     const refreshRes = await new Promise<AuthenticatedResponse>((resolve, reject) => {
       this.http.post<AuthenticatedResponse>("https://localhost:5001/api/token/refresh", credentials, {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json"
-        })
-      }).subscribe({
+        headers: new HttpHeaders({"Content-Type": "application/json"})
+      }).subscribe({ 
         next: (res: AuthenticatedResponse) => resolve(res),
-        error: (_) => { reject; isRefreshSuccess = false;}
+        error: (_) => { reject; isRefreshSuccess = false; this.router.navigate([""]);}
       });
     });
     localStorage.setItem("jwt", refreshRes.token);

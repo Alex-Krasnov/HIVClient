@@ -1,5 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-import { HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { logOut } from '../services/logout.service';
 import { Router } from '@angular/router';
@@ -11,26 +10,32 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit{
   customers: any;
+  isKlassif:boolean = false;
+  isAdmin:boolean = false;
+  isWriter:boolean = false;
+  //roles:string[];
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private logout: logOut, private router: Router){  }
+  constructor(
+    private jwtHelper: JwtHelperService, 
+    private logout: logOut, 
+    private router: Router
+    ){  }
 
   ngOnInit() { 
-    console.log(this.jwtHelper.getTokenExpirationDate(localStorage.getItem("jwt")));
     console.log(this.jwtHelper.decodeToken(localStorage.getItem("jwt")));
+    var roles = this.jwtHelper.decodeToken(localStorage.getItem("jwt"))["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+    console.log(this.jwtHelper.getTokenExpirationDate(localStorage.getItem("jwt")));
+    
+    if(roles.find(e => e == "Klassif") != null)
+      this.isKlassif = true;
+    if(roles.find(e => e == "Admin") != null)
+      this.isAdmin = true;
+    if(roles.find(e => e == "Writer") != null)
+      this.isWriter = true;
+
+    console.log(this.isWriter, "isWriter",this.isKlassif, "isKlassif",this.isAdmin, "isAdmin");
   }  
-
-  isUserAuthenticated = (): boolean => {
-    const token = localStorage.getItem("jwt");
-    if (token && !this.jwtHelper.isTokenExpired(token)){
-      return true;      
-    }
-    return false;
-  }
-
-  roles(){
-    localStorage.getItem("jwt");
-
-  }
 
   exit(){
     this.logout.revokeToken();

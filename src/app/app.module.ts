@@ -12,6 +12,8 @@ import { EngineeringWorksComponent } from './engineering-works/engineering-works
 import { LoginComponent } from './login/login.component';
 import { JwtModule } from "@auth0/angular-jwt"; 
 import { logOut } from './services/logout.service';
+import { PatientCardModule } from './patient-card/patient-card.module';
+
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -36,7 +38,8 @@ export function tokenGetter() {
         allowedDomains: ["localhost:5001"],
         disallowedRoutes: []
       }
-    })
+    }),
+    PatientCardModule
   ],
   providers: [
     AuthGuard,

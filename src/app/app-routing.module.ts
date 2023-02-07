@@ -11,7 +11,10 @@ import { EngineeringWorksComponent } from './engineering-works/engineering-works
 const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'main', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: 'err', component: EngineeringWorksComponent, canActivate: [AuthGuard]}
+  { path: 'err', component: EngineeringWorksComponent, canActivate: [AuthGuard]},
+  { path: 'patient_card', 
+  loadChildren: () => import('./patient-card/patient-card.module').then(m => m.PatientCardModule), 
+  canActivate: [AuthGuard]} // , canActivate: [AuthGuard]
 ];
 
 @NgModule({
