@@ -62,7 +62,7 @@
 </nav>
 <div style="background-color: #ade8dd;">
     <div class="row mb-2">
-        <div class="col-4">
+        <div class="col-xl-4">
             <div class="row m-1">
                 <div class="col-xl  form-floating p-0 ps-1">
                     <input type="text" class="form-control" disabled placeholder="ИД пациента" name="patientId" [(ngModel)]="patient.patientId">
@@ -112,8 +112,10 @@
                 <label for="floatingInput">УНРЗ</label>
             </div>
         </div>
-        <div class="col-xl ">
-            <!-- компонент для блота -->
+        <div class="col-xl me-1">
+            <div class=" mt-1" style="height: 367px; overflow: auto;">
+                <app-patient-blot [(blots)]="patient.blots"></app-patient-blot>
+            </div>
         </div>
     </div>
     <p class="text-start ms-2 m-0">Место проживания</p>
@@ -250,8 +252,17 @@
             </div>
         </div>
     </div>
-    <div class="row g-1 mb-2">
-
+    <div class="row g-1 mb-1">
+        <div class="col-xl-3 me-1">
+            <div class="ms-1 mt-1" style="height: 115px; overflow: auto;">
+                <app-patient-stage [(stages)]="patient.stages"></app-patient-stage>
+            </div>
+        </div>
+        <div class="col-xl-5 me-1">
+            <div class=" mt-1" style="height: 115px; overflow: auto;">
+                <app-patient-second-desease [(secondDeseases)]="patient.secondDeseases"></app-patient-second-desease>
+            </div>
+        </div>
     </div>
     <div class="row g-1 mb-2">
         <div class="col-xl m-1">

@@ -1,0 +1,21 @@
+<table class="table border">
+    <thead style="position: sticky;top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 30px;">Стадии</th>
+        <th scope="col" style="width: 90px;"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of stages" [value]="item">
+        <td><input type="date" class="form-control tbl" name="" [(ngModel)]="item.stageDate"></td>
+        <td><input type="text" list="listStage" class="form-control tbl" name="" [(ngModel)]="item.stage"></td>
+        <td><button class="btn btn-outline-danger"></button></td>
+      </tr>
+      <tr>
+        <td><input type="date" class="form-control tbl" name=""></td>
+        <td><input type="text" list="listStage" class="form-control tbl" name=""></td>
+        <td><button class="btn btn-outline-success"></button></td>
+      </tr>
+    </tbody>
+  </table>

@@ -115,3 +115,19 @@ body {
 .form-floating>label {
     padding: 0.5rem 0.5rem;
 }
+
+.tbl{
+    border-radius: 0;
+    padding: 2px;
+}
+
+td{
+    padding: 0.1rem 0.1rem!important;
+}
+th{
+    padding: 0.1rem 0.1rem!important;
+}
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}

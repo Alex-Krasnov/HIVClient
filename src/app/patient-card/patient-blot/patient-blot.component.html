@@ -1,1 +1,82 @@
-<p>patient-blot works!</p>
+<table class="table border">
+    <thead style="position: sticky;top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 30px;">№</th>
+        <th scope="col" style="width: 90px;">№ рез.</th>
+        <th scope="col" style="width: 135px;">Дата</th>
+        <th scope="col" style="width: 35px;">Рез.</th>
+        <th scope="col">ЛПУ, направ. матер.</th>
+        <th scope="col" style="width: 30px;">1й</th>
+        <th scope="col" style="width: 47px;">Посл.</th>
+        <th scope="col" style="width: 41px;">ИФА</th>
+        <th scope="col" style="width: 135px;">Дата ввода</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of blots" [value]="item">
+        <td>
+            <input type="text" class="form-control tbl" name="" [(ngModel)]="item.blotId">
+        </td>
+        <td>
+            <input type="text" class="form-control tbl" name="" [(ngModel)]="item.blotNo">
+        </td>
+        <td>
+            <input type="date" class="form-control tbl" name="" [(ngModel)]="item.blotDate">
+        </td>
+        <td>
+            <input type="text" list="listRes" class="form-control tbl" name="" [(ngModel)]="item.blotRes">
+        </td>
+        <td>
+            <input type="text" list="listCheckPlace" class="form-control tbl" name="" [(ngModel)]="item.checkPlace">
+        </td>
+        <td>
+            <input type="checkbox" class="form-check-input mt-2" name="" [(ngModel)]="item.first">
+        </td>
+        <td>
+            <input type="checkbox" class="form-check-input mt-2" name="" [(ngModel)]="item.last">
+        </td>
+        <td>
+            <input type="checkbox" class="form-check-input mt-2" name="" [(ngModel)]="item.ifa">
+        </td>
+        <td>
+            <input type="date" disabled class="form-control tbl" name="" [(ngModel)]="item.inputDate">
+        </td>
+        <td>
+            <button class="btn btn-outline-danger"></button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <input type="text" class="form-control tbl" name="">
+        </td>
+        <td>
+            <input type="text" class="form-control tbl" name="">
+        </td>
+        <td>
+            <input type="date" class="form-control tbl" name="">
+        </td>
+        <td>
+            <input type="text" list="listRes" class="form-control tbl" name="">
+        </td>
+        <td>
+            <input type="text" list="listCheckPlace" class="form-control tbl" name="">
+        </td>
+        <td>
+            <input type="checkbox" class="form-check-input mt-2" name="">
+        </td>
+        <td>
+            <input type="checkbox" class="form-check-input mt-2" name="">
+        </td>
+        <td>
+            <input type="checkbox" class="form-check-input mt-2" name="">
+        </td>
+        <td>
+            <input type="date" disabled class="form-control tbl" name="">
+        </td>
+        <td>
+            <button class="btn btn-outline-success"></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>

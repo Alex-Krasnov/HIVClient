@@ -5,13 +5,17 @@ import { PatientCardMainComponent } from './patient-card-main/patient-card-main.
 import { PatientCardMain } from 'src/app/services/patient-card-main.service';
 import { FormsModule } from '@angular/forms';
 import { PatientBlotComponent } from './patient-blot/patient-blot.component';
+import { PatientStageComponent } from './patient-stage/patient-stage.component';
+import { PatientSecondDeseaseComponent } from './patient-second-desease/patient-second-desease.component';
 
 
 
 @NgModule({
   declarations: [
     PatientCardMainComponent,
-    PatientBlotComponent
+    PatientBlotComponent,
+    PatientStageComponent,
+    PatientSecondDeseaseComponent
   ],
   imports: [
     CommonModule, 
