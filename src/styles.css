@@ -102,11 +102,16 @@ body {
     --bs-nav-link-hover-color: #666565;
 }
 
-/* .form-floating>.form-control, .form-floating>.form-control-plaintext, .form-floating>.form-select {
-    height: auto; 
-} */
-
 .border {
     --bs-border-width: 1px;
     --bs-border-color: #5f8d84;
+}
+
+.form-floating>.form-control, .form-floating>.form-control-plaintext, .form-floating>.form-select {
+    height: calc(2.5rem + 2px);
+    line-height: 1.25;
+}
+
+.form-floating>label {
+    padding: 0.5rem 0.5rem;
 }

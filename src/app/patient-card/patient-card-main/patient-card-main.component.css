@@ -1,3 +1,11 @@
 .visibleDropdown{
     display: block;
 }
+
+.fontw{
+    font-weight: 600!important;
+}
+
+.form-control{
+    font-weight: 600;
+}

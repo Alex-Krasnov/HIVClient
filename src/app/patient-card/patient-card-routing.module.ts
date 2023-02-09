@@ -4,7 +4,7 @@ import { Routes,RouterModule } from '@angular/router';
 import { PatientCardMainComponent } from './patient-card-main/patient-card-main.component';
 
 const routes: Routes = [
-  { path: 'main', component: PatientCardMainComponent }//,
+  { path: 'main/:id', component: PatientCardMainComponent }//,
   //{ path: ':id', component: ItemsDetailComponent }
 ];
 

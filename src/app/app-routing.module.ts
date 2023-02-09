@@ -4,14 +4,12 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { EngineeringWorksComponent } from './engineering-works/engineering-works.component';
 
 
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'main', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: 'err', component: EngineeringWorksComponent, canActivate: [AuthGuard]},
   { path: 'patient_card', 
   loadChildren: () => import('./patient-card/patient-card.module').then(m => m.PatientCardModule), 
   canActivate: [AuthGuard]} // , canActivate: [AuthGuard]
