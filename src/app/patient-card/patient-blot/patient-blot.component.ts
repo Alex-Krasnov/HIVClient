@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Blot } from 'src/app/_interfaces/blot.model';
 
 @Component({
@@ -8,8 +8,13 @@ import { Blot } from 'src/app/_interfaces/blot.model';
 })
 export class PatientBlotComponent implements OnInit {
   @Input() blots: Blot[];
+  @Output() delBlotId = new EventEmitter<number>();
 
   ngOnInit() {
     
+ }
+
+ delBlot(blotId: number) {
+  this.delBlotId.emit(blotId);
  }
 }

@@ -10,7 +10,7 @@
       <tr *ngFor="let item of stages" [value]="item">
         <td><input type="date" class="form-control tbl" name="" [(ngModel)]="item.stageDate"></td>
         <td><input type="text" list="listStage" class="form-control tbl" name="" [(ngModel)]="item.stage"></td>
-        <td><button class="btn btn-outline-danger"></button></td>
+        <td><button class="btn btn-outline-danger" (click)="delStage(item.stageDate)"></button></td>
       </tr>
       <tr>
         <td><input type="date" class="form-control tbl" name=""></td>

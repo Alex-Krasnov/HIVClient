@@ -114,7 +114,7 @@
         </div>
         <div class="col-xl me-1">
             <div class=" mt-1" style="height: 367px; overflow: auto;">
-                <app-patient-blot [(blots)]="patient.blots"></app-patient-blot>
+                <app-patient-blot [(blots)]="patient.blots" (delBlotId)="delBlot($event)"></app-patient-blot>
             </div>
         </div>
     </div>
@@ -255,12 +255,12 @@
     <div class="row g-1 mb-1">
         <div class="col-xl-3 me-1">
             <div class="ms-1 mt-1" style="height: 115px; overflow: auto;">
-                <app-patient-stage [(stages)]="patient.stages"></app-patient-stage>
+                <app-patient-stage [(stages)]="patient.stages" (delStageId)="delStage($event)"></app-patient-stage>
             </div>
         </div>
         <div class="col-xl-5 me-1">
             <div class=" mt-1" style="height: 115px; overflow: auto;">
-                <app-patient-second-desease [(secondDeseases)]="patient.secondDeseases"></app-patient-second-desease>
+                <app-patient-second-desease [(secondDeseases)]="patient.secondDeseases" [(patientId)]="patient.patientId"></app-patient-second-desease>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 import { PatientCardMain } from 'src/app/services/patient-card-main.service';
 import { NgForm } from '@angular/forms';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-patient-card-main',
@@ -47,5 +48,19 @@ export class PatientCardMainComponent implements OnInit {
     });
     this.getPatient.getPatientData(this.patientId)
       .subscribe((data:PatientCardMainModel) => this.patient = data);
+  }
+
+  delBlot(blotId: number) {
+    console.log('blotId - ', blotId);
+    this.getPatient.delPatientBlot(this.patientId, blotId)
+    .subscribe();
+    location.reload();
+  }
+
+  delStage(date: Date) {
+    console.log('date - ', date);
+    this.getPatient.delPatientStage(this.patientId, date)
+    .subscribe();
+    location.reload();
   }
 }

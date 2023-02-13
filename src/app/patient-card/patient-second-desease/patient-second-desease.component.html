@@ -3,7 +3,7 @@
       <tr>
         <th scope="col" style="width: 30px;">Дата с</th>
         <th scope="col" style="width: 30px;">Дата по</th>
-        <th scope="col" style="width: 300px;">Врторичное заболевание</th>
+        <th scope="col" style="width: 300px;">Вторичное заболевание</th>
         <th scope="col"></th>
       </tr>
     </thead>
@@ -12,7 +12,7 @@
         <td><input type="date" class="form-control tbl" name="" [(ngModel)]="item.startDate"></td>
         <td><input type="date" class="form-control tbl" name="" [(ngModel)]="item.endDate"></td>
         <td><input type="text" list="listDesease" class="form-control tbl" name="" [(ngModel)]="item.deseas"></td>
-        <td><button class="btn btn-outline-danger"></button></td>
+        <td><button class="btn btn-outline-danger" (click)="delSecondDeseases(item.startDate, item.deseas)"></button></td>
       </tr>
       <tr>
         <td><input type="date" class="form-control tbl" name=""></td>

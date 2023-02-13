@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Stage } from 'src/app/_interfaces/stage.model';
 
 @Component({
@@ -8,8 +8,11 @@ import { Stage } from 'src/app/_interfaces/stage.model';
 })
 export class PatientStageComponent implements OnInit {
   @Input() stages: Stage[];
+  @Output() delStageId = new EventEmitter<Date>();
 
-  ngOnInit() {
-    
- }
+  ngOnInit() {}
+ 
+  delStage(date: Date) {
+    this.delStageId.emit(date);
+  }
 }
