@@ -1,4 +1,4 @@
-<table class="table border">
+<table *ngIf="chForm" class="table border" [formGroup]="chForm">
     <thead style="position: sticky;top: 0; background: #ade8dd;">
       <tr>
         <th scope="col" style="width: 30px;">Дата с</th>
@@ -8,16 +8,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of secondDeseases" [value]="item">
-        <td><input type="date" class="form-control tbl" name="" [(ngModel)]="item.startDate"></td>
-        <td><input type="date" class="form-control tbl" name="" [(ngModel)]="item.endDate"></td>
-        <td><input type="text" list="listDesease" class="form-control tbl" name="" [(ngModel)]="item.deseas"></td>
-        <td><button class="btn btn-outline-danger" (click)="delSecondDeseases(item.startDate, item.deseas)"></button></td>
-      </tr>
+      <ng-container formArrayName="secondDeseases" *ngFor="let item of secondDeseases.controls; let i = index">
+        <tr [formGroup]="item">
+          <td><input type="date" class="form-control tbl" formControlName="item"></td>
+          <td><input type="date" class="form-control tbl" formControlName="item"></td>
+          <td><input type="text" list="listDesease" class="form-control tbl" formControlName="item"></td>
+          <td><button class="btn btn-outline-danger" (click)="delSecondDeseases(item.startDate, item.deseas, i)"></button></td>
+        </tr>
+      </ng-container>
       <tr>
-        <td><input type="date" class="form-control tbl" name=""></td>
-        <td><input type="date" class="form-control tbl" name=""></td>
-        <td><input type="text" list="listDesease" class="form-control tbl" name=""></td>
+        <td><input type="date" class="form-control tbl"></td>
+        <td><input type="date" class="form-control tbl"></td>
+        <td><input type="text" list="listDesease" class="form-control tbl"></td>
         <td><button class="btn btn-outline-success"></button></td>
       </tr>
     </tbody>

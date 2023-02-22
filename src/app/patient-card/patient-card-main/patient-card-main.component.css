@@ -9,3 +9,8 @@
 .form-control{
     font-weight: 600;
 }
+
+input.ng-touched.ng-invalid{
+    border-color: red;
+    border-width: 2px;
+}

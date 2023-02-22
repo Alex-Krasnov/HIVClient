@@ -8,13 +8,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of stages" [value]="item">
-        <td><input type="date" class="form-control tbl" name="" [(ngModel)]="item.stageDate"></td>
-        <td><input type="text" list="listStage" class="form-control tbl" name="" [(ngModel)]="item.stage"></td>
-        <td><button class="btn btn-outline-danger" (click)="delStage(item.stageDate)"></button></td>
+        <td><input type="date" class="form-control tbl" formControlName="stageDate"></td>
+        <td><input type="text" list="listStage" class="form-control tbl" formControlName="stage"></td>
+        <td><button class="btn btn-outline-danger" (click)="delStage(item.stageDate, index)"></button></td>
       </tr>
       <tr>
-        <td><input type="date" class="form-control tbl" name=""></td>
-        <td><input type="text" list="listStage" class="form-control tbl" name=""></td>
+        <td><input type="date" class="form-control tbl"></td>
+        <td><input type="text" list="listStage" class="form-control tbl"></td>
         <td><button class="btn btn-outline-success"></button></td>
       </tr>
     </tbody>

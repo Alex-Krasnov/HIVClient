@@ -25,7 +25,7 @@ export class PatientCardMain {
         return this.http.delete(this.url+`/DelSecondDeseases?patientId=${patientId}&date=${date}&deseases=${name}`)
     };
 
-    delPatientPatient(id: number){
-        
+    delPatientPatient(patientId: number){
+        return this.http.delete(this.url+`/DelPatientPatient?patientId=${patientId}`)
     };
 }

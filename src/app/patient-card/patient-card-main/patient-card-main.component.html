@@ -60,343 +60,354 @@
         </div>
     </div>
 </nav>
-<div style="background-color: #ade8dd;">
-    <div class="row mb-2">
-        <div class="col-xl-4">
-            <div class="row m-1">
-                <div class="col-xl  form-floating p-0 ps-1">
-                    <input type="text" class="form-control" disabled placeholder="ИД пациента" name="patientId" [(ngModel)]="patient.patientId">
-                    <label for="floatingInput">ИД пациента</label>
+<div *ngIf="IsErr" class="alert alert-danger">Неверный ...</div>
+<form *ngIf="patientForm" [formGroup]="patientForm">
+    <div style="background-color: #ade8dd;">
+        <div class="row mb-2">
+            <div class="col-xl-4">
+                <div class="row m-1">
+                    <div class="col-xl form-floating p-0 ps-1">
+                        <input type="text" class="form-control" placeholder="ИД пациента" formControlName="patientId">
+                        <label for="floatingInput">ИД пациента</label>
+                    </div>
+                    <div class="col-xl-6 form-floating p-0">
+                        <input type="date" class="form-control" placeholder="Дата внесения" formControlName="inputDate">
+                        <label for="floatingInput">Дата внесения</label>
+                    </div>
                 </div>
-                <div class="col-xl -6 form-floating p-0">
-                    <input type="date" class="form-control" disabled placeholder="Дата внесения" name="inputDate" [(ngModel)]="patient.inputDate">
-                    <label for="floatingInput">Дата внесения</label>
+                <div class="form-floating ms-1">
+                    <input type="text" class="form-control" placeholder="Фамилия" formControlName="familyName">
+                    <label for="floatingInput">Фамилия</label>
                 </div>
-            </div>
-            <div class="form-floating ms-1">
-                <input type="text" class="form-control" placeholder="Фамилия" name="" [(ngModel)]="patient.familyName">
-                <label for="floatingInput">Фамилия</label>
-            </div>
-            <div class="form-floating ms-1">
-                <input type="text" class="form-control" placeholder="Имя" name="" [(ngModel)]="patient.firstName">
-                <label for="floatingInput">Имя</label>
-            </div>
-            <div class="form-floating ms-1">
-                <input type="text" class="form-control" placeholder="Отчество" name="" [(ngModel)]="patient.thirdName">
-                <label for="floatingInput">Отчество</label>
-            </div>
-            <div class="form-floating ms-1">
-                <input type="date" class="form-control" placeholder="Дата рождения" name="" [(ngModel)]="patient.birthDate">
-                <label for="floatingInput">Дата рождения</label>
-            </div>
-            <div class="form-floating ms-1">
-                <input type="text" list="listSex" class="form-control" placeholder="Пол" name="" [(ngModel)]="patient.sex">
-                <label for="floatingInput">Пол</label>
-            </div>
-            <div class="form-floating ms-1">
-                <input type="date" class="form-control" placeholder="Дата пост. на учет" name="" [(ngModel)]="patient.regOnDate">
-                <label for="floatingInput">Дата пост. на учет</label>
-            </div>
-            <div class="ms-1">
-                <div class="col-xl-5 form-floating p-0 btn-group">
-                    <input type="date" class="form-control" placeholder="Дата снят. с учёта" name="" [(ngModel)]="patient.regOffDate">
-                    <label for="floatingInput">Дата снят. с учёта</label>
+                <div class="form-floating ms-1">
+                    <input type="text" class="form-control" placeholder="Имя" formControlName="firstName">
+                    <label for="floatingInput">Имя</label>
                 </div>
-                <div class="col-xl-7 form-floating p-0 ps-1 btn-group">
-                    <input type="text" list="listRegOffReason" class="form-control" placeholder="Причина снят. с учёта" name=""[(ngModel)]="patient.regOffReason">
-                    <label for="floatingInput">Причина снят. с учёта</label>
+                <div class="form-floating ms-1">
+                    <input type="text" class="form-control" placeholder="Отчество" formControlName="thirdName">
+                    <label for="floatingInput">Отчество</label>
                 </div>
-            </div>
-            <div class="form-floating ms-1">
-                <input type="text" class="form-control" placeholder="УНРЗ" name="" [(ngModel)]="patient.unrzFr">
-                <label for="floatingInput">УНРЗ</label>
-            </div>
-        </div>
-        <div class="col-xl me-1">
-            <div class=" mt-1" style="height: 367px; overflow: auto;">
-                <app-patient-blot [(blots)]="patient.blots" (delBlotId)="delBlot($event)"></app-patient-blot>
-            </div>
-        </div>
-    </div>
-    <p class="text-start ms-2 m-0">Место проживания</p>
-    <div class="border mb-2">
-        <div class="row g-1">
-            <div class="col-xl m-1">
-                <div class="form-floating">
-                    <input type="text" list="listRegion" class="form-control" placeholder="Регион" name="" [(ngModel)]="patient.region">
-                    <label for="floatingInput">Регион</label>
+                <div class="form-floating ms-1">
+                    <input type="date" class="form-control" placeholder="Дата рождения" formControlName="birthDate">
+                    <label for="floatingInput">Дата рождения</label>
+                </div>
+                <div class="form-floating ms-1">
+                    <input type="text" list="listSex" class="form-control" placeholder="Пол" formControlName="sex">
+                    <label for="floatingInput">Пол</label>
+                </div>
+                <div class="form-floating ms-1">
+                    <input type="date" class="form-control" placeholder="Дата пост. на учет" formControlName="regOnDate">
+                    <label for="floatingInput">Дата пост. на учет</label>
+                </div>
+                <div class="ms-1">
+                    <div class="col-xl-5 form-floating p-0 btn-group">
+                        <input type="date" class="form-control" placeholder="Дата снят. с учёта" formControlName="regOffDate">
+                        <label for="floatingInput">Дата снят. с учёта</label>
+                    </div>
+                    <div class="col-xl-7 form-floating p-0 ps-1 btn-group">
+                        <input type="text" list="listRegOffReason" class="form-control" placeholder="Причина снят. с учёта" formControlName="regOffReason">
+                        <label for="floatingInput">Причина снят. с учёта</label>
+                    </div>
+                </div>
+                <div class="form-floating ms-1">
+                    <input type="text" class="form-control" placeholder="УНРЗ" formControlName="unrzFr">
+                    <label for="floatingInput">УНРЗ</label>
                 </div>
             </div>
-            <div class="col-xl m-1">
-                <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Город" name="" [(ngModel)]="patient.cityName">
-                    <label for="floatingInput">Город</label>
-                </div>
-            </div>
-            <div class="col-xl m-1">
-                <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Населенный пункт" name="" [(ngModel)]="patient.locationName">
-                    <label for="floatingInput">Населенный пункт</label>
+            <div class="col-xl me-1">
+                <div class=" mt-1" style="height: 367px; overflow: auto;">
+                    <app-patient-blot [(blots)]="patient.blots" (delBlotId)="delBlot($event)"></app-patient-blot>
                 </div>
             </div>
         </div>
-        <div class="row g-1">
+        <p class="text-start ms-2 m-0">Место проживания</p>
+        <div class="border mb-2">
+            <div class="row g-1">
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" list="listRegion" class="form-control" placeholder="Регион" formControlName="region">
+                        <label for="floatingInput">Регион</label>
+                    </div>
+                </div>
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Город" formControlName="cityName">
+                        <label for="floatingInput">Город</label>
+                    </div>
+                </div>
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Населенный пункт" formControlName="locationName">
+                        <label for="floatingInput">Населенный пункт</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-1">
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Телефон" formControlName="phone">
+                        <label for="floatingInput">Телефон</label>
+                    </div>
+                </div>
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Улица" formControlName="addrStreat">
+                        <label for="floatingInput">Улица</label>
+                    </div>
+                </div>
+                <div class="col-xl-1 m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Дом" formControlName="addrHouse">
+                        <label for="floatingInput">Дом</label>
+                    </div>
+                </div>
+                <div class="col-xl-1 m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Корпус" formControlName="addrExt">
+                        <label for="floatingInput">Корпус</label>
+                    </div>
+                </div>
+                <div class="col-xl-1 m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Квартира" formControlName="addrFlat">
+                        <label for="floatingInput">Квартира</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="text-start ms-2 m-0">Место фактического проживания</p>
+        <div class="border mb-2">
+            <div class="row g-1">
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" list="listRegion" class="form-control" placeholder="Регион" formControlName="regionFact">
+                        <label for="floatingInput">Регион</label>
+                    </div>
+                </div>
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Город" formControlName="cityNameFact">
+                        <label for="floatingInput">Город</label>
+                    </div>
+                </div>
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Населенный пункт" formControlName="locationNameFact">
+                        <label for="floatingInput">Населенный пункт</label>
+                    </div>
+                </div>
+                <div class="col-xl">
+                    <div class="col-xl form-floating p-0 m-0 btn-group">
+                        <input type="date" class="form-control" placeholder="Дата рег. с" formControlName="dtRegBeg">
+                        <label for="floatingInput">Дата рег. с</label>
+                    </div>
+                    <div class="col-xl form-floating p-0 m-0 ps-1 btn-group">
+                        <input type="date" class="form-control" placeholder="Дата рег. по" formControlName="dtRefEnd">
+                        <label for="floatingInput">Дата рег. по</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-1">
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Индекс" formControlName="indexFact">
+                        <label for="floatingInput">Индекс</label>
+                    </div>
+                </div>
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Улица" formControlName="addrStreatFact">
+                        <label for="floatingInput">Улица</label>
+                    </div>
+                </div>
+                <div class="col-xl-1 m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Дом" formControlName="addrHouseFact">
+                        <label for="floatingInput">Дом</label>
+                    </div>
+                </div>
+                <div class="col-xl-1 m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Корпус" formControlName="addrExtFact">
+                        <label for="floatingInput">Корпус</label>
+                    </div>
+                </div>
+                <div class="col-xl-1 m-1">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" placeholder="Квартира" formControlName="addrFlatFact">
+                        <label for="floatingInput">Квартира</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row g-1 mb-2">
             <div class="col-xl m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Телефон" name="" [(ngModel)]="patient.phone">
-                    <label for="floatingInput">Телефон</label>
+                    <input type="text" class="form-control" placeholder="Примечание" formControlName="comm">
+                    <label for="floatingInput">Примечание</label>
+                </div>
+            </div>
+            <div class="col-xl-3 m-1">
+                <div class="form-floating">
+                    <input type="text" list="listCountry" class="form-control" placeholder="Страна" formControlName="country">
+                    <label for="floatingInput">Страна</label>
+                </div>
+            </div>
+        </div>
+        <div class="row g-1 mb-1">
+            <div class="col-xl-3 me-1">
+                <div class="ms-1 mt-1" style="height: 115px; overflow: auto;">
+                    <app-patient-stage [(stages)]="patient.stages" [(patientId)]="patient.patientId" ></app-patient-stage>
+                </div>
+            </div>
+            <div class="col-xl-5 me-1">
+                <div class=" mt-1" style="height: 115px; overflow: auto;">
+                    <app-patient-second-desease [(data)]="patient.secondDeseases" [(patientId)]="patient.patientId"></app-patient-second-desease>
+                </div>
+            </div>
+        </div>
+        <div class="row g-1 mb-2">
+            <div class="col-xl m-1">
+                <div class="form-floating">
+                    <input type="text" list="listPlaceCheck" class="form-control" placeholder="Место выявления" formControlName="placeCheck">
+                    <label for="floatingInput">Место выявления</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" list="listCodeMKB" class="form-control" placeholder="Кодировка МКБ 10" formControlName="codeMKB10">
+                    <label for="floatingInput">Кодировка МКБ 10</label>
                 </div>
             </div>
             <div class="col-xl m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Улица" name="" [(ngModel)]="patient.addrStreat">
-                    <label for="floatingInput">Улица</label>
+                    <input type="text" class="form-control" placeholder="№ карты" formControlName="cardNo">
+                    <label for="floatingInput">№ карты</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" list="listVulnerableGroup" class="form-control" placeholder="Кат. уязвимой группы" formControlName="vulnerableGroup">
+                    <label for="floatingInput">Кат. уязвимой группы</label>
                 </div>
             </div>
             <div class="col-xl-1 m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Дом" name="" [(ngModel)]="patient.addrHouse">
-                    <label for="floatingInput">Дом</label>
+                    <input type="text" class="form-control" placeholder="Рост" formControlName="heightOld">
+                    <label for="floatingInput">Рост</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Вес" formControlName="weightOld">
+                    <label for="floatingInput">Вес</label>
                 </div>
             </div>
-            <div class="col-xl-1 m-1">
-                <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Корпус" name="" [(ngModel)]="patient.addrExt">
-                    <label for="floatingInput">Корпус</label>
+            <div class="col-xl-2 m-1">
+                <div class="row g-0">
+                    <div class="col-xl">
+                        <label>Зав. АПО</label>
+                    </div>
+                    <div class="col-xl">
+                        <input type="checkbox" class="form-check-input" placeholder="Зав. АПО" formControlName="headPhysician">
+                    </div>
                 </div>
-            </div>
-            <div class="col-xl-1 m-1">
-                <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Квартира" name="" [(ngModel)]="patient.addrFlat">
-                    <label for="floatingInput">Квартира</label>
+                <div class="row g-0">
+                    <div class="col-xl">
+                        <label>Внесен в ФР</label>
+                    </div>
+                    <div class="col-xl">
+                        <input type="checkbox" class="form-check-input" placeholder="Внесен в ФР" formControlName="zamMedPart">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <p class="text-start ms-2 m-0">Место фактического проживания</p>
-    <div class="border mb-2">
-        <div class="row g-1">
-            <div class="col-xl m-1">
+        <div class="row g-1 mb-2">
+            <div class="col-xl-1 m-1">
                 <div class="form-floating">
-                    <input type="text" list="listRegion" class="form-control" placeholder="Регион" name="" [(ngModel)]="patient.regionFact">
-                    <label for="floatingInput">Регион</label>
+                    <input type="text" list="listCheckCourseShort" class="form-control" placeholder="Обращения" formControlName="checkCourseShort">
+                    <label for="floatingInput">Причина Обращения</label>
                 </div>
-            </div>
-            <div class="col-xl m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Город" name="" [(ngModel)]="patient.cityNameFact">
-                    <label for="floatingInput">Город</label>
+                    <input type="text" list="listInfectCourseShort" class="form-control" placeholder="Заражения" formControlName="infectCourseShort">
+                    <label for="floatingInput">Причина Заражения</label>
                 </div>
-            </div>
-            <div class="col-xl m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Населенный пункт" name="" [(ngModel)]="patient.locationNameFact">
-                    <label for="floatingInput">Населенный пункт</label>
-                </div>
-            </div>
-            <div class="col-xl">
-                <div class="col-xl form-floating p-0 m-0 btn-group">
-                    <input type="date" class="form-control" placeholder="Дата рег. с" name="" [(ngModel)]="patient.dtRegBeg">
-                    <label for="floatingInput">Дата рег. с</label>
-                </div>
-                <div class="col-xl form-floating p-0 m-0 ps-1 btn-group">
-                    <input type="date" class="form-control" placeholder="Дата рег. по" name=""[(ngModel)]="patient.dtRefEnd">
-                    <label for="floatingInput">Дата рег. по</label>
-                </div>
-            </div>
-        </div>
-        <div class="row g-1">
-            <div class="col-xl m-1">
-                <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Индекс" name="" [(ngModel)]="patient.indexFact">
-                    <label for="floatingInput">Индекс</label>
+                    <input type="text" list="listDieCourseShort" class="form-control" placeholder="смерти" formControlName="dieCourseShort">
+                    <label for="floatingInput">Причина Смерти</label>
                 </div>
             </div>
             <div class="col-xl m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Улица" name="" [(ngModel)]="patient.addrStreatFact">
-                    <label for="floatingInput">Улица</label>
+                    <input type="text" list="listCheckCourseLong" class="form-control" placeholder="Причина обращения" formControlName="checkCourseLong">
+                    <label for="floatingInput">Причина обращения</label>
                 </div>
-            </div>
-            <div class="col-xl-1 m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Дом" name="" [(ngModel)]="patient.addrHouseFact">
-                    <label for="floatingInput">Дом</label>
+                    <input type="text" list="listInfectCourseLong" class="form-control" placeholder="Причина заражения" formControlName="infectCourseLong">
+                    <label for="floatingInput">Причина заражения</label>
                 </div>
-            </div>
-            <div class="col-xl-1 m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Корпус" name="" [(ngModel)]="patient.addrExtFact">
-                    <label for="floatingInput">Корпус</label>
+                    <input type="text" list="listDieCourseLong" class="form-control" placeholder="Причина смерти" formControlName="dieCourseLong">
+                    <label for="floatingInput">Причина смерти</label>
                 </div>
             </div>
-            <div class="col-xl-1 m-1">
+        </div>
+        <div class="row g-1 mb-2">
+            <div class="col-xl-2 m-1">
                 <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="Квартира" name="" [(ngModel)]="patient.addrFlatFact">
-                    <label for="floatingInput">Квартира</label>
+                    <input type="date" class="form-control" placeholder="Передан в район" formControlName="transfAreaDate">
+                    <label for="floatingInput">Передан в район</label>
+                </div>
+                <div class="form-floating">
+                    <input type="date" class="form-control" placeholder="Передан в Суб. Фед." formControlName="transfFederDate">
+                    <label for="floatingInput">Передан в Суб. Фед.</label>
+                </div>
+                <div class="form-floating">
+                    <input type="date" class="form-control" placeholder="Передан в УФСИН" formControlName="ufsinDate">
+                    <label for="floatingInput">Передан в УФСИН</label>
+                </div>
+            </div>
+            <div class="col-xl-2 m-1">
+                <div class="form-floating">
+                    <input type="date" class="form-control" placeholder="Дата внесения смерти" formControlName="dieInputDate">
+                    <label for="floatingInput">Дата внесения смерти</label>
+                </div>
+                <div class="form-floating">
+                    <input type="date" class="form-control" placeholder="Дата смерти" formControlName="dieDate">
+                    <label for="floatingInput">Дата смерти</label>
+                </div>
+                <div class="form-floating">
+                    <input type="date" class="form-control" placeholder="Дата смерти от СПИДа" formControlName="dieAidsDate">
+                    <label for="floatingInput">Дата смерти от СПИДа</label>
+                </div>
+            </div>
+            <div class="col-xl-2 m-1">
+                <div class="form-floating">
+                    <input type="text" list="listARVT" class="form-control" placeholder="АРВТ" formControlName="arvt">
+                    <label for="floatingInput">АРВТ</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" list="listInvalid" class="form-control" placeholder="Гр. инвалидности" formControlName="invalid">
+                    <label for="floatingInput">Гр. инвалидности</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Архив" formControlName="archive">
+                    <label for="floatingInput">Архив</label>
+                </div>
+            </div>
+            <div class="col-xl-4 m-1">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Кодовое слово" formControlName="codeWord">
+                    <label for="floatingInput">Кодовое слово</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="СНИЛС" formControlName="snils">
+                    <label for="floatingInput">СНИЛС</label>
+                </div>
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="Смена ФИО" formControlName="fioChange">
+                    <label for="floatingInput">Смена ФИО</label>
                 </div>
             </div>
         </div>
+        <br>
+        <br>
     </div>
-    <div class="row g-1 mb-2">
-        <div class="col-xl m-1">
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Примечание" name="" [(ngModel)]="patient.comm">
-                <label for="floatingInput">Примечание</label>
-            </div>
-        </div>
-        <div class="col-xl-3 m-1">
-            <div class="form-floating">
-                <input type="text" list="listCountry" class="form-control" placeholder="Страна" name="" [(ngModel)]="patient.country">
-                <label for="floatingInput">Страна</label>
-            </div>
-        </div>
-    </div>
-    <div class="row g-1 mb-1">
-        <div class="col-xl-3 me-1">
-            <div class="ms-1 mt-1" style="height: 115px; overflow: auto;">
-                <app-patient-stage [(stages)]="patient.stages" (delStageId)="delStage($event)"></app-patient-stage>
-            </div>
-        </div>
-        <div class="col-xl-5 me-1">
-            <div class=" mt-1" style="height: 115px; overflow: auto;">
-                <app-patient-second-desease [(secondDeseases)]="patient.secondDeseases" [(patientId)]="patient.patientId"></app-patient-second-desease>
-            </div>
-        </div>
-    </div>
-    <div class="row g-1 mb-2">
-        <div class="col-xl m-1">
-            <div class="form-floating">
-                <input type="text" list="listPlaceCheck" class="form-control" placeholder="Место выявления" name="" [(ngModel)]="patient.placeCheck">
-                <label for="floatingInput">Место выявления</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" list="listCodeMKB" class="form-control" placeholder="Кодировка МКБ 10" name="" [(ngModel)]="patient.codeMKB10">
-                <label for="floatingInput">Кодировка МКБ 10</label>
-            </div>
-        </div>
-        <div class="col-xl m-1">
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="№ карты" name="" [(ngModel)]="patient.cardNo">
-                <label for="floatingInput">№ карты</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" list="listVulnerableGroup" class="form-control" placeholder="Кат. уязвимой группы" name="" [(ngModel)]="patient.vulnerableGroup">
-                <label for="floatingInput">Кат. уязвимой группы</label>
-            </div>
-        </div>
-        <div class="col-xl-1 m-1">
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Рост" name="" [(ngModel)]="patient.heightOld">
-                <label for="floatingInput">Рост</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Вес" name="" [(ngModel)]="patient.weightOld">
-                <label for="floatingInput">Вес</label>
-            </div>
-        </div>
-    </div>
-    <div class="row g-1 mb-2">
-        <div class="col-xl-1 m-1">
-            <div class="form-floating">
-                <input type="text" list="listCheckCourseShort" class="form-control" placeholder="Обращения" name="" [(ngModel)]="patient.checkCourseShort">
-                <label for="floatingInput">Причина Обращения</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" list="listInfectCourseShort" class="form-control" placeholder="Заражения" name="" [(ngModel)]="patient.infectCourseShort">
-                <label for="floatingInput">Причина Заражения</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" list="listDieCourseShort" class="form-control" placeholder="смерти" name="" [(ngModel)]="patient.dieCourseShort">
-                <label for="floatingInput">Причина Смерти</label>
-            </div>
-        </div>
-        <div class="col-xl m-1">
-            <div class="form-floating">
-                <input type="text" list="listCheckCourseLong" class="form-control" placeholder="Причина обращения" name="" [(ngModel)]="patient.checkCourseLong">
-                <label for="floatingInput">Причина обращения</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" list="listInfectCourseLong" class="form-control" placeholder="Причина заражения" name="" [(ngModel)]="patient.infectCourseLong">
-                <label for="floatingInput">Причина заражения</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" list="listDieCourseLong" class="form-control" placeholder="Причина смерти" name="" [(ngModel)]="patient.dieCourseLong">
-                <label for="floatingInput">Причина смерти</label>
-            </div>
-        </div>
-    </div>
-    <div class="row g-1 mb-2">
-        <div class="col-xl-2 m-1">
-            <div class="form-floating">
-                <input type="date" class="form-control" placeholder="Передан в район" name="" [(ngModel)]="patient.transfAreaDate">
-                <label for="floatingInput">Передан в район</label>
-            </div>
-            <div class="form-floating">
-                <input type="date" class="form-control" placeholder="Передан в Суб. Фед." name="" [(ngModel)]="patient.transfFederDate">
-                <label for="floatingInput">Передан в Суб. Фед.</label>
-            </div>
-            <div class="form-floating">
-                <input type="date" class="form-control" placeholder="Передан в УФСИН" name="" [(ngModel)]="patient.ufsinDate">
-                <label for="floatingInput">Передан в УФСИН</label>
-            </div>
-        </div>
-        <div class="col-xl-2 m-1">
-            <div class="form-floating">
-                <input type="date" class="form-control" disabled placeholder="Дата внесения смерти" name="" [(ngModel)]="patient.dieInputDate">
-                <label for="floatingInput">Дата внесения смерти</label>
-            </div>
-            <div class="form-floating">
-                <input type="date" class="form-control" placeholder="Дата смерти" name="" [(ngModel)]="patient.dieDate">
-                <label for="floatingInput">Дата смерти</label>
-            </div>
-            <div class="form-floating">
-                <input type="date" class="form-control" placeholder="Дата смерти от СПИДа" name="" [(ngModel)]="patient.dieAidsDate">
-                <label for="floatingInput">Дата смерти от СПИДа</label>
-            </div>
-        </div>
-        <div class="col-xl-2 m-1">
-            <div class="form-floating">
-                <input type="text" list="listARVT" class="form-control" placeholder="АРВТ" name="" [(ngModel)]="patient.arvt">
-                <label for="floatingInput">АРВТ</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" list="listInvalid" class="form-control" placeholder="Гр. инвалидности" name="" [(ngModel)]="patient.invalid">
-                <label for="floatingInput">Гр. инвалидности</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Архив" name="" [(ngModel)]="patient.archive">
-                <label for="floatingInput">Архив</label>
-            </div>
-        </div>
-        <div class="col-xl-4 m-1">
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Кодовое слово" name="" [(ngModel)]="patient.codeWord">
-                <label for="floatingInput">Кодовое слово</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="СНИЛС" name="" [(ngModel)]="patient.snils">
-                <label for="floatingInput">СНИЛС</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Смена ФИО" name="" [(ngModel)]="patient.fioChange">
-                <label for="floatingInput">Смена ФИО</label>
-            </div>
-        </div>
-        <div class="col-xl-1 m-1">
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Зав. АПО" name="" [(ngModel)]="patient.headPhysician">
-                <label for="floatingInput">Зав. АПО</label>
-            </div>
-            <div class="form-floating">
-                <input type="text" class="form-control" placeholder="Внесен в ФР" name="" [(ngModel)]="patient.zamMedPart">
-                <label for="floatingInput">Внесен в ФР</label>
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
-</div>
+</form>
 
 <datalist id="listSex">
     <option  *ngFor="let sex of patient.listSex" [value]="sex">
