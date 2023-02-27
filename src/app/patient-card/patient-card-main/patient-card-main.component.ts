@@ -58,7 +58,7 @@ export class PatientCardMainComponent implements OnInit {
         this.initForm();
 
         // console.log(this.patient.secondDeseases);
-        console.log(this.patientForm.value);
+        // console.log(this.patientForm.value);
       });
   }
 

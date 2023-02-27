@@ -28,4 +28,13 @@ export class PatientCardMain {
     delPatientPatient(patientId: number){
         return this.http.delete(this.url+`/DelPatientPatient?patientId=${patientId}`)
     };
+
+    createPatientSecondDesease(patientId: number, dateStart: string, dateEnd: string, name: string){
+        return this.http.post(this.url+`/CreateSecondDeseases`, {
+            PatientId: patientId, 
+            StartDate: dateStart, 
+            EndDate: dateEnd, 
+            Deseas: name
+        })
+    };
 }

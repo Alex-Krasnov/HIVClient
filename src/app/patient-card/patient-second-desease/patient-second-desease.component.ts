@@ -9,42 +9,53 @@ import { SecondDeseases } from 'src/app/_interfaces/second-deseases.model';
   styleUrls: ['./patient-second-desease.component.css']
 })
 export class PatientSecondDeseaseComponent implements OnInit{
-
-  // form: FormGroup;
-
-  // farray = new FormArray([]); 
-  @Input() chForm: FormArray; 
+  form: FormGroup;
+  @Input() deseasArr: FormArray; 
   @Input() patientId: number;
 
   constructor(
-    private getPatient: PatientCardMain,
+    private patientService: PatientCardMain,
     private fb: FormBuilder
   ){}
 
   ngOnInit() { 
-    
+    this.form = this.fb.group({
+      secondDeseases: this.deseasArr as FormArray,
+      newStartDate: new FormControl(),
+      newEndDate: new FormControl(),
+      newDeseas: new FormControl()
+    })
   }
+
   get secondDeseases() {
-    return this.chForm.get("secondDeseases") as FormArray;
+    return this.form.get('secondDeseases') as FormArray;
   }
 
-  // initForm(){
-  //   this.form = new FormGroup({
-  //     secondDeseases: this.fb.array([
-  //       this.fb.group({
-  //         startDate: new FormControl(),
-  //         endDate: new FormControl(),
-  //         deseas: new FormControl('123')
-  //       })
-  //     ])
-  //   });
-  // }
+  delSecondDeseases(index: number) {
+    let e = this.secondDeseases.at(index)
+    console.log(e.get('startDate').value, e.get('deseas').value);
+    this.patientService.delPatientSecondDesease(this.patientId, e.get('startDate').value, e.get('deseas').value).subscribe(); 
+    this.secondDeseases.removeAt(index);
+  }
 
-  delSecondDeseases(date: Date, name: string, index: number) {
-    console.log(this.chForm);
-    console.log('date - ', date,'name - ', name, index);
-    // this.getPatient.delPatientSecondDesease(this.patientId, date, name).subscribe(); 
-    // this.secondDeseases.removeAt(index);
-    // location.reload();
+  createSecondDeseases(){
+    let StartDate = this.form.get('newStartDate').value;
+    let EndDate = this.form.get('newEndDate').value;
+    let Deseas = this.form.get('newDeseas').value
+
+    const desForm = new FormGroup ({
+      startDate: new FormControl(StartDate),
+      endDate: new FormControl(EndDate),
+      deseas: new FormControl(Deseas)
+    });
+
+    this.patientService.createPatientSecondDesease(this.patientId, StartDate, EndDate, Deseas)
+    .subscribe()
+
+    this.secondDeseases.push(desForm);
+
+    this.form.get('newStartDate').setValue('')
+    this.form.get('newEndDate').setValue('')
+    this.form.get('newDeseas').setValue('')
   }
 }

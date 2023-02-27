@@ -262,7 +262,7 @@
             </div>
             <div class="col-xl-5 me-1">
                 <div class=" mt-1" style="height: 115px; overflow: auto;">
-                    <app-patient-second-desease [(data)]="patient.secondDeseases" [(patientId)]="patient.patientId"></app-patient-second-desease>
+                    <app-patient-second-desease [(deseasArr)]="patientSecondDeseases" [(patientId)]="patient.patientId"></app-patient-second-desease>
                 </div>
             </div>
         </div>
@@ -471,7 +471,7 @@
 </datalist> 
 <datalist id="listVulnerableGroup">
     <option  *ngFor="let VulnerableGroup of patient.listVulnerableGroup" [value]="VulnerableGroup">
-        {{VulnerableGroup}}
+        <!-- {{VulnerableGroup}} -->
     </option>
 </datalist> 
 <datalist id="listARVT">

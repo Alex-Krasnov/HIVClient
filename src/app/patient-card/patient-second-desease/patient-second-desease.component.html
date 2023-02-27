@@ -1,4 +1,4 @@
-<table *ngIf="chForm" class="table border" [formGroup]="chForm">
+<table class="table border" [formGroup]="form">
     <thead style="position: sticky;top: 0; background: #ade8dd;">
       <tr>
         <th scope="col" style="width: 30px;">Дата с</th>
@@ -9,18 +9,19 @@
     </thead>
     <tbody>
       <ng-container formArrayName="secondDeseases" *ngFor="let item of secondDeseases.controls; let i = index">
-        <tr [formGroup]="item">
-          <td><input type="date" class="form-control tbl" formControlName="item"></td>
-          <td><input type="date" class="form-control tbl" formControlName="item"></td>
-          <td><input type="text" list="listDesease" class="form-control tbl" formControlName="item"></td>
-          <td><button class="btn btn-outline-danger" (click)="delSecondDeseases(item.startDate, item.deseas, i)"></button></td>
+        <tr  formGroupName="{{i}}">
+          <td><input type="date" class="form-control tbl" formControlName="startDate"></td>
+          <td><input type="date" class="form-control tbl" formControlName="endDate"></td>
+          <td><input type="text" list="listDesease" class="form-control tbl" formControlName="deseas"></td>
+          <td><button class="btn btn-outline-danger" (click)="delSecondDeseases(i)"></button></td>
+          <!-- i.startDate, deseas,  -->
         </tr>
       </ng-container>
       <tr>
-        <td><input type="date" class="form-control tbl"></td>
-        <td><input type="date" class="form-control tbl"></td>
-        <td><input type="text" list="listDesease" class="form-control tbl"></td>
-        <td><button class="btn btn-outline-success"></button></td>
+        <td><input type="date" class="form-control tbl" formControlName="newStartDate"></td>
+        <td><input type="date" class="form-control tbl" formControlName="newEndDate"></td>
+        <td><input type="text" list="listDesease" class="form-control tbl" formControlName="newDeseas"></td>
+        <td><button class="btn btn-outline-success" (click)="createSecondDeseases()"></button></td>
       </tr>
     </tbody>
   </table>
