@@ -35,7 +35,7 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
   }
 
   delSecondDeseases(index: number) {
-    let e = this.secondDeseases.at(index)
+    let e = this.secondDeseases.at(index);
     this.patientService.delPatientSecondDesease(this.patientId, e.get('startDate').value, e.get('deseas').value).subscribe(); 
     this.secondDeseases.removeAt(index);
   }

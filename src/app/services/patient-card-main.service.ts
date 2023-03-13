@@ -70,7 +70,7 @@ export class PatientCardMainService {
     };
 
     delPatientSecondDesease(patientId: number, date: Date, name: string){
-        return this.http.delete(this.url+`/DelSecondDeseases?patientId=${patientId}&date=${date}&deseases=${name}`)
+        return this.http.delete(this.url+`/DelSecondDeseases?patientId=${patientId}&startDate=${date}&deseas=${name}`)
     };
 
     createPatientSecondDesease(patientId: number, dateStart: string, dateEnd: string, name: string){

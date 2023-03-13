@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 import { PatientCardMainService } from 'src/app/services/patient-card-main.service';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
@@ -35,7 +35,8 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private patientService: PatientCardMainService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ){}
 
   ngOnInit() {
@@ -101,6 +102,17 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
     blot.forEach(e => {
       this.blotForUpd.push(e)
     });
+  }
+
+  leaveComponent(name: string){
+
+    console.log(this.patientForm.valid);
+    
+    if(this.patientForm.valid){
+      this.router.navigate([name]);
+    } else{
+      confirm('Данные не верны!')
+    }
   }
 
   ngOnDestroy() {

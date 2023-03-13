@@ -54,7 +54,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['/main']" routerLinkActive="disabled">Гл. меню</a>
+                    <a class="nav-link" (click)="leaveComponent('/main')">Гл. меню</a>
                 </li>
             </ul>
         </div>
@@ -196,7 +196,7 @@
                         <label for="floatingInput">Населенный пункт</label>
                     </div>
                 </div>
-                <div class="col-xl">
+                <div class="col-xl-3">
                     <div class="col-xl form-floating p-0 m-0 btn-group">
                         <input type="date" class="form-control" placeholder="Дата рег. с" formControlName="dtRegBeg">
                         <label for="floatingInput">Дата рег. с</label>
