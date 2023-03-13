@@ -1,4 +1,4 @@
-<table class="table border" [formGroup]="form">
+<table class="table border" [formGroup]="formSd">
     <thead style="position: sticky;top: 0; background: #ade8dd;">
       <tr>
         <th scope="col" style="width: 30px;">Дата с</th>
@@ -14,7 +14,6 @@
           <td><input type="date" class="form-control tbl" formControlName="endDate"></td>
           <td><input type="text" list="listDesease" class="form-control tbl" formControlName="deseas"></td>
           <td><button class="btn btn-outline-danger" (click)="delSecondDeseases(i)"></button></td>
-          <!-- i.startDate, deseas,  -->
         </tr>
       </ng-container>
       <tr>

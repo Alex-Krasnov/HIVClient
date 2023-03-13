@@ -1,4 +1,4 @@
-<table class="table border">
+<table class="table border" [formGroup]="formB">
     <thead style="position: sticky;top: 0; background: #ade8dd;">
       <tr>
         <th scope="col" style="width: 30px;">№</th>
@@ -14,29 +14,31 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of blots" [value]="item">
-        <td><input type="text" class="form-control tbl" name="" [(ngModel)]="item.blotId"></td>
-        <td><input type="text" class="form-control tbl" name="" [(ngModel)]="item.blotNo"></td>
-        <td><input type="date" class="form-control tbl" name="" [(ngModel)]="item.blotDate"></td>
-        <td><input type="text" list="listRes" class="form-control tbl" name="" [(ngModel)]="item.blotRes"></td>
-        <td><input type="text" list="listCheckPlace" class="form-control tbl" name="" [(ngModel)]="item.checkPlace"></td>
-        <td><input type="checkbox" class="form-check-input mt-2" name="" [(ngModel)]="item.first"></td>
-        <td><input type="checkbox" class="form-check-input mt-2" name="" [(ngModel)]="item.last"></td>
-        <td><input type="checkbox" class="form-check-input mt-2" name="" [(ngModel)]="item.ifa"></td>
-        <td><input type="date" disabled class="form-control tbl" name="" [(ngModel)]="item.inputDate"></td>
-        <td><button class="btn btn-outline-danger" (click)="delBlot(item.blotId)"></button></td>
-      </tr>
+      <ng-container formArrayName="blots" *ngFor="let item of blots.controls; let i = index">
+        <tr formGroupName="{{i}}">
+          <td><input type="text" class="form-control tbl" formControlName="blotId"></td>
+          <td><input type="text" class="form-control tbl" formControlName="blotNo"></td>
+          <td><input type="date" class="form-control tbl" formControlName="blotDate"></td>
+          <td><input type="text" list="listRes" class="form-control tbl" formControlName="blotRes"></td>
+          <td><input type="text" list="listCheckPlace" class="form-control tbl" formControlName="checkPlace"></td>
+          <td><input type="checkbox" class="form-check-input mt-2" formControlName="first"></td>
+          <td><input type="checkbox" class="form-check-input mt-2" formControlName="last"></td>
+          <td><input type="checkbox" class="form-check-input mt-2" formControlName="ifa"></td>
+          <td><input type="date" class="form-control tbl" formControlName="inputDate"></td>
+          <td><button class="btn btn-outline-danger" (click)="delBlot(i)"></button></td>
+        </tr>
+      </ng-container>
       <tr>
-        <td><input type="text" class="form-control tbl" name=""></td>
-        <td><input type="text" class="form-control tbl" name=""></td>
-        <td><input type="date" class="form-control tbl" name=""></td>
-        <td><input type="text" list="listRes" class="form-control tbl" name=""></td>
-        <td><input type="text" list="listCheckPlace" class="form-control tbl" name=""></td>
-        <td><input type="checkbox" class="form-check-input mt-2" name=""></td>
-        <td><input type="checkbox" class="form-check-input mt-2" name=""></td>
-        <td><input type="checkbox" class="form-check-input mt-2" name=""></td>
-        <td><input type="date" disabled class="form-control tbl" name=""></td>
-        <td><button class="btn btn-outline-success"></button></td>
+        <td><input type="text" class="form-control tbl" formControlName="newBlotId"></td>
+        <td><input type="text" class="form-control tbl" formControlName="newBlotNo"></td>
+        <td><input type="date" class="form-control tbl" formControlName="newBlotDate"></td>
+        <td><input type="text" list="listRes" class="form-control tbl" formControlName="newBlotRes"></td>
+        <td><input type="text" list="listCheckPlace" class="form-control tbl" formControlName="newCheckPlace"></td>
+        <td><input type="checkbox" class="form-check-input mt-2" formControlName="newFirst"></td>
+        <td><input type="checkbox" class="form-check-input mt-2" formControlName="newLast"></td>
+        <td><input type="checkbox" class="form-check-input mt-2" formControlName="newIfa"></td>
+        <td><input type="date" disabled class="form-control tbl"></td>
+        <td><button class="btn btn-outline-success" (click)="createBlot()"></button></td>
       </tr>
     </tbody>
   </table>

@@ -4,7 +4,7 @@ import { PatientCardMainModel } from "../_interfaces/patient-card-main.model";
 import { catchError, Observable, of, throwError } from "rxjs";
 
 @Injectable()
-export class PatientCardMain {
+export class PatientCardMainService {
     // patient: PatientCardMainModel | undefined;
     url: string = 'https://localhost:5001/api/PatientCard';
     constructor(private http: HttpClient){}
@@ -17,16 +17,60 @@ export class PatientCardMain {
         return this.http.delete(this.url+`/DelBlot?patientId=${patientId}&blotId=${blotId}`)
     };
 
+    createPatientBlot(patientId: number, blotId: number, blotNo: number, blotDate: Date, 
+        ibResultId: string, checkPlaceId: string, first: boolean, last: boolean, flgIfa: boolean){
+        return this.http.post(this.url+`/CreateBlot`, {
+            PatientId: patientId, 
+            BlotId: blotId,
+            BlotNo: blotNo,
+            BlotDate: blotDate,
+            IbResultId: ibResultId,
+            CheckPlaceId: checkPlaceId,
+            First1: first,
+            Last1: last,
+            FlgIfa: flgIfa
+        })
+    };
+
+    updatePatientBlot(patientId: number, blotId: number, blotIdOld: number, blotNo: number, blotDate: Date, 
+        ibResultId: string, checkPlaceId: string, first: boolean, last: boolean, flgIfa: boolean){
+            return this.http.post(this.url+`/UpdateBlot`, {
+                PatientId: patientId, 
+                BlotId: blotId,
+                BlotNo: blotNo,
+                BlotDate: blotDate,
+                IbResultId: ibResultId,
+                CheckPlaceId: checkPlaceId,
+                First1: first,
+                Last1: last,
+                FlgIfa: flgIfa,
+                BlotIdOld: blotIdOld
+            })
+    };
+
     delPatientStage(patientId: number, date: Date){
         return this.http.delete(this.url+`/DelStage?patientId=${patientId}&date=${date}`)
     };
 
-    delPatientSecondDesease(patientId: number, date: Date, name: string){
-        return this.http.delete(this.url+`/DelSecondDeseases?patientId=${patientId}&date=${date}&deseases=${name}`)
+    createPatientStage(patientId: number, dateStart: string, name: string){
+        return this.http.post(this.url+`/CreateStage`, {
+            PatientId: patientId, 
+            StageDate: dateStart,
+            StageName: name
+        })
     };
 
-    delPatientPatient(patientId: number){
-        return this.http.delete(this.url+`/DelPatientPatient?patientId=${patientId}`)
+    updatePatientStage(patientId: number, dateStage: string, dateStageOld: string, name: string){
+        return this.http.post(this.url+`/UpdateStage`, {
+            PatientId: patientId, 
+            StageDate: dateStage, 
+            StageName: name,
+            StageDateOld: dateStageOld
+        })
+    };
+
+    delPatientSecondDesease(patientId: number, date: Date, name: string){
+        return this.http.delete(this.url+`/DelSecondDeseases?patientId=${patientId}&date=${date}&deseases=${name}`)
     };
 
     createPatientSecondDesease(patientId: number, dateStart: string, dateEnd: string, name: string){
@@ -37,4 +81,21 @@ export class PatientCardMain {
             Deseas: name
         })
     };
+
+    updatePatientSecondDesease(patientId: number, dateStart: string, dateEnd: string, name: string, dateStartOld: string, nameOld: string){
+        return this.http.post(this.url+`/UpdateSecondDeseases`, {
+            PatientId: patientId, 
+            StartDate: dateStart, 
+            EndDate: dateEnd, 
+            Deseas: name,
+            StartDateOld: dateStartOld,
+            DeseasOld: nameOld
+        })
+    };
+
+    delPatientPatient(patientId: number){
+        return this.http.delete(this.url+`/DelPatientPatient?patientId=${patientId}`)
+    };
+
+    
 }

@@ -1,4 +1,4 @@
-<table class="table border">
+<table class="table border" [formGroup]="formS">
     <thead style="position: sticky;top: 0; background: #ade8dd;">
       <tr>
         <th scope="col" style="width: 30px;">Стадии</th>
@@ -7,15 +7,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of stages" [value]="item">
-        <td><input type="date" class="form-control tbl" formControlName="stageDate"></td>
-        <td><input type="text" list="listStage" class="form-control tbl" formControlName="stage"></td>
-        <td><button class="btn btn-outline-danger" (click)="delStage(item.stageDate, index)"></button></td>
-      </tr>
+      <ng-container formArrayName="stages" *ngFor="let item of stages.controls; let i = index">
+        <tr formGroupName="{{i}}">
+          <td><input type="date" class="form-control tbl" formControlName="stageDate"></td>
+          <td><input type="text" list="listStage" class="form-control tbl" formControlName="stage"></td>
+          <td><button class="btn btn-outline-danger" (click)="delStage(i)"></button></td>
+        </tr>
+      </ng-container>
       <tr>
-        <td><input type="date" class="form-control tbl"></td>
-        <td><input type="text" list="listStage" class="form-control tbl"></td>
-        <td><button class="btn btn-outline-success"></button></td>
+        <td><input type="date" class="form-control tbl" formControlName="newStageDate"></td>
+        <td><input type="text" list="listStage" class="form-control tbl" formControlName="newStage"></td>
+        <td><button class="btn btn-outline-success" (click)="createStage()"></button></td>
       </tr>
     </tbody>
   </table>

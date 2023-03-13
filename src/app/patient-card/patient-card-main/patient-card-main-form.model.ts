@@ -1,4 +1,4 @@
-import { FormArray, FormControl, FormGroup } from '@angular/forms'
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms'
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 
 export class PatientCardMainForm {
@@ -55,11 +55,13 @@ export class PatientCardMainForm {
     invalid = new FormControl()
     archive = new FormControl()
     codeWord = new FormControl()
-    snils = new FormControl()
+    snils = new FormControl('', Validators.required)
     fioChange = new FormControl()
     headPhysician = new FormControl()
     zamMedPart = new FormControl()
     secondDeseases = new FormArray([])
+    stages = new FormArray([])
+    blots = new FormArray([])
 
     constructor(data: PatientCardMainModel) {
         this.patientId.setValue(data.patientId)
@@ -119,7 +121,6 @@ export class PatientCardMainForm {
         this.archive.setValue(data.archive)
         this.codeWord.setValue(data.codeWord)
         this.snils.setValue(data.snils)
-        // this.snils.validator .pattern('[А-я]*')
         this.fioChange.setValue(data.fioChange)
         this.headPhysician.setValue(data.headPhysician)
         this.zamMedPart.setValue(data.zamMedPart)
@@ -127,12 +128,37 @@ export class PatientCardMainForm {
         data.secondDeseases.map(
             (des: any) => {
               const desForm = new FormGroup ({
-                startDate: new FormControl(des.startDate),
+                startDate: new FormControl(des.startDate, Validators.required),
                 endDate: new FormControl(des.endDate),
-                deseas: new FormControl(des.deseas)
+                deseas: new FormControl(des.deseas, Validators.required)
               });
               this.secondDeseases.push(desForm);
             }
         );
+        data.stages.map(
+          (e: any) => {
+            const stageForm = new FormGroup ({
+              stageDate: new FormControl(e.stageDate, Validators.required),
+              stage: new FormControl(e.stage)
+            });
+            this.stages.push(stageForm);
+          }
+        );
+        data.blots.map(
+          (e: any) => {
+            const blotForm = new FormGroup ({
+              blotId: new FormControl(e.blotId, Validators.required),
+              blotNo: new FormControl(e.blotNo),
+              blotDate: new FormControl(e.blotDate),
+              blotRes: new FormControl(e.blotRes),
+              checkPlace: new FormControl(e.checkPlace),
+              first: new FormControl(e.first),
+              last: new FormControl(e.last),
+              ifa: new FormControl(e.ifa),
+              inputDate: new FormControl({value: e.inputDate, disabled: true})
+            });
+            this.blots.push(blotForm);
+          }
+        )
     }
 }
