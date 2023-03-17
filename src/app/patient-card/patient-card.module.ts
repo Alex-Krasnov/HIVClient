@@ -7,6 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PatientBlotComponent } from './patient-blot/patient-blot.component';
 import { PatientStageComponent } from './patient-stage/patient-stage.component';
 import { PatientSecondDeseaseComponent } from './patient-second-desease/patient-second-desease.component';
+import { ListService } from '../services/list.service';
+import { InList } from '../validators/in-lst';
 
 
 
@@ -24,7 +26,9 @@ import { PatientSecondDeseaseComponent } from './patient-second-desease/patient-
     ReactiveFormsModule
   ],
   providers:[
-    PatientCardMainService
+    PatientCardMainService,
+    ListService,
+    InList
   ]
 })
 export class PatientCardModule { }

@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 import { PatientCardMainService } from 'src/app/services/patient-card-main.service';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl, Validators} from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardMainForm } from './patient-card-main-form.model';
+import { ListService } from 'src/app/services/list.service';
+import { InList } from 'src/app/validators/in-lst';
 
 @Component({
   selector: 'app-patient-card-main',
@@ -24,9 +26,9 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
   patient: PatientCardMainModel | undefined;
   patientForm: FormGroup;
   patientFormSub: Subscription;
-  patientSecondDeseases: FormArray;
-  patientStages: FormArray;
-  patientBlot: FormArray;
+  patientSecondDeseases = new FormArray([]);
+  patientStages = new FormArray([]);
+  patientBlot = new FormArray([]);
 
   sdForUpd = [];
   stageForUpd = [];
@@ -36,12 +38,14 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private patientService: PatientCardMainService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private listService: ListService,
   ){}
 
   ngOnInit() {
     this.route.params.subscribe(params => { this.Id = params['id'] });
     this.getPatientData();
+    console.log('status',this.patientForm.status);
   }
 
   openDropdown(str:string): void{
@@ -64,19 +68,6 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
         this.patient = data;
         this.initForm();
       });
-  }
-
-  initForm(){
-    this.PatineCardMainForm = new BehaviorSubject(this.fb.group(new PatientCardMainForm(this.patient)));
-    this.PatineCardMainForm$ = this.PatineCardMainForm.asObservable()
-
-    this.patientFormSub = this.PatineCardMainForm$
-      .subscribe(data => {
-        this.patientForm = data
-        this.patientSecondDeseases = this.patientForm.get('secondDeseases') as FormArray
-        this.patientStages = this.patientForm.get('stages') as FormArray
-        this.patientBlot = this.patientForm.get('blots') as FormArray
-    })
   }
 
   delBlot(blotId: number) {
@@ -106,12 +97,16 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
 
   leaveComponent(name: string){
 
-    console.log(this.patientForm.valid);
-    
     if(this.patientForm.valid){
       this.router.navigate([name]);
     } else{
-      confirm('Данные не верны!')
+      Object.keys(this.patientForm.controls).forEach(
+        (data: any) => {
+          if(this.patientForm.controls[data].invalid)
+            console.log(data);          
+        }
+      )
+      confirm(`Ошибка в заполнении данных!`)
     }
   }
 
@@ -148,5 +143,63 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  initForm(){
+    this.PatineCardMainForm = new BehaviorSubject(this.fb.group(new PatientCardMainForm(this.patient, this.listService)));
+    this.PatineCardMainForm$ = this.PatineCardMainForm.asObservable();
+
+    this.patientFormSub = this.PatineCardMainForm$
+      .subscribe(data => {
+        this.patientForm = data;
+    });
+
+    this.patient.secondDeseases.map(
+        (des: any) => {
+          const desForm = new FormGroup ({
+            startDate: new FormControl(des.startDate, Validators.required),
+            endDate: new FormControl(des.endDate),
+            deseas: new FormControl(des.deseas, {
+              asyncValidators: [InList.validateDeseases(this.listService)],
+              updateOn: 'blur'
+            })
+          });
+          this.patientSecondDeseases.push(desForm);
+        }
+    );
+    this.patient.stages.map(
+      (e: any) => {
+        const stageForm = new FormGroup ({
+          stageDate: new FormControl(e.stageDate, Validators.required),
+          stage: new FormControl(e.stage, {
+            asyncValidators: [InList.validateStage(this.listService)],
+            updateOn: 'blur'
+          })
+        });
+        this.patientStages.push(stageForm);
+      }
+    );
+    this.patient.blots.map(
+      (e: any) => {
+        const blotForm = new FormGroup ({
+          blotId: new FormControl(e.blotId, Validators.required),
+          blotNo: new FormControl(e.blotNo),
+          blotDate: new FormControl(e.blotDate),
+          blotRes: new FormControl(e.blotRes, {
+            asyncValidators: [InList.validateIbResult(this.listService)],
+            updateOn: 'blur'
+          }),
+          checkPlace: new FormControl(e.checkPlace, {
+            asyncValidators: [InList.validateCheckPlace(this.listService)],
+            updateOn: 'blur'
+          }),
+          first: new FormControl(e.first),
+          last: new FormControl(e.last),
+          ifa: new FormControl(e.ifa),
+          inputDate: new FormControl({value: e.inputDate, disabled: true})
+        });
+        this.patientBlot.push(blotForm);
+      }
+    );
   }
 }
