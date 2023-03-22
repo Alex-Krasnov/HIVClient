@@ -13,7 +13,8 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
   pervValue: any;
   @Input() deseasArr: FormArray; 
   @Input() patientId: number;
-  @Output() sdForUpd = new EventEmitter<object[]>();
+  // @Output() sdForUpd = new EventEmitter<object[]>();
+  @Output() sdIsValid = new EventEmitter<boolean>();
 
   constructor(
     private patientService: PatientCardMainService,
@@ -21,13 +22,22 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
   ){}
 
   ngOnInit() {
+    this.sdIsValid.emit(true);
     this.formSd = this.fb.group({
       secondDeseases: this.deseasArr as FormArray,
       newStartDate: new FormControl(),
       newEndDate: new FormControl(),
       newDeseas: new FormControl()
-    });
+    }, {updateOn: 'blur'});
     this.pervValue = this.deseasArr.value as FormArray;
+
+    this.formSd.controls['secondDeseases'].statusChanges.subscribe(() => {
+      if (this.formSd.controls['secondDeseases'].valid){
+        this.updateDesease();
+        this.sdIsValid.emit(true);
+      } else 
+        this.sdIsValid.emit(false);
+    })
   }
 
   get secondDeseases() {
@@ -36,7 +46,8 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
 
   delSecondDeseases(index: number) {
     let e = this.secondDeseases.at(index);
-    this.patientService.delPatientSecondDesease(this.patientId, e.get('startDate').value, e.get('deseas').value).subscribe(); 
+    this.patientService.delPatientSecondDesease(this.patientId, e.get('startDate').value, e.get('deseas').value).subscribe();
+    this.pervValue.splice(index, 1);
     this.secondDeseases.removeAt(index);
   }
 
@@ -50,11 +61,17 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
       endDate: new FormControl(EndDate),
       deseas: new FormControl(Deseas)
     });
+    const desData ={
+      startDate: StartDate,
+      endDate: EndDate,
+      deseas: Deseas
+    }
 
     this.patientService.createPatientSecondDesease(this.patientId, StartDate, EndDate, Deseas)
     .subscribe()
 
     this.secondDeseases.push(desForm)
+    this.pervValue.push(desData)
 
     this.formSd.get('newStartDate').setValue('')
     this.formSd.get('newEndDate').setValue('')
@@ -64,32 +81,33 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
     this.formSd.get('newDeseas').markAsPristine()
   }
 
+  updateDesease(){
+    let oldValue = this.pervValue;
+    let curValue = this.formSd.controls['secondDeseases'].value;
+
+    if(!(JSON.stringify(oldValue) === JSON.stringify(curValue)))
+      for (let index = 0; index < oldValue.length; index++) {
+        if(!(JSON.stringify(oldValue[index]) === JSON.stringify(curValue[index]))){
+          
+          this.patientService.updatePatientSecondDesease
+          (
+            this.patientId, 
+            curValue[index].startDate, 
+            curValue[index].endDate, 
+            curValue[index].deseas, 
+            oldValue[index].startDate, 
+            oldValue[index].deseas
+          ).subscribe()
+          oldValue[index] = curValue[index]
+        }
+      } 
+  }
+
   // chengeTraking(){
   //   merge(...this.deseasArr.controls.map((control: any, index: number) =>
   //     control.valueChanges.pipe(map(value => ({ rowIndex: index, value }))))
   //   ).subscribe(changes => { this.nextValue = changes });
   // }
 
-  ngOnDestroy() {
-    let oldValue = this.pervValue;
-    let curValue = this.formSd.controls['secondDeseases'].value;
-
-    if(!(JSON.stringify(oldValue) === JSON.stringify(curValue))){
-      var forUpd = [];
-
-      for (let index = 0; index < oldValue.length; index++) {
-        if(!(JSON.stringify(oldValue[index]) === JSON.stringify(curValue[index]))){
-          forUpd.push({
-            patientId: this.patientId,
-            startDate: curValue[index].startDate, 
-            endDate: curValue[index].endDate, 
-            deseas: curValue[index].deseas, 
-            oldStartDate: oldValue[index].startDate, 
-            oldDeseas: oldValue[index].deseas
-          });
-        }
-      } 
-      this.sdForUpd.emit(forUpd);
-    }
-  }
+  ngOnDestroy() {}
 }

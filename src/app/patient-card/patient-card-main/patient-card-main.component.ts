@@ -13,13 +13,16 @@ import { InList } from 'src/app/validators/in-lst';
   templateUrl: './patient-card-main.component.html',
   styleUrls: ['./patient-card-main.component.css']
 })
-export class PatientCardMainComponent implements OnInit, OnDestroy {
+export class PatientCardMainComponent implements OnInit {
   private PatineCardMainForm: BehaviorSubject<FormGroup | undefined>
   PatineCardMainForm$: Observable<FormGroup>
 
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  bIsValid: boolean = true;
+  sdIsValid: boolean = true;
+  stageIsValid: boolean = true;
   Id: number;
   IsErr: boolean = false;
 
@@ -30,9 +33,6 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
   patientStages = new FormArray([]);
   patientBlot = new FormArray([]);
 
-  sdForUpd = [];
-  stageForUpd = [];
-  blotForUpd = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +45,6 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.route.params.subscribe(params => { this.Id = params['id'] });
     this.getPatientData();
-    console.log('status',this.patientForm.status);
   }
 
   openDropdown(str:string): void{
@@ -70,29 +69,25 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
       });
   }
 
-  delBlot(blotId: number) {
-    console.log('blotId - ', blotId);
-    this.patientService.delPatientBlot(this.Id, blotId)
-    .subscribe();
-    location.reload();
+  deletePatient(){
+    
+    if(confirm(`Вы уверены, что хотите удалить карту пациента?`)){
+      console.log('delete');
+      this.patientService.delPatientPatient(this.Id).subscribe()
+      // this.route
+    }
   }
 
-  giveSdForUpd(sd: object[]){
-    sd.forEach(e => {
-      this.sdForUpd.push(e)
-    });
+  giveSdForUpd(isValid: boolean){
+    this.sdIsValid = isValid;
   }
 
-  giveStageForUpd(stage: object[]){
-    stage.forEach(e => {
-      this.stageForUpd.push(e)
-    });
+  giveStageForUpd(isValid: boolean){
+    this.stageIsValid = isValid;
   }
 
-  giveBlotForUpd(blot: object[]){
-    blot.forEach(e => {
-      this.blotForUpd.push(e)
-    });
+  giveBlotForUpd(isValid: boolean){
+    this.bIsValid = isValid;    
   }
 
   leaveComponent(name: string){
@@ -107,41 +102,6 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
         }
       )
       confirm(`Ошибка в заполнении данных!`)
-    }
-  }
-
-  ngOnDestroy() {
-    if(this.sdForUpd.length != 0 || this.stageForUpd.length != 0 || this.blotForUpd.length != 0){
-      if(confirm('Сохранить изменения?')){
-
-        if(this.sdForUpd.length != 0){
-          this.sdForUpd.forEach(e => {
-            this.patientService
-            .updatePatientSecondDesease(e.patientId, e.startDate, e.endDate, e.deseas, e.oldStartDate, e.oldDeseas)
-            .subscribe()
-          })
-        }
-
-        if(this.stageForUpd.length != 0){
-          this.stageForUpd.forEach(e => {
-            this.patientService
-            .updatePatientStage(e.patientId, e.StageDate, e.StageDateOld, e.StageName)
-            .subscribe()
-          })
-        }
-
-        if(this.blotForUpd.length != 0){
-          this.blotForUpd.forEach(e => {
-            this.patientService
-            .updatePatientBlot(e.patientId, e.blotId, e.blotIdOld , e.blotNo, e.blotDate, e.ibResultId, e.checkPlaceId, e.first, e.last, e.flgIfa)
-            .subscribe()
-          })
-        }
-
-        if(true){
-          stop
-        }
-      }
     }
   }
 
@@ -182,17 +142,17 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
     this.patient.blots.map(
       (e: any) => {
         const blotForm = new FormGroup ({
-          blotId: new FormControl(e.blotId, Validators.required),
-          blotNo: new FormControl(e.blotNo),
+          blotId: new FormControl(e.blotId, [Validators.required, Validators.pattern("^[0-9]*$")]),
+          blotNo: new FormControl(e.blotNo, Validators.pattern("^[0-9]*$")),
           blotDate: new FormControl(e.blotDate),
           blotRes: new FormControl(e.blotRes, {
-            asyncValidators: [InList.validateIbResult(this.listService)],
-            updateOn: 'blur'
-          }),
+                asyncValidators: [InList.validateIbResult(this.listService)],
+                updateOn: 'blur'
+              }),
           checkPlace: new FormControl(e.checkPlace, {
-            asyncValidators: [InList.validateCheckPlace(this.listService)],
-            updateOn: 'blur'
-          }),
+                asyncValidators: [InList.validateCheckPlace(this.listService)],
+                updateOn: 'blur'
+              }),
           first: new FormControl(e.first),
           last: new FormControl(e.last),
           ifa: new FormControl(e.ifa),

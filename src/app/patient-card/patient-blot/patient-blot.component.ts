@@ -13,7 +13,8 @@ export class PatientBlotComponent implements OnInit {
   pervValue: any;
   @Input() blotArr: FormArray; 
   @Input() patientId: number;
-  @Output() bForUpd = new EventEmitter<object[]>();
+  // @Output() bForUpd = new EventEmitter<object[]>();
+  @Output() bIsValid = new EventEmitter<boolean>();
 
   constructor(
     private patientService: PatientCardMainService,
@@ -21,6 +22,7 @@ export class PatientBlotComponent implements OnInit {
   ){}
 
   ngOnInit() {
+    this.bIsValid.emit(true);
     this.formB = this.fb.group({
       blots: this.blotArr as FormArray,
       newBlotId: new FormControl(),
@@ -31,8 +33,16 @@ export class PatientBlotComponent implements OnInit {
       newFirst: new FormControl(),
       newLast: new FormControl(),
       newIfa: new FormControl()
-    });
+    }, {updateOn: 'blur'});
     this.pervValue = this.blotArr.value as FormArray;
+
+    this.formB.controls['blots'].statusChanges.subscribe(() => {
+      if (this.formB.controls['blots'].valid){
+        this.updateBlot();
+        this.bIsValid.emit(true);
+      } else 
+        this.bIsValid.emit(false);
+    })
  }
 
  get blots(){
@@ -41,7 +51,8 @@ export class PatientBlotComponent implements OnInit {
 
  delBlot(index: number) {
     let e = this.blots.at(index)
-    this.patientService.delPatientBlot(this.patientId, e.get('blotId').value).subscribe(); 
+    this.patientService.delPatientBlot(this.patientId, e.get('blotId').value).subscribe();
+    this.pervValue.splice(index, 1);
     this.blots.removeAt(index);
   }
 
@@ -64,13 +75,26 @@ export class PatientBlotComponent implements OnInit {
       first: new FormControl(First),
       last: new FormControl(Last),
       ifa: new FormControl(FlgIfa),
-      inputDate: new FormControl(Date.now())
+      inputDate: new FormControl({value: Date.now(), disabled: true})
     });
+
+    const blotData = {
+      blotId: BlotId,
+      blotNo: BlotNo,
+      blotDate: BlotDate,
+      blotRes: ibResult,
+      checkPlace: CheckPlace,
+      first: First,
+      last: Last,
+      ifa: FlgIfa,
+      inputDate: Date.now()
+    }
 
     this.patientService.createPatientBlot(this.patientId, BlotId, BlotNo, BlotDate, ibResult, CheckPlace, First, Last, FlgIfa)
     .subscribe()
 
     this.blots.push(blotForm)
+    this.pervValue.push(blotData);
 
     this.formB.get('newBlotId').setValue('')
     this.formB.get('newBlotNo').setValue('')
@@ -90,30 +114,32 @@ export class PatientBlotComponent implements OnInit {
     this.formB.get('newIfa').markAsPristine()
   }
 
-  ngOnDestroy() {
+  updateBlot(){
     let oldValue = this.pervValue;
     let curValue = this.formB.controls['blots'].value;
-
+    
     if(!(JSON.stringify(oldValue) === JSON.stringify(curValue))){
-      var forUpd = [];
-
       for (let index = 0; index < oldValue.length; index++) {
         if(!(JSON.stringify(oldValue[index]) === JSON.stringify(curValue[index]))){
-          forUpd.push({
-            patientId: this.patientId, 
-            blotId: curValue[index].blotId,
-            blotNo: curValue[index].blotNo,
-            blotDate: curValue[index].blotDate,
-            ibResultId: curValue[index].blotRes,
-            checkPlaceId: curValue[index].checkPlace,
-            first: curValue[index].first,
-            last: curValue[index].last,
-            flgIfa: curValue[index].ifa,
-            blotIdOld: oldValue[index].blotId
-          });
+          // console.log(curValue[index]);
+          this.patientService.updatePatientBlot
+          (
+            this.patientId, 
+            curValue[index].blotId, 
+            oldValue[index].blotId, 
+            curValue[index].blotNo == "" ? null : curValue[index].blotNo, 
+            curValue[index].blotDate, 
+            curValue[index].blotRes, 
+            curValue[index].checkPlace, 
+            curValue[index].first,
+            curValue[index].last,
+            curValue[index].ifa
+          ).subscribe()
+          oldValue[index] = curValue[index]
         }
       } 
-      this.bForUpd.emit(forUpd);
     }
   }
+
+  ngOnDestroy() {}
 }

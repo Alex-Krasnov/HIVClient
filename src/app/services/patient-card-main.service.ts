@@ -96,6 +96,4 @@ export class PatientCardMainService {
     delPatientPatient(patientId: number){
         return this.http.delete(this.url+`/DelPatientPatient?patientId=${patientId}`)
     };
-
-    
 }

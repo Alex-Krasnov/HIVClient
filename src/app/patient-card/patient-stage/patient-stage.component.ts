@@ -12,7 +12,8 @@ export class PatientStageComponent implements OnInit {
   pervValue: any;
   @Input() stageArr: FormArray; 
   @Input() patientId: number;
-  @Output() sForUpd = new EventEmitter<object[]>();
+  // @Output() sForUpd = new EventEmitter<object[]>();
+  @Output() sIsValid = new EventEmitter<boolean>();
 
   constructor(
     private fb: FormBuilder,
@@ -20,12 +21,21 @@ export class PatientStageComponent implements OnInit {
   ){}
 
   ngOnInit() {
+    this.sIsValid.emit(true);
     this.formS = this.fb.group({
       stages: this.stageArr as FormArray,
       newStageDate: new FormControl(),
       newStage: new FormControl()
-    });
+    }, {updateOn: 'blur'});
     this.pervValue = this.stageArr.value as FormArray;
+
+    this.formS.controls['stages'].statusChanges.subscribe(() => {
+      if (this.formS.controls['stages'].valid){
+        this.updateStage();
+        this.sIsValid.emit(true);
+      } else 
+        this.sIsValid.emit(false);
+    })
   }
 
   get stages() {
@@ -35,6 +45,7 @@ export class PatientStageComponent implements OnInit {
   delStage(index: number) {
     let e = this.stages.at(index);
     this.patientService.delPatientStage(this.patientId, e.get('stageDate').value).subscribe();
+    this.pervValue.splice(index, 1);
     this.stages.removeAt(index);
   }
 
@@ -47,10 +58,16 @@ export class PatientStageComponent implements OnInit {
       stage: new FormControl(Stage)
     });
 
+    const stageData = {
+      stageDate: StageDate,
+      stage: Stage
+    }
+
     this.patientService.createPatientStage(this.patientId, StageDate, Stage)
     .subscribe()
 
     this.stages.push(stageForm)
+    this.pervValue.push(stageData);
 
     this.formS.get('newStageDate').setValue('')
     this.formS.get('newStage').setValue('')
@@ -58,25 +75,23 @@ export class PatientStageComponent implements OnInit {
     this.formS.get('newStage').markAsPristine()
   }
 
-  ngOnDestroy() {
+  updateStage(){
     let oldValue = this.pervValue;
     let curValue = this.formS.controls['stages'].value;
 
-    if(!(JSON.stringify(oldValue) === JSON.stringify(curValue))){
-      var forUpd = [];
-
+    if(!(JSON.stringify(oldValue) === JSON.stringify(curValue)))
       for (let index = 0; index < oldValue.length; index++) {
         if(!(JSON.stringify(oldValue[index]) === JSON.stringify(curValue[index]))){
-          forUpd.push({
-            patientId: this.patientId,
-            StageDate: curValue[index].stageDate, 
-            StageName: curValue[index].stage,
-            StageDateOld: oldValue[index].stageDate
-          });
+          this.patientService.updatePatientStage(
+            this.patientId,
+            curValue[index].stageDate, 
+            oldValue[index].stageDate,
+            curValue[index].stage
+          ).subscribe()
+          oldValue[index] = curValue[index]
         }
-      } 
-      
-      this.sForUpd.emit(forUpd);
-    }
+      }
   }
+
+  ngOnDestroy() {}
 }

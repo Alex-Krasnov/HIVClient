@@ -61,23 +61,8 @@
     </div>
 </nav>
 <ng-container  *ngIf="patientForm">
-<div *ngIf="patientForm.controls['sex'].pending 
-            || patientForm.controls['regOffReason'].pending
-            || patientForm.controls['region'].pending
-            || patientForm.controls['regionFact'].pending
-            || patientForm.controls['country'].pending
-            || patientForm.controls['codeMKB10'].pending
-            || patientForm.controls['vulnerableGroup'].pending
-            || patientForm.controls['checkCourseShort'].pending
-            || patientForm.controls['infectCourseShort'].pending
-            || patientForm.controls['dieCourseShort'].pending
-            || patientForm.controls['checkCourseLong'].pending
-            || patientForm.controls['infectCourseLong'].pending
-            || patientForm.controls['dieCourseLong'].pending
-            || patientForm.controls['arvt'].pending
-            || patientForm.controls['invalid'].pending"
-            >Validating...</div>
-<div *ngIf="IsErr" class="alert alert-danger">Неверный ...</div>
+<div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
+<div *ngIf="patientForm.invalid || !bIsValid || !sdIsValid || !stageIsValid" class="alert alert-danger">Ошибка...</div>
 <form *ngIf="patientForm" [formGroup]="patientForm">
     <div style="background-color: #ade8dd;">
         <div class="row mb-2">
@@ -133,7 +118,7 @@
             </div>
             <div class="col-xl me-1">
                 <div class=" mt-1" style="height: 367px; overflow: auto;">
-                    <app-patient-blot [(blotArr)]="patientBlot" [(patientId)]="patient.patientId" (bForUpd)="giveBlotForUpd($event)"></app-patient-blot>
+                    <app-patient-blot [(blotArr)]="patientBlot" [(patientId)]="patient.patientId" (bIsValid)="giveBlotForUpd($event)"></app-patient-blot>
                 </div>
             </div>
         </div>
@@ -274,12 +259,12 @@
         <div class="row g-1 mb-1">
             <div class="col-xl-3 me-1">
                 <div class="ms-1 mt-1" style="height: 115px; overflow: auto;">
-                    <app-patient-stage [(stageArr)]="patientStages" [(patientId)]="patient.patientId" (sForUpd)="giveStageForUpd($event)"></app-patient-stage>
+                    <app-patient-stage [(stageArr)]="patientStages" [(patientId)]="patient.patientId" (sIsValid)="giveStageForUpd($event)"></app-patient-stage>
                 </div>
             </div>
             <div class="col-xl-5 me-1">
                 <div class=" mt-1" style="height: 115px; overflow: auto;">
-                    <app-patient-second-desease [(deseasArr)]="patientSecondDeseases" [(patientId)]="patient.patientId" (sdForUpd)="giveSdForUpd($event)"></app-patient-second-desease>
+                    <app-patient-second-desease [(deseasArr)]="patientSecondDeseases" [(patientId)]="patient.patientId" (sdIsValid)="giveSdForUpd($event)"></app-patient-second-desease>
                 </div>
             </div>
         </div>
@@ -423,6 +408,9 @@
         </div>
         <br>
         <br>
+        <div class="row g-0 m-2">
+            <div class="row g-0 text-left" (click)="deletePatient()"><button class="btn btn-lg btn-outline-danger">Удалить карту</button></div>
+        </div>
     </div>
 </form>
 </ng-container>
