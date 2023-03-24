@@ -2,6 +2,7 @@ import { ErrorHandler, Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { PatientCardMainModel } from "../_interfaces/patient-card-main.model";
 import { catchError, Observable, of, throwError } from "rxjs";
+import { pcMain } from "../_interfaces/pc-main.model";
 
 @Injectable()
 export class PatientCardMainService {
@@ -95,5 +96,9 @@ export class PatientCardMainService {
 
     delPatientPatient(patientId: number){
         return this.http.delete(this.url+`/DelPatientPatient?patientId=${patientId}`)
+    };
+
+    updatePatient(patient: pcMain){
+        return this.http.post(this.url+`/UpdatePatient`, patient)
     };
 }

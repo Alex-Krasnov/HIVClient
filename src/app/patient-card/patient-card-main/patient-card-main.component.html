@@ -408,12 +408,13 @@
         </div>
         <br>
         <br>
-        <div class="row g-0 m-2">
-            <div class="row g-0 text-left" (click)="deletePatient()"><button class="btn btn-lg btn-outline-danger">Удалить карту</button></div>
-        </div>
+    </div>
+    <div class="row g-0">
+        <!-- deletePatient -->
+        <div class="row g-0 text-left" (click)="deletePatient()"><button class="btn btn-lg btn-outline-danger">Удалить карту</button></div>
     </div>
 </form>
-</ng-container>
+
 
 <datalist id="listSex">
     <option  *ngFor="let sex of patient.listSex" [value]="sex">
@@ -510,3 +511,5 @@
         {{Stage}}
     </option>
 </datalist> 
+
+</ng-container>
