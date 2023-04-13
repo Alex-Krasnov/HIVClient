@@ -133,3 +133,8 @@ table {
     border-collapse: separate;
     border-spacing: 0;
 }
+
+.navbar-toggler-icon {
+    
+    background-image: var('nav-btn.svg');
+}

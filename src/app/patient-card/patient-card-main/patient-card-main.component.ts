@@ -68,8 +68,6 @@ export class PatientCardMainComponent implements OnInit {
     this.patientService.getPatientData(this.Id)
       .subscribe((data:PatientCardMainModel) => {
         this.patient = data;
-        console.log(data);
-        
         this.initForm();
         this.pervValue = {
           patientId: data.patientId,
@@ -419,7 +417,11 @@ export class PatientCardMainComponent implements OnInit {
     if(this.patientForm.valid){
       if(this.needUpd)
         this.updatePatient()
-      this.router.navigate([name]);
+      if(name == '/main'){
+        this.router.navigate([name]);
+        return null
+      }
+      this.router.navigate([name+this.Id])
     } else{
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {

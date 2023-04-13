@@ -84,4 +84,32 @@ export class ListService {
     InListStage(name: string): Observable<object>{
         return this.http.post(this.url+`getInListStage`,{ str: name});
     };
+
+    InListCorrespIllnesses(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListCorrespIllnesses`,{ str: name});
+    };
+
+    InListCureSchemaName(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListCureSchemaName`,{ str: name});
+    };
+
+    InListCureChangeName(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListCureChangeName`,{ str: name});
+    };
+
+    InListRangeTherapy(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListRangeTherapy`,{ str: name});
+    };
+
+    InListLpuName(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListLpuName`,{ str: name});
+    };
+
+    InListHospCourseName(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListHospCourseName`,{ str: name});
+    };
+
+    InListHospResult(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListHospResult`,{ str: name});
+    };
 }

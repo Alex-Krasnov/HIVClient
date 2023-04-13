@@ -1,0 +1,124 @@
+<ng-container [formGroup]="patientForm" *ngIf="patientForm">
+    <div class="navbar row bg-light container-fluid justify-content-between p-0 m-0">
+        <div class="col-xl-1 p-0 ps-1 d-flex justify-content-start">
+            <img class="ms-1" src="favicon.ico" width="35" height="35">
+        </div>
+        <div class="col-xl">
+            <div class="row g-0">
+                <div class="col-xl">
+                    <input class="form-control m-0 ps-1 me-3" style="border-radius: 0px;" formControlName="patientFio">
+                </div>
+                <div class="col-xl-1">
+                    <input class="form-control m-0 ps-1 me-3" style="border-radius: 0px;" formControlName="patientId">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-1 p-0 ps-1 d-flex justify-content-end navbar-expand-xxl">
+            <button class="navbar-toggler collapsed m-1" type="button" (click)="openDropdown('Меню')">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-xxl bg-light p-0">
+        <div class="container-fluid">
+            <div class="navbar-collapse collapse" [class.show]="isVisibleMenu">
+                <ul class="navbar-nav justify-content-between" style="width: 100%;">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/main')" [routerLink]="['/patient_card/main']" routerLinkActive="disabled">Общие данные</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Эпид. данные</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/treatment')" [routerLink]="['/patient_card/treatment']" routerLinkActive="disabled">Лечение</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Явка на приём</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" (click)="openDropdown('Диагностика')">Диагностика</a>
+                        <ul [class.visibleDropdown]="isVisibleDiagn" class="dropdown-menu">
+                            <li><a class="dropdown-item">Диагностика общ.</a></li>
+                            <li><a class="dropdown-item">Резистентность</a></li>
+                            <li><a class="dropdown-item">Диагностика и сопут.</a></li>
+                            <li><a class="dropdown-item">Диагн. руч.</a></li>
+                            <li><a class="dropdown-item">ACL</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Рецепты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Беременные</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Дети</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">COVID</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">СИЗО</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" (click)="openDropdown('Системные')">Системные</a>
+                        <ul [class.visibleDropdown]="isVisibleSystem" class="dropdown-menu">
+                            <li><a class="dropdown-item">setup_print</a></li>
+                            <li><a class="dropdown-item">print</a></li>
+                            <li><a class="dropdown-item">research_frm</a></li>
+                            <li><a class="dropdown-item">other_print</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="leaveComponent('/main')">Гл. меню</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
+        <div class="row ms-1">
+            <div class="col-xl-3 form-floating p-0">
+                <input type="text" class="form-control" placeholder="Стадия" formControlName="stageName">
+                <label>Стадия</label>
+            </div>
+            <div class="col-xl-3 form-floating p-0 ms-2">
+                <input type="text" class="form-control" placeholder="Гр. инвалидности" formControlName="invalidName">
+                <label>Гр. инвалидности</label>
+            </div>
+        </div>
+        <div class="row mt-1 ms-1">
+            <div class="col-xl-1">
+                <label>Расшифровка стадии</label>
+            </div>
+            <div class="col-xl">
+                <textarea class="form-control" rows="2" formControlName="stageCom"></textarea>
+            </div>
+        </div>
+        <div class="row mt-1 ms-1">
+            <div class="col-xl-1">
+                <label>Комментарий</label>
+            </div>
+            <div class="col-xl">
+                <textarea class="form-control" rows="2" formControlName="patientCom"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl">
+                
+            </div>
+        </div>
+        <br>
+        <br>
+    </form>
+</ng-container>
