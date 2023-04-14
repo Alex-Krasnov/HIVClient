@@ -31,4 +31,32 @@ export class PatientCardTreatmentService {
                 CorrespIllnessNameOld: nameOld
             })
     };
+
+    delHospResultRs(patientId: number, name: string, date: string): Observable<unknown>{
+        return this.http.delete(this.url+`/DelHospResult?patientId=${patientId}&name=${name}&date=${date}`)
+    };
+
+    createHospResultRs(patientId: number, name: string, date: string, hospCourseName: string, dateHospOut: string, hospResultName: string){
+        return this.http.post(this.url+`/CreateHospResult`, {
+            PatientId: patientId, 
+            LpuName: name,
+            DateHospIn: date,
+            HospCourseName: hospCourseName,
+            DateHospOut: dateHospOut,
+            HospResultName: hospResultName
+        })
+    };
+
+    updateHospResultRs(patientId: number, name: string, date: string, hospCourseName: string, dateHospOut: string, hospResultName: string, nameOld: string, dateOld: string){
+            return this.http.post(this.url+`/UpdateHospResult`, {
+                PatientId: patientId, 
+                LpuName: name,
+                DateHospIn: date,
+                HospCourseName: hospCourseName,
+                DateHospOut: dateHospOut,
+                HospResultName: hospResultName,
+                LpuNameOld: nameOld,
+                DateHospInOld: dateOld
+            })
+    };
 }

@@ -60,7 +60,10 @@ export class PatientCorrepIllnessesComponent implements OnInit{
 
     if(this.formCI.controls['newCorrespIllness'].valid){
       const sForm = new FormGroup ({
-        correspIllness: new FormControl(name),
+        correspIllness: new FormControl(name, {
+          asyncValidators: [InList.validateCorrespIllnesses(this.listService)],
+          updateOn: 'blur'
+        }),
         correspIllnessDate: new FormControl({value: Date.now(), disabled: true})
       });
       const sData ={

@@ -103,21 +103,23 @@
                 <textarea class="form-control" rows="2" formControlName="patientCom"></textarea>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-1 ms-1">
             <div class="col-xl-5">
                 <div class=" mt-1" style="height: 115px; overflow: auto;">
                     <app-patient-correp-illnesses [(correpIllnessesArr)]="patientCorrespIllnesses" [(patientId)]="patient.patientId" (ciIsValid)="giveSIForUpd($event)"></app-patient-correp-illnesses>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-1 ms-1">
             <div class="col-xl">
                 
             </div>
         </div>
-        <div class="row">
-            <div class="col-xl">
-                
+        <div class="row mt-1 ms-1">
+            <div class="col-xl-11 ">
+                <div class=" mt-1" style="height: 115px; overflow: auto;">
+                    <app-patient-hosp-result-rs [(hospResultArr)]="patientHospResultRs" [(patientId)]="patient.patientId" (hrIsValid)="giveHRForUpd($event)"></app-patient-hosp-result-rs>
+                </div>
             </div>
         </div>
         <br>

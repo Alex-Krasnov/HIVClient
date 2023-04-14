@@ -1,1 +1,32 @@
-<p>patient-hosp-result-rs works!</p>
+<table class="table border" [formGroup]="formHR">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 30px;">Дата госп</th>
+        <th scope="col" style="width: 300px;">ЛПУ</th>
+        <th scope="col" style="width: 300px;">Причина госпитализации</th>
+        <th scope="col" style="width: 30px;">Дата ввода</th>
+        <th scope="col" style="width: 300px;">Исход госпитализации</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="hospResultRs" *ngFor="let item of hospResultRs.controls; let i = index">
+        <tr  formGroupName="{{i}}">
+            <td><input type="date" class="form-control tbl" formControlName="dateHospIn"></td>
+            <td><input type="text" list="listLpus" class="form-control tbl" formControlName="lpuName"></td>
+            <td><input type="text" list="listHospCourses" class="form-control tbl" formControlName="hospCourseName"></td>
+            <td><input type="date" class="form-control tbl" formControlName="dateHospOut"></td>
+            <td><input type="text" list="listHospResults" class="form-control tbl" formControlName="hospResult"></td>
+            <td><button class="btn btn-outline-danger" (click)="delHospResultRs(i)"></button></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="date" class="form-control tbl" formControlName="newDateHospIn"></td>
+            <td><input type="text" list="listLpus" class="form-control tbl" formControlName="newLpuName"></td>
+            <td><input type="text" list="listHospCourses" class="form-control tbl" formControlName="newHospCourseName"></td>
+            <td><input type="date" class="form-control tbl" formControlName="newDateHospOut"></td>
+            <td><input type="text" list="listHospResults" class="form-control tbl" formControlName="newHospResult"></td>
+            <td><button class="btn btn-outline-success" (click)="createHospResultRs()"></button></td>
+        </tr>
+    </tbody>
+  </table>
