@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ListService } from 'src/app/services/list.service';
 import { PatientCardMainService } from 'src/app/services/patient-card-main.service';
+import { InList } from 'src/app/validators/in-lst';
 
 @Component({
   selector: 'app-patient-blot',
@@ -18,18 +20,25 @@ export class PatientBlotComponent implements OnInit {
 
   constructor(
     private patientService: PatientCardMainService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private listService: ListService
   ){}
 
   ngOnInit() {
     this.bIsValid.emit(true);
     this.formB = this.fb.group({
       blots: this.blotArr as FormArray,
-      newBlotId: new FormControl(),
-      newBlotNo: new FormControl(),
+      newBlotId: new FormControl('', Validators.pattern("^[0-9]*$")),
+      newBlotNo: new FormControl('',Validators.pattern("^[0-9]*$")),
       newBlotDate: new FormControl(),
-      newBlotRes: new FormControl(),
-      newCheckPlace: new FormControl(),
+      newBlotRes: new FormControl('', {
+        asyncValidators: [InList.validateIbResult(this.listService)],
+        updateOn: 'blur'
+      }),
+      newCheckPlace: new FormControl('', {
+        asyncValidators: [InList.validateCheckPlace(this.listService)],
+        updateOn: 'blur'
+      }),
       newFirst: new FormControl(),
       newLast: new FormControl(),
       newIfa: new FormControl()
@@ -66,35 +75,42 @@ export class PatientBlotComponent implements OnInit {
     let Last = this.formB.get('newLast').value
     let FlgIfa = this.formB.get('newIfa').value
 
-    const blotForm = new FormGroup ({
-      blotId: new FormControl(BlotId),
-      blotNo: new FormControl(BlotNo),
-      blotDate: new FormControl(BlotDate),
-      blotRes: new FormControl(ibResult),
-      checkPlace: new FormControl(CheckPlace),
-      first: new FormControl(First),
-      last: new FormControl(Last),
-      ifa: new FormControl(FlgIfa),
-      inputDate: new FormControl({value: Date.now(), disabled: true})
-    });
-
-    const blotData = {
-      blotId: BlotId,
-      blotNo: BlotNo,
-      blotDate: BlotDate,
-      blotRes: ibResult,
-      checkPlace: CheckPlace,
-      first: First,
-      last: Last,
-      ifa: FlgIfa,
-      inputDate: Date.now()
+    if(
+      this.formB.controls['newBlotId'].valid && 
+      this.formB.controls['newBlotNo'].valid && 
+      this.formB.controls['newBlotRes'].valid && 
+      this.formB.controls['newCheckPlace'].valid
+      ){
+      const blotForm = new FormGroup ({
+        blotId: new FormControl(BlotId),
+        blotNo: new FormControl(BlotNo),
+        blotDate: new FormControl(BlotDate),
+        blotRes: new FormControl(ibResult),
+        checkPlace: new FormControl(CheckPlace),
+        first: new FormControl(First),
+        last: new FormControl(Last),
+        ifa: new FormControl(FlgIfa),
+        inputDate: new FormControl({value: Date.now(), disabled: true})
+      });
+  
+      const blotData = {
+        blotId: BlotId,
+        blotNo: BlotNo,
+        blotDate: BlotDate,
+        blotRes: ibResult,
+        checkPlace: CheckPlace,
+        first: First,
+        last: Last,
+        ifa: FlgIfa,
+        inputDate: Date.now()
+      }
+  
+      this.patientService.createPatientBlot(this.patientId, BlotId, BlotNo, BlotDate, ibResult, CheckPlace, First, Last, FlgIfa)
+      .subscribe()
+  
+      this.blots.push(blotForm)
+      this.pervValue.push(blotData);
     }
-
-    this.patientService.createPatientBlot(this.patientId, BlotId, BlotNo, BlotDate, ibResult, CheckPlace, First, Last, FlgIfa)
-    .subscribe()
-
-    this.blots.push(blotForm)
-    this.pervValue.push(blotData);
 
     this.formB.get('newBlotId').setValue('')
     this.formB.get('newBlotNo').setValue('')

@@ -11,6 +11,9 @@ import { PatientSecondDeseaseComponent } from './patient-second-desease/patient-
 import { ListService } from '../services/list.service';
 import { InList } from '../validators/in-lst';
 import { PatientCardTreatmentComponent } from './patient-card-treatment/patient-card-treatment.component';
+import { PatientCorrepIllnessesComponent } from './patient-correp-illnesses/patient-correp-illnesses.component';
+import { PatientCureSchemasComponent } from './patient-cure-schemas/patient-cure-schemas.component';
+import { PatientHospResultRsComponent } from './patient-hosp-result-rs/patient-hosp-result-rs.component';
 
 
 
@@ -20,7 +23,10 @@ import { PatientCardTreatmentComponent } from './patient-card-treatment/patient-
     PatientBlotComponent,
     PatientStageComponent,
     PatientSecondDeseaseComponent,
-    PatientCardTreatmentComponent
+    PatientCardTreatmentComponent,
+    PatientCorrepIllnessesComponent,
+    PatientCureSchemasComponent,
+    PatientHospResultRsComponent
   ],
   imports: [
     CommonModule, 

@@ -12,4 +12,23 @@ export class PatientCardTreatmentService {
     getData(id: number): Observable<PatientCardTreatmentModel>{
         return this.http.get<PatientCardTreatmentModel>(this.url+`?patientId=${id}`);
     };
+
+    delCorrepIllness(patientId: number, name: number): Observable<unknown>{
+        return this.http.delete(this.url+`/DelCorrepIllness?patientId=${patientId}&name=${name}`)
+    };
+
+    createCorrepIllness(patientId: number, name: string){
+        return this.http.post(this.url+`/CreateCorrepIllness`, {
+            PatientId: patientId, 
+            CorrespIllnessName: name,
+        })
+    };
+
+    updateCorrepIllness(patientId: number, name: string, nameOld: string){
+            return this.http.post(this.url+`/UpdateCorrepIllness`, {
+                PatientId: patientId, 
+                CorrespIllnessName: name,
+                CorrespIllnessNameOld: nameOld
+            })
+    };
 }

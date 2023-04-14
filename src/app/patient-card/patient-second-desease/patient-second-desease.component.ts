@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { map, merge } from 'rxjs';
 import { PatientCardMainService } from 'src/app/services/patient-card-main.service';
 
 @Component({
@@ -56,22 +55,27 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
     let EndDate = this.formSd.get('newEndDate').value
     let Deseas = this.formSd.get('newDeseas').value
 
-    const desForm = new FormGroup ({
-      startDate: new FormControl(StartDate),
-      endDate: new FormControl(EndDate),
-      deseas: new FormControl(Deseas)
-    });
-    const desData ={
-      startDate: StartDate,
-      endDate: EndDate,
-      deseas: Deseas
+    if(this.formSd.controls['newStartDate'].valid && 
+        this.formSd.controls['newEndDate'].valid && 
+        this.formSd.controls['newDeseas'].valid){
+          
+      const desForm = new FormGroup ({
+        startDate: new FormControl(StartDate),
+        endDate: new FormControl(EndDate),
+        deseas: new FormControl(Deseas)
+      });
+      const desData ={
+        startDate: StartDate,
+        endDate: EndDate,
+        deseas: Deseas
+      }
+  
+      this.patientService.createPatientSecondDesease(this.patientId, StartDate, EndDate, Deseas)
+      .subscribe()
+  
+      this.secondDeseases.push(desForm)
+      this.pervValue.push(desData)
     }
-
-    this.patientService.createPatientSecondDesease(this.patientId, StartDate, EndDate, Deseas)
-    .subscribe()
-
-    this.secondDeseases.push(desForm)
-    this.pervValue.push(desData)
 
     this.formSd.get('newStartDate').setValue('')
     this.formSd.get('newEndDate').setValue('')

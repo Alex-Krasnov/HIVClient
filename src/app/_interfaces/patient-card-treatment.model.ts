@@ -10,14 +10,14 @@ export interface PatientCardTreatmentModel {
   patientCom: string;
   invalidName: string;
 
-  ListInvalids?: string[];
-  ListCorrespIllness?: string[];
-  ListCureSchemas?: string[];
-  ListCureChanges?: string[];
-  ListRangeTherapy?: string[];
-  ListLpus?: string[];
-  ListHospCourses?: string[];
-  ListHospResults?: string[];
+  listInvalids?: string[];
+  listCorrespIllness?: string[];
+  listCureSchemas?: string[];
+  listCureChanges?: string[];
+  listRangeTherapy?: string[];
+  listLpus?: string[];
+  listHospCourses?: string[];
+  listHospResults?: string[];
 
   correspIllnesses?: CorrespIllnesses[]; 
   cureSchemas?: CureSchemas[];

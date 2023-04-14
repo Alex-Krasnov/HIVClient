@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ListService } from 'src/app/services/list.service';
 import { PatientCardMainService } from 'src/app/services/patient-card-main.service';
+import { InList } from 'src/app/validators/in-lst';
 
 @Component({
   selector: 'app-patient-stage',
@@ -17,7 +19,8 @@ export class PatientStageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private patientService: PatientCardMainService
+    private patientService: PatientCardMainService,
+    private listService: ListService
   ){}
 
   ngOnInit() {
@@ -25,7 +28,10 @@ export class PatientStageComponent implements OnInit {
     this.formS = this.fb.group({
       stages: this.stageArr as FormArray,
       newStageDate: new FormControl(),
-      newStage: new FormControl()
+      newStage: new FormControl('', {
+        asyncValidators: [InList.validateStage(this.listService)],
+        updateOn: 'blur'
+      })
     }, {updateOn: 'blur'});
     this.pervValue = this.stageArr.value as FormArray;
 
@@ -53,21 +59,23 @@ export class PatientStageComponent implements OnInit {
     let StageDate = this.formS.get('newStageDate').value
     let Stage = this.formS.get('newStage').value
 
-    const stageForm = new FormGroup ({
-      stageDate: new FormControl(StageDate),
-      stage: new FormControl(Stage)
-    });
-
-    const stageData = {
-      stageDate: StageDate,
-      stage: Stage
+    if(this.formS.controls['newStage'].valid){
+      const stageForm = new FormGroup ({
+        stageDate: new FormControl(StageDate),
+        stage: new FormControl(Stage)
+      });
+  
+      const stageData = {
+        stageDate: StageDate,
+        stage: Stage
+      }
+  
+      this.patientService.createPatientStage(this.patientId, StageDate, Stage)
+      .subscribe()
+  
+      this.stages.push(stageForm)
+      this.pervValue.push(stageData);
     }
-
-    this.patientService.createPatientStage(this.patientId, StageDate, Stage)
-    .subscribe()
-
-    this.stages.push(stageForm)
-    this.pervValue.push(stageData);
 
     this.formS.get('newStageDate').setValue('')
     this.formS.get('newStage').setValue('')

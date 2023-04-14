@@ -42,7 +42,7 @@ export class PatientCardMainComponent implements OnInit {
     private patientService: PatientCardMainService,
     private fb: FormBuilder,
     private router: Router,
-    private listService: ListService,
+    private listService: ListService
   ){}
 
   ngOnInit() {

@@ -104,8 +104,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xl">
-
+            <div class="col-xl-5">
+                <div class=" mt-1" style="height: 115px; overflow: auto;">
+                    <app-patient-correp-illnesses [(correpIllnessesArr)]="patientCorrespIllnesses" [(patientId)]="patient.patientId" (ciIsValid)="giveSIForUpd($event)"></app-patient-correp-illnesses>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -122,3 +124,44 @@
         <br>
     </form>
 </ng-container>
+
+<datalist id="listInvalids">
+    <option  *ngFor="let item of patient.listInvalids" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listCorrespIllness">
+    <option  *ngFor="let item of patient.listCorrespIllness" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listCureSchemas">
+    <option  *ngFor="let item of patient.listCureSchemas" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listCureChanges">
+    <option  *ngFor="let item of patient.listCureChanges" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listRangeTherapy">
+    <option  *ngFor="let item of patient.listRangeTherapy" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listLpus">
+    <option  *ngFor="let item of patient.listLpus" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listHospCourses">
+    <option  *ngFor="let item of patient.listHospCourses" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listHospResults">
+    <option  *ngFor="let item of patient.listHospResults" [value]="item">
+        {{item}}
+    </option>
+</datalist>

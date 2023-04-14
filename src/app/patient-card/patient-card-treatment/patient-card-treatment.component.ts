@@ -34,7 +34,7 @@ export class PatientCardTreatmentComponent implements OnInit{
     private patientTreatmentService: PatientCardTreatmentService,
     private fb: FormBuilder,
     private router: Router,
-    private listService: ListService,
+    private listService: ListService
   ){}
 
   ngOnInit() {
@@ -66,7 +66,7 @@ export class PatientCardTreatmentComponent implements OnInit{
               asyncValidators: [InList.validateCorrespIllnesses(this.listService)],
               updateOn: 'blur'
             }),
-            correspIllnessDate: new FormControl(cor.correspIllnessDate)
+            correspIllnessDate: new FormControl({value: cor.correspIllnessDate, disabled: true})
           });
           this.patientCorrespIllnesses.push(corForm);
         }
