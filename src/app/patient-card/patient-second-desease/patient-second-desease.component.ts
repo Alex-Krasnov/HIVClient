@@ -1,6 +1,8 @@
 import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ListService } from 'src/app/services/list.service';
 import { PatientCardMainService } from 'src/app/services/patient-card-main.service';
+import { InList } from 'src/app/validators/in-lst';
 
 @Component({
   selector: 'app-patient-second-desease',
@@ -17,7 +19,8 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
 
   constructor(
     private patientService: PatientCardMainService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private listService: ListService
   ){}
 
   ngOnInit() {
@@ -26,7 +29,10 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
       secondDeseases: this.deseasArr as FormArray,
       newStartDate: new FormControl(),
       newEndDate: new FormControl(),
-      newDeseas: new FormControl()
+      newDeseas: new FormControl('', {
+        asyncValidators: [InList.validateDeseases(this.listService)],
+        updateOn: 'blur'
+      })
     }, {updateOn: 'blur'});
     this.pervValue = this.deseasArr.value as FormArray;
 
@@ -62,7 +68,10 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
       const desForm = new FormGroup ({
         startDate: new FormControl(StartDate),
         endDate: new FormControl(EndDate),
-        deseas: new FormControl(Deseas)
+        deseas: new FormControl(Deseas, {
+          asyncValidators: [InList.validateDeseases(this.listService)],
+          updateOn: 'blur'
+        })
       });
       const desData ={
         startDate: StartDate,

@@ -117,9 +117,7 @@ export class PatientHospResultRsComponent implements OnInit{
   updateHospResultRs(){
     let oldValue = this.pervValue;
     let curValue = this.formHR.controls['hospResultRs'].value;
-    console.log(123);
     
-
     if(!(JSON.stringify(oldValue) === JSON.stringify(curValue)))
       for (let index = 0; index < oldValue.length; index++) {
         if(!(JSON.stringify(oldValue[index]) === JSON.stringify(curValue[index]))){

@@ -62,7 +62,10 @@ export class PatientStageComponent implements OnInit {
     if(this.formS.controls['newStage'].valid){
       const stageForm = new FormGroup ({
         stageDate: new FormControl(StageDate),
-        stage: new FormControl(Stage)
+        stage: new FormControl(Stage, {
+          asyncValidators: [InList.validateStage(this.listService)],
+          updateOn: 'blur'
+        })
       });
   
       const stageData = {

@@ -82,11 +82,17 @@ export class PatientBlotComponent implements OnInit {
       this.formB.controls['newCheckPlace'].valid
       ){
       const blotForm = new FormGroup ({
-        blotId: new FormControl(BlotId),
-        blotNo: new FormControl(BlotNo),
+        blotId: new FormControl(BlotId, Validators.pattern("^[0-9]*$")),
+        blotNo: new FormControl(BlotNo, Validators.pattern("^[0-9]*$")),
         blotDate: new FormControl(BlotDate),
-        blotRes: new FormControl(ibResult),
-        checkPlace: new FormControl(CheckPlace),
+        blotRes: new FormControl(ibResult, {
+          asyncValidators: [InList.validateIbResult(this.listService)],
+          updateOn: 'blur'
+        }),
+        checkPlace: new FormControl(CheckPlace, {
+          asyncValidators: [InList.validateCheckPlace(this.listService)],
+          updateOn: 'blur'
+        }),
         first: new FormControl(First),
         last: new FormControl(Last),
         ifa: new FormControl(FlgIfa),
