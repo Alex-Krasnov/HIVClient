@@ -24,13 +24,13 @@
             <div class="navbar-collapse collapse" [class.show]="isVisibleMenu">
                 <ul class="navbar-nav justify-content-between" style="width: 100%;">
                     <li class="nav-item">
-                        <a class="nav-link" (click)="leaveComponent('/patient_card/main')" [routerLink]="['/patient_card/main']" routerLinkActive="disabled">Общие данные</a>
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/main/')" [routerLink]="['/patient_card/main']" routerLinkActive="disabled">Общие данные</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Эпид. данные</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" (click)="leaveComponent('/patient_card/treatment')" [routerLink]="['/patient_card/treatment']" routerLinkActive="disabled">Лечение</a>
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/treatment/')" [routerLink]="['/patient_card/treatment']" routerLinkActive="disabled">Лечение</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Явка на приём</a>
@@ -76,6 +76,8 @@
             </div>
         </div>
     </nav>
+    <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
+    <div *ngIf="patientForm.invalid || !siIsValid || !csIsValid || !hrIsValid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1">
             <div class="col-xl-3 form-floating p-0">
@@ -83,7 +85,7 @@
                 <label>Стадия</label>
             </div>
             <div class="col-xl-3 form-floating p-0 ms-2">
-                <input type="text" class="form-control" placeholder="Гр. инвалидности" formControlName="invalidName">
+                <input type="text" class="form-control" list="listInvalids" placeholder="Гр. инвалидности" formControlName="invalidName">
                 <label>Гр. инвалидности</label>
             </div>
         </div>
@@ -128,7 +130,6 @@
         <br>
         <button style="display: none;" type="button"></button>
     </form>
-</ng-container>
 
 <datalist id="listInvalids">
     <option  *ngFor="let item of patient.listInvalids" [value]="item">
@@ -170,3 +171,4 @@
         {{item}}
     </option>
 </datalist>
+</ng-container>

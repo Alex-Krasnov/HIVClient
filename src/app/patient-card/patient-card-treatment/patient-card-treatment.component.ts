@@ -20,6 +20,11 @@ export class PatientCardTreatmentComponent implements OnInit{
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  siIsValid: boolean = true;
+  csIsValid: boolean = true;
+  hrIsValid: boolean = true;
+  IsErr: boolean = false;
+  needUpd: boolean = false;
 
   Id: number;
   patient: PatientCardTreatmentModel | undefined;
@@ -28,10 +33,11 @@ export class PatientCardTreatmentComponent implements OnInit{
   patientCorrespIllnesses = new FormArray([]);
   patientCureSchemas = new FormArray([]);
   patientHospResultRs = new FormArray([]);
+  pervValue: object;
 
   constructor(
     private route: ActivatedRoute,
-    private patientTreatmentService: PatientCardTreatmentService,
+    private patientService: PatientCardTreatmentService,
     private fb: FormBuilder,
     private router: Router,
     private listService: ListService
@@ -43,10 +49,16 @@ export class PatientCardTreatmentComponent implements OnInit{
   }
 
   getData(): void {
-    this.patientTreatmentService.getData(this.Id)
+    this.patientService.getData(this.Id)
       .subscribe((data:PatientCardTreatmentModel) => {
         this.patient = data;
         this.initForm();
+        this.pervValue = {
+          patientId: this.Id,
+          invalidName: data.invalidName,
+          stageCom: data.stageCom,
+          patientCom: data.patientCom,
+        }
       });
   }
 
@@ -118,6 +130,11 @@ export class PatientCardTreatmentComponent implements OnInit{
         this.patientHospResultRs.push(curForm);
       }
     );
+
+    this.patientForm.statusChanges.subscribe( (status) => {
+      if(status == 'VALID')
+        this.needUpd = true;
+    })
   }
 
   openDropdown(str:string): void{
@@ -134,23 +151,57 @@ export class PatientCardTreatmentComponent implements OnInit{
     } 
   }
 
+  giveSIForUpd(isValid: boolean){
+    this.siIsValid = isValid;
+  }
+  
+  giveCSForUpd(isValid: boolean){
+    this.csIsValid = isValid;
+  }
+
+  giveHRForUpd(isValid: boolean){
+    this.hrIsValid = isValid;    
+  }
+
+  updatePatient(){
+    let curValue = {
+      patientId: this.Id,
+      invalidName: this.patientForm.controls['invalidName'].value,
+      stageCom: this.patientForm.controls['stageCom'].value,
+      patientCom: this.patientForm.controls['patientCom'].value,
+    };
+    
+    if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
+      this.patientService.updatePatient(curValue.patientId, curValue.stageCom, curValue.patientCom, curValue.invalidName).subscribe()
+
+      this.pervValue = {
+        patientId: curValue.patientId,
+        invalidName: curValue.invalidName,
+        stageCom: curValue.stageCom,
+        patientCom: curValue.patientCom
+      };
+
+      this.patientForm.markAsPristine()
+    }
+  }
+
   leaveComponent(name: string){
-    // if(this.patientForm.valid){
-    //   if(this.needUpd)
-    //     this.updatePatient()
-    //   if(name == '/main'){
-    //     this.router.navigate([name]);
-    //     return null
-    //   }
-    //   this.router.navigate([name+this.Id])
-    // } else{
-    //   Object.keys(this.patientForm.controls).forEach(
-    //     (data: any) => {
-    //       if(this.patientForm.controls[data].invalid)
-    //         console.log(data);          
-    //     }
-    //   )
-    //   confirm(`Ошибка в заполнении данных!`)
-    // }
+    if(this.patientForm.valid && this.siIsValid && this.csIsValid && this.hrIsValid){
+      if(this.needUpd)
+        this.updatePatient()
+      if(name == '/main'){
+        this.router.navigate([name]);
+        return null
+      }
+      this.router.navigate([name+this.Id])
+    } else{
+      Object.keys(this.patientForm.controls).forEach(
+        (data: any) => {
+          if(this.patientForm.controls[data].invalid)
+            console.log(data);          
+        }
+      )
+      confirm(`Ошибка в заполнении данных!`)
+    }
   }
 }

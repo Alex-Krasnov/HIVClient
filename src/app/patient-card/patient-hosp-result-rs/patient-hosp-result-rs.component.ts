@@ -121,7 +121,6 @@ export class PatientHospResultRsComponent implements OnInit{
     if(!(JSON.stringify(oldValue) === JSON.stringify(curValue)))
       for (let index = 0; index < oldValue.length; index++) {
         if(!(JSON.stringify(oldValue[index]) === JSON.stringify(curValue[index]))){
-          console.log(curValue[index]);
           
           this.patientService.updateHospResultRs
           (

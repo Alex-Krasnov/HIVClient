@@ -97,4 +97,13 @@ export class PatientCardTreatmentService {
                 StartDateOld: startDateOld
             })
     };
+
+    updatePatient(patientId: number, stageCom: string, com: string, invalid: string){
+        return this.http.post(this.url+`/UpdatePatient`, {
+            PatientId: patientId, 
+            StageCom: stageCom,
+            Com: com,
+            Invalid: invalid
+        })
+};
 }
