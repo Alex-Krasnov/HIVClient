@@ -20,8 +20,8 @@
                     <a class="nav-link">Явка на приём</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" (click)="openDropdown('Диагностика')">Диагностика</a>
-                    <ul [class.visibleDropdown]="isVisibleDiagn" class="dropdown-menu">
+                    <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Диагностика')" (mouseleave)="openDropdown('Диагностика')">Диагностика</a>
+                    <ul [class.visibleDropdown]="isVisibleDiagn" class="dropdown-menu" (mouseenter)="openDropdown('Диагностика')" (mouseleave)="openDropdown('Диагностика')">
                         <li><a class="dropdown-item">Диагностика общ.</a></li>
                         <li><a class="dropdown-item">Резистентность</a></li>
                         <li><a class="dropdown-item">Диагностика и сопут.</a></li>
@@ -45,8 +45,8 @@
                     <a class="nav-link">СИЗО</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" (click)="openDropdown('Системные')">Системные</a>
-                    <ul [class.visibleDropdown]="isVisibleSystem" class="dropdown-menu">
+                    <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">Системные</a>
+                    <ul [class.visibleDropdown]="isVisibleSystem" class="dropdown-menu" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">
                         <li><a class="dropdown-item">setup_print</a></li>
                         <li><a class="dropdown-item">print</a></li>
                         <li><a class="dropdown-item">research_frm</a></li>
