@@ -11,13 +11,13 @@
         <tr formGroupName="{{i}}">
           <td><input type="date" class="form-control tbl" formControlName="stageDate"></td>
           <td><input type="text" list="listStage" class="form-control tbl" formControlName="stage"></td>
-          <td><button class="btn btn-outline-danger" (click)="delStage(i)"></button></td>
+          <td><button type="button" class="btn btn-outline-danger" (click)="delStage(i)"></button></td>
         </tr>
       </ng-container>
       <tr>
         <td><input type="date" class="form-control tbl" formControlName="newStageDate"></td>
         <td><input type="text" list="listStage" class="form-control tbl" formControlName="newStage"></td>
-        <td><button class="btn btn-outline-success" (click)="createStage()"></button></td>
+        <td><button type="button" class="btn btn-outline-success" (click)="createStage()"></button></td>
       </tr>
     </tbody>
   </table>

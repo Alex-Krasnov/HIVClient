@@ -59,4 +59,42 @@ export class PatientCardTreatmentService {
                 DateHospInOld: dateOld
             })
     };
+
+    delCureSchemas(patientId: number, name: string, date: string): Observable<unknown>{
+        return this.http.post(this.url+`/DelCureSchema`, {
+            PatientId: patientId, 
+            CureSchemaName: name,
+            StartDate: date
+        })
+    };
+
+    createCureSchemas(patientId: number, name: string, date: string, endDate: string, schemaCom: string, cureChangeName: string, protNum: string, rangeTherapyName: string, last: string){
+        return this.http.post(this.url+`/CreateCureSchema`, {
+            PatientId: patientId, 
+            CureSchemaName: name,
+            StartDate: date,
+            EndDate: endDate,
+            SchemaCom: schemaCom,
+            CureChangeName: cureChangeName,
+            ProtNum: protNum,
+            RangeTherapyName: rangeTherapyName,
+            Last: last
+        })
+    };
+
+    updateCureSchemas(patientId: number, name: string, date: string, endDate: string, schemaCom: string, cureChangeName: string, protNum: string, rangeTherapyName: string, last: string, cureSchemaNameOld: string, startDateOld: string){
+            return this.http.post(this.url+`/UpdateCureSchema`, {
+                PatientId: patientId, 
+                CureSchemaName: name,
+                StartDate: date,
+                EndDate: endDate,
+                SchemaCom: schemaCom,
+                CureChangeName: cureChangeName,
+                ProtNum: protNum,
+                RangeTherapyName: rangeTherapyName,
+                Last: last,
+                CureSchemaNameOld: cureSchemaNameOld,
+                StartDateOld: startDateOld
+            })
+    };
 }

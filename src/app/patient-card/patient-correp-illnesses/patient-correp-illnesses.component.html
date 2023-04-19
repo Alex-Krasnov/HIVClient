@@ -9,15 +9,15 @@
     <tbody>
         <ng-container formArrayName="correpIllnesses" *ngFor="let item of correpIllnesses.controls; let i = index">
         <tr  formGroupName="{{i}}">
-            <td><input type="text" list="listDesease" class="form-control tbl" list="listCorrespIllness" formControlName="correspIllness"></td>
+            <td><input type="text" list="listDesease" class="form-control tbl" list="listCorrespIllness" formControlName="correspIllness" title="{{pervValue[i].correspIllness}}"></td>
             <td><input type="date" class="form-control tbl" formControlName="correspIllnessDate"></td>
-            <td><button class="btn btn-outline-danger" (click)="delCorrepIllnesses(i)"></button></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="delCorrepIllnesses(i)"></button></td>
         </tr>
         </ng-container>
         <tr>
             <td><input type="text" list="listDesease" class="form-control tbl" list="listCorrespIllness" formControlName="newCorrespIllness"></td>
             <td><input type="date" class="form-control tbl" disabled></td>
-            <td><button class="btn btn-outline-success" (click)="createCorrepIllnesses()"></button></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="createCorrepIllnesses()"></button></td>
         </tr>
     </tbody>
   </table>

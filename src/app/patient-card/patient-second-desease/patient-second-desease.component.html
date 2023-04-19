@@ -12,15 +12,15 @@
         <tr  formGroupName="{{i}}">
           <td><input type="date" class="form-control tbl" formControlName="startDate"></td>
           <td><input type="date" class="form-control tbl" formControlName="endDate"></td>
-          <td><input type="text" list="listDesease" class="form-control tbl" formControlName="deseas"></td>
-          <td><button class="btn btn-outline-danger" (click)="delSecondDeseases(i)"></button></td>
+          <td><input type="text" list="listDesease" class="form-control tbl" formControlName="deseas" title="{{pervValue[i].deseas}}"></td>
+          <td><button type="button" class="btn btn-outline-danger" (click)="delSecondDeseases(i)"></button></td>
         </tr>
       </ng-container>
       <tr>
         <td><input type="date" class="form-control tbl" formControlName="newStartDate"></td>
         <td><input type="date" class="form-control tbl" formControlName="newEndDate"></td>
         <td><input type="text" list="listDesease" class="form-control tbl" formControlName="newDeseas"></td>
-        <td><button class="btn btn-outline-success" (click)="createSecondDeseases()"></button></td>
+        <td><button type="button" class="btn btn-outline-success" (click)="createSecondDeseases()"></button></td>
       </tr>
     </tbody>
   </table>

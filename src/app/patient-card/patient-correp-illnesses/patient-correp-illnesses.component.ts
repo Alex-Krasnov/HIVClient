@@ -32,9 +32,7 @@ export class PatientCorrepIllnessesComponent implements OnInit{
       })
     }, {updateOn: 'blur'});
     this.pervValue = this.correpIllnessesArr.value as FormArray;
-    console.log(this.pervValue);
     
-
     this.formCI.controls['correpIllnesses'].statusChanges.subscribe(() => {
       if (this.formCI.controls['correpIllnesses'].valid){
         this.updateCorrepIllnesses();
