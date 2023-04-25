@@ -77,7 +77,8 @@ export class PatientStageComponent implements OnInit {
       .subscribe()
   
       this.stages.push(stageForm)
-      this.pervValue.push(stageData);
+      this.pervValue.push(stageData)
+      this.sIsValid.emit(true);
     }
 
     this.formS.get('newStageDate').setValue('')

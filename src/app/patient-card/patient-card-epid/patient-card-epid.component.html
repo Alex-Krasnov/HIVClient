@@ -1,0 +1,243 @@
+<ng-container [formGroup]="patientForm" *ngIf="patientForm">
+    <div class="navbar row bg-light container-fluid justify-content-between p-0 m-0">
+        <div class="col-xl-1 p-0 ps-1 d-flex justify-content-start">
+            <img class="ms-1" src="favicon.ico" width="35" height="35">
+        </div>
+        <div class="col-xl">
+            <div class="row g-0">
+                <div class="col-xl">
+                    <input class="form-control m-0 ps-1 me-3" style="border-radius: 0px;" formControlName="patientFio">
+                </div>
+                <div class="col-xl-1">
+                    <input class="form-control m-0 ps-1 me-3" style="border-radius: 0px;" formControlName="patientId">
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-1 p-0 ps-1 d-flex justify-content-end navbar-expand-xxl">
+            <button class="navbar-toggler collapsed m-1" type="button" (click)="openDropdown('Меню')">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-xxl bg-light p-0">
+        <div class="container-fluid">
+            <div class="navbar-collapse collapse" [class.show]="isVisibleMenu">
+                <ul class="navbar-nav justify-content-between" style="width: 100%;">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/main/')" [routerLink]="['/patient_card/main']" routerLinkActive="disabled">Общие данные</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/epid/')" [routerLink]="['/patient_card/epid']" routerLinkActive="disabled">Эпид. данные</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/treatment/')" [routerLink]="['/patient_card/treatment']" routerLinkActive="disabled">Лечение</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Явка на приём</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Диагностика')" (mouseleave)="openDropdown('Диагностика')">Диагностика</a>
+                        <ul [class.visibleDropdown]="isVisibleDiagn" class="dropdown-menu" (mouseenter)="openDropdown('Диагностика')" (mouseleave)="openDropdown('Диагностика')">
+                            <li><a class="dropdown-item">Диагностика общ.</a></li>
+                            <li><a class="dropdown-item">Резистентность</a></li>
+                            <li><a class="dropdown-item">Диагностика и сопут.</a></li>
+                            <li><a class="dropdown-item">Диагн. руч.</a></li>
+                            <li><a class="dropdown-item">ACL</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Рецепты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Беременные</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Дети</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">COVID</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">СИЗО</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">Системные</a>
+                        <ul [class.visibleDropdown]="isVisibleSystem" class="dropdown-menu" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">
+                            <li><a class="dropdown-item">setup_print</a></li>
+                            <li><a class="dropdown-item">print</a></li>
+                            <li><a class="dropdown-item">research_frm</a></li>
+                            <li><a class="dropdown-item">other_print</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="leaveComponent('/main')">Гл. меню</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
+    <div *ngIf="patientForm.invalid || !ccIsValid || !rcIsValid || !ocIsValid || !piIsValid || !pniIsValid || !cvIsValid || !cIsValid" class="alert alert-danger">Ошибка...</div>
+    <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
+        <div class="row ms-1 mt-1">
+            <div class="col-xl">
+                <p class="text-start m-0">Постоянные партнеры</p>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-patient-contact [(contactArr)]="patientConstantContacts" [(patientId)]="patient.patientId" [(type)]="type1" (cIsValid)="giveCCForUpd($event)"></app-patient-contact>
+                </div>
+                <p class="text-start m-0">Случайные партнеры</p>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-patient-contact [(contactArr)]="patientRandomContacts" [(patientId)]="patient.patientId" [(type)]="type2" (cIsValid)="giveRCForUpd($event)"></app-patient-contact>
+                </div>
+                <p class="text-start m-0">Прочие партнеры</p>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-patient-contact [(contactArr)]="patientOtherContacts" [(patientId)]="patient.patientId" [(type)]="type3" (cIsValid)="giveOCForUpd($event)"></app-patient-contact>
+                </div>
+                <p class="text-start m-0">Химсекс</p>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-patient-chemsex [(subArr)]="patientChemsexes" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-chemsex>
+                </div>
+                <p class="text-start m-0">Употребление ПАВ инъекционно</p>
+                <div class="row">
+                    <app-patient-pav [(subArr)]="patientPavInjs" [(patientId)]="patient.patientId" (isValid)="givePIForUpd($event)"></app-patient-pav>
+                </div>
+                <p class="text-start m-0">Употребление ПАВ неинъекционно</p>
+                <div class="row">
+                    <app-patient-pav-not-inj [(subArr)]="patientPavNotInjs" [(patientId)]="patient.patientId" (isValid)="givePNIForUpd($event)"></app-patient-pav-not-inj>
+                </div>
+            </div>
+            <div class="col-xl">
+                <div class="row me-3">
+                    <div class="col-xl form-floating p-0">
+                        <input type="date" class="form-control" placeholder="Дата письма в др регион" formControlName="dtMailReg" title="{{pervValue.dtMailReg}}">
+                        <label>Дата письма в регион</label>
+                    </div>
+                    <div class="col-xl form-floating p-0 ms-3">
+                        <input type="text" class="form-control" placeholder="№ письма" formControlName="numMail" title="{{pervValue.numMail}}">
+                        <label>№ письма</label>
+                    </div>
+                </div>
+                <div class="row my-1 me-3">
+                    <div class="col-xl form-floating p-0">
+                        <input type="text" list="listEdu" class="form-control" placeholder="Образование" formControlName="eduName" title="{{pervValue.eduName}}">
+                        <label>Образование</label>
+                    </div>
+                    <div class="col-xl form-floating p-0 ms-3">
+                        <input type="text" list="listFamilyStatus" class="form-control" placeholder="Семейное положение" formControlName="familyStatusName" title="{{pervValue.familyStatusName}}">
+                        <label>Семейное положение</label>
+                    </div>
+                </div>
+                <div class="row my-1 me-3">
+                    <div class="col-xl form-floating p-0">
+                        <input type="text" list="listEmloyment" class="form-control" placeholder="Занятость" formControlName="employmentName" title="{{pervValue.employmentName}}">
+                        <label>Занятость</label>
+                    </div>
+                    <div class="col-xl form-floating p-0 ms-3">
+                        <input type="text" list="listTrans" class="form-control" placeholder="Трансгендерность" formControlName="transName" title="{{pervValue.transName}}">
+                        <label>Трансгендерность</label>
+                    </div>
+                </div>
+                <div class="row my-1 me-3">
+                    <div class="col-xl form-floating p-0">
+                        <input type="text" list="listTransmitionMech" class="form-control" placeholder="Вероятный мех. пеоедачи" formControlName="transmitionMechName" title="{{pervValue.transmitionMechName}}">
+                        <label>Вероятный мех. пеоедачи</label>
+                    </div>
+                    <div class="col-xl form-floating p-0 ms-3">
+                        <input type="text" list="listSituationDetect" class="form-control" placeholder="Обстоятельства выявления" formControlName="situationDetectName" title="{{pervValue.situationDetectName}}">
+                        <label>Обстоятельства выявления</label>
+                    </div>
+                </div>
+                <div class="row my-1 me-3">
+                    <div class="col-xl form-floating p-0">
+                        <input type="date" class="form-control" placeholder="Вероятный срок инфицирования с" formControlName="epidTimeInfectStart">
+                        <label>Вероятный срок инфицирования с</label>
+                    </div>
+                    <div class="col-xl form-floating p-0 ms-3">
+                        <input type="date" class="form-control" placeholder="Вероятный срок инфицирования с" formControlName="epidTimeInfectEnd">
+                        <label>Вероятный срок инфицирования по</label>
+                    </div>
+                </div>
+                <div class="row my-1 me-3">
+                    <div class="col-xl form-floating p-0">
+                        <input type="text" list="listEpidDoc" class="form-control" placeholder="Врач проводивший расследование" formControlName="epidDocName" title="{{pervValue.epidDocName}}">
+                        <label>Врач проводивший расследование</label>
+                    </div>
+                </div>
+                <p class="text-start m-0">Примечание</p>
+                <div class="row my-1 me-3">
+                    <div class="col-xl p-0">
+                        <textarea class="form-control" rows="2" formControlName="epidemCom"></textarea>
+                    </div>
+                </div>
+                <p class="text-start m-0">Данные о вакцинации COVID-19</p>
+                <div class="row my-1 me-3">
+                    <app-patient-covid-vac-epid [(subArr)]="patientCovidVac" [(patientId)]="patient.patientId" (isValid)="giveCVForUpd($event)"></app-patient-covid-vac-epid>
+                </div>
+                <p class="text-start m-0">Данные о заболевании COVID-19</p>
+                <div class="row my-1 me-3">
+                    <app-patient-covid-epid [(subArr)]="patientCovid" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-covid-epid>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <button style="display: none;" type="button"></button>
+    </form>
+
+<datalist id="listCovidMKB">
+    <option  *ngFor="let item of patient.listCovidMKB" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listEdu">
+    <option  *ngFor="let item of patient.listEdu" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listEmloyment">
+    <option  *ngFor="let item of patient.listEmloyment" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listEpidDoc">
+    <option  *ngFor="let item of patient.listEpidDoc" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listFamilyStatus">
+    <option  *ngFor="let item of patient.listFamilyStatus" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listSituationDetect">
+    <option  *ngFor="let item of patient.listSituationDetect" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listTrans">
+    <option  *ngFor="let item of patient.listTrans" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listTransmitionMech">
+    <option  *ngFor="let item of patient.listTransmitionMech" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listTypeContacts">
+    <option  *ngFor="let item of patient.listTypeContacts" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listVac">
+    <option  *ngFor="let item of patient.listVac" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+<datalist id="listYn">
+    <option  *ngFor="let item of patient.listYn" [value]="item">
+        {{item}}
+    </option>
+</datalist>
+
+</ng-container>

@@ -1,0 +1,25 @@
+<table class="table border" [formGroup]="formS">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 135px;">Дата + рез</th>
+        <th scope="col" style="width: 135px;">Дата - рез</th>
+        <th scope="col">Диагноз МКБ10 COVID</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="covids" *ngFor="let item of covids.controls; let i = index">
+        <tr  formGroupName="{{i}}">
+            <td><input type="date" class="form-control tbl" formControlName="dPositivRes"></td>
+            <td><input type="date" class="form-control tbl" formControlName="dNegativeRes"></td>
+            <td><input type="text" class="form-control tbl" list="listCovidMKB" formControlName="covidMKB" title="{{pervValue[i].covidMKB}}"></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="date" class="form-control tbl" formControlName="newDPositivRes"></td>
+            <td><input type="date" class="form-control tbl" formControlName="newDNegativeRes"></td>
+            <td><input type="text" list="listCovidMKB"  class="form-control tbl" formControlName="newCovidMKB"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="createCovid()"></button></td>
+        </tr>
+    </tbody>
+</table>

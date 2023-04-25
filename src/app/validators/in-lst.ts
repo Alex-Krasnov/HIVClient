@@ -291,4 +291,125 @@ export class InList  {
       )
     } 
   }
+
+  static validateEducation( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListEducation(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateFammilyStatus( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListFammilyStatus(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateEmployment( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListEmployment(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateTrans( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListTrans(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateVac( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListVac(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateMkb10Covid( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListMkb10Covid(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateTransmisionMech( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListTransmisionMech(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateSituationDetect( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListSituationDetect(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateEpidDoctor( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListEpidDoctor(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateYn( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListYn(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validatePatientCard( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListPatientCard(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
 }

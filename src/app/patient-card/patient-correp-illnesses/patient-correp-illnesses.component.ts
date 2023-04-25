@@ -74,6 +74,7 @@ export class PatientCorrepIllnessesComponent implements OnInit{
   
       this.correpIllnesses.push(sForm)
       this.pervValue.push(sData)
+      this.ciIsValid.emit(true);
     }
     
     this.formCI.get('newCorrespIllness').setValue('')

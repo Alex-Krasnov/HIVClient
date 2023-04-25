@@ -115,6 +115,7 @@ export class PatientCureSchemasComponent implements OnInit{
   
       this.cureSchemas.push(sForm)
       this.pervValue.push(sData)
+      this.csIsValid.emit(true);
     }
     
     this.formCS.get('newCureSchemaName').setValue('')

@@ -116,6 +116,7 @@ export class PatientBlotComponent implements OnInit {
   
       this.blots.push(blotForm)
       this.pervValue.push(blotData);
+      this.bIsValid.emit(true);
     }
 
     this.formB.get('newBlotId').setValue('')

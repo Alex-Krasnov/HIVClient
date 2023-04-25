@@ -109,7 +109,51 @@ export class ListService {
         return this.http.post(this.url+`getInListHospCourseName`,{ str: name});
     };
 
+    InListEducation(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListEducation`,{ str: name});
+    };
+
     InListHospResult(name: string): Observable<object>{
         return this.http.post(this.url+`getInListHospResult`,{ str: name});
+    };
+
+    InListFammilyStatus(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListFammilyStatus`,{ str: name});
+    };
+
+    InListEmployment(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListEmployment`,{ str: name});
+    };
+
+    InListTrans(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListTrans`,{ str: name});
+    };
+
+    InListVac(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListVac`,{ str: name});
+    };
+
+    InListMkb10Covid(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMkb10Covid`,{ str: name});
+    };
+
+    InListTransmisionMech(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListTransmisionMech`,{ str: name});
+    };
+
+    InListSituationDetect(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListSituationDetect`,{ str: name});
+    };
+
+    InListEpidDoctor(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListEpidDoctor`,{ str: name});
+    };
+
+    InListYn(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListYn`,{ str: name});
+    };
+
+    InListPatientCard(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListPatientCard`,{ str: name.toString()});
     };
 }

@@ -100,6 +100,7 @@ export class PatientHospResultRsComponent implements OnInit{
   
       this.hospResultRs.push(sForm)
       this.pervValue.push(sData)
+      this.hrIsValid.emit(true);
     }
     
     this.formHR.get('newLpuName').setValue('')

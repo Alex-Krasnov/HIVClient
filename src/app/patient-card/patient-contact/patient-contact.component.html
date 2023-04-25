@@ -1,0 +1,26 @@
+<table class="table border" [formGroup]="formC">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 100px;">Ид</th>
+        <th scope="col" style="width: 300px;">ФИО</th>
+        <th scope="col" style="width: 300px;">Вид контакта</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="contacts" *ngFor="let item of contacts.controls; let i = index">
+        <tr  formGroupName="{{i}}">
+            <td><input type="text" class="form-control tbl" formControlName="contactId" title="{{pervValue[i].contactId}}"></td>
+            <td><input type="text" class="form-control tbl" formControlName="Fio" title="{{pervValue[i].Fio}}"></td>
+            <td><input type="text" list="listTypeContacts" class="form-control tbl" formControlName="InfectCourseName" title="{{pervValue[i].InfectCourseName}}"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="delContacts(i)"></button></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="text" class="form-control tbl" formControlName="newContactId"></td>
+            <td><input type="text" class="form-control tbl" formControlName="newFio"></td>
+            <td><input type="text" list="listTypeContacts" class="form-control tbl" formControlName="newInfectCourseName"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="createContacts()"></button></td>
+        </tr>
+    </tbody>
+</table>

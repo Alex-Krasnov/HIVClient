@@ -1,0 +1,26 @@
+<table class="table border" [formGroup]="formS">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 135px;">Дата 1 дозы</th>
+        <th scope="col" style="width: 135px;">Дата 2 дозы</th>
+        <th scope="col">Наименование вакцины</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+        <tr  formGroupName="{{i}}">
+            <td><input type="date" class="form-control tbl" formControlName="dVac1"></td>
+            <td><input type="date" class="form-control tbl" formControlName="dVac2"></td>
+            <td><input type="text" class="form-control tbl" list="listVac" formControlName="vacName" title="{{pervValue[i].vacName}}"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="delCovidVac(i)"></button></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="date" class="form-control tbl" formControlName="newDVac1"></td>
+            <td><input type="date" class="form-control tbl" formControlName="newDVac2"></td>
+            <td><input type="text" list="listVac"  class="form-control tbl" formControlName="newVacName"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="createCovidVac()"></button></td>
+        </tr>
+    </tbody>
+</table>

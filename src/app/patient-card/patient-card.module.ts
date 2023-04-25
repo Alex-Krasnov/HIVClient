@@ -14,6 +14,14 @@ import { PatientCardTreatmentComponent } from './patient-card-treatment/patient-
 import { PatientCorrepIllnessesComponent } from './patient-correp-illnesses/patient-correp-illnesses.component';
 import { PatientCureSchemasComponent } from './patient-cure-schemas/patient-cure-schemas.component';
 import { PatientHospResultRsComponent } from './patient-hosp-result-rs/patient-hosp-result-rs.component';
+import { PatientCardEpidComponent } from './patient-card-epid/patient-card-epid.component';
+import { PatientContactComponent } from './patient-contact/patient-contact.component';
+import { PatientPavComponent } from './patient-pav/patient-pav.component';
+import { PatientChemsexComponent } from './patient-chemsex/patient-chemsex.component';
+import { PatientCovidVacEpidComponent } from './patient-covid-vac-epid/patient-covid-vac-epid.component';
+import { PatientCovidEpidComponent } from './patient-covid-epid/patient-covid-epid.component';
+import { PatientCardEpidService } from '../services/patient-card-epid.service';
+import { PatientPavNotInjComponent } from './patient-pav-not-inj/patient-pav-not-inj.component';
 
 
 
@@ -26,7 +34,14 @@ import { PatientHospResultRsComponent } from './patient-hosp-result-rs/patient-h
     PatientCardTreatmentComponent,
     PatientCorrepIllnessesComponent,
     PatientCureSchemasComponent,
-    PatientHospResultRsComponent
+    PatientHospResultRsComponent,
+    PatientCardEpidComponent,
+    PatientContactComponent,
+    PatientPavComponent,
+    PatientChemsexComponent,
+    PatientCovidVacEpidComponent,
+    PatientCovidEpidComponent,
+    PatientPavNotInjComponent
   ],
   imports: [
     CommonModule, 
@@ -37,6 +52,7 @@ import { PatientHospResultRsComponent } from './patient-hosp-result-rs/patient-h
   providers:[
     PatientCardMainService,
     PatientCardTreatmentService,
+    PatientCardEpidService,
     ListService,
     InList
   ]

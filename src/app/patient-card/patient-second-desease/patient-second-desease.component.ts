@@ -84,6 +84,7 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
   
       this.secondDeseases.push(desForm)
       this.pervValue.push(desData)
+      this.sdIsValid.emit(true);
     }
 
     this.formSd.get('newStartDate').setValue('')
