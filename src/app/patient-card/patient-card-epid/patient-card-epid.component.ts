@@ -7,6 +7,7 @@ import { ListService } from 'src/app/services/list.service';
 import { PatientCardEpidService } from 'src/app/services/patient-card-epid.service';
 import { InList } from 'src/app/validators/in-lst';
 import { PatientCardEpidForm } from './patient-card-epid-form.model';
+import { pcEpid } from 'src/app/_interfaces/pc-epid.model';
 
 @Component({
   selector: 'app-patient-card-epid',
@@ -268,35 +269,51 @@ export class PatientCardEpidComponent implements OnInit {
   }
 
   giveCForUpd(isValid: boolean){
-    console.log('give', isValid);
-    
     this.cIsValid = isValid;
   }
 
   updatePatient(){
-    // let curValue = {
-    //   patientId: this.Id,
-    //   invalidName: this.patientForm.controls['invalidName'].value,
-    //   stageCom: this.patientForm.controls['stageCom'].value,
-    //   patientCom: this.patientForm.controls['patientCom'].value,
-    // };
+    let curValue: pcEpid = {
+      patientId: this.patientForm.controls['patientId'].value,
+      dtMailReg: this.patientForm.controls['dtMailReg'].value,
+      numMail: this.patientForm.controls['numMail'].value,
+      eduName: this.patientForm.controls['eduName'].value,
+      familyStatusName: this.patientForm.controls['familyStatusName'].value,
+      employmentName: this.patientForm.controls['employmentName'].value,
+      transName: this.patientForm.controls['transName'].value,
+      epidemCom: this.patientForm.controls['epidemCom'].value,
+      transmitionMechName: this.patientForm.controls['transmitionMechName'].value,
+      situationDetectName: this.patientForm.controls['situationDetectName'].value,
+      epidTimeInfectStart: this.patientForm.controls['epidTimeInfectStart'].value,
+      epidTimeInfectEnd: this.patientForm.controls['epidTimeInfectEnd'].value,
+      epidDocName: this.patientForm.controls['epidDocName'].value
+    };
     
-    // if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-    //   this.patientService.updatePatient(curValue.patientId, curValue.stageCom, curValue.patientCom, curValue.invalidName).subscribe()
+    if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
+      this.patientService.updatePatient(curValue).subscribe()
 
-    //   this.pervValue = {
-    //     patientId: curValue.patientId,
-    //     invalidName: curValue.invalidName,
-    //     stageCom: curValue.stageCom,
-    //     patientCom: curValue.patientCom
-    //   };
+      this.pervValue = {
+        patientId: this.Id,
+          dtMailReg: curValue.dtMailReg,
+          eduName: curValue.eduName,
+          employmentName: curValue.employmentName,
+          epidDocName: curValue.epidDocName,
+          epidTimeInfectEnd: curValue.epidTimeInfectEnd,
+          epidTimeInfectStart: curValue.epidTimeInfectStart,
+          epidemCom: curValue.epidemCom,
+          familyStatusName: curValue.familyStatusName,
+          numMail: curValue.numMail,
+          situationDetectName: curValue.situationDetectName,
+          transName: curValue.transName,
+          transmitionMechName: curValue.transmitionMechName
+      };
 
-    //   this.patientForm.markAsPristine()
-    // }
+      this.patientForm.markAsPristine()
+    }
   }
 
   leaveComponent(name: string){
-    if(this.patientForm.valid && this.ccIsValid && this.rcIsValid && this.ocIsValid){
+    if(this.patientForm.valid && this.ccIsValid && this.rcIsValid && this.ocIsValid && this.piIsValid && this.pniIsValid && this.cvIsValid && this.cIsValid){
       if(this.needUpd)
         this.updatePatient()
       if(name == '/main'){

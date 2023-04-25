@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, catchError, map, of } from "rxjs";
 import { PatientCardEpidModel } from "../_interfaces/patient-card-epid.model";
+import { pcEpid } from "../_interfaces/pc-epid.model";
 
 @Injectable()
 export class PatientCardEpidService {
@@ -147,5 +148,9 @@ export class PatientCardEpidService {
                 covidMkb: covidMkb10,
                 covidId: covidId
             })
+    };
+
+    updatePatient(patient: pcEpid){
+        return this.http.post(this.url+`/UpdatePatient`, patient)
     };
 }
