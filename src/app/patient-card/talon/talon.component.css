@@ -1,0 +1,17 @@
+.modal{
+    display: block;
+}
+
+.modal-dialog {
+    max-width: 600px;
+}
+
+input.ng-touched.ng-invalid{
+    border-color: red;
+    border-width: 2px;
+}
+
+input.ng-dirty{
+    border-color: rgb(9, 212, 2);
+    border-width: 2px;
+}

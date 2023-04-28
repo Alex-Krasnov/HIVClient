@@ -1,8 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient} from "@angular/common/http";
-import { delay, Observable, of } from "rxjs";
-
-const ALTER_EGOS = ['Eric'];
+import { Observable } from "rxjs";
 
 @Injectable()
 export class ListService {
@@ -155,5 +153,53 @@ export class ListService {
 
     InListPatientCard(name: string): Observable<object>{
         return this.http.post(this.url+`getInListPatientCard`,{ str: name.toString()});
+    };
+
+    InListRegTime(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListRegTimes`,{ str: name});
+    };
+
+    InListCabinet(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListCabinets`,{ str: name});
+    };
+
+    InListDoctor(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListDoctors`,{ str: name});
+    };
+
+    InListSpec(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListSpecs`,{ str: name});
+    };
+
+    InList13(name: string): Observable<object>{
+        return this.http.post(this.url+`getInList13`,{ str: name});
+    };
+
+    InList14(name: string): Observable<object>{
+        return this.http.post(this.url+`getInList14`,{ str: name});
+    };
+
+    InList21(name: string): Observable<object>{
+        return this.http.post(this.url+`getInList21`,{ str: name});
+    };
+
+    InList22(name: string): Observable<object>{
+        return this.http.post(this.url+`getInList22`,{ str: name});
+    };
+
+    InList24(name: string): Observable<object>{
+        return this.http.post(this.url+`getInList24`,{ str: name});
+    };
+
+    InList25(name: string): Observable<object>{
+        return this.http.post(this.url+`getInList25`,{ str: name});
+    };
+
+    InList35(name: string): Observable<object>{
+        return this.http.post(this.url+`getInList35`,{ str: name});
+    };
+
+    InList36(name: string): Observable<object>{
+        return this.http.post(this.url+`getInList36`,{ str: name});
     };
 }

@@ -1,0 +1,29 @@
+<table class="table border" [formGroup]="formS">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 135px;">Дата приёма</th>
+        <th scope="col" style="width: 150px;">Дата след. визита</th>
+        <th scope="col">Специалист</th>
+        <th scope="col">Фио специалиста</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+        <tr  formGroupName="{{i}}">
+            <td><input type="date" class="form-control tbl" formControlName="checkDate"></td>
+            <td><input type="date" class="form-control tbl" formControlName="checkDateNext"></td>
+            <td><input type="text" class="form-control tbl" list="listSpec" formControlName="checkSpec" title="{{pervValue[i].checkSpec}}"></td>
+            <td><input type="text" class="form-control tbl" list="listDoctor" formControlName="checkDoc" title="{{pervValue[i].checkDoc}}"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="date" class="form-control tbl" formControlName="newCheckDate"></td>
+            <td><input type="date" class="form-control tbl" formControlName="newCheckDateNext"></td>
+            <td><input type="text" list="listSpec"  class="form-control tbl" formControlName="newCheckSpec"></td>
+            <td><input type="text" list="listDoctor"  class="form-control tbl" formControlName="newCheckDoc"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
+        </tr>
+    </tbody>
+</table>
