@@ -77,52 +77,41 @@
         </div>
     </nav>
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
-    <div *ngIf="patientForm.invalid || !siIsValid || !csIsValid || !hrIsValid" class="alert alert-danger">Ошибка...</div>
+    <div *ngIf="patientForm.invalid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
-        <div class="row ms-1">
-            <div class="col-xl-3 form-floating p-0">
-                <input type="text" class="form-control" placeholder="Стадия" formControlName="stageName">
-                <label>Стадия</label>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">Определение вирусной нагрузки</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics3-col [(subArr)]="patientVirusLoad"></app-diagnostics3-col>
+                </div>
             </div>
-            <div class="col-xl-3 form-floating p-0 ms-2">
-                <input type="text" class="form-control" list="listInvalids" placeholder="Гр. инвалидности" formControlName="invalidName">
-                <label>Гр. инвалидности</label>
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">Определение вирусной нагрузки кач.</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics2-col [(subArr)]="patientVirusLoadQual"></app-diagnostics2-col>
+                </div>
             </div>
-        </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl-1">
-                <label>Расшифровка стадии</label>
-            </div>
-            <div class="col-xl">
-                <textarea class="form-control" rows="2" formControlName="stageCom"></textarea>
-            </div>
-        </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl-1">
-                <label>Комментарий</label>
-            </div>
-            <div class="col-xl">
-                <textarea class="form-control" rows="2" formControlName="patientCom"></textarea>
-            </div>
-        </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl-5">
-                <div class=" mt-1" style="height: 115px; overflow: auto;">
-                    <app-patient-correp-illnesses [(correpIllnessesArr)]="patientCorrespIllnesses" [(patientId)]="patient.patientId" (ciIsValid)="giveSIForUpd($event)"></app-patient-correp-illnesses>
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">CMV</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics3-col [(subArr)]="patientCMV"></app-diagnostics3-col>
                 </div>
             </div>
         </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl">
-                <div class=" mt-1" style="height: 230px; overflow: auto;">
-                    <app-patient-cure-schemas [(cureSchemaArr)]="patientCureSchemas" [(patientId)]="patient.patientId" (csIsValid)="giveCSForUpd($event)"></app-patient-cure-schemas>
-                </div>
+        <div class="row ms-1 mt-3">
+            <div class="col-xl-4" style="height: 115px; overflow: auto;">
+                <app-im-stat [(subArr)]="patientImStat"></app-im-stat>
+            </div>
+            <div class="col-xl me-3" style="height: 115px; overflow: auto;">
+                <app-im-stat-cd348 [(subArr)]="patientImStatCD348"></app-im-stat-cd348>
             </div>
         </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl-11 ">
-                <div class=" mt-1" style="height: 115px; overflow: auto;">
-                    <app-patient-hosp-result-rs [(hospResultArr)]="patientHospResultRs" [(patientId)]="patient.patientId" (hrIsValid)="giveHRForUpd($event)"></app-patient-hosp-result-rs>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start m-0">Результат ИХЛА ВИЧ</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics2-col [(subArr)]="patientIHL"></app-diagnostics2-col>
                 </div>
             </div>
         </div>
@@ -130,45 +119,4 @@
         <br>
         <button style="display: none;" type="button"></button>
     </form>
-
-<datalist id="listInvalids">
-    <option  *ngFor="let item of patient.listInvalids" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listCorrespIllness">
-    <option  *ngFor="let item of patient.listCorrespIllness" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listCureSchemas">
-    <option  *ngFor="let item of patient.listCureSchemas" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listCureChanges">
-    <option  *ngFor="let item of patient.listCureChanges" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listRangeTherapy">
-    <option  *ngFor="let item of patient.listRangeTherapy" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listLpus">
-    <option  *ngFor="let item of patient.listLpus" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listHospCourses">
-    <option  *ngFor="let item of patient.listHospCourses" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listHospResults">
-    <option  *ngFor="let item of patient.listHospResults" [value]="item">
-        {{item}}
-    </option>
-</datalist>
 </ng-container>

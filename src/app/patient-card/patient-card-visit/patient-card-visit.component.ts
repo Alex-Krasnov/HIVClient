@@ -10,10 +10,10 @@ import { PatientCardVisitForm } from './patient-card-visit-form.model';
 
 @Component({
   selector: 'app-patient-visit',
-  templateUrl: './patient-visit.component.html',
-  styleUrls: ['./patient-visit.component.css']
+  templateUrl: './patient-card-visit.component.html',
+  styleUrls: ['./patient-card-visit.component.css']
 })
-export class PatientVisitComponent implements OnInit {
+export class PatientCardVisitComponent implements OnInit {
   private PatineCardVisitForm: BehaviorSubject<FormGroup | undefined>
   PatineCardVisitForm$: Observable<FormGroup>
   

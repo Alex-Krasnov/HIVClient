@@ -22,12 +22,17 @@ import { PatientCovidVacEpidComponent } from './patient-covid-vac-epid/patient-c
 import { PatientCovidEpidComponent } from './patient-covid-epid/patient-covid-epid.component';
 import { PatientCardEpidService } from '../services/patient-card-epid.service';
 import { PatientPavNotInjComponent } from './patient-pav-not-inj/patient-pav-not-inj.component';
-import { PatientVisitComponent } from './patient-visit/patient-visit.component';
+import { PatientCardVisitComponent } from './patient-card-visit/patient-card-visit.component';
 import { PatientCardVisitService } from '../services/patient-card-visit.service';
 import { PatientCheckComponent } from './patient-check/patient-check.component';
 import { PatientCheckOutComponent } from './patient-check-out/patient-check-out.component';
 import { PatientRegistryComponent } from './patient-registry/patient-registry.component';
 import { TalonComponent } from './talon/talon.component';
+import { PatientCardDiagnosticsComponent } from './patient-card-diagnostics/patient-card-diagnostics.component';
+import { Diagnostics3ColComponent } from './diagnostics3-col/diagnostics3-col.component';
+import { Diagnostics2ColComponent } from './diagnostics2-col/diagnostics2-col.component';
+import { ImStatComponent } from './im-stat/im-stat.component';
+import { ImStatCD348Component } from './im-stat-cd348/im-stat-cd348.component';
 
 
 
@@ -48,11 +53,16 @@ import { TalonComponent } from './talon/talon.component';
     PatientCovidVacEpidComponent,
     PatientCovidEpidComponent,
     PatientPavNotInjComponent,
-    PatientVisitComponent,
+    PatientCardVisitComponent,
     PatientCheckComponent,
     PatientCheckOutComponent,
     PatientRegistryComponent,
-    TalonComponent
+    TalonComponent,
+    PatientCardDiagnosticsComponent,
+    Diagnostics3ColComponent,
+    Diagnostics2ColComponent,
+    ImStatComponent,
+    ImStatCD348Component
   ],
   imports: [
     CommonModule, 
