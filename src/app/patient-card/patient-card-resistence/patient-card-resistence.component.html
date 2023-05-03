@@ -77,24 +77,14 @@
         </div>
     </nav>
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
-    <div *ngIf="!cIsValid || !coIsValid || !rIsValid" class="alert alert-danger">Ошибка...</div>
+    <div *ngIf="patientForm.invalid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
-            <div class="col-xl-10">
-                <div class="row" style="height: 115px; overflow: auto;">
-                    <app-patient-check [(subArr)]="patientChecks" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-check>
-                </div>
-                <div class="row" style="height: 115px; overflow: auto;">
-                    <app-patient-registry [(subArr)]="patientRegistries" [(patientId)]="patient.patientId" (isValid)="giveRForUpd($event)"></app-patient-registry>
-                </div>
-                <p class="text-start m-0">Явка на выезде</p>
-                <div class="row" style="height: 115px; overflow: auto;">
-                    <app-patient-check-out [(subArr)]="patientCheckOuts" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-check-out>
-                </div>
-                <br>
-                <br>
+            <div class="col-xl">
+                <div class="row"><h6 class="text-start">Резистентность</h6></div>
                 <div class="row">
-                    <button class="btn btn-outline-success" type="button" disabled>Записать на приём</button>
+                    <!-- style="height: 500px; overflow: auto;" -->
+                    <app-resistence [(subArr)]="patientResistence"></app-resistence>
                 </div>
             </div>
         </div>
@@ -102,25 +92,4 @@
         <br>
         <button style="display: none;" type="button"></button>
     </form>
-
-<datalist id="listSpec">
-    <option  *ngFor="let item of patient.listSpec" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listDoctor">
-    <option  *ngFor="let item of patient.listDoctor" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listCab">
-    <option  *ngFor="let item of patient.listCab" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listRegTime">
-    <option  *ngFor="let item of patient.listRegTime" [value]="item">
-        {{item}}
-    </option>
-</datalist>
 </ng-container>

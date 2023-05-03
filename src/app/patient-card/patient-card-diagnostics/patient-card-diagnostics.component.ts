@@ -3,11 +3,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardDiagnosticsModel } from 'src/app/_interfaces/patient-card-diagnostics.model';
-import { ListService } from 'src/app/services/list.service';
 import { PatientCardDiagnosticsService } from 'src/app/services/patient-card-diagnostics.service';
-import { InList } from 'src/app/validators/in-lst';
 import { PatientCardDiagnosticsForm } from './patient-card-diagnostics-form.model';
-// import { PatientCardEpidForm } from './patient-card-epid-form.model';
 
 @Component({
   selector: 'app-patient-card-diagnostics',
@@ -21,16 +18,6 @@ export class PatientCardDiagnosticsComponent implements OnInit {
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
-
-  ccIsValid: boolean = true;
-  rcIsValid: boolean = true;
-  ocIsValid: boolean = true;
-  piIsValid: boolean = true;
-  pniIsValid: boolean = true;
-  cvIsValid: boolean = true;
-  cIsValid: boolean = true;
-  IsErr: boolean = false;
-  needUpd: boolean = false;
 
   Id: number;
   patient: PatientCardDiagnosticsModel | undefined;
@@ -137,11 +124,6 @@ export class PatientCardDiagnosticsComponent implements OnInit {
         this.patientImStatCD348.push(sForm);
       }
     );
-    
-    this.patientForm.statusChanges.subscribe( (status) => {
-      if(status == 'VALID')
-        this.needUpd = true;
-    })
   }
 
   openDropdown(str:string): void{
@@ -159,9 +141,7 @@ export class PatientCardDiagnosticsComponent implements OnInit {
   }
 
   leaveComponent(name: string){
-    console.log(this.patientForm);
-    
-    if(this.patientForm.disabled){
+    if(true){
       if(name == '/main'){
         this.router.navigate([name]);
         return null

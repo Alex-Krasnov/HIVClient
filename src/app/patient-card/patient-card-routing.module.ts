@@ -6,6 +6,7 @@ import { PatientCardTreatmentComponent } from './patient-card-treatment/patient-
 import { PatientCardEpidComponent } from './patient-card-epid/patient-card-epid.component';
 import { PatientCardVisitComponent } from './patient-card-visit/patient-card-visit.component';
 import { PatientCardDiagnosticsComponent } from './patient-card-diagnostics/patient-card-diagnostics.component';
+import { PatientCardResistenceComponent } from './patient-card-resistence/patient-card-resistence.component';
 
 const routes: Routes = [
   { path: 'main/:id', component: PatientCardMainComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'epid/:id', component: PatientCardEpidComponent },
   { path: 'visit/:id', component: PatientCardVisitComponent },
   { path: 'diagnostics/:id', component: PatientCardDiagnosticsComponent },
+  { path: 'resistence/:id', component: PatientCardResistenceComponent }
 ];
 
 @NgModule({

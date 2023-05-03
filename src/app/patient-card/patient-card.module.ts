@@ -33,6 +33,8 @@ import { Diagnostics3ColComponent } from './diagnostics3-col/diagnostics3-col.co
 import { Diagnostics2ColComponent } from './diagnostics2-col/diagnostics2-col.component';
 import { ImStatComponent } from './im-stat/im-stat.component';
 import { ImStatCD348Component } from './im-stat-cd348/im-stat-cd348.component';
+import { PatientCardResistenceComponent } from './patient-card-resistence/patient-card-resistence.component';
+import { ResistenceComponent } from './resistence/resistence.component';
 
 
 
@@ -62,7 +64,9 @@ import { ImStatCD348Component } from './im-stat-cd348/im-stat-cd348.component';
     Diagnostics3ColComponent,
     Diagnostics2ColComponent,
     ImStatComponent,
-    ImStatCD348Component
+    ImStatCD348Component,
+    PatientCardResistenceComponent,
+    ResistenceComponent
   ],
   imports: [
     CommonModule, 
