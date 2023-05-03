@@ -86,8 +86,6 @@ export class PatientCardResistenceComponent implements OnInit {
   }
 
   openDropdown(str:string): void{
-    console.log(str);
-      
     switch(str){
       case "Диагностика":
         this.isVisibleDiagn = !this.isVisibleDiagn;

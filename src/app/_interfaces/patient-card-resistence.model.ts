@@ -1,4 +1,4 @@
-import { Resistence } from "./resistence.model copy";
+import { Resistence } from "./resistence.model";
 
 export interface PatientCardResistenceModel {
   patientId: number;

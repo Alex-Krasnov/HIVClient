@@ -37,6 +37,9 @@ import { PatientCardResistenceComponent } from './patient-card-resistence/patien
 import { ResistenceComponent } from './resistence/resistence.component';
 import { PatientCardDiagnosticConcomitantComponent } from './patient-card-diagnostic-concomitant/patient-card-diagnostic-concomitant.component';
 import { HepCPcrComponent } from './hep-cpcr/hep-cpcr.component';
+import { PatientCardAclComponent } from './patient-card-acl/patient-card-acl.component';
+import { GEComponent } from './ge/ge.component';
+import { BHComponent } from './bh/bh.component';
 
 
 
@@ -70,7 +73,10 @@ import { HepCPcrComponent } from './hep-cpcr/hep-cpcr.component';
     PatientCardResistenceComponent,
     ResistenceComponent,
     PatientCardDiagnosticConcomitantComponent,
-    HepCPcrComponent
+    HepCPcrComponent,
+    PatientCardAclComponent,
+    GEComponent,
+    BHComponent
   ],
   imports: [
     CommonModule, 

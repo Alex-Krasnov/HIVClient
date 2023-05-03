@@ -1,9 +1,9 @@
-<table class="table border" [formGroup]="formS">
+<table class="table border" [formGroup]="formS" style="table-layout: fixed;">
     <thead style="position: sticky; top: 0; background: #ade8dd;">
       <tr>
         <th scope="col" style="width: 60px;"></th>
         <th scope="col" style="width: 300px;"></th>
-        <ng-container *ngFor="let item of subs; let i = index"><th scope="col">{{item.date}}</th></ng-container>
+        <ng-container *ngFor="let item of subs; let i = index"><th scope="col" style="width: 95px;">{{item.date}}</th></ng-container>
       </tr>
     </thead>
     <tbody>

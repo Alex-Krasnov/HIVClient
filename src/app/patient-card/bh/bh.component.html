@@ -1,0 +1,181 @@
+<table class="table border" [formGroup]="formS" style="table-layout: fixed;">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 60px;"></th>
+        <th scope="col" style="width: 265px;"></th>
+        <th scope="col" style="width: 80px;"></th>
+        <th scope="col" style="width: 80px;"></th>
+        <ng-container *ngFor="let item of subs; let i = index"><th scope="col" style="width: 95px;">{{item.date}}</th></ng-container>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б001" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Альбумин" disabled></td>
+            <td><input type="text" class="form-control tbl" value="г/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="32-55" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b001}}" title="{{item.b001}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б005" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Аланинаминотрасфераза (АЛТ)" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Ед/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="4-37" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b005}}" title="{{item.b005}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б010" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Щелочная фосфатаза" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Ед/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="4-37" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b010}}" title="{{item.b010}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б015" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Амилаза" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Ед/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="10-115" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b015}}" title="{{item.b015}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б020" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Аспартатаминотрансфераза(АсАТ)" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Ед/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="4-43" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b020}}" title="{{item.b020}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б025" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Билирубин прямой" disabled></td>
+            <td><input type="text" class="form-control tbl" value="мкмоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="0,1-4,5" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b025}}" title="{{item.b025}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б030" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Билирубин общ." disabled></td>
+            <td><input type="text" class="form-control tbl" value="мкмоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="2-21" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b030}}" title="{{item.b030}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б035" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Кальций" disabled></td>
+            <td><input type="text" class="form-control tbl" value="ммоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="2,20-2,55" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b035}}" title="{{item.b035}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б040" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Холестерин" disabled></td>
+            <td><input type="text" class="form-control tbl" value="ммоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="2,8-5,2" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b040}}" title="{{item.b040}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б045" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Креатинин" disabled></td>
+            <td><input type="text" class="form-control tbl" value="мкмоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="44-106" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b045}}" title="{{item.b045}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б050" disabled></td>
+            <td><input type="text" class="form-control tbl" value="У-глутаминотрансфераза(У-ГТ)" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Ед/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="10-51" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b050}}" title="{{item.b050}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б055" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Глюкоза" disabled></td>
+            <td><input type="text" class="form-control tbl" value="ммоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="3,8-6" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b055}}" title="{{item.b055}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б060" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Холестерин ЛПВП" disabled></td>
+            <td><input type="text" class="form-control tbl" value="ммоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="0,95-4" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b060}}" title="{{item.b060}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б065" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Железо" disabled></td>
+            <td><input type="text" class="form-control tbl" value="мкмоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="7-28" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b065}}" title="{{item.b065}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б070" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Лактатдегидтогеназа(ЛДГ)" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Ед/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="50-480" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b070}}" title="{{item.b070}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б075" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Холестерин ЛПНП" disabled></td>
+            <td><input type="text" class="form-control tbl" value="ммоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="2,6-4,7" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b075}}" title="{{item.b075}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б080" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Липаза" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Ед/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="20-190" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b080}}" title="{{item.b080}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б085" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Фосфор" disabled></td>
+            <td><input type="text" class="form-control tbl" value="ммоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="0,87-1,45" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b085}}" title="{{item.b085}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б090" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Общий белок" disabled></td>
+            <td><input type="text" class="form-control tbl" value="г/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="55-87" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b090}}" title="{{item.b090}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б095" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Триглицериды" disabled></td>
+            <td><input type="text" class="form-control tbl" value="ммоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="0,5-2,32" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b095}}" title="{{item.b095}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б100" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Мочевая кислота" disabled></td>
+            <td><input type="text" class="form-control tbl" value="мкмоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="200-420" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b100}}" title="{{item.b100}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б105" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Железосвязывающая способность" disabled></td>
+            <td><input type="text" class="form-control tbl" value="мкмоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="23-63" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b105}}" title="{{item.b105}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б110" disabled></td>
+            <td><input type="text" class="form-control tbl" value="Мочевина" disabled></td>
+            <td><input type="text" class="form-control tbl" value="ммоль/л" disabled></td>
+            <td><input type="text" class="form-control tbl" value="3,9-8,9" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b110}}" title="{{item.b110}}"></td></ng-container>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control tbl" value="Б115" disabled></td>
+            <td><input type="text" class="form-control tbl" value="С-реактивный белок(СРБ)" disabled></td>
+            <td><input type="text" class="form-control tbl" value="0-5" disabled></td>
+            <td><input type="text" class="form-control tbl" value="0-5" disabled></td>
+            <ng-container *ngFor="let item of subs; let i = index"><td><input type="text" disabled class="form-control tbl" value="{{item.b115}}" title="{{item.b115}}"></td></ng-container>
+        </tr>
+    </tbody>
+</table>

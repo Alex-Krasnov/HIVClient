@@ -81,9 +81,17 @@
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
             <div class="col-xl">
-                <div class="row"><h6 class="text-start">Резистентность</h6></div>
+                <div class="row"><h6 class="text-start">Биохимия</h6></div>
                 <div class="row" style="width: 1270px; overflow: auto;">
-                    <app-resistence [(subArr)]="patientResistence"></app-resistence>
+                    <app-bh [(subArr)]="patientBh"></app-bh>
+                </div>
+            </div>
+        </div>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl">
+                <div class="row"><h6 class="text-start">Гемaтология</h6></div>
+                <div class="row" style="width: 1270px; overflow: auto;">
+                    <app-ge [(subArr)]="patientGe"></app-ge>
                 </div>
             </div>
         </div>
