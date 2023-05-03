@@ -35,6 +35,8 @@ import { ImStatComponent } from './im-stat/im-stat.component';
 import { ImStatCD348Component } from './im-stat-cd348/im-stat-cd348.component';
 import { PatientCardResistenceComponent } from './patient-card-resistence/patient-card-resistence.component';
 import { ResistenceComponent } from './resistence/resistence.component';
+import { PatientCardDiagnosticConcomitantComponent } from './patient-card-diagnostic-concomitant/patient-card-diagnostic-concomitant.component';
+import { HepCPcrComponent } from './hep-cpcr/hep-cpcr.component';
 
 
 
@@ -66,7 +68,9 @@ import { ResistenceComponent } from './resistence/resistence.component';
     ImStatComponent,
     ImStatCD348Component,
     PatientCardResistenceComponent,
-    ResistenceComponent
+    ResistenceComponent,
+    PatientCardDiagnosticConcomitantComponent,
+    HepCPcrComponent
   ],
   imports: [
     CommonModule, 

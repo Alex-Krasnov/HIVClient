@@ -79,39 +79,57 @@
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
     <div *ngIf="patientForm.invalid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
-        <div class="row ms-1 mt-1">
-            <div class="col-xl-4">
-                <div class="row"><h6 class="text-start">Определение вирусной нагрузки</h6></div>
-                <div class="row" style="height: 115px; overflow: auto;">
-                    <app-diagnostics3-col [(subArr)]="patientVirusLoad"></app-diagnostics3-col>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="row"><h6 class="text-start">Определение вирусной нагрузки кач.</h6></div>
-                <div class="row" style="height: 115px; overflow: auto;">
-                    <app-diagnostics2-col [(subArr)]="patientVirusLoadQual"></app-diagnostics2-col>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="row"><h6 class="text-start">CMV</h6></div>
-                <div class="row" style="height: 115px; overflow: auto;">
-                    <app-diagnostics3-col [(subArr)]="patientCMV"></app-diagnostics3-col>
-                </div>
-            </div>
-        </div>
         <div class="row ms-1 mt-3">
-            <div class="col-xl-4" style="height: 115px; overflow: auto;">
-                <app-im-stat [(subArr)]="patientImStat"></app-im-stat>
+            <div class="col-xl me-3">
+                <div class="row"><h6 class="text-start">Результат на гепатит C методом ПЦР</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-hep-cpcr [(subArr)]="patientHepCPcrs"></app-hep-cpcr>
+                </div>
             </div>
-            <div class="col-xl me-3" style="height: 115px; overflow: auto;">
-                <app-im-stat-cd348 [(subArr)]="patientImStatCD348"></app-im-stat-cd348>
+            <div class="col-xl-4 me-3">
+                <div class="row"><h6 class="text-start">Результат на гепатит В методом ПЦР</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics3-col [(subArr)]="patientHepBPcrs"></app-diagnostics3-col>
+                </div>
             </div>
         </div>
         <div class="row ms-1 mt-1">
             <div class="col-xl-4">
-                <div class="row"><h6 class="text-start m-0">Результат ИХЛА ВИЧ</h6></div>
+                <div class="row"><h6 class="text-start">Результат на гепатит C методом ИФА/ИХЛА</h6></div>
                 <div class="row" style="height: 115px; overflow: auto;">
-                    <app-diagnostics2-col [(subArr)]="patientIHL"></app-diagnostics2-col>
+                    <app-diagnostics2-col [(subArr)]="patientHepCIfas"></app-diagnostics2-col>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">Результат на гепатит В методом ИФА/ИХЛА</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics2-col [(subArr)]="patientHepBIfas"></app-diagnostics2-col>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">Результат на сифилис методом ИФА/ИХЛА</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics2-col [(subArr)]="patientSiphilisIfas"></app-diagnostics2-col>
+                </div>
+            </div>
+        </div>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">Токсоплазмоз IgG</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics2-col [(subArr)]="patientToxIggs"></app-diagnostics2-col>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">Токсоплазмоз IgM</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics2-col [(subArr)]="patientToxIgms"></app-diagnostics2-col>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">Вирус папилломы человека</h6></div>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-diagnostics3-col [(subArr)]="patientVpchs"></app-diagnostics3-col>
                 </div>
             </div>
         </div>

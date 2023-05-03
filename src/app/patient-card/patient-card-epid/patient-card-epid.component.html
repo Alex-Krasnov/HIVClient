@@ -40,7 +40,7 @@
                         <ul [class.visibleDropdown]="isVisibleDiagn" class="dropdown-menu" (mouseenter)="openDropdown('Диагностика')" (mouseleave)="openDropdown('Диагностика')">
                             <li><a class="dropdown-item" (click)="leaveComponent('/patient_card/diagnostics/')" [routerLink]="['/patient_card/diagnostics']" routerLinkActive="disabled">Диагностика общ.</a></li>
                             <li><a class="dropdown-item" (click)="leaveComponent('/patient_card/resistence/')" [routerLink]="['/patient_card/resistence']" routerLinkActive="disabled">Резистентность</a></li>
-                            <li><a class="dropdown-item">Диагностика и сопут.</a></li>
+                            <li><a class="dropdown-item" (click)="leaveComponent('/patient_card/dconcomitant/')" [routerLink]="['/patient_card/dconcomitant']" routerLinkActive="disabled">Диагностика и сопут.</a></li>
                             <li><a class="dropdown-item">Диагн. руч.</a></li>
                             <li><a class="dropdown-item">ACL</a></li>
                         </ul>
