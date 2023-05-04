@@ -98,11 +98,11 @@
                     <app-patient-chemsex [(subArr)]="patientChemsexes" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-chemsex>
                 </div>
                 <p class="text-start m-0">Употребление ПАВ инъекционно</p>
-                <div class="row">
+                <div class="row" style="height: 115px; overflow: auto;">
                     <app-patient-pav [(subArr)]="patientPavInjs" [(patientId)]="patient.patientId" (isValid)="givePIForUpd($event)"></app-patient-pav>
                 </div>
                 <p class="text-start m-0">Употребление ПАВ неинъекционно</p>
-                <div class="row">
+                <div class="row" style="height: 115px; overflow: auto;">
                     <app-patient-pav-not-inj [(subArr)]="patientPavNotInjs" [(patientId)]="patient.patientId" (isValid)="givePNIForUpd($event)"></app-patient-pav-not-inj>
                 </div>
             </div>
@@ -170,11 +170,11 @@
                     </div>
                 </div>
                 <p class="text-start m-0">Данные о вакцинации COVID-19</p>
-                <div class="row my-1 me-3">
+                <div class="row my-1 me-3" style="height: 220px; overflow: auto;">
                     <app-patient-covid-vac-epid [(subArr)]="patientCovidVac" [(patientId)]="patient.patientId" (isValid)="giveCVForUpd($event)"></app-patient-covid-vac-epid>
                 </div>
                 <p class="text-start m-0">Данные о заболевании COVID-19</p>
-                <div class="row my-1 me-3">
+                <div class="row my-1 me-3" style="height: 220px; overflow: auto;">
                     <app-patient-covid-epid [(subArr)]="patientCovid" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-covid-epid>
                 </div>
             </div>

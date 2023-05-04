@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-xxl bg-light" aria-label="Fourth navbar example">
     <div class="container-fluid">
         <img src="favicon.ico" width="35" height="35">
-        <p class="m-auto" style="padding-left: 0.25rem;">Общие данные</p>
+        <!-- <p class="m-auto" style="padding-left: 0.25rem;">Общие данные</p> -->
         <button class="navbar-toggler collapsed" type="button" (click)="openDropdown('Меню')">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -258,12 +258,12 @@
         </div>
         <div class="row g-1 mb-1">
             <div class="col-xl-3 me-1">
-                <div class="ms-1 mt-1" style="height: 115px; overflow: auto;">
+                <div class="ms-1 mt-1" style="height: 220px; overflow: auto;">
                     <app-patient-stage [(stageArr)]="patientStages" [(patientId)]="patient.patientId" (sIsValid)="giveStageForUpd($event)"></app-patient-stage>
                 </div>
             </div>
             <div class="col-xl-5 me-1">
-                <div class=" mt-1" style="height: 115px; overflow: auto;">
+                <div class=" mt-1" style="height: 220px; overflow: auto;">
                     <app-patient-second-desease [(deseasArr)]="patientSecondDeseases" [(patientId)]="patient.patientId" (sdIsValid)="giveSdForUpd($event)"></app-patient-second-desease>
                 </div>
             </div>
@@ -416,100 +416,24 @@
 </form>
 
 
-<datalist id="listSex">
-    <option  *ngFor="let sex of patient.listSex" [value]="sex">
-        {{sex}}
-    </option>
-</datalist>
-<datalist id="listRegOffReason">
-    <option  *ngFor="let RegOffReason of patient.listRegOffReason" [value]="RegOffReason">
-        {{RegOffReason}}
-    </option>
-</datalist>
-<datalist id="listRegion">
-    <option  *ngFor="let Region of patient.listRegion" [value]="Region">
-        {{Region}}
-    </option>
-</datalist>
-<datalist id="listCountry">
-    <option  *ngFor="let Country of patient.listCountry" [value]="Country">
-        {{Country}}
-    </option>
-</datalist>
-<datalist id="listPlaceChecks">
-    <option  *ngFor="let PlaceCheck of patient.listPlaceCheck" [value]="PlaceCheck">
-        {{PlaceCheck}}
-    </option>
-</datalist>
-<datalist id="listCodeMKB">
-    <option  *ngFor="let CodeMKB of patient.listCodeMKB" [value]="CodeMKB">
-        {{CodeMKB}}
-    </option>
-</datalist>
-<datalist id="listCheckCourseShort">
-    <option  *ngFor="let CheckCourseShort of patient.listCheckCourseShort" [value]="CheckCourseShort">
-        {{CheckCourseShort}}
-    </option>
-</datalist>
-<datalist id="listCheckCourseLong">
-    <option  *ngFor="let CheckCourseLong of patient.listCheckCourseLong" [value]="CheckCourseLong">
-        {{CheckCourseLong}}
-    </option>
-</datalist>
-<datalist id="listInfectCourseShort">
-    <option  *ngFor="let InfectCourseShort of patient.listInfectCourseShort" [value]="InfectCourseShort">
-        {{InfectCourseShort}}
-    </option>
-</datalist>
-<datalist id="listInfectCourseLong">
-    <option  *ngFor="let InfectCourseLong of patient.listInfectCourseLong" [value]="InfectCourseLong">
-        {{InfectCourseLong}}
-    </option>
-</datalist>
-<datalist id="listDieCourseShort">
-    <option  *ngFor="let DieCourseShort of patient.listDieCourseShort" [value]="DieCourseShort">
-        {{DieCourseShort}}
-    </option>
-</datalist> 
-<datalist id="listDieCourseLong">
-    <option  *ngFor="let DieCourseLong of patient.listDieCourseLong" [value]="DieCourseLong">
-        {{DieCourseLong}}
-    </option>
-</datalist> 
-<datalist id="listVulnerableGroup">
-    <option  *ngFor="let VulnerableGroup of patient.listVulnerableGroup" [value]="VulnerableGroup">
-        <!-- {{VulnerableGroup}} -->
-    </option>
-</datalist> 
-<datalist id="listARVT">
-    <option  *ngFor="let arvt of patient.listARVT" [value]="arvt">
-        {{arvt}}
-    </option>
-</datalist> 
-<datalist id="listInvalid">
-    <option  *ngFor="let Invalid of patient.listInvalid" [value]="Invalid">
-        {{Invalid}}
-    </option>
-</datalist> 
-<datalist id="listCheckPlace">
-    <option  *ngFor="let CheckPlace of patient.listCheckPlace" [value]="CheckPlace">
-        {{CheckPlace}}
-    </option>
-</datalist> 
-<datalist id="listRes">
-    <option  *ngFor="let Res of patient.listRes" [value]="Res">
-        {{Res}}
-    </option>
-</datalist> 
-<datalist id="listDesease">
-    <option  *ngFor="let Desease of patient.listDesease" [value]="Desease">
-        {{Desease}}
-    </option>
-</datalist> 
-<datalist id="listStage">
-    <option  *ngFor="let Stage of patient.listStage" [value]="Stage">
-        {{Stage}}
-    </option>
-</datalist> 
+<datalist id="listSex"><option *ngFor="let sex of patient.listSex" [value]="sex"></option></datalist>
+<datalist id="listRegOffReason"><option *ngFor="let RegOffReason of patient.listRegOffReason" [value]="RegOffReason"></option></datalist>
+<datalist id="listRegion"><option *ngFor="let Region of patient.listRegion" [value]="Region"></option></datalist>
+<datalist id="listCountry"><option *ngFor="let Country of patient.listCountry" [value]="Country"></option></datalist>
+<datalist id="listPlaceChecks"><option *ngFor="let PlaceCheck of patient.listPlaceCheck" [value]="PlaceCheck"></option></datalist>
+<datalist id="listCodeMKB"><option *ngFor="let CodeMKB of patient.listCodeMKB" [value]="CodeMKB"></option></datalist>
+<datalist id="listCheckCourseShort"><option *ngFor="let CheckCourseShort of patient.listCheckCourseShort" [value]="CheckCourseShort"></option></datalist>
+<datalist id="listCheckCourseLong"><option *ngFor="let CheckCourseLong of patient.listCheckCourseLong" [value]="CheckCourseLong"></option></datalist>
+<datalist id="listInfectCourseShort"><option *ngFor="let InfectCourseShort of patient.listInfectCourseShort" [value]="InfectCourseShort"></option></datalist>
+<datalist id="listInfectCourseLong"><option *ngFor="let InfectCourseLong of patient.listInfectCourseLong" [value]="InfectCourseLong"></option></datalist>
+<datalist id="listDieCourseShort"><option *ngFor="let DieCourseShort of patient.listDieCourseShort" [value]="DieCourseShort"></option></datalist> 
+<datalist id="listDieCourseLong"><option *ngFor="let DieCourseLong of patient.listDieCourseLong" [value]="DieCourseLong"></option></datalist> 
+<datalist id="listVulnerableGroup"><option *ngFor="let VulnerableGroup of patient.listVulnerableGroup" [value]="VulnerableGroup"></option></datalist> 
+<datalist id="listARVT"><option *ngFor="let arvt of patient.listARVT" [value]="arvt"></option></datalist> 
+<datalist id="listInvalid"><option *ngFor="let Invalid of patient.listInvalid" [value]="Invalid"></option></datalist> 
+<datalist id="listCheckPlace"><option *ngFor="let CheckPlace of patient.listCheckPlace" [value]="CheckPlace"></option></datalist> 
+<datalist id="listRes"><option *ngFor="let Res of patient.listRes" [value]="Res"></option></datalist> 
+<datalist id="listDesease"><option *ngFor="let Desease of patient.listDesease" [value]="Desease"></option></datalist> 
+<datalist id="listStage"><option *ngFor="let Stage of patient.listStage" [value]="Stage"></option></datalist> 
 
 </ng-container>

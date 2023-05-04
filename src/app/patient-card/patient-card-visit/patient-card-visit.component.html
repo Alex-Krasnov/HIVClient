@@ -81,14 +81,14 @@
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
             <div class="col-xl-10">
-                <div class="row" style="height: 115px; overflow: auto;">
+                <div class="row" style="height: 220px; overflow: auto;">
                     <app-patient-check [(subArr)]="patientChecks" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-check>
                 </div>
-                <div class="row" style="height: 115px; overflow: auto;">
+                <div class="row" style="height: 220px; overflow: auto;">
                     <app-patient-registry [(subArr)]="patientRegistries" [(patientId)]="patient.patientId" (isValid)="giveRForUpd($event)"></app-patient-registry>
                 </div>
                 <p class="text-start m-0">Явка на выезде</p>
-                <div class="row" style="height: 115px; overflow: auto;">
+                <div class="row" style="height: 220px; overflow: auto;">
                     <app-patient-check-out [(subArr)]="patientCheckOuts" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-check-out>
                 </div>
                 <br>
