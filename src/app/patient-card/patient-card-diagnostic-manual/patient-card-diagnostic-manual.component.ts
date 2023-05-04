@@ -1,0 +1,163 @@
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { PatientCardDiagnosticManualModel } from 'src/app/_interfaces/patient-card-diagnostic-manual.model';
+import { ListService } from 'src/app/services/list.service';
+import { PatientCardDiagnosticManualService } from 'src/app/services/patient-card-diagnostic-manual.service';
+import { InList } from 'src/app/validators/in-lst';
+import { PatientCardDiagnosticManualForm } from './patient-card-diagnostic-manual-form.model';
+
+@Component({
+  selector: 'app-patient-card-diagnostic-manual',
+  templateUrl: './patient-card-diagnostic-manual.component.html',
+  styleUrls: ['./patient-card-diagnostic-manual.component.css']
+})
+export class PatientCardDiagnosticManualComponent implements OnInit {
+  private PatineCardEpidForm: BehaviorSubject<FormGroup | undefined>
+  PatineCardEpidForm$: Observable<FormGroup>
+  
+  isVisibleSystem: boolean = false;
+  isVisibleDiagn: boolean = false;
+  isVisibleMenu:boolean = false;
+  vlIsValid: boolean = true;
+  hcIsValid: boolean = true;
+  hbIsValid: boolean = true;
+  IsErr: boolean = false;
+  needUpd: boolean = false;
+
+  Id: number;
+  type1 = 'vl';
+  type2 = 'hc';
+  type3 = 'hb';
+  patient: PatientCardDiagnosticManualModel | undefined;
+  patientForm: FormGroup;
+  patientFormSub: Subscription;
+
+  patientVls = new FormArray([]);
+  patientHcs = new FormArray([]);
+  patientHbs = new FormArray([]);
+
+  constructor(
+    private route: ActivatedRoute,
+    private patientService: PatientCardDiagnosticManualService,
+    private fb: FormBuilder,
+    private router: Router,
+    private listService: ListService
+  ){}
+
+  ngOnInit() {
+    this.route.params.subscribe(params => { this.Id = params['id'] })
+    this.getData()
+  }
+
+  getData(): void {
+    this.patientService.getData(this.Id)
+      .subscribe((data:PatientCardDiagnosticManualModel) => {
+        this.patient = data;
+        this.initForm();
+      });
+  }
+
+  initForm(){
+    this.PatineCardEpidForm = new BehaviorSubject(this.fb.group(new PatientCardDiagnosticManualForm(this.patient)));
+    this.PatineCardEpidForm$ = this.PatineCardEpidForm.asObservable();
+
+    this.patientFormSub = this.PatineCardEpidForm$
+      .subscribe(data => {
+        this.patientForm = data;
+    });
+
+    this.patient.virusLoads.map(
+        (item: any) => {
+          const sForm = new FormGroup ({
+            date: new FormControl(item.date),
+            result: new FormControl(item.result),
+            resultDescr: new FormControl(item.resultDescr, {
+              asyncValidators: [InList.validateVl(this.listService)],
+              updateOn: 'blur'
+            })
+          });
+          this.patientVls.push(sForm);
+        }
+    );
+
+    this.patient.hepCs.map(
+      (item: any) => {
+        const sForm = new FormGroup ({
+          date: new FormControl(item.date),
+          result: new FormControl(item.result),
+          resultDescr: new FormControl(item.resultDescr, {
+            asyncValidators: [InList.validateHc(this.listService)],
+            updateOn: 'blur'
+          })
+        });
+        this.patientHcs.push(sForm);
+      }
+    );
+
+    this.patient.hepBs.map(
+      (item: any) => {
+        const sForm = new FormGroup ({
+          date: new FormControl(item.date),
+          result: new FormControl(item.result),
+          resultDescr: new FormControl(item.resultDescr, {
+            asyncValidators: [InList.validateHb(this.listService)],
+            updateOn: 'blur'
+          })
+        });
+        this.patientHbs.push(sForm);
+      }
+    );
+      console.log(this.vlIsValid , this.hcIsValid , this.hbIsValid);
+      
+    this.patientForm.statusChanges.subscribe( (status) => {
+      if(status == 'VALID')
+        this.needUpd = true;
+    })
+  }
+
+  openDropdown(str:string): void{
+    switch(str){
+      case "Диагностика":
+        this.isVisibleDiagn = !this.isVisibleDiagn;
+        break;
+      case "Системные":
+        this.isVisibleSystem = !this.isVisibleSystem;
+        break;
+      case "Меню":
+        this.isVisibleMenu = !this.isVisibleMenu;
+        break;
+    } 
+  }
+
+  giveVLForUpd(isValid: boolean){
+     this.vlIsValid = isValid;
+  }
+  
+  giveHCForUpd(isValid: boolean){
+    this.hcIsValid = isValid;
+  }
+
+  giveHBForUpd(isValid: boolean){
+    this.hbIsValid = isValid;
+  }
+
+  leaveComponent(name: string){
+    if(this.vlIsValid && this.hcIsValid && this.hbIsValid){
+      if(name == '/main'){
+        this.router.navigate([name]);
+        return null
+      }
+      this.router.navigate([name+this.Id])
+    } else{
+      Object.keys(this.patientForm.controls).forEach(
+        (data: any) => {
+          if(this.patientForm.controls[data].invalid)
+            console.log(data);          
+        }
+      )
+      confirm(`Ошибка в заполнении данных!`)
+    }
+  }
+}

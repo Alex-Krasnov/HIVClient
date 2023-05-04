@@ -9,6 +9,7 @@ import { PatientCardDiagnosticsComponent } from './patient-card-diagnostics/pati
 import { PatientCardResistenceComponent } from './patient-card-resistence/patient-card-resistence.component';
 import { PatientCardDiagnosticConcomitantComponent } from './patient-card-diagnostic-concomitant/patient-card-diagnostic-concomitant.component';
 import { PatientCardAclComponent } from './patient-card-acl/patient-card-acl.component';
+import { PatientCardDiagnosticManualComponent } from './patient-card-diagnostic-manual/patient-card-diagnostic-manual.component';
 
 const routes: Routes = [
   { path: 'main/:id', component: PatientCardMainComponent },
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'diagnostics/:id', component: PatientCardDiagnosticsComponent },
   { path: 'resistence/:id', component: PatientCardResistenceComponent },
   { path: 'dconcomitant/:id', component: PatientCardDiagnosticConcomitantComponent },
-  { path: 'acl/:id', component: PatientCardAclComponent }
+  { path: 'acl/:id', component: PatientCardAclComponent },
+  { path: 'dmanual/:id', component: PatientCardDiagnosticManualComponent }
 ];
 
 @NgModule({

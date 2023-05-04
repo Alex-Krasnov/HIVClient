@@ -40,6 +40,8 @@ import { HepCPcrComponent } from './hep-cpcr/hep-cpcr.component';
 import { PatientCardAclComponent } from './patient-card-acl/patient-card-acl.component';
 import { GEComponent } from './ge/ge.component';
 import { BHComponent } from './bh/bh.component';
+import { PatientCardDiagnosticManualComponent } from './patient-card-diagnostic-manual/patient-card-diagnostic-manual.component';
+import { Diagnostic3ColCrudComponent } from './diagnostic3-col-crud/diagnostic3-col-crud.component';
 
 
 
@@ -76,7 +78,9 @@ import { BHComponent } from './bh/bh.component';
     HepCPcrComponent,
     PatientCardAclComponent,
     GEComponent,
-    BHComponent
+    BHComponent,
+    PatientCardDiagnosticManualComponent,
+    Diagnostic3ColCrudComponent
   ],
   imports: [
     CommonModule, 
