@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ListService } from 'src/app/services/list.service';
+import { ModalService } from 'src/app/services/modal.service';
 import { PatientCardTreatmentService } from 'src/app/services/patient-card-treatment.service';
 import { InList } from 'src/app/validators/in-lst';
 
@@ -19,7 +20,8 @@ export class PatientCureSchemasComponent implements OnInit{
   constructor(
     private patientService: PatientCardTreatmentService,
     private fb: FormBuilder,
-    private listService: ListService
+    private listService: ListService,
+    public modal: ModalService
   ){}
 
   ngOnInit() {

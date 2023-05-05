@@ -42,6 +42,10 @@ import { GEComponent } from './ge/ge.component';
 import { BHComponent } from './bh/bh.component';
 import { PatientCardDiagnosticManualComponent } from './patient-card-diagnostic-manual/patient-card-diagnostic-manual.component';
 import { Diagnostic3ColCrudComponent } from './diagnostic3-col-crud/diagnostic3-col-crud.component';
+import { PatientCardRecipeComponent } from './patient-card-recipe/patient-card-recipe.component';
+import { RecipeComponent } from './recipe/recipe.component';
+import { SchemaSelectComponent } from './schema-select/schema-select.component';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
 
 
 
@@ -80,7 +84,11 @@ import { Diagnostic3ColCrudComponent } from './diagnostic3-col-crud/diagnostic3-
     GEComponent,
     BHComponent,
     PatientCardDiagnosticManualComponent,
-    Diagnostic3ColCrudComponent
+    Diagnostic3ColCrudComponent,
+    PatientCardRecipeComponent,
+    RecipeComponent,
+    SchemaSelectComponent,
+    ModalWindowComponent
   ],
   imports: [
     CommonModule, 

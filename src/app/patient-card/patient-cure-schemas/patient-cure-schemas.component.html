@@ -15,7 +15,7 @@
     <tbody>
         <ng-container formArrayName="cureSchemas" *ngFor="let item of cureSchemas.controls; let i = index">
         <tr formGroupName="{{i}}">
-            <td><input type="text" list="listCureSchemas" class="form-control tbl" formControlName="cureSchemaName" title="{{pervValue[i].cureSchemaName}}"></td>
+            <td><input type="text" list="listCureSchemas" class="form-control tbl" formControlName="cureSchemaName" title="{{pervValue[i].cureSchemaName}}" (click)="modal.open()"></td>
             <td><input type="date" class="form-control tbl" formControlName="startDate"></td>
             <td><input type="date" class="form-control tbl" formControlName="endDate"></td>
             <td><textarea class="form-control py-0" style="min-height: 30px;" rows="1" formControlName="schemaComm"></textarea></td>

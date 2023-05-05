@@ -1,0 +1,50 @@
+<table class="table border" [formGroup]="formS" style="table-layout: fixed;">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 55px;">Серия</th>
+        <th scope="col" style="width: 55px;">№</th>
+        <th scope="col" style="width: 120px;">Дата (вып.)</th>
+        <th scope="col">Врач (вып.)</th>
+        <th scope="col">Перепарат (вып.)</th>
+        <th scope="col" style="width: 100px;">Кол. (вып.)</th>
+        <th scope="col">Ист. фин.</th>
+        <th scope="col" style="width: 120px;">Дата (выд.)</th>
+        <th scope="col" style="width: 30px;"></th>
+        <th scope="col">Перепарат (выд.)</th>
+        <th scope="col" style="width: 100px;">Кол. (выд.)</th>
+        <th scope="col" style="width: 30px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+          <tr formGroupName="{{i}}">
+            <td><input type="text" class="form-control tbl" formControlName="ser"></td>
+            <td><input type="text" class="form-control tbl" formControlName="num" ></td>
+            <td><input type="date" class="form-control tbl" formControlName="prescrDate"></td>
+            <td><input type="text" class="form-control tbl" list="listDoctor" formControlName="doctor"></td>
+            <td><input type="text" class="form-control tbl" list="listMedicine" formControlName="medicine"></td>
+            <td><input type="text" class="form-control tbl" formControlName="packNum"></td>
+            <td><input type="text" class="form-control tbl" list="listFinSource" formControlName="finSource"></td>
+            <td><input type="date" class="form-control tbl" formControlName="giveDate"></td>
+            <td><input type="checkbox" class="form-check-input mt-2" formControlName="giveDateCheck"></td>
+            <td><input type="text" class="form-control tbl" list="listMedicine" formControlName="medicineGive"></td>
+            <td><input type="text" class="form-control tbl" formControlName="packNumGive"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
+          </tr>
+        </ng-container>
+        <tr>
+          <td><input type="text" class="form-control tbl" formControlName="newSer"></td>
+          <td><input type="text" class="form-control tbl" formControlName="newNum" ></td>
+          <td><input type="date" class="form-control tbl" formControlName="newPrescrDate"></td>
+          <td><input type="text" class="form-control tbl" list="listDoctor" formControlName="newDoctor"></td>
+          <td><input type="text" class="form-control tbl" list="listMedicine" formControlName="newMedicine"></td>
+          <td><input type="text" class="form-control tbl" formControlName="newPackNum"></td>
+          <td><input type="text" class="form-control tbl" list="listFinSource" formControlName="newFinSource"></td>
+          <td><input type="date" class="form-control tbl" formControlName="newGiveDate"></td>
+          <td><input type="checkbox" class="form-check-input mt-2" formControlName="newGiveDateCheck"></td>
+          <td><input type="text" class="form-control tbl" list="listMedicine" formControlName="newMedicineGive"></td>
+          <td><input type="text" class="form-control tbl" formControlName="newPackNumGive"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
+          </tr>
+    </tbody>
+</table>

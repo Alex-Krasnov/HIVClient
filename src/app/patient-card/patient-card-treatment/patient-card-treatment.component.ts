@@ -7,6 +7,7 @@ import { ListService } from 'src/app/services/list.service';
 import { PatientCardTreatmentService } from 'src/app/services/patient-card-treatment.service';
 import { PatientCardTreatmentForm } from './patient-card-treatment-form.model';
 import { InList } from 'src/app/validators/in-lst';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-patient-card-treatment',
@@ -40,10 +41,12 @@ export class PatientCardTreatmentComponent implements OnInit{
     private patientService: PatientCardTreatmentService,
     private fb: FormBuilder,
     private router: Router,
-    private listService: ListService
+    private listService: ListService,
+    public modal: ModalService
   ){}
 
   ngOnInit() {
+    // this.modal.open();
     this.route.params.subscribe(params => { this.Id = params['id'] })
     this.getData()
   }

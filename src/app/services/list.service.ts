@@ -210,7 +210,16 @@ export class ListService {
     InListHc(name: string): Observable<object>{
         return this.http.post(this.url+`getInListHc`,{ str: name});
     };
+
     InListHb(name: string): Observable<object>{
         return this.http.post(this.url+`getInListHb`,{ str: name});
+    };
+
+    InListFinSource(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListFinSource`,{ str: name});
+    };
+
+    InListMedicine(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMedicine`,{ str: name});
     };
 }
