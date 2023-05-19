@@ -46,6 +46,7 @@ import { PatientCardRecipeComponent } from './patient-card-recipe/patient-card-r
 import { RecipeComponent } from './recipe/recipe.component';
 import { SchemaSelectComponent } from './schema-select/schema-select.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { MyFilterPipe } from './schema-select/formarray-filter.pipe';
 
 
 
@@ -88,7 +89,8 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
     PatientCardRecipeComponent,
     RecipeComponent,
     SchemaSelectComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    MyFilterPipe
   ],
   imports: [
     CommonModule, 

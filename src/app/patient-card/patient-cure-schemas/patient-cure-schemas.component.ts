@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -10,11 +10,13 @@ import { InList } from 'src/app/validators/in-lst';
   templateUrl: './patient-cure-schemas.component.html',
   styleUrls: ['./patient-cure-schemas.component.css']
 })
-export class PatientCureSchemasComponent implements OnInit{
+export class PatientCureSchemasComponent implements OnInit, OnChanges{
   formCS: FormGroup;
   pervValue: any;
+  indForUpd: number;
   @Input() cureSchemaArr: FormArray; 
   @Input() patientId: number;
+  @Input() updSchema: string;
   @Output() csIsValid = new EventEmitter<boolean>();
 
   constructor(
@@ -55,6 +57,8 @@ export class PatientCureSchemasComponent implements OnInit{
       } else 
         this.csIsValid.emit(false);
     })
+
+    // this.updSchema.
   }
 
   get cureSchemas() {
@@ -160,8 +164,21 @@ export class PatientCureSchemasComponent implements OnInit{
             oldValue[index].cureSchemaName,
             oldValue[index].startDate
           ).subscribe()
-          oldValue[index] = curValue[index]
+          this.pervValue[index] = curValue[index]
         }
       } 
+  }
+
+  writeInd(i: number){
+    this.indForUpd = i
+    console.log(this.indForUpd, this.updSchema);
+    
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.updSchema && !changes.updSchema.firstChange) {
+      this.cureSchemas.controls[this.indForUpd].get('cureSchemaName').setValue(this.updSchema)
+      this.cureSchemas.controls[this.indForUpd].get('cureSchemaName').touched
+    }
   }
 }

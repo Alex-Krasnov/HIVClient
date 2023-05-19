@@ -35,6 +35,7 @@ export class PatientCardTreatmentComponent implements OnInit{
   patientCureSchemas = new FormArray([]);
   patientHospResultRs = new FormArray([]);
   pervValue: object;
+  updSchema:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,6 @@ export class PatientCardTreatmentComponent implements OnInit{
   ){}
 
   ngOnInit() {
-    // this.modal.open();
     this.route.params.subscribe(params => { this.Id = params['id'] })
     this.getData()
   }
@@ -206,5 +206,9 @@ export class PatientCardTreatmentComponent implements OnInit{
       )
       confirm(`Ошибка в заполнении данных!`)
     }
+  }
+
+  giveSchema (schema: string){
+    this.updSchema = schema
   }
 }

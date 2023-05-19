@@ -1,1 +1,26 @@
-<p>schema-select works!</p>
+<form style="width: 900px;" class="mx-auto modal-content p-1" [formGroup]="form" >
+    <div class="row">
+        <div class="col ">
+            <input type="text" id="floatingInput" class="form-control" value="{{msg}}" disabled>
+        </div>
+        <div class="col-1">
+            <button type="button" class="btn btn-outline-success my-auto" (click)="setSchema()">Выбор</button>
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-outline-success my-auto" (click)="exit()">Закрыть</button>
+      </div>
+    </div>
+    <br>
+    <div style="height: 800px; overflow-y: scroll; overflow-x: hidden;">
+      <ng-container formArrayName="formArr" *ngFor="let item of formArr.controls | myfilter:possibleSchems; let i = index">
+        <div class="row" formGroupName="{{i}}">
+          <div class="col">
+              <input type="text" class="form-control" formControlName="name" title="{{data[i].medicineName}}">
+          </div>
+          <div class="col-1">
+              <input type="checkbox" class="form-check-input mt-2" formControlName="select">
+          </div>
+        </div>
+      </ng-container>
+    </div>
+</form>
