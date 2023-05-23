@@ -46,7 +46,10 @@ export class PregnantMComponent implements OnInit, OnChanges{
         asyncValidators: [InList.validateChildCount(this.listService)],
         updateOn: 'blur'
       }),
-      newChildId: new FormControl(),
+      newChildId: new FormControl('', {
+        asyncValidators: [InList.validatePatientCard(this.listService)],
+        updateOn: 'blur'
+      }),
       newStartMonth: new FormControl(),
       newChildFamilyName: new FormControl(),
       newChildFirstName: new FormControl(),
@@ -88,7 +91,9 @@ export class PregnantMComponent implements OnInit, OnChanges{
   }
 
   create() {
-    if(this.formS.controls['newBirthType'].valid && this.formS.controls['newChildCount'].valid && this.formS.controls['newPhpSchema1'].valid && this.formS.controls['newPhpSchema2'].valid && this.formS.controls['newPhpSchema3'].valid){
+    if(this.formS.controls['newBirthType'].valid && this.formS.controls['newChildCount'].valid 
+    && this.formS.controls['newPhpSchema1'].valid && this.formS.controls['newPhpSchema2'].valid 
+    && this.formS.controls['newPhpSchema3'].valid && this.formS.controls['newChildId'].valid){
       let item: pcPregM = {
         patientId: this.patientId,
         pregId: this.formS.controls['newPregId'].value,

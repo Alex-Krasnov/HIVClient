@@ -152,7 +152,7 @@ export class ListService {
     };
 
     InListPatientCard(name: string): Observable<object>{
-        return this.http.post(this.url+`getInListPatientCard`,{ str: name.toString()});
+        return this.http.post(this.url+`getInListPatientCard`,{ str: name});
     };
 
     InListRegTime(name: string): Observable<object>{

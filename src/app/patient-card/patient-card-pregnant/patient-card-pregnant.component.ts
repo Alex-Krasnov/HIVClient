@@ -85,7 +85,10 @@ export class PatientCardPregnantComponent implements OnInit {
               asyncValidators: [InList.validateChildCount(this.listService)],
               updateOn: 'blur'
             }),
-            childId: new FormControl(item.childId),
+            childId: new FormControl(item.childId, {
+              asyncValidators: [InList.validatePatientCard(this.listService)],
+              updateOn: 'blur'
+            }),
             startMonth: new FormControl(item.startMonth),
             childFamilyName: new FormControl(item.childFamilyName),
             childFirstName: new FormControl(item.childFirstName),
