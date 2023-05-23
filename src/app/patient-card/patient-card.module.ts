@@ -47,6 +47,8 @@ import { RecipeComponent } from './recipe/recipe.component';
 import { SchemaSelectComponent } from './schema-select/schema-select.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { MyFilterPipe } from './schema-select/formarray-filter.pipe';
+import { PatientCardPregnantComponent } from './patient-card-pregnant/patient-card-pregnant.component';
+import { PregnantMComponent } from './pregnant-m/pregnant-m.component';
 
 
 
@@ -90,7 +92,9 @@ import { MyFilterPipe } from './schema-select/formarray-filter.pipe';
     RecipeComponent,
     SchemaSelectComponent,
     ModalWindowComponent,
-    MyFilterPipe
+    MyFilterPipe,
+    PatientCardPregnantComponent,
+    PregnantMComponent
   ],
   imports: [
     CommonModule, 

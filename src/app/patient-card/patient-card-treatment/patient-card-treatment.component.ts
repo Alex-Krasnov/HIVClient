@@ -35,7 +35,7 @@ export class PatientCardTreatmentComponent implements OnInit{
   patientCureSchemas = new FormArray([]);
   patientHospResultRs = new FormArray([]);
   pervValue: object;
-  updSchema:string;
+  updSchema: string;
 
   constructor(
     private route: ActivatedRoute,

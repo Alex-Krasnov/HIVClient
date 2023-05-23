@@ -222,4 +222,16 @@ export class ListService {
     InListMedicine(name: string): Observable<object>{
         return this.http.post(this.url+`getInListMedicine`,{ str: name});
     };
+
+    InListPregCheck(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListPregCheck`,{ str: name});
+    };
+
+    InListBirthType(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListBirthType`,{ str: name});
+    };
+
+    InListChildCount(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListChildCount`,{ str: name});
+    };
 }

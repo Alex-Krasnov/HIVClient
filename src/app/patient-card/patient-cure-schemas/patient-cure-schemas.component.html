@@ -27,7 +27,7 @@
         </tr>
         </ng-container>
         <tr>
-          <td><input type="text" list="" class="form-control tbl" formControlName="newCureSchemaName"></td>
+          <td><input type="text" list="" class="form-control tbl" formControlName="newCureSchemaName" (click)="modal.open()" (click)="writeInd(-1)"></td>
           <td><input type="date" class="form-control tbl" formControlName="newStartDate"></td>
           <td><input type="date" class="form-control tbl" formControlName="newEndDate"></td>
           <td><textarea class="form-control py-0" style="min-height: 30px;" rows="1" formControlName="newSchemaComm"></textarea></td>

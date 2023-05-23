@@ -1,0 +1,168 @@
+<div [formGroup]="formS" class="ms-1 me-3">
+    <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+    <div class="row ms-2 mb-2 border" formGroupName="{{i}}">
+        <div class="col-xl ps-3 mt-1">
+            <div class="row mb-1">
+                <div class="col-xl-1 form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Ид" formControlName="pregId" title="{{pervValue[i].pregId}}">
+                    <label>Ид</label>
+                </div>
+                <div class="col-xl-1 form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Срок" formControlName="pwMonth" title="{{pervValue[i].newPwMonth}}">
+                    <label>Срок</label>
+                </div>
+                <div class="col-xl-2 form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Нач. мес." formControlName="startMonth" title="{{pervValue[i].startMonth}}">
+                    <label>Нач. мес.</label>
+                </div>
+                <div class="col-xl-3 form-floating p-0 me-1">
+                    <input type="date" class="form-control" placeholder="Дата беременности" formControlName="pregDate" title="{{pervValue[i].pregDate}}">
+                    <label>Дата беременности</label>
+                </div>
+                <div class="col-xl-3 form-floating p-0 me-1">
+                    <input type="date" class="form-control" placeholder="Дата родов" formControlName="childBirthDate" title="{{pervValue[i].childBirthDate}}">
+                    <label>Дата родов</label>
+                </div>
+                <div class="col-xl-1 p-0">
+                    <label class="mt-1 me-1">Ж/К</label>
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="pwCheck">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-xl-2 form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Ид ребёнка" formControlName="childId" title="{{pervValue[i].childId}}">
+                    <label>Ид ребёнка</label>
+                </div>
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" list="listBirthType" class="form-control" placeholder="Вид родов" formControlName="birthType" title="{{pervValue[i].birthType}}">
+                    <label>Вид родов</label>
+                </div>
+                <div class="col-xl form-floating p-0">
+                    <input type="text" list="listChildCount" class="form-control" placeholder="Количество детей" formControlName="childCount" title="{{pervValue[i].childCount}}">
+                    <label>Количество детей</label>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Фамилия ребёнка" formControlName="childFamilyName" title="{{pervValue[i].childFamilyName}}">
+                    <label>Фамилия ребёнка</label>
+                </div>
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Имя ребёнка" formControlName="childFirstName" title="{{pervValue[i].childFirstName}}">
+                    <label>Имя ребёнка</label>
+                </div>
+                <div class="col-xl form-floating p-0">
+                    <input type="text" class="form-control" placeholder="Отчество ребёнка" formControlName="childThirdName" title="{{pervValue[i].childThirdName}}">
+                    <label>Отчество ребёнка</label>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="ПХП1 (схема)" formControlName="phpSchema1" title="{{pervValue[i].phpSchema1}}" (click)="modal.open()" (click)="writeInd(i, 1)">
+                    <label>ПХП1 (схема)</label>
+                </div>
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="ПХП1 (схема)" formControlName="phpSchema2" title="{{pervValue[i].phpSchema2}}" (click)="modal.open()" (click)="writeInd(i, 2)">
+                    <label>ПХП2 (схема)</label>
+                </div>
+                <div class="col-xl form-floating p-0">
+                    <input type="text" class="form-control" placeholder="ПХП1 (схема)" formControlName="phpSchema3" title="{{pervValue[i].phpSchema3}}" (click)="modal.open()" (click)="writeInd(i, 3)">
+                    <label>ПХП3 (схема)</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 mt-1 ms-1 me-1">
+            <div class="row">
+                <div class="col-xl p-0">
+                    <textarea class="form-control" rows="6" formControlName="pregDescr"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-outline-danger my-1" (click)="del(i)"></button>
+            </div>
+        </div>
+    </div>
+    </ng-container>
+    <div class="row ms-2 mb-2 border">
+        <div class="col-xl ps-3 mt-1">
+            <div class="row mb-1">
+                <div class="col-xl-1 form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Ид" formControlName="newPregId">
+                    <label>Ид</label>
+                </div>
+                <div class="col-xl-1 form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Срок" formControlName="newPwMonth">
+                    <label>Срок</label>
+                </div>
+                <div class="col-xl-2 form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Нач. мес." formControlName="newStartMonth">
+                    <label>Нач. мес.</label>
+                </div>
+                <div class="col-xl-3 form-floating p-0 me-1">
+                    <input type="date" class="form-control" placeholder="Дата беременности" formControlName="newPregDate">
+                    <label>Дата беременности</label>
+                </div>
+                <div class="col-xl-3 form-floating p-0 me-1">
+                    <input type="date" class="form-control" placeholder="Дата родов" formControlName="newChildBirthDate">
+                    <label>Дата родов</label>
+                </div>
+                <div class="col-xl-1 p-0">
+                    <label class="mt-1 me-1">Ж/К</label>
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="newPwCheck">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-xl-2 form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Ид ребёнка" formControlName="newChildId">
+                    <label>Ид ребёнка</label>
+                </div>
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" list="listBirthType" class="form-control" placeholder="Вид родов" formControlName="newBirthType">
+                    <label>Вид родов</label>
+                </div>
+                <div class="col-xl form-floating p-0">
+                    <input type="text" list="listChildCount" class="form-control" placeholder="Количество детей" formControlName="newChildCount">
+                    <label>Количество детей</label>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Фамилия ребёнка" formControlName="newChildFamilyName">
+                    <label>Фамилия ребёнка</label>
+                </div>
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="Имя ребёнка" formControlName="newChildFirstName">
+                    <label>Имя ребёнка</label>
+                </div>
+                <div class="col-xl form-floating p-0">
+                    <input type="text" class="form-control" placeholder="Отчество ребёнка" formControlName="newChildThirdName">
+                    <label>Отчество ребёнка</label>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="ПХП1 (схема)" formControlName="newPhpSchema1" (click)="modal.open()" (click)="writeInd(-1, 1)">
+                    <label>ПХП1 (схема)</label>
+                </div>
+                <div class="col-xl form-floating p-0 me-1">
+                    <input type="text" class="form-control" placeholder="ПХП1 (схема)" formControlName="newPhpSchema2" (click)="modal.open()" (click)="writeInd(-1, 2)">
+                    <label>ПХП2 (схема)</label>
+                </div>
+                <div class="col-xl form-floating p-0">
+                    <input type="text" class="form-control" placeholder="ПХП1 (схема)" formControlName="newPhpSchema3" (click)="modal.open()" (click)="writeInd(-1, 3)">
+                    <label>ПХП3 (схема)</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 mt-1 ms-1 me-1">
+            <div class="row">
+                <div class="col-xl p-0">
+                    <textarea class="form-control" rows="6" formControlName="newPregDescr"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <button type="button" class="btn btn-outline-success my-1" (click)="create()"></button>
+            </div>
+        </div>
+    </div>
+</div>

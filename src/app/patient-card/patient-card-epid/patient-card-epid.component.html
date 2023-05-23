@@ -49,7 +49,7 @@
                         <a class="nav-link" (click)="leaveComponent('/patient_card/recipe/')" [routerLink]="['/patient_card/recipe']" routerLinkActive="disabled">Рецепты</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">Беременные</a>
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/preg/')" [routerLink]="['/patient_card/preg']" routerLinkActive="disabled">Беременные</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">Дети</a>
@@ -184,60 +184,16 @@
         <button style="display: none;" type="button"></button>
     </form>
 
-<datalist id="listCovidMKB">
-    <option  *ngFor="let item of patient.listCovidMKB" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listEdu">
-    <option  *ngFor="let item of patient.listEdu" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listEmloyment">
-    <option  *ngFor="let item of patient.listEmloyment" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listEpidDoc">
-    <option  *ngFor="let item of patient.listEpidDoc" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listFamilyStatus">
-    <option  *ngFor="let item of patient.listFamilyStatus" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listSituationDetect">
-    <option  *ngFor="let item of patient.listSituationDetect" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listTrans">
-    <option  *ngFor="let item of patient.listTrans" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listTransmitionMech">
-    <option  *ngFor="let item of patient.listTransmitionMech" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listTypeContacts">
-    <option  *ngFor="let item of patient.listTypeContacts" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listVac">
-    <option  *ngFor="let item of patient.listVac" [value]="item">
-        {{item}}
-    </option>
-</datalist>
-<datalist id="listYn">
-    <option  *ngFor="let item of patient.listYn" [value]="item">
-        {{item}}
-    </option>
-</datalist>
+<datalist id="listCovidMKB"><option  *ngFor="let item of patient.listCovidMKB" [value]="item"></option></datalist>
+<datalist id="listEdu"><option  *ngFor="let item of patient.listEdu" [value]="item"></option></datalist>
+<datalist id="listEmloyment"><option  *ngFor="let item of patient.listEmloyment" [value]="item"></option></datalist>
+<datalist id="listEpidDoc"><option  *ngFor="let item of patient.listEpidDoc" [value]="item"></option></datalist>
+<datalist id="listFamilyStatus"><option  *ngFor="let item of patient.listFamilyStatus" [value]="item"></option></datalist>
+<datalist id="listSituationDetect"><option  *ngFor="let item of patient.listSituationDetect" [value]="item"></option></datalist>
+<datalist id="listTrans"><option  *ngFor="let item of patient.listTrans" [value]="item"></option></datalist>
+<datalist id="listTransmitionMech"><option  *ngFor="let item of patient.listTransmitionMech" [value]="item"></option></datalist>
+<datalist id="listTypeContacts"><option  *ngFor="let item of patient.listTypeContacts" [value]="item"></option></datalist>
+<datalist id="listVac"><option  *ngFor="let item of patient.listVac" [value]="item"></option></datalist>
+<datalist id="listYn"><option *ngFor="let item of patient.listYn" [value]="item"></option></datalist>
 
 </ng-container>

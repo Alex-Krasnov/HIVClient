@@ -57,8 +57,6 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
       } else 
         this.csIsValid.emit(false);
     })
-
-    // this.updSchema.
   }
 
   get cureSchemas() {
@@ -177,6 +175,11 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.updSchema && !changes.updSchema.firstChange) {
+      if(this.indForUpd == -1){
+        this.formCS.get('newCureSchemaName').setValue(this.updSchema)
+        this.formCS.get('newCureSchemaName').touched
+        return null
+      }
       this.cureSchemas.controls[this.indForUpd].get('cureSchemaName').setValue(this.updSchema)
       this.cureSchemas.controls[this.indForUpd].get('cureSchemaName').touched
     }

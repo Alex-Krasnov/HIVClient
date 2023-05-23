@@ -77,70 +77,35 @@
         </div>
     </nav>
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
-    <div *ngIf="patientForm.invalid || !siIsValid || !csIsValid || !hrIsValid" class="alert alert-danger">Ошибка...</div>
+    <div *ngIf="patientForm.invalid || !sIsValid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
-        <div class="row ms-1">
-            <div class="col-xl-3 form-floating p-0">
-                <input type="text" class="form-control" placeholder="Стадия" formControlName="stageName">
-                <label>Стадия</label>
-            </div>
-            <div class="col-xl-3 form-floating p-0 ms-2">
-                <input type="text" class="form-control" list="listInvalids" placeholder="Гр. инвалидности" formControlName="invalidName">
-                <label>Гр. инвалидности</label>
-            </div>
-        </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl-1">
-                <label>Расшифровка стадии</label>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl">
+                <div class="col-xl form-floating p-0">
+                    <input type="text" list="listPregCheck" class="form-control" placeholder="Выявление" formControlName="pregCheck" title="{{pervValue.pregCheck}}">
+                    <label>Выявление</label>
+                </div>
             </div>
             <div class="col-xl">
-                <textarea class="form-control" rows="2" formControlName="stageCom"></textarea>
-            </div>
-        </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl-1">
-                <label>Комментарий</label>
-            </div>
-            <div class="col-xl">
-                <textarea class="form-control" rows="2" formControlName="patientCom"></textarea>
-            </div>
-        </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl-5">
-                <div class=" mt-1" style="height: 220px; overflow: auto;">
-                    <app-patient-correp-illnesses [(correpIllnessesArr)]="patientCorrespIllnesses" [(patientId)]="patient.patientId" (ciIsValid)="giveSIForUpd($event)"></app-patient-correp-illnesses>
+                <div class="col-xl form-floating p-0 pe-3">
+                    <input type="text" class="form-control" placeholder="Срок беременности" formControlName="pregMonth">
+                    <label>Срок беременности</label>
                 </div>
             </div>
         </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl">
-                <div class=" mt-1" style="height: 230px; overflow: auto;">
-                    <app-patient-cure-schemas [(updSchema)]="updSchema" [(cureSchemaArr)]="patientCureSchemas" [(patientId)]="patient.patientId" (csIsValid)="giveCSForUpd($event)"></app-patient-cure-schemas>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-1 ms-1">
-            <div class="col-xl-11 ">
-                <div class=" mt-1" style="height: 220px; overflow: auto;">
-                    <app-patient-hosp-result-rs [(hospResultArr)]="patientHospResultRs" [(patientId)]="patient.patientId" (hrIsValid)="giveHRForUpd($event)"></app-patient-hosp-result-rs>
-                </div>
-            </div>
+        <div class="row mx-1 mt-1" style="height: 500px; overflow-y: auto; overflow-x: hidden;">
+            <app-pregnant-m class="p-0" [(subArr)]="patientPregMs" [(updSchema)]="updSchema" [(patientId)]="patient.patientId" (isValid)="giveSForUpd($event)"></app-pregnant-m>
         </div>
         <br>
         <br>
         <button style="display: none;" type="button"></button>
     </form>
 
-<datalist id="listInvalids"><option  *ngFor="let item of patient.listInvalids" [value]="item"></option></datalist>
-<datalist id="listCorrespIllness"><option  *ngFor="let item of patient.listCorrespIllness" [value]="item"></option></datalist>
-<datalist id="listCureSchemas"><option  *ngFor="let item of patient.listCureSchemas" [value]="item"></option></datalist>
-<datalist id="listCureChanges"><option  *ngFor="let item of patient.listCureChanges" [value]="item"></option></datalist>
-<datalist id="listRangeTherapy"><option  *ngFor="let item of patient.listRangeTherapy" [value]="item"></option></datalist>
-<datalist id="listLpus"><option  *ngFor="let item of patient.listLpus" [value]="item"></option></datalist>
-<datalist id="listHospCourses"><option  *ngFor="let item of patient.listHospCourses" [value]="item"></option></datalist>
-<datalist id="listHospResults"><option  *ngFor="let item of patient.listHospResults" [value]="item"></option></datalist>
-</ng-container>
+    <datalist id="listPregCheck"><option  *ngFor="let item of patient.listPregCheck" [value]="item"></option></datalist>
+    <datalist id="listBirthType"><option  *ngFor="let item of patient.listBirthType" [value]="item"></option></datalist>
+    <datalist id="listChildCount"><option  *ngFor="let item of patient.listChildCount" [value]="item"></option></datalist>
 
+</ng-container>
 <app-modal-window *ngIf="modal.isVisible$ | async" [(id)]="patientId" [(date)]="date" [(cab)]="cab">
 <app-schema-select (schema)="giveSchema($event)"></app-schema-select>
 </app-modal-window>
