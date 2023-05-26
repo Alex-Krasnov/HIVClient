@@ -1,0 +1,29 @@
+<table class="table border" [formGroup]="formS">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 300px;">СИЗО</th>
+        <th scope="col" style="width: 120px;">Дата с</th>
+        <th scope="col" style="width: 120px;">Дата по</th>
+        <th scope="col" style="width: 300px;">Место выбытия</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+        <tr  formGroupName="{{i}}">
+            <td><input type="text" list="listJail" class="form-control tbl" formControlName="jailName" title="{{pervValue[i].jailName}}"></td>
+            <td><input type="date" class="form-control tbl" formControlName="jailStart"></td>
+            <td><input type="date" class="form-control tbl" formControlName="jailEnd"></td>
+            <td><input type="text" list="listJail" class="form-control tbl" formControlName="jailLeavName" title="{{pervValue[i].jailLeavName}}"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="text" list="listJail" class="form-control tbl" formControlName="newJailName"></td>
+            <td><input type="date" class="form-control tbl" formControlName="newJailStart"></td>
+            <td><input type="date" class="form-control tbl" formControlName="newJailEnd"></td>
+            <td><input type="text" list="listJail" class="form-control tbl" formControlName="newJailLeavName"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
+        </tr>
+    </tbody>
+</table>

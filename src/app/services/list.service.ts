@@ -250,4 +250,8 @@ export class ListService {
     InListMaterHome(name: string): Observable<object>{
         return this.http.post(this.url+`getInListMaterHome`,{ str: name});
     };
+
+    InListJail(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListJail`,{ str: name});
+    };
 }

@@ -42,7 +42,7 @@
                     <a class="nav-link">COVID</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">СИЗО</a>
+                    <a class="nav-link" (click)="leaveComponent('/patient_card/jail/')" [routerLink]="['/patient_card/jail']" routerLinkActive="disabled">СИЗО</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">Системные</a>

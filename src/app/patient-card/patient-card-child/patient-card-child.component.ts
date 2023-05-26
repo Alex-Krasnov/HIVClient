@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
-import { InList } from 'src/app/validators/in-lst';
 import { PatientCardChildForm } from './patient-card-child-form.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { PatientCardChildModel } from 'src/app/_interfaces/patient-card-child.model';

@@ -50,6 +50,8 @@ import { MyFilterPipe } from './schema-select/formarray-filter.pipe';
 import { PatientCardPregnantComponent } from './patient-card-pregnant/patient-card-pregnant.component';
 import { PregnantMComponent } from './pregnant-m/pregnant-m.component';
 import { PatientCardChildComponent } from './patient-card-child/patient-card-child.component';
+import { PatientCardJailComponent } from './patient-card-jail/patient-card-jail.component';
+import { JailComponent } from './jail/jail.component';
 
 
 
@@ -96,7 +98,9 @@ import { PatientCardChildComponent } from './patient-card-child/patient-card-chi
     MyFilterPipe,
     PatientCardPregnantComponent,
     PregnantMComponent,
-    PatientCardChildComponent
+    PatientCardChildComponent,
+    PatientCardJailComponent,
+    JailComponent
   ],
   imports: [
     CommonModule, 

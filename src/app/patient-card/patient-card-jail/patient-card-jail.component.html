@@ -78,45 +78,31 @@
     </nav>
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
     <div *ngIf="patientForm.invalid" class="alert alert-danger">Ошибка...</div>
-    <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
-        <div class="row mx-1 mt-1">
-            <div class="col-xl-4 border">
-                <div class="row"><h6 class="text-start">Определение вирусной нагрузки</h6></div>
-                <div class="row" style="height: 220px; overflow: auto;">
-                    <app-diagnostics3-col [(subArr)]="patientVirusLoad"></app-diagnostics3-col>
-                </div>
-            </div>
-            <div class="col-xl-4 border">
-                <div class="row"><h6 class="text-start">Определение вирусной нагрузки кач.</h6></div>
-                <div class="row" style="height: 220px; overflow: auto;">
-                    <app-diagnostics2-col [(subArr)]="patientVirusLoadQual"></app-diagnostics2-col>
-                </div>
-            </div>
-            <div class="col-xl-4 border">
-                <div class="row"><h6 class="text-start">CMV</h6></div>
-                <div class="row" style="height: 220px; overflow: auto;">
-                    <app-diagnostics3-col [(subArr)]="patientCMV"></app-diagnostics3-col>
-                </div>
-            </div>
-        </div>
-        <div class="row ms-1 mt-3">
-            <div class="col-xl-4 border" style="height: 220px; overflow: auto;">
-                <app-im-stat [(subArr)]="patientImStat"></app-im-stat>
-            </div>
-            <div class="col-xl me-3 border" style="height: 220px; overflow: auto;">
-                <app-im-stat-cd348 [(subArr)]="patientImStatCD348"></app-im-stat-cd348>
-            </div>
-        </div>
+    <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm || !sIsValid" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
-            <div class="col-xl-4 border">
-                <div class="row"><h6 class="text-start m-0">Результат ИХЛА ВИЧ</h6></div>
-                <div class="row" style="height: 220px; overflow: auto;">
-                    <app-diagnostics2-col [(subArr)]="patientIHL"></app-diagnostics2-col>
-                </div>
+            <div class="col-xl-4 form-floating p-0">
+                <input type="text" list="listJail" class="form-control" placeholder="СИЗО" formControlName="jailName" title="{{pervValue.jailName}}">
+                <label>СИЗО</label>
+            </div>
+            <div class="col-xl-4 form-floating p-0 ms-2">
+                <input type="text" list="listRegion" class="form-control" placeholder="Регион выбытия" formControlName="jailOffRegion" title="{{pervValue.jailOffRegion}}">
+                <label>Регион выбытия</label>
+            </div>
+            <div class="col-xl-2 form-floating p-0 ms-2">
+                <input type="date" class="form-control" placeholder="Дата выбытия" formControlName="jailOffDate">
+                <label>Дата выбытия</label>
+            </div>
+        </div>
+        <div class="row m-2" style="height: 220px; overflow: auto;">
+            <div class="col-xl-6">
+                <app-jail [(subArr)]="patientJails" [(patientId)]="Id" (cIsValid)="giveForUpd($event)"></app-jail>
             </div>
         </div>
         <br>
         <br>
         <button style="display: none;" type="button"></button>
     </form>
+
+    <datalist id="listJail"><option  *ngFor="let item of patient.listJail" [value]="item"></option></datalist>
+    <datalist id="listRegion"><option  *ngFor="let item of patient.listRegion" [value]="item"></option></datalist>
 </ng-container>
