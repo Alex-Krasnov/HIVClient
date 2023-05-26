@@ -49,6 +49,7 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { MyFilterPipe } from './schema-select/formarray-filter.pipe';
 import { PatientCardPregnantComponent } from './patient-card-pregnant/patient-card-pregnant.component';
 import { PregnantMComponent } from './pregnant-m/pregnant-m.component';
+import { PatientCardChildComponent } from './patient-card-child/patient-card-child.component';
 
 
 
@@ -94,7 +95,8 @@ import { PregnantMComponent } from './pregnant-m/pregnant-m.component';
     ModalWindowComponent,
     MyFilterPipe,
     PatientCardPregnantComponent,
-    PregnantMComponent
+    PregnantMComponent,
+    PatientCardChildComponent
   ],
   imports: [
     CommonModule, 

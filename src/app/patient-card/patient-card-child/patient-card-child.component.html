@@ -80,23 +80,107 @@
     <div *ngIf="patientForm.invalid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
-            <div class="col-xl">
-                <div class="row"><h6 class="text-start">Биохимия</h6></div>
-                <div class="row" style="width: 1270px; overflow: auto;">
-                    <app-bh [(subArr)]="patientBh"></app-bh>
-                </div>
+            <div class="col-xl-4 form-floating p-0">
+                <input type="text" list="listFamilyType" class="form-control" placeholder="Сотав семьи" formControlName="familyType" title="{{pervValue.familyType}}">
+                <label>Сотав семьи</label>
+            </div>
+            <div class="col-xl-2 p-0">
+                <label class="mt-1 me-1">Отказ от ПХП</label>
+                <input type="checkbox" class="form-check-input mt-2" formControlName="refusalPhp">
+            </div>
+            <div class="col-xl-2 p-0">
+                <label class="mt-1 me-1">Отказ от обследования</label>
+                <input type="checkbox" class="form-check-input mt-2" formControlName="refusalResearch">
+            </div>
+            <div class="col-xl-2 p-0">
+                <label class="mt-1 me-1">Отказ от лечения</label>
+                <input type="checkbox" class="form-check-input mt-2" formControlName="refusalTherapy">
             </div>
         </div>
         <div class="row ms-1 mt-1">
-            <div class="col-xl">
-                <div class="row"><h6 class="text-start">Гемaтология</h6></div>
-                <div class="row" style="width: 1270px; overflow: auto;">
-                    <app-ge [(subArr)]="patientGe"></app-ge>
-                </div>
+            <div class="col-xl-2 form-floating p-0">
+                <input type="text" class="form-control" placeholder="Зарегестрированная мать" formControlName="mId">
+                <label>Зарегестрированная мать</label>
+            </div>
+            <div class="col-xl-4 form-floating p-0 ms-3">
+                <input type="text" class="form-control" placeholder="ФИО" formControlName="mFio" title="{{pervValue.mFio}}">
+                <label>ФИО</label>
+            </div>
+        </div>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl-2 form-floating p-0">
+                <input type="text" class="form-control" placeholder="Зарегестрированный отец" formControlName="fId">
+                <label>Зарегестрированный отец</label>
+            </div>
+            <div class="col-xl-4 form-floating p-0 ms-3">
+                <input type="text" class="form-control" placeholder="ФИО" formControlName="fFio" title="{{pervValue.fFio}}">
+                <label>ФИО</label>
+            </div>
+        </div>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl-2 form-floating p-0">
+                <input type="date" class="form-control" placeholder="Дата первого визита" formControlName="firstCheckDate">
+                <label>ЗДата первого визита</label>
+            </div>
+            <div class="col-xl-2 form-floating p-0 ms-3">
+                <input type="date" class="form-control" placeholder="Поледнее письмо в опеку" formControlName="lastCareDate">
+                <label>Поледнее письмо в опеку</label>
+            </div>
+            <div class="col-xl-2 form-floating p-0 ms-3">
+                <input type="date" class="form-control" placeholder="Поледнее общение с родителями" formControlName="communicationParentDate">
+                <label>Поледнее общение с родителями</label>
+            </div>
+            <div class="col-xl-2 form-floating p-0 ms-3">
+                <input type="date" class="form-control" placeholder="Вызов через районого специалиста" formControlName="callingDistrictSpecDate">
+                <label>Вызов через районого специалиста</label>
+            </div>
+        </div>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl-2 form-floating p-0">
+                <input type="text" list="listChildPlace" class="form-control" placeholder="Распол. отказн. ребёнка" formControlName="childPlace" title="{{pervValue.childPlace}}">
+                <label>Распол. отказн. ребёнка</label>
+            </div>
+            <div class="col-xl-2 form-floating p-0 ms-3">
+                <input type="text" class="form-control" placeholder="Месяц грудного вскармливания" formControlName="breastMonth">
+                <label>Месяц грудного вскармливания</label>
+            </div>
+            <div class="col-xl-3 form-floating p-0 ms-3">
+                <input type="text" list="listChildPhp" class="form-control" placeholder="Профилактика ПХП" formControlName="childPhp" title="{{pervValue.childPhp}}">
+                <label>Профилактика ПХП</label>
+            </div>
+            <div class="col-xl-3 form-floating p-0 ms-3">
+                <input type="text" list="listMaterHome" class="form-control" placeholder="Роддом" formControlName="materHome" title="{{pervValue.materHome}}">
+                <label>Роддом</label>
+            </div>
+        </div>
+        <p class="text-start m-0 ms-1">Примечание</p>
+        <div class="row my-1 ms-1 me-3">
+            <div class="col-xl p-0">
+                <textarea class="form-control" rows="4" formControlName="childDescr"></textarea>
+            </div>
+        </div>
+        <div class="row ms-1 mt-1">
+            <div class="col-xl-1 form-floating p-0">
+                <input type="text" class="form-control" placeholder="Рост" formControlName="growth">
+                <label>Рост</label>
+            </div>
+            <div class="col-xl-1 form-floating p-0 ms-1">
+                <input type="text" class="form-control" placeholder="Вес" formControlName="weight">
+                <label>Вес</label>
+            </div>
+            <div class="col-xl-2 form-floating p-0 ms-3">
+                <input type="text" list="listForm309" class="form-control" placeholder="Форма 309" formControlName="forma309">
+                <label>Форма 309</label>
             </div>
         </div>
         <br>
         <br>
         <button style="display: none;" type="button"></button>
     </form>
+
+    <datalist id="listFamilyType"><option  *ngFor="let item of patient.listFamilyType" [value]="item"></option></datalist>
+    <datalist id="listChildPlace"><option  *ngFor="let item of patient.listChildPlace" [value]="item"></option></datalist>
+    <datalist id="listChildPhp"><option  *ngFor="let item of patient.listChildPhp" [value]="item"></option></datalist>
+    <datalist id="listMaterHome"><option  *ngFor="let item of patient.listMaterHome" [value]="item"></option></datalist>
+    <datalist id="listForm309"><option  *ngFor="let item of patient.listForm309" [value]="item"></option></datalist>
 </ng-container>

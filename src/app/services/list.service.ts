@@ -151,7 +151,7 @@ export class ListService {
         return this.http.post(this.url+`getInListYn`,{ str: name});
     };
 
-    InListPatientCard(name: string): Observable<object>{
+    InListPatientCard(name: number): Observable<object>{
         return this.http.post(this.url+`getInListPatientCard`,{ str: name});
     };
 
@@ -233,5 +233,21 @@ export class ListService {
 
     InListChildCount(name: string): Observable<object>{
         return this.http.post(this.url+`getInListChildCount`,{ str: name});
+    };
+
+    InListFamilyType(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListFamilyType`,{ str: name});
+    };
+
+    InListChildPlace(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListChildPlace`,{ str: name});
+    };
+
+    InListChildPhp(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListChildPhp`,{ str: name});
+    };
+
+    InListMaterHome(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMaterHome`,{ str: name});
     };
 }

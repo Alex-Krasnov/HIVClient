@@ -44,6 +44,5 @@ export class PatientCardEpidForm {
       this.transName.setAsyncValidators(InList.validateTrans(this.listService))
       this.transmitionMechName.setValue(data.transmitionMechName)
       this.transmitionMechName.setAsyncValidators(InList.validateTransmisionMech(this.listService))
-
     }
 }

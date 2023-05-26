@@ -632,4 +632,48 @@ export class InList  {
       )
     } 
   }
+
+  static validateFamilyType( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListFamilyType(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateChildPlace( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListChildPlace(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateChildPhp( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListChildPhp(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateMaterHome( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListMaterHome(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
 }

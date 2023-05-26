@@ -12,6 +12,7 @@ import { PatientCardAclComponent } from './patient-card-acl/patient-card-acl.com
 import { PatientCardDiagnosticManualComponent } from './patient-card-diagnostic-manual/patient-card-diagnostic-manual.component';
 import { PatientCardRecipeComponent } from './patient-card-recipe/patient-card-recipe.component';
 import { PatientCardPregnantComponent } from './patient-card-pregnant/patient-card-pregnant.component';
+import { PatientCardChildComponent } from './patient-card-child/patient-card-child.component';
 
 const routes: Routes = [
   { path: 'main/:id', component: PatientCardMainComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'acl/:id', component: PatientCardAclComponent },
   { path: 'dmanual/:id', component: PatientCardDiagnosticManualComponent },
   { path: 'recipe/:id', component: PatientCardRecipeComponent },
-  { path: 'preg/:id', component: PatientCardPregnantComponent }
+  { path: 'preg/:id', component: PatientCardPregnantComponent },
+  { path: 'child/:id', component: PatientCardChildComponent }
 ];
 
 @NgModule({
