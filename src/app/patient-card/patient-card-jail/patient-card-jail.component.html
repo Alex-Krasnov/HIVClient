@@ -77,8 +77,8 @@
         </div>
     </nav>
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
-    <div *ngIf="patientForm.invalid" class="alert alert-danger">Ошибка...</div>
-    <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm || !sIsValid" style="background-color: #ade8dd;">
+    <div *ngIf="patientForm.invalid || !sIsValid" class="alert alert-danger">Ошибка...</div>
+    <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
             <div class="col-xl-4 form-floating p-0">
                 <input type="text" list="listJail" class="form-control" placeholder="СИЗО" formControlName="jailName" title="{{pervValue.jailName}}">
@@ -95,7 +95,7 @@
         </div>
         <div class="row m-2" style="height: 220px; overflow: auto;">
             <div class="col-xl-6">
-                <app-jail [(subArr)]="patientJails" [(patientId)]="Id" (cIsValid)="giveForUpd($event)"></app-jail>
+                <app-jail [(subArr)]="patientJails" [(patientId)]="Id" (isValid)="givesForUpd($event)"></app-jail>
             </div>
         </div>
         <br>

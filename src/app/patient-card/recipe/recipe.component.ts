@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { pcRecipe } from 'src/app/_interfaces/pc-recipe.model';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardRecipeService } from 'src/app/services/patient-card-recipe.service';
@@ -73,7 +73,11 @@ export class RecipeComponent implements OnInit{
 
   create() {
     
-    if(this.formS.controls['newDoctor'].valid && this.formS.controls['newMedicine'].valid && this.formS.controls['newFinSource'].valid){
+    if(this.formS.controls['newDoctor'].valid && 
+    this.formS.controls['newMedicine'].valid && 
+    this.formS.controls['newFinSource'].valid && 
+    this.formS.controls['newSer'].value.length != 0 && 
+    this.formS.controls['newNum'].value.length != 0){
       
       let item: pcRecipe = {
         patientId: this.patientId,
@@ -93,8 +97,8 @@ export class RecipeComponent implements OnInit{
       this.patientService.createRecipe(item).subscribe()
       
       const sForm = new FormGroup ({
-        ser: new FormControl(item.ser),
-        num: new FormControl(item.num),
+        ser: new FormControl(item.ser, Validators.required),
+        num: new FormControl(item.num, Validators.required),
         prescrDate: new FormControl(item.prescrDate),
         doctor: new FormControl(item.doctor, {
           asyncValidators: [InList.validateDoctor(this.listService)],

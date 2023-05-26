@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardJailModel } from 'src/app/_interfaces/patient-card-jail.model';
@@ -70,8 +70,8 @@ export class PatientCardJailComponent implements OnInit {
     this.patient.jails.map(
         (item: any) => {
           const sForm = new FormGroup ({
-            jailStart: new FormControl(item.jailStart),
-            jailEnd: new FormControl(item.jailEnd),
+            jailStart: new FormControl(item.jailStart, Validators.required),
+            jailEnd: new FormControl(item.jailEnd, Validators.required),
             jailName: new FormControl(item.jailName, {
               asyncValidators: [InList.validateJail(this.listService)],
               updateOn: 'blur'

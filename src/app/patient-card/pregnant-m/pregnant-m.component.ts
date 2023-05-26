@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { pcPregM } from 'src/app/_interfaces/pc-preg-m.model';
 import { ListService } from 'src/app/services/list.service';
@@ -93,7 +93,8 @@ export class PregnantMComponent implements OnInit, OnChanges{
   create() {
     if(this.formS.controls['newBirthType'].valid && this.formS.controls['newChildCount'].valid 
     && this.formS.controls['newPhpSchema1'].valid && this.formS.controls['newPhpSchema2'].valid 
-    && this.formS.controls['newPhpSchema3'].valid && this.formS.controls['newChildId'].valid){
+    && this.formS.controls['newPhpSchema3'].valid && this.formS.controls['newChildId'].valid &&
+    this.formS.controls['newPregId'].value.length != 0){
       let item: pcPregM = {
         patientId: this.patientId,
         pregId: this.formS.controls['newPregId'].value,
@@ -117,7 +118,7 @@ export class PregnantMComponent implements OnInit, OnChanges{
       this.patientService.createPregM(item).subscribe()
 
       const sForm = new FormGroup ({
-        pregId: new FormControl(item.pregId ),
+        pregId: new FormControl(item.pregId, Validators.required),
         pwCheck: new FormControl(item.pwCheck),
         pwMonth: new FormControl(item.pwMonth),
         pregDate: new FormControl(item.pregDate),

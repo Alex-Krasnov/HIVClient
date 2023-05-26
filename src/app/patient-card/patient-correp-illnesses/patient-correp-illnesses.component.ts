@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardTreatmentService } from 'src/app/services/patient-card-treatment.service';
 import { InList } from 'src/app/validators/in-lst';
@@ -56,9 +56,10 @@ export class PatientCorrepIllnessesComponent implements OnInit{
   createCorrepIllnesses() {
     let name = this.formCI.get('newCorrespIllness').value
 
-    if(this.formCI.controls['newCorrespIllness'].valid){
+    if(this.formCI.controls['newCorrespIllness'].valid && this.formCI.controls['newCorrespIllness'].value.length != 0){
       const sForm = new FormGroup ({
         correspIllness: new FormControl(name, {
+          validators: Validators.required,
           asyncValidators: [InList.validateCorrespIllnesses(this.listService)],
           updateOn: 'blur'
         }),

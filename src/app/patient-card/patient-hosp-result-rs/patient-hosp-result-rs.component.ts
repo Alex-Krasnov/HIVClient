@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardTreatmentService } from 'src/app/services/patient-card-treatment.service';
 import { InList } from 'src/app/validators/in-lst';
@@ -70,9 +70,14 @@ export class PatientHospResultRsComponent implements OnInit{
     let dateHospOut = this.formHR.get('newDateHospOut').value
     let hospResultName = this.formHR.get('newHospResult').value
 
-    if(this.formHR.controls['newLpuName'].valid && this.formHR.controls['newHospCourseName'].valid && this.formHR.controls['newHospResult'].valid){
+    if(this.formHR.controls['newLpuName'].valid && 
+    this.formHR.controls['newHospCourseName'].valid && 
+    this.formHR.controls['newHospResult'].valid &&
+    this.formHR.controls['newLpuName'].value.length != 0 &&
+    this.formHR.controls['newDateHospIn'].value.length != 0){
       const sForm = new FormGroup ({
         lpuName: new FormControl(name, {
+          validators: Validators.required,
           asyncValidators: [InList.validateLpuName(this.listService)],
           updateOn: 'blur'
         }),
@@ -84,7 +89,7 @@ export class PatientHospResultRsComponent implements OnInit{
           asyncValidators: [InList.validateHospResult(this.listService)],
           updateOn: 'blur'
         }),
-        dateHospIn: new FormControl(date),
+        dateHospIn: new FormControl(date, Validators.required),
         dateHospOut: new FormControl(dateHospOut)
       });
       const sData ={

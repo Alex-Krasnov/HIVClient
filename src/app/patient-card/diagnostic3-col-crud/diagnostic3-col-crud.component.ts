@@ -79,12 +79,14 @@ export class Diagnostic3ColCrudComponent implements OnInit{
     let result = this.formS.get('newResult').value
     let resultDescr = this.formS.get('newResultDescr').value
     
-    if(this.formS.controls['newResult'].valid && this.formS.controls['newResultDescr'].valid && this.formS.controls['newDate'].valid){
+    if(this.formS.controls['newResult'].valid && 
+    this.formS.controls['newResultDescr'].valid && 
+    this.formS.controls['newDate'].value.length != 0){
       
       this.patientService.createManual(this.patientId, date, this.type, result, resultDescr).subscribe()
       
       const sForm = new FormGroup ({
-        date: new FormControl(date),
+        date: new FormControl(date, Validators.required),
         result: new FormControl(result),
         resultDescr: new FormControl(resultDescr, {
           updateOn: 'blur'

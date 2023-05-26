@@ -65,7 +65,6 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
 
   delCureSchemas(index: number) {
     let e = this.cureSchemas.at(index);
-    console.log(e.get('cureSchemaName').value );
     
     this.patientService.delCureSchemas(this.patientId, e.get('cureSchemaName').value, e.get('startDate').value).subscribe();
     this.pervValue.splice(index, 1);
@@ -82,7 +81,11 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
     let protNum = this.formCS.get('newProtNum').value
     let last = this.formCS.get('newLast').value
 
-    if(this.formCS.controls['newCureSchemaName'].valid && this.formCS.controls['newCureChangeName'].valid && this.formCS.controls['newRangeTherapy'].valid){
+    if(this.formCS.controls['newCureSchemaName'].valid && 
+    this.formCS.controls['newCureChangeName'].valid && 
+    this.formCS.controls['newRangeTherapy'].valid &&
+    this.formCS.controls['newCureSchemaName'].value.length != 0 &&
+    this.formCS.controls['newStartDate'].value.length != 0){
 
       const sForm = new FormGroup ({
         cureSchemaName: new FormControl(name, {
@@ -169,8 +172,6 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
 
   writeInd(i: number){
     this.indForUpd = i
-    console.log(this.indForUpd, this.updSchema);
-    
   }
 
   ngOnChanges(changes: SimpleChanges) {

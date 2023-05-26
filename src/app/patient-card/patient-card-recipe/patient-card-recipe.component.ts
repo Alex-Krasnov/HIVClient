@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardRecipeModel } from 'src/app/_interfaces/patient-card-recipe.model';
@@ -25,9 +25,6 @@ export class PatientCardRecipeComponent implements OnInit {
   needUpd: boolean = false;
 
   Id: number;
-  type1 = 'vl';
-  type2 = 'hc';
-  type3 = 'hb';
   patient: PatientCardRecipeModel | undefined;
   patientForm: FormGroup;
   patientFormSub: Subscription;
@@ -67,8 +64,8 @@ export class PatientCardRecipeComponent implements OnInit {
     this.patient.recipes.map(
         (item: any) => {
           const sForm = new FormGroup ({
-            ser: new FormControl(item.ser),
-            num: new FormControl(item.num),
+            ser: new FormControl(item.ser, Validators.required),
+            num: new FormControl(item.num, Validators.required),
             prescrDate: new FormControl(item.prescrDate),
             doctor: new FormControl(item.doctor, {
               asyncValidators: [InList.validateDoctor(this.listService)],

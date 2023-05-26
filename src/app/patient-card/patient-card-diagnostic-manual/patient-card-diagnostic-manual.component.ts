@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardDiagnosticManualModel } from 'src/app/_interfaces/patient-card-diagnostic-manual.model';
@@ -71,7 +71,7 @@ export class PatientCardDiagnosticManualComponent implements OnInit {
     this.patient.virusLoads.map(
         (item: any) => {
           const sForm = new FormGroup ({
-            date: new FormControl(item.date),
+            date: new FormControl(item.date, Validators.required),
             result: new FormControl(item.result),
             resultDescr: new FormControl(item.resultDescr, {
               asyncValidators: [InList.validateVl(this.listService)],
@@ -85,7 +85,7 @@ export class PatientCardDiagnosticManualComponent implements OnInit {
     this.patient.hepCs.map(
       (item: any) => {
         const sForm = new FormGroup ({
-          date: new FormControl(item.date),
+          date: new FormControl(item.date, Validators.required),
           result: new FormControl(item.result),
           resultDescr: new FormControl(item.resultDescr, {
             asyncValidators: [InList.validateHc(this.listService)],
@@ -99,7 +99,7 @@ export class PatientCardDiagnosticManualComponent implements OnInit {
     this.patient.hepBs.map(
       (item: any) => {
         const sForm = new FormGroup ({
-          date: new FormControl(item.date),
+          date: new FormControl(item.date, Validators.required),
           result: new FormControl(item.result),
           resultDescr: new FormControl(item.resultDescr, {
             asyncValidators: [InList.validateHb(this.listService)],

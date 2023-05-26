@@ -65,7 +65,9 @@ export class PatientCheckOutComponent implements OnInit{
     let checkDoc = this.formS.get('newCheckDoc').value
     let checkSpec = this.formS.get('newCheckSpec').value
 
-    if(this.formS.controls['newCheckDoc'].valid && this.formS.controls['newCheckSpec'].valid && this.formS.get('newCheckDate').value != null){
+    if(this.formS.controls['newCheckDoc'].valid && 
+    this.formS.controls['newCheckSpec'].valid && 
+    this.formS.get('newCheckDate').value.length != 0){
       
       this.patientService.createCheckOuts(this.patientId, checkDate, checkSpec, checkDateNext, checkDoc).subscribe()
       

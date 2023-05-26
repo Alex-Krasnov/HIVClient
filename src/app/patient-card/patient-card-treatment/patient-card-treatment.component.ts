@@ -78,6 +78,7 @@ export class PatientCardTreatmentComponent implements OnInit{
         (cor: any) => {
           const corForm = new FormGroup ({
             correspIllness: new FormControl(cor.correspIllness, {
+              validators: Validators.required,
               asyncValidators: [InList.validateCorrespIllnesses(this.listService)],
               updateOn: 'blur'
             }),
@@ -91,6 +92,7 @@ export class PatientCardTreatmentComponent implements OnInit{
       (cur: any) => {
         const curForm = new FormGroup ({
           cureSchemaName: new FormControl(cur.cureSchemaName, {
+            validators: Validators.required,
             asyncValidators: [InList.validateCureSchemaName(this.listService)],
             updateOn: 'blur'
           }),
@@ -102,7 +104,7 @@ export class PatientCardTreatmentComponent implements OnInit{
             asyncValidators: [InList.validateRangeTherapy(this.listService)],
             updateOn: 'blur'
           }),
-          startDate: new FormControl(cur.startDate),
+          startDate: new FormControl(cur.startDate, Validators.required),
           endDate: new FormControl(cur.endDate),
           schemaComm: new FormControl(cur.schemaComm),
           protNum: new FormControl(cur.protNum),
@@ -116,6 +118,7 @@ export class PatientCardTreatmentComponent implements OnInit{
       (hosp: any) => {
         const curForm = new FormGroup ({
           lpuName: new FormControl(hosp.lpuName, {
+            validators: Validators.required,
             asyncValidators: [InList.validateLpuName(this.listService)],
             updateOn: 'blur'
           }),
@@ -127,7 +130,7 @@ export class PatientCardTreatmentComponent implements OnInit{
             asyncValidators: [InList.validateHospResult(this.listService)],
             updateOn: 'blur'
           }),
-          dateHospIn: new FormControl(hosp.dateHospIn),
+          dateHospIn: new FormControl(hosp.dateHospIn, Validators.required),
           dateHospOut: new FormControl(hosp.dateHospOut)
         });
         this.patientHospResultRs.push(curForm);

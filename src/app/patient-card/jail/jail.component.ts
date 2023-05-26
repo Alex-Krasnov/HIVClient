@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardJailService } from 'src/app/services/patient-card-jail.service';
@@ -76,8 +76,8 @@ export class JailComponent implements OnInit{
       this.patientService.createJail(this.patientId, jailName, jailLeavName, jailStart, jailEnd).subscribe()
       
       const sForm = new FormGroup ({
-        jailStart: new FormControl(jailStart),
-        jailEnd: new FormControl(jailEnd),
+        jailStart: new FormControl(jailStart, Validators.required),
+        jailEnd: new FormControl(jailEnd, Validators.required),
         jailName: new FormControl(jailName, {
           asyncValidators: [InList.validateJail(this.listService)],
           updateOn: 'blur'

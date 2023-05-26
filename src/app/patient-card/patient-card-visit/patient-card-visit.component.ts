@@ -68,7 +68,7 @@ export class PatientCardVisitComponent implements OnInit {
         (item: any) => {
           const sForm = new FormGroup ({
             checkDateNext: new FormControl(item.checkDateNext),
-            checkDate: new FormControl(item.checkDate, [Validators.required]),
+            checkDate: new FormControl(item.checkDate, Validators.required),
             checkDoc: new FormControl(item.checkDoc, {
               validators: Validators.required,
               asyncValidators: [InList.validateDoctor(this.listService)],
@@ -88,7 +88,7 @@ export class PatientCardVisitComponent implements OnInit {
       (item: any) => {
         const sForm = new FormGroup ({
           checkDateNext: new FormControl(item.checkDateNext),
-          checkDate: new FormControl(item.checkDate, [Validators.required]),
+          checkDate: new FormControl(item.checkDate, Validators.required),
           checkDoc: new FormControl(item.checkDoc, {
             validators: Validators.required,
             asyncValidators: [InList.validateDoctor(this.listService)],
@@ -107,7 +107,7 @@ export class PatientCardVisitComponent implements OnInit {
     this.patient.registries.map(
       (item: any) => {
         const sForm = new FormGroup ({
-          regDate: new FormControl(item.regDate, [Validators.required]),
+          regDate: new FormControl(item.regDate, Validators.required),
           regCheck: new FormControl(item.regCheck),
           regCom: new FormControl(item.regCom),
           regCab: new FormControl(item.regCab, {

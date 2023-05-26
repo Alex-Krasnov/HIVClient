@@ -65,13 +65,15 @@ export class PatientCheckComponent implements OnInit{
     let checkDoc = this.formS.get('newCheckDoc').value
     let checkSpec = this.formS.get('newCheckSpec').value
 
-    if(this.formS.controls['newCheckDoc'].valid && this.formS.controls['newCheckSpec'].valid && this.formS.get('newCheckDate').value != null){
+    if(this.formS.controls['newCheckDoc'].valid && 
+    this.formS.controls['newCheckSpec'].valid && 
+    this.formS.get('newCheckDate').value.length != 0){
       
       this.patientService.createChecks(this.patientId, checkDate, checkSpec, checkDateNext, checkDoc).subscribe()
       
       const sForm = new FormGroup ({
         checkDateNext: new FormControl(checkDateNext),
-            checkDate: new FormControl(checkDate, [Validators.required]),
+            checkDate: new FormControl(checkDate, Validators.required),
             checkDoc: new FormControl(checkDoc, {
               validators: Validators.required,
               asyncValidators: [InList.validateDoctor(this.listService)],

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardEpidModel } from 'src/app/_interfaces/patient-card-epid.model';
@@ -115,6 +115,7 @@ export class PatientCardEpidComponent implements OnInit {
       (item: any) => {
         const sForm = new FormGroup ({
           contactId: new FormControl(item.contactId, {
+            validators: Validators.required,
             asyncValidators: [InList.validatePatientCard(this.listService)],
             updateOn: 'blur'
           }),
@@ -132,6 +133,7 @@ export class PatientCardEpidComponent implements OnInit {
       (item: any) => {
         const sForm = new FormGroup ({
           contactId: new FormControl(item.contactId, {
+            validators: Validators.required,
             asyncValidators: [InList.validatePatientCard(this.listService)],
             updateOn: 'blur'
           }),
@@ -149,6 +151,7 @@ export class PatientCardEpidComponent implements OnInit {
       (item: any) => {
         const sForm = new FormGroup ({
           contactId: new FormControl(item.contactId, {
+            validators: Validators.required,
             asyncValidators: [InList.validatePatientCard(this.listService)],
             updateOn: 'blur'
           }),

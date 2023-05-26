@@ -14,7 +14,6 @@ export class PatientStageComponent implements OnInit {
   pervValue: any;
   @Input() stageArr: FormArray; 
   @Input() patientId: number;
-  // @Output() sForUpd = new EventEmitter<object[]>();
   @Output() sIsValid = new EventEmitter<boolean>();
 
   constructor(
@@ -59,7 +58,7 @@ export class PatientStageComponent implements OnInit {
     let StageDate = this.formS.get('newStageDate').value
     let Stage = this.formS.get('newStage').value
 
-    if(this.formS.controls['newStage'].valid){
+    if(this.formS.controls['newStage'].valid && this.formS.controls['newStageDate'].value.length != 0){
       const stageForm = new FormGroup ({
         stageDate: new FormControl(StageDate),
         stage: new FormControl(Stage, {

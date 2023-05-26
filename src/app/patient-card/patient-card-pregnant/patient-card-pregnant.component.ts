@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
@@ -72,7 +72,7 @@ export class PatientCardPregnantComponent implements OnInit {
     this.patient.pregnantMs.map(
         (item: any) => {
           const sForm = new FormGroup ({
-            pregId: new FormControl(item.pregId),
+            pregId: new FormControl(item.pregId, Validators.required),
             pwCheck: new FormControl(item.pwCheck),
             pwMonth: new FormControl(item.pwMonth),
             pregDate: new FormControl(item.pregDate),

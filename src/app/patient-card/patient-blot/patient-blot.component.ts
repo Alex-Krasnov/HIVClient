@@ -15,7 +15,6 @@ export class PatientBlotComponent implements OnInit {
   pervValue: any;
   @Input() blotArr: FormArray; 
   @Input() patientId: number;
-  // @Output() bForUpd = new EventEmitter<object[]>();
   @Output() bIsValid = new EventEmitter<boolean>();
 
   constructor(
@@ -79,10 +78,11 @@ export class PatientBlotComponent implements OnInit {
       this.formB.controls['newBlotId'].valid && 
       this.formB.controls['newBlotNo'].valid && 
       this.formB.controls['newBlotRes'].valid && 
-      this.formB.controls['newCheckPlace'].valid
+      this.formB.controls['newCheckPlace'].valid &&
+      this.formB.controls['newBlotId'].value.length != 0
       ){
       const blotForm = new FormGroup ({
-        blotId: new FormControl(BlotId, Validators.pattern("^[0-9]*$")),
+        blotId: new FormControl(BlotId, (Validators.required, Validators.pattern("^[0-9]*$"))),
         blotNo: new FormControl(BlotNo, Validators.pattern("^[0-9]*$")),
         blotDate: new FormControl(BlotDate),
         blotRes: new FormControl(ibResult, {

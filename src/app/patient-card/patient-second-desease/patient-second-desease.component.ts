@@ -14,7 +14,6 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
   pervValue: any;
   @Input() deseasArr: FormArray; 
   @Input() patientId: number;
-  // @Output() sdForUpd = new EventEmitter<object[]>();
   @Output() sdIsValid = new EventEmitter<boolean>();
 
   constructor(
@@ -63,7 +62,8 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
 
     if(this.formSd.controls['newStartDate'].valid && 
         this.formSd.controls['newEndDate'].valid && 
-        this.formSd.controls['newDeseas'].valid){
+        this.formSd.controls['newDeseas'].valid &&
+        this.formSd.controls['newStartDate'].value.length != 0){
           
       const desForm = new FormGroup ({
         startDate: new FormControl(StartDate),

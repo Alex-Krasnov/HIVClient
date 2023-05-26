@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardEpidService } from 'src/app/services/patient-card-epid.service';
@@ -63,13 +63,14 @@ export class PatientContactComponent implements OnInit{
   async createContacts() {
     let contactId = this.formC.get('newContactId').value
     let infectCourseName = this.formC.get('newInfectCourseName').value
-    let fio = await firstValueFrom(this.patientService.getFio(contactId))
     
-    // this.patientService.getFio(contactId).subscribe(e => fio = e.fio)
-    
-    if(this.formC.controls['newInfectCourseName'].valid && this.formC.controls['newContactId'].valid){
+    console.log(this.formC.controls['newContactId'].value.length);
+        
+    if(this.formC.controls['newInfectCourseName'].valid && this.formC.controls['newContactId'].valid && this.formC.controls['newContactId'].value.length != 0){
+      let fio = await firstValueFrom(this.patientService.getFio(contactId))
       const sForm = new FormGroup ({
           contactId: new FormControl(contactId, {
+            validators: Validators.required,
             asyncValidators: [InList.validatePatientCard(this.listService)],
             updateOn: 'blur'
           }),
