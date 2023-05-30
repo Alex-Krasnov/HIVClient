@@ -52,6 +52,9 @@ import { PregnantMComponent } from './pregnant-m/pregnant-m.component';
 import { PatientCardChildComponent } from './patient-card-child/patient-card-child.component';
 import { PatientCardJailComponent } from './patient-card-jail/patient-card-jail.component';
 import { JailComponent } from './jail/jail.component';
+import { PatientCardCovidComponent } from './patient-card-covid/patient-card-covid.component';
+import { CovidComponent } from './covid/covid.component';
+import { SubCovidComponent } from './sub-covid/sub-covid.component';
 
 
 
@@ -100,7 +103,10 @@ import { JailComponent } from './jail/jail.component';
     PregnantMComponent,
     PatientCardChildComponent,
     PatientCardJailComponent,
-    JailComponent
+    JailComponent,
+    PatientCardCovidComponent,
+    CovidComponent,
+    SubCovidComponent
   ],
   imports: [
     CommonModule, 

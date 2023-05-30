@@ -15,3 +15,12 @@ input.ng-dirty{
     border-color: rgb(9, 212, 2);
     border-width: 2px;
 }
+
+.form-floating {
+    position: inherit;
+}
+.modal-content{
+    background-color: #e9ecef;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 0.3rem;
+}

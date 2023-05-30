@@ -1,0 +1,26 @@
+<table class="table border" [formGroup]="formS">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 135px;">Код МКБ</th>
+        <th scope="col">Название</th>
+        <th scope="col">Комментарий</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+          <tr formGroupName="{{i}}">
+            <td><input type="text" list="" class="form-control tbl" formControlName="nameShort"></td>
+            <td><input type="text" list="" class="form-control tbl" formControlName="nameLong" ></td>
+            <td><input type="text" class="form-control tbl" formControlName="comm"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
+          </tr>
+        </ng-container>
+        <tr>
+            <td><input type="text" list="" class="form-control tbl" formControlName="newNameShort"></td>
+            <td><input type="text" list="" class="form-control tbl" formControlName="newNameLong" ></td>
+            <td><input type="text" class="form-control tbl" formControlName="newComm"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
+        </tr>
+    </tbody>
+</table>

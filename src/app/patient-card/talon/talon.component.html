@@ -1,24 +1,25 @@
 <form *ngIf="talonForm" [formGroup]="talonForm">
     <div class="modal">
-        <div class="modal-dialog" tabindex="-1">
+        <!--  -->
+        <div class="modal-dialog">
+            <!--  -->
             <div class="modal-content">
-            <div class="modal-body">
-                <h5 class="modal-title" id="exampleModalLabel">Заполнение талона</h5>
-
-                <div class="input-group mb-1">
-                    <div class="input-group-prepend"><span class="input-group-text">Дата</span></div>
-                    <input type="date" class="form-control" placeholder="Дата" formControlName="regDate">
+                <div class="modal-body">
+                    <h5 class="modal-title">Заполнение талона</h5>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend"><span class="input-group-text">Дата</span></div>
+                        <input type="date" class="form-control" placeholder="Дата" formControlName="regDate">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend"><span class="input-group-text">Кабинет</span></div>
+                        <input type="text" class="form-control" placeholder="Кабинет" formControlName="regCab">
+                    </div>
+                    <div class="input-group mb-1">
+                        <div class="input-group-prepend"><span class="input-group-text">Id</span></div>
+                        <input type="text" class="form-control" placeholder="Id" formControlName="patientId">
+                    </div>
                 </div>
-                <div class="input-group mb-1">
-                    <div class="input-group-prepend"><span class="input-group-text">Кабинет</span></div>
-                    <input type="text" class="form-control" placeholder="Кабинет" formControlName="regCab">
-                </div>
-                <div class="input-group mb-1">
-                    <div class="input-group-prepend"><span class="input-group-text">Id</span></div>
-                    <input type="text" class="form-control" placeholder="Id" formControlName="patientId">
-                </div>
-            </div>
-            <div class="modal-body">
+                <div class="modal-body">
                     <div class="input-group mb-1">
                         <div class="input-group-prepend"><span class="input-group-text">Номер талона</span></div>
                         <input type="text" class="form-control" placeholder="Номер талона" formControlName="talonNum">
@@ -63,7 +64,7 @@
                         <div class="input-group-prepend"><span class="input-group-text">36. Диспансерное наблюдение</span></div>
                         <input type="text" class="form-control" list="list36" placeholder="36. Диспансерное наблюдение" formControlName="field36">
                     </div>
-            </div>
+                </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modalService.close()">Закрыть</button>
                 <button type="button" class="btn btn-primary" (click)="givePdf()" disabled>Pdf</button>
@@ -73,45 +74,12 @@
         </div>
     </div>
 
-
-    <datalist id="list13">
-        <option  *ngFor="let item of talon.list13" [value]="item">
-            {{item}}
-        </option>
-    </datalist>
-    <datalist id="list14">
-        <option  *ngFor="let item of talon.list14" [value]="item">
-            {{item}}
-        </option>
-    </datalist>
-    <datalist id="list21">
-        <option  *ngFor="let item of talon.list21" [value]="item">
-            {{item}}
-        </option>
-    </datalist>
-    <datalist id="list22">
-        <option  *ngFor="let item of talon.list22" [value]="item">
-            {{item}}
-        </option>
-    </datalist>
-    <datalist id="list24">
-        <option  *ngFor="let item of talon.list24" [value]="item">
-            {{item}}
-        </option>
-    </datalist>
-    <datalist id="list25">
-        <option  *ngFor="let item of talon.list25" [value]="item">
-            {{item}}
-        </option>
-    </datalist>
-    <datalist id="list35">
-        <option  *ngFor="let item of talon.list35" [value]="item">
-            {{item}}
-        </option>
-    </datalist>
-    <datalist id="list36">
-        <option  *ngFor="let item of talon.list36" [value]="item">
-            {{item}}
-        </option>
-    </datalist>
+    <datalist id="list13"><option  *ngFor="let item of talon.list13" [value]="item"></option></datalist>
+    <datalist id="list14"><option  *ngFor="let item of talon.list14" [value]="item"></option></datalist>
+    <datalist id="list21"><option  *ngFor="let item of talon.list21" [value]="item"></option></datalist>
+    <datalist id="list22"><option  *ngFor="let item of talon.list22" [value]="item"></option></datalist>
+    <datalist id="list24"><option  *ngFor="let item of talon.list24" [value]="item"></option></datalist>
+    <datalist id="list25"><option  *ngFor="let item of talon.list25" [value]="item"></option></datalist>
+    <datalist id="list35"><option  *ngFor="let item of talon.list35" [value]="item"></option></datalist>
+    <datalist id="list36"><option  *ngFor="let item of talon.list36" [value]="item"></option></datalist>
 </form>

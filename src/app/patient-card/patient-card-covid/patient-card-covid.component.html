@@ -57,9 +57,6 @@
                     <li class="nav-item">
                         <a class="nav-link" (click)="leaveComponent('/patient_card/covid/')" [routerLink]="['/patient_card/covid']" routerLinkActive="disabled">COVID</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="leaveComponent('/patient_card/jail/')" [routerLink]="['/patient_card/jail']" routerLinkActive="disabled">СИЗО</a>
-                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">Системные</a>
                         <ul [class.visibleDropdown]="isVisibleSystem" class="dropdown-menu" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">
@@ -77,32 +74,37 @@
         </div>
     </nav>
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
-    <div *ngIf="patientForm.invalid || !sIsValid" class="alert alert-danger">Ошибка...</div>
+    <div *ngIf="patientForm.invalid || !cIsValid || !pIsValid || !oIsValid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
-            <div class="col-xl-4 form-floating p-0">
-                <input type="text" list="listJail" class="form-control" placeholder="СИЗО" formControlName="jailName" title="{{pervValue.jailName}}">
-                <label>СИЗО</label>
+            <div class="col-xl">
+                <app-sub-covid [(subArr)]="patientOtherDiads" [(patientId)]="patient.patientId" [(type)]="type1" (isValid)="giveoForUpd($event)"></app-sub-covid>
             </div>
-            <div class="col-xl-4 form-floating p-0 ms-2">
-                <input type="text" list="listRegion" class="form-control" placeholder="Регион выбытия" formControlName="jailOffRegion" title="{{pervValue.jailOffRegion}}">
-                <label>Регион выбытия</label>
-            </div>
-            <div class="col-xl-2 form-floating p-0 ms-2">
-                <input type="date" class="form-control" placeholder="Дата выбытия" formControlName="jailOffDate">
-                <label>Дата выбытия</label>
+            <div class="col-xl me-3">
+                <app-sub-covid [(subArr)]="patientPatDiads" [(patientId)]="patient.patientId" [(type)]="type2" (isValid)="giveoForUpd($event)"></app-sub-covid>
             </div>
         </div>
-        <div class="row m-2" style="height: 220px; overflow: auto;">
-            <div class="col-xl-6">
-                <app-jail [(subArr)]="patientJails" [(patientId)]="Id" (isValid)="givesForUpd($event)"></app-jail>
-            </div>
+        <div class="row ms-1 mt-1">
+            <app-covid [(subArr)]="patientCovids" [(patientId)]="patient.patientId" (isValid)="giveoForUpd($event)"></app-covid>
         </div>
         <br>
         <br>
         <button style="display: none;" type="button"></button>
     </form>
 
-    <datalist id="listJail"><option  *ngFor="let item of patient.listJail" [value]="item"></option></datalist>
-    <datalist id="listRegion"><option  *ngFor="let item of patient.listRegion" [value]="item"></option></datalist>
+<datalist id="listYN"><option  *ngFor="let item of patient.listYN" [value]="item"></option></datalist>
+<datalist id="listOutHosp"><option  *ngFor="let item of patient.listOutHosp" [value]="item"></option></datalist>
+<datalist id="listClinVarCOVID"><option  *ngFor="let item of patient.listClinVarCOVID" [value]="item"></option></datalist>
+<datalist id="listCourseCOVID"><option  *ngFor="let item of patient.listCourseCOVID" [value]="item"></option></datalist>
+<datalist id="listMkb10COVIDShort"><option  *ngFor="let item of patient.listMkb10COVIDShort" [value]="item"></option></datalist>
+<datalist id="listMkb10COVIDLong"><option  *ngFor="let item of patient.listMkb10COVIDLong" [value]="item"></option></datalist>
+<datalist id="listMkbTuderShort"><option  *ngFor="let item of patient.listMkbTuderShort" [value]="item"></option></datalist>
+<datalist id="listMkbTuderLong"><option  *ngFor="let item of patient.listMkbTuderLong" [value]="item"></option></datalist>
+<datalist id="listMkbPneumoniaShort"><option  *ngFor="let item of patient.listMkbPneumoniaShort" [value]="item"></option></datalist>
+<datalist id="listMkbPneumoniaLong"><option  *ngFor="let item of patient.listMkbPneumoniaLong" [value]="item"></option></datalist>
+<datalist id="listCommitment"><option  *ngFor="let item of patient.listCommitment" [value]="item"></option></datalist>
+<datalist id="listAvlType"><option  *ngFor="let item of patient.listAvlType" [value]="item"></option></datalist>
+<datalist id="listFullMKB10Short"><option  *ngFor="let item of patient.listFullMKB10Short" [value]="item"></option></datalist>
+<datalist id="listFullMKB10Long"><option  *ngFor="let item of patient.listFullMKB10Long" [value]="item"></option></datalist>
+
 </ng-container>

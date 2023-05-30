@@ -254,4 +254,56 @@ export class ListService {
     InListJail(name: string): Observable<object>{
         return this.http.post(this.url+`getInListJail`,{ str: name});
     };
+
+    InListOutHosp(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListOutHosp`,{ str: name});
+    };
+
+    InListClinVarCovid(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListClinVarCovid`,{ str: name});
+    };
+
+    InListCourseCovid(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListCourseCovid`,{ str: name});
+    };
+
+    InListMkb10CovidShort(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMkb10CovidShort`,{ str: name});
+    };
+
+    InListMkb10CovidLong(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMkb10CovidLong`,{ str: name});
+    };
+
+    InListMkbTuderShort(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMkbTuderShort`,{ str: name});
+    };
+
+    InListMkbTuderLong(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMkbTuderLong`,{ str: name});
+    };
+
+    InListMkbPneumoniaShort(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMkbPneumoniaShort`,{ str: name});
+    };
+
+    InListMkbPneumoniaLong(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListMkbPneumoniaLong`,{ str: name});
+    };
+
+    InListAvlType(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListAvlType`,{ str: name});
+    };
+
+    InListCommitment(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListCommitment`,{ str: name});
+    };
+
+    InListFullMkb10Short(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListFullMkb10Short`,{ str: name});
+    };
+
+    InListFullMkb10Long(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListFullMkb10Long`,{ str: name});
+    };
 }

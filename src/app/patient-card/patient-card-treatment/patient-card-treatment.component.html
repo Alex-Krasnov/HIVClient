@@ -55,10 +55,7 @@
                         <a class="nav-link" (click)="leaveComponent('/patient_card/child/')" [routerLink]="['/patient_card/child']" routerLinkActive="disabled">Дети</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">COVID</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="leaveComponent('/patient_card/jail/')" [routerLink]="['/patient_card/jail']" routerLinkActive="disabled">СИЗО</a>
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/covid/')" [routerLink]="['/patient_card/covid']" routerLinkActive="disabled">COVID</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">Системные</a>
@@ -141,6 +138,6 @@
 <datalist id="listHospResults"><option  *ngFor="let item of patient.listHospResults" [value]="item"></option></datalist>
 </ng-container>
 
-<app-modal-window *ngIf="modal.isVisible$ | async" [(id)]="patientId" [(date)]="date" [(cab)]="cab">
+<app-modal-window *ngIf="modal.isVisible$ | async">
 <app-schema-select (schema)="giveSchema($event)"></app-schema-select>
 </app-modal-window>

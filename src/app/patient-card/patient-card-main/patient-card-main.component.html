@@ -39,10 +39,7 @@
                     <a class="nav-link" (click)="leaveComponent('/patient_card/child/')" [routerLink]="['/patient_card/child']" routerLinkActive="disabled">Дети</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">COVID</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" (click)="leaveComponent('/patient_card/jail/')" [routerLink]="['/patient_card/jail']" routerLinkActive="disabled">СИЗО</a>
+                    <a class="nav-link" (click)="leaveComponent('/patient_card/covid/')" [routerLink]="['/patient_card/covid']" routerLinkActive="disabled">COVID</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">Системные</a>
@@ -114,6 +111,10 @@
                 <div class="form-floating ms-1">
                     <input type="text" class="form-control" placeholder="УНРЗ" formControlName="unrzFr">
                     <label for="floatingInput">УНРЗ</label>
+                </div>
+                <div class="form-floating ms-1">
+                    <input type="text" class="form-control" placeholder="СНИЛС" formControlName="snils">
+                    <label for="floatingInput">СНИЛС</label>
                 </div>
             </div>
             <div class="col-xl me-1">
@@ -256,18 +257,6 @@
                 </div>
             </div>
         </div>
-        <div class="row g-1 mb-1">
-            <div class="col-xl-3 me-1">
-                <div class="ms-1 mt-1" style="height: 220px; overflow: auto;">
-                    <app-patient-stage [(stageArr)]="patientStages" [(patientId)]="patient.patientId" (sIsValid)="giveStageForUpd($event)"></app-patient-stage>
-                </div>
-            </div>
-            <div class="col-xl-5 me-1">
-                <div class=" mt-1" style="height: 220px; overflow: auto;">
-                    <app-patient-second-desease [(deseasArr)]="patientSecondDeseases" [(patientId)]="patient.patientId" (sdIsValid)="giveSdForUpd($event)"></app-patient-second-desease>
-                </div>
-            </div>
-        </div>
         <div class="row g-1 mb-2">
             <div class="col-xl m-1">
                 <div class="form-floating">
@@ -318,33 +307,37 @@
                 </div>
             </div>
         </div>
+        <div class="row g-1 mb-1">
+            <div class="col-xl-3 me-1">
+                <div class="ms-1 mt-1" style="height: 220px; overflow: auto;">
+                    <app-patient-stage [(stageArr)]="patientStages" [(patientId)]="patient.patientId" (sIsValid)="giveStageForUpd($event)"></app-patient-stage>
+                </div>
+            </div>
+            <div class="col-xl-5 me-1">
+                <div class=" mt-1" style="height: 220px; overflow: auto;">
+                    <app-patient-second-desease [(deseasArr)]="patientSecondDeseases" [(patientId)]="patient.patientId" (sdIsValid)="giveSdForUpd($event)"></app-patient-second-desease>
+                </div>
+            </div>
+        </div>
         <div class="row g-1 mb-2">
             <div class="col-xl-1 m-1">
                 <div class="form-floating">
-                    <input type="text" list="listCheckCourseShort" class="form-control" placeholder="Обращения" formControlName="checkCourseShort">
-                    <label for="floatingInput">Причина Обращения</label>
+                    <input type="text" list="listCheckCourseShort" class="form-control" placeholder="Код контингента" formControlName="checkCourseShort">
+                    <label for="floatingInput">Код контингента</label>
                 </div>
                 <div class="form-floating">
                     <input type="text" list="listInfectCourseShort" class="form-control" placeholder="Заражения" formControlName="infectCourseShort">
                     <label for="floatingInput">Причина Заражения</label>
                 </div>
-                <div class="form-floating">
-                    <input type="text" list="listDieCourseShort" class="form-control" placeholder="смерти" formControlName="dieCourseShort">
-                    <label for="floatingInput">Причина Смерти</label>
-                </div>
             </div>
             <div class="col-xl m-1">
                 <div class="form-floating">
-                    <input type="text" list="listCheckCourseLong" class="form-control" placeholder="Причина обращения" formControlName="checkCourseLong">
-                    <label for="floatingInput">Причина обращения</label>
+                    <input type="text" list="listCheckCourseLong" class="form-control" placeholder="Код контингента" formControlName="checkCourseLong">
+                    <label for="floatingInput">Код контингента</label>
                 </div>
                 <div class="form-floating">
                     <input type="text" list="listInfectCourseLong" class="form-control" placeholder="Причина заражения" formControlName="infectCourseLong">
                     <label for="floatingInput">Причина заражения</label>
-                </div>
-                <div class="form-floating">
-                    <input type="text" list="listDieCourseLong" class="form-control" placeholder="Причина смерти" formControlName="dieCourseLong">
-                    <label for="floatingInput">Причина смерти</label>
                 </div>
             </div>
         </div>
@@ -379,8 +372,8 @@
             </div>
             <div class="col-xl-2 m-1">
                 <div class="form-floating">
-                    <input type="text" list="listARVT" class="form-control" placeholder="АРВТ" formControlName="arvt">
-                    <label for="floatingInput">АРВТ</label>
+                    <input type="text" list="listARVT" class="form-control" placeholder="АРТ" formControlName="arvt">
+                    <label for="floatingInput">АРТ</label>
                 </div>
                 <div class="form-floating">
                     <input type="text" list="listInvalid" class="form-control" placeholder="Гр. инвалидности" formControlName="invalid">
@@ -396,13 +389,24 @@
                     <input type="text" class="form-control" placeholder="Кодовое слово" formControlName="codeWord">
                     <label for="floatingInput">Кодовое слово</label>
                 </div>
-                <div class="form-floating">
-                    <input type="text" class="form-control" placeholder="СНИЛС" formControlName="snils">
-                    <label for="floatingInput">СНИЛС</label>
-                </div>
+                
                 <div class="form-floating">
                     <input type="text" class="form-control" placeholder="Смена ФИО" formControlName="fioChange">
                     <label for="floatingInput">Смена ФИО</label>
+                </div>
+            </div>
+            <div class="row g-1 mb-2">
+                <div class="col-xl-1 m-1">
+                    <div class="form-floating">
+                        <input type="text" list="listDieCourseShort" class="form-control" placeholder="смерти" formControlName="dieCourseShort">
+                        <label for="floatingInput">Причина Смерти</label>
+                    </div>
+                </div>
+                <div class="col-xl m-1">
+                    <div class="form-floating">
+                        <input type="text" list="listDieCourseLong" class="form-control" placeholder="Причина смерти" formControlName="dieCourseLong">
+                        <label for="floatingInput">Причина смерти</label>
+                    </div>
                 </div>
             </div>
         </div>

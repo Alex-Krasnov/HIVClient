@@ -55,10 +55,7 @@
                         <a class="nav-link" (click)="leaveComponent('/patient_card/child/')" [routerLink]="['/patient_card/child']" routerLinkActive="disabled">Дети</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">COVID</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" (click)="leaveComponent('/patient_card/jail/')" [routerLink]="['/patient_card/jail']" routerLinkActive="disabled">СИЗО</a>
+                        <a class="nav-link" (click)="leaveComponent('/patient_card/covid/')" [routerLink]="['/patient_card/covid']" routerLinkActive="disabled">COVID</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">Системные</a>
@@ -120,7 +117,7 @@
         <div class="row ms-1 mt-1">
             <div class="col-xl-2 form-floating p-0">
                 <input type="date" class="form-control" placeholder="Дата первого визита" formControlName="firstCheckDate">
-                <label>ЗДата первого визита</label>
+                <label>Дата первого визита</label>
             </div>
             <div class="col-xl-2 form-floating p-0 ms-3">
                 <input type="date" class="form-control" placeholder="Поледнее письмо в опеку" formControlName="lastCareDate">
@@ -137,12 +134,12 @@
         </div>
         <div class="row ms-1 mt-1">
             <div class="col-xl-2 form-floating p-0">
-                <input type="text" list="listChildPlace" class="form-control" placeholder="Распол. отказн. ребёнка" formControlName="childPlace" title="{{pervValue.childPlace}}">
-                <label>Распол. отказн. ребёнка</label>
+                <input type="text" list="listChildPlace" class="form-control" placeholder="Местонахождение отказн. ребёнка" formControlName="childPlace" title="{{pervValue.childPlace}}">
+                <label>Местонахождение отказн. ребёнка</label>
             </div>
             <div class="col-xl-2 form-floating p-0 ms-3">
-                <input type="text" class="form-control" placeholder="Месяц грудного вскармливания" formControlName="breastMonth">
-                <label>Месяц грудного вскармливания</label>
+                <input type="text" class="form-control" placeholder="Продолжительность грудного вскармливания" formControlName="breastMonth">
+                <label>Продолжительность грудного вскармливания</label>
             </div>
             <div class="col-xl-3 form-floating p-0 ms-3">
                 <input type="text" list="listChildPhp" class="form-control" placeholder="Профилактика ПХП" formControlName="childPhp" title="{{pervValue.childPhp}}">

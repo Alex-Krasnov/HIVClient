@@ -14,6 +14,7 @@ import { PatientCardRecipeComponent } from './patient-card-recipe/patient-card-r
 import { PatientCardPregnantComponent } from './patient-card-pregnant/patient-card-pregnant.component';
 import { PatientCardChildComponent } from './patient-card-child/patient-card-child.component';
 import { PatientCardJailComponent } from './patient-card-jail/patient-card-jail.component';
+import { PatientCardCovidComponent } from './patient-card-covid/patient-card-covid.component';
 
 const routes: Routes = [
   { path: 'main/:id', component: PatientCardMainComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'recipe/:id', component: PatientCardRecipeComponent },
   { path: 'preg/:id', component: PatientCardPregnantComponent },
   { path: 'child/:id', component: PatientCardChildComponent },
-  { path: 'jail/:id', component: PatientCardJailComponent }
+  { path: 'jail/:id', component: PatientCardJailComponent },
+  { path: 'covid/:id', component: PatientCardCovidComponent }
 ];
 
 @NgModule({

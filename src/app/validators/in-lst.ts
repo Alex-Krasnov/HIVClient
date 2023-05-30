@@ -687,4 +687,147 @@ export class InList  {
       )
     } 
   }
+
+  static validateOutHosp( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListOutHosp(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateClinVarCovid( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListClinVarCovid(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateCourseCovid( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListCourseCovid(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateMkb10CovidShort( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListMkb10CovidShort(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateMkb10CovidLong( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListMkb10CovidLong(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateMkbTuderShort( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListMkbTuderShort(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateMkbTuderLong( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListMkbTuderLong(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateMkbPneumoniaShort( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListMkbPneumoniaShort(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateMkbPneumoniaLong( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListMkbPneumoniaLong(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateAvlType( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListAvlType(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateCommitment( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListCommitment(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateFullMkb10Short( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListFullMkb10Short(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateFullMkb10Long( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListFullMkb10Long(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
 }

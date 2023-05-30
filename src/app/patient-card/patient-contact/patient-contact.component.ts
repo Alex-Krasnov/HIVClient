@@ -63,9 +63,7 @@ export class PatientContactComponent implements OnInit{
   async createContacts() {
     let contactId = this.formC.get('newContactId').value
     let infectCourseName = this.formC.get('newInfectCourseName').value
-    
-    console.log(this.formC.controls['newContactId'].value.length);
-        
+            
     if(this.formC.controls['newInfectCourseName'].valid && this.formC.controls['newContactId'].valid && this.formC.controls['newContactId'].value.length != 0){
       let fio = await firstValueFrom(this.patientService.getFio(contactId))
       const sForm = new FormGroup ({

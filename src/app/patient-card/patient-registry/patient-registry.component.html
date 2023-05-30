@@ -24,5 +24,6 @@
         </ng-container>
     </tbody>
 </table>
-
-<app-talon *ngIf="modal.isVisible$ | async" [(id)]="patientId" [(date)]="date" [(cab)]="cab"></app-talon>
+<app-modal-window *ngIf="modal.isVisible$ | async">
+  <app-talon [(id)]="patientId" [(date)]="date" [(cab)]="cab"></app-talon>
+</app-modal-window>
