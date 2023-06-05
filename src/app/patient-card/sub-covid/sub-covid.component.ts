@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom, map, startWith } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardCovidService } from 'src/app/services/patient-card-covid.service';
 import { InList } from 'src/app/validators/in-lst';
@@ -11,12 +11,18 @@ import { InList } from 'src/app/validators/in-lst';
   styleUrls: ['./sub-covid.component.css']
 })
 export class SubCovidComponent implements OnInit{
+  options: string[] = ['One', 'Two', 'Three'];
   formS: FormGroup;
   pervValue: any;
-  @Input() subArr: FormArray; 
+  @Input() subArr: FormArray;
   @Input() patientId: number;
   @Input() type: number;
   @Output() isValid = new EventEmitter<boolean>();
+
+  @Input() listFullMKB10Long: string[];
+  @Input() listFullMKB10Short: string[];
+
+  filteredOptions: Observable<string[]>;
 
   constructor(
     private patientService: PatientCardCovidService,
@@ -25,17 +31,20 @@ export class SubCovidComponent implements OnInit{
   ){}
 
   ngOnInit() {
+
+    this.options = Array.from(this.listFullMKB10Short);
+
     this.isValid.emit(true);
     this.formS = this.fb.group({
       subs: this.subArr as FormArray,
       newComm: new FormControl(),
       newNameShort: new FormControl('', {
         asyncValidators: [InList.validateFullMkb10Short(this.listService)],
-        updateOn: 'blur'
+        updateOn: 'change'
       }),
       newNameLong: new FormControl('', {
         asyncValidators: [InList.validateFullMkb10Long(this.listService)],
-        updateOn: 'blur'
+        updateOn: 'change'
       })
     }, {updateOn: 'blur'});
 
@@ -148,5 +157,43 @@ export class SubCovidComponent implements OnInit{
           oldValue[index] = curValue[index]
         }
       } 
+  }
+
+  setLong(ind?: number){
+    if(ind == null){
+      if (this.formS.controls['newNameShort'].value == null || this.formS.controls['newNameShort'].value.length < 1 ){
+        this.formS.controls['newNameLong'].setValue(null)
+        return null
+      }
+      let index = this.listFullMKB10Short.indexOf(this.formS.controls['newNameShort'].value)
+      this.formS.controls['newNameLong'].setValue(this.listFullMKB10Long.at(index)) 
+      return null
+    }
+
+    if (this.subs.at(ind).get('nameShort').value == null || this.subs.at(ind).get('nameShort').value.length < 1 ){
+      this.subs.at(ind).get('nameLong').setValue(null)
+      return null
+    }
+    let index = this.listFullMKB10Short.indexOf(this.subs.at(ind).get('nameShort').value)
+    this.subs.at(ind).get('nameLong').setValue(this.listFullMKB10Long.at(index)) 
+  }
+
+  setShort(ind?: number){
+    if(ind == null){
+      if (this.formS.controls['newNameLong'].value == null || this.formS.controls['newNameLong'].value.length < 1 ){
+        this.formS.controls['newNameShort'].setValue(null)
+        return null
+      }
+      let index = this.listFullMKB10Long.indexOf(this.formS.controls['newNameLong'].value)
+      this.formS.controls['newNameShort'].setValue(this.listFullMKB10Short.at(index)) 
+      return null
+    }
+    
+    if (this.subs.at(ind).get('nameLong').value == null || this.subs.at(ind).get('nameLong').value.length < 1 ){
+      this.subs.at(ind).get('nameShort').setValue(null)
+      return null
+    }
+    let index = this.listFullMKB10Long.indexOf(this.subs.at(ind).get('nameLong').value)
+    this.subs.at(ind).get('nameShort').setValue(this.listFullMKB10Short.at(index)) 
   }
 }

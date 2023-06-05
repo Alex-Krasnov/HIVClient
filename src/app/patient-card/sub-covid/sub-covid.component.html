@@ -10,15 +10,15 @@
     <tbody>
         <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
           <tr formGroupName="{{i}}">
-            <td><input type="text" list="" class="form-control tbl" formControlName="nameShort"></td>
-            <td><input type="text" list="" class="form-control tbl" formControlName="nameLong" ></td>
+            <td><input type="text" list="listFullMKB10Short" class="form-control tbl" formControlName="nameShort" (mouseleave)="setLong(i)"></td>
+            <td><input type="text" list="listFullMKB10Long" class="form-control tbl" formControlName="nameLong" (mouseleave)="setShort(i)"></td>
             <td><input type="text" class="form-control tbl" formControlName="comm"></td>
             <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
           </tr>
         </ng-container>
         <tr>
-            <td><input type="text" list="" class="form-control tbl" formControlName="newNameShort"></td>
-            <td><input type="text" list="" class="form-control tbl" formControlName="newNameLong" ></td>
+            <td><input type="text" list="listFullMKB10Short" class="form-control tbl" formControlName="newNameShort" (mouseleave)="setLong()"></td>
+            <td><input type="text" list="listFullMKB10Long" class="form-control tbl" formControlName="newNameLong" (mouseleave)="setShort()"></td>
             <td><input type="text" class="form-control tbl" formControlName="newComm"></td>
             <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
         </tr>

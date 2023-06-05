@@ -55,6 +55,9 @@ import { JailComponent } from './jail/jail.component';
 import { PatientCardCovidComponent } from './patient-card-covid/patient-card-covid.component';
 import { CovidComponent } from './covid/covid.component';
 import { SubCovidComponent } from './sub-covid/sub-covid.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 
@@ -112,7 +115,10 @@ import { SubCovidComponent } from './sub-covid/sub-covid.component';
     CommonModule, 
     PatientCardRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    ScrollingModule
   ],
   providers:[
     PatientCardMainService,

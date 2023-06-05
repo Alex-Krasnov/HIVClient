@@ -77,11 +77,17 @@
     <div *ngIf="patientForm.invalid || !cIsValid || !pIsValid || !oIsValid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
-            <div class="col-xl">
+            <!-- <div class="col-xl">
                 <app-sub-covid [(subArr)]="patientOtherDiads" [(patientId)]="patient.patientId" [(type)]="type1" (isValid)="giveoForUpd($event)"></app-sub-covid>
-            </div>
-            <div class="col-xl me-3">
-                <app-sub-covid [(subArr)]="patientPatDiads" [(patientId)]="patient.patientId" [(type)]="type2" (isValid)="giveoForUpd($event)"></app-sub-covid>
+            </div> -->
+            <div class="col-xl-6">
+                <app-sub-covid 
+                [(subArr)]="patientPatDiads" 
+                [(patientId)]="patient.patientId" 
+                [(type)]="type2" 
+                [(listFullMKB10Long)]="patient.listFullMKB10Long"
+                [(listFullMKB10Short)]="patient.listFullMKB10Short"
+                (isValid)="giveoForUpd($event)"></app-sub-covid>
             </div>
         </div>
         <div class="row ms-1 mt-1">
@@ -104,7 +110,12 @@
 <datalist id="listMkbPneumoniaLong"><option  *ngFor="let item of patient.listMkbPneumoniaLong" [value]="item"></option></datalist>
 <datalist id="listCommitment"><option  *ngFor="let item of patient.listCommitment" [value]="item"></option></datalist>
 <datalist id="listAvlType"><option  *ngFor="let item of patient.listAvlType" [value]="item"></option></datalist>
-<datalist id="listFullMKB10Short"><option  *ngFor="let item of patient.listFullMKB10Short" [value]="item"></option></datalist>
-<datalist id="listFullMKB10Long"><option  *ngFor="let item of patient.listFullMKB10Long" [value]="item"></option></datalist>
 
+<cdk-virtual-scroll-viewport itemSize="100">       
+    <datalist id="listFullMKB10Long"><option  *ngFor="let item of patient.listFullMKB10Long" [value]="item"></option></datalist>
+</cdk-virtual-scroll-viewport>
+
+<cdk-virtual-scroll-viewport itemSize="100">       
+    <datalist id="listFullMKB10Short"><option  *ngFor="let item of patient.listFullMKB10Short" [value]="item"></option></datalist>
+</cdk-virtual-scroll-viewport>
 </ng-container>

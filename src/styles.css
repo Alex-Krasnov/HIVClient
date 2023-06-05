@@ -155,3 +155,5 @@ table {
     --bs-btn-disabled-bg: #e2b698;
     --bs-btn-disabled-border-color: #e2b698;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

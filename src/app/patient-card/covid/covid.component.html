@@ -24,12 +24,12 @@
                 <input type="date" class="form-control" placeholder="Дата выписки/смерти" formControlName="dischargeDate">
                 <label>Дата выписки/смерти</label>
             </div>
+            <div class="col-xl form-floating p-0 me-1">
+                <input type="text" class="form-control" list="listOutHosp" placeholder="Исход госпитализации" formControlName="outcomeHosp" title="{{pervValue[i].outcomeHosp}}">
+                <label>Исход госпитализации</label>
+            </div>
         </div>
         <div class="row m-1">
-            <div class="col-xl-2 form-floating p-0 me-1">
-                <input type="text" class="form-control" list="listYN" placeholder="Амбулаторное лечение" formControlName="outPatTreat">
-                <label>Амбулаторное лечение</label>
-            </div>
             <div class="col-xl-2 form-floating p-0 me-1">
                 <input type="text" class="form-control" list="listYN" placeholder="Смерть от COVID" formControlName="deathCovid">
                 <label>Смерть от COVID</label>
@@ -79,26 +79,18 @@
         </div>
         <div class="row m-1">
             <div class="col-xl-2 form-floating p-0 me-1">
-                <input type="text" class="form-control" list="listOutHosp" placeholder="Исход госпитализации" formControlName="outcomeHosp" title="{{pervValue[i].outcomeHosp}}">
-                <label>Исход госпитализации</label>
+                <input type="text" class="form-control" list="listYN" placeholder="Амбулаторное лечение" formControlName="outPatTreat">
+                <label>Амбулаторное лечение</label>
             </div>
-            <div class="col-xl form-floating p-0 me-1">
+            <div class="col-xl-4 form-floating p-0 me-1">
                 <input type="text" list="listCourseCOVID" class="form-control" placeholder="Тяжесть течения COVID" formControlName="severityCovid" title="{{pervValue[i].severityCovid}}">
                 <label>Тяжесть течения COVID</label>
-            </div>
-            <div class="col-xl form-floating p-0">
-                <input type="text" list="listAvlType" class="form-control" placeholder="Тип ИВЛ" formControlName="typeAvl" title="{{pervValue[i].typeAvl}}">
-                <label>Тип ИВЛ</label>
             </div>
         </div>
         <div class="row m-1">
             <div class="col-xl form-floating p-0 me-1">
                 <input type="text" list="listBirthType" list="listClinVarCOVID" class="form-control" placeholder="Клинические варианты и проявления COVID" formControlName="clinVarCovid" title="{{pervValue[i].clinVarCovid}}">
                 <label>Клинические варианты и проявления COVID</label>
-            </div>
-            <div class="col-xl form-floating p-0">
-                <input type="text" list="listCommitment" class="form-control" placeholder="Информация о приверженности лечению" formControlName="commitment" title="{{pervValue[i].commitment}}">
-                <label>Информация о приверженности лечению</label>
             </div>
         </div>
         <div class="row m-1">
@@ -108,12 +100,12 @@
                     <label>Код по МБК ковид</label>
                 </div>
                 <div class="col-xl form-floating p-0 mb-1">
-                    <input type="text" list="listMkbTuderShort" class="form-control" placeholder="Туберкулёз" formControlName="tubercuosisShort" title="{{pervValue[i].tubercuosisShort}}">
-                    <label>Туберкулёз</label>
-                </div>
-                <div class="col-xl form-floating p-0 mb-1">
                     <input type="text" list="listMkbPneumoniaShort" class="form-control" placeholder="Наличие пневмонии" formControlName="pneumoniaShort" title="{{pervValue[i].pneumoniaShort}}">
                     <label>Наличие пневмонии</label>
+                </div>
+                <div class="col-xl form-floating p-0 mb-1">
+                    <input type="text" list="listMkbTuderShort" class="form-control" placeholder="Туберкулёз" formControlName="tubercuosisShort" title="{{pervValue[i].tubercuosisShort}}">
+                    <label>Туберкулёз</label>
                 </div>
             </div>
             <div class="col-xl m-0 p-0 ms-1">
@@ -122,12 +114,12 @@
                     <label>Код по МБК ковид</label>
                 </div>
                 <div class="col-xl form-floating p-0 mb-1">
-                    <input type="text" list="listMkbTuderLong" class="form-control" placeholder="Туберкулёз" formControlName="tubercuosisLong" title="{{pervValue[i].tubercuosisLong}}">
-                    <label>Туберкулёз</label>
-                </div>
-                <div class="col-xl form-floating p-0 mb-1">
                     <input type="text" list="listMkbPneumoniaLong" class="form-control" placeholder="Наличие пневмонии" formControlName="pneumoniaLong" title="{{pervValue[i].pneumoniaLong}}">
                     <label>Наличие пневмонии</label>
+                </div>
+                <div class="col-xl form-floating p-0 mb-1">
+                    <input type="text" list="listMkbTuderLong" class="form-control" placeholder="Туберкулёз" formControlName="tubercuosisLong" title="{{pervValue[i].tubercuosisLong}}">
+                    <label>Туберкулёз</label>
                 </div>
             </div>
         </div>
@@ -165,12 +157,12 @@
                 <input type="date" class="form-control" placeholder="Дата выписки/смерти" formControlName="dischargeDate">
                 <label>Дата выписки/смерти</label>
             </div>
+            <div class="col-xl form-floating p-0 me-1">
+                <input type="text" class="form-control" list="listOutHosp" placeholder="Исход госпитализации" formControlName="outcomeHosp">
+                <label>Исход госпитализации</label>
+            </div>
         </div>
         <div class="row m-1">
-            <div class="col-xl-2 form-floating p-0 me-1">
-                <input type="text" class="form-control" list="listYN" placeholder="Амбулаторное лечение" formControlName="outPatTreat">
-                <label>Амбулаторное лечение</label>
-            </div>
             <div class="col-xl-2 form-floating p-0 me-1">
                 <input type="text" class="form-control" list="listYN" placeholder="Смерть от COVID" formControlName="deathCovid">
                 <label>Смерть от COVID</label>
@@ -220,26 +212,18 @@
         </div>
         <div class="row m-1">
             <div class="col-xl-2 form-floating p-0 me-1">
-                <input type="text" class="form-control" list="listOutHosp" placeholder="Исход госпитализации" formControlName="outcomeHosp">
-                <label>Исход госпитализации</label>
+                <input type="text" class="form-control" list="listYN" placeholder="Амбулаторное лечение" formControlName="outPatTreat">
+                <label>Амбулаторное лечение</label>
             </div>
-            <div class="col-xl form-floating p-0 me-1">
+            <div class="col-xl-4 form-floating p-0 me-1">
                 <input type="text" list="listCourseCOVID" class="form-control" placeholder="Тяжесть течения COVID" formControlName="severityCovid">
                 <label>Тяжесть течения COVID</label>
-            </div>
-            <div class="col-xl form-floating p-0">
-                <input type="text" list="listAvlType" class="form-control" placeholder="Тип ИВЛ" formControlName="typeAvl">
-                <label>Тип ИВЛ</label>
             </div>
         </div>
         <div class="row m-1">
             <div class="col-xl form-floating p-0 me-1">
                 <input type="text" list="listBirthType" list="listClinVarCOVID" class="form-control" placeholder="Клинические варианты и проявления COVID" formControlName="clinVarCovid">
                 <label>Клинические варианты и проявления COVID</label>
-            </div>
-            <div class="col-xl form-floating p-0">
-                <input type="text" list="listCommitment" class="form-control" placeholder="Информация о приверженности лечению" formControlName="commitment">
-                <label>Информация о приверженности лечению</label>
             </div>
         </div>
         <div class="row m-1">
@@ -249,12 +233,12 @@
                     <label>Код по МБК ковид</label>
                 </div>
                 <div class="col-xl form-floating p-0 mb-1">
-                    <input type="text" list="listMkbTuderShort" class="form-control" placeholder="Туберкулёз" formControlName="tubercuosisShort">
-                    <label>Туберкулёз</label>
-                </div>
-                <div class="col-xl form-floating p-0 mb-1">
                     <input type="text" list="listMkbPneumoniaShort" class="form-control" placeholder="Наличие пневмонии" formControlName="pneumoniaShort">
                     <label>Наличие пневмонии</label>
+                </div>
+                <div class="col-xl form-floating p-0 mb-1">
+                    <input type="text" list="listMkbTuderShort" class="form-control" placeholder="Туберкулёз" formControlName="tubercuosisShort">
+                    <label>Туберкулёз</label>
                 </div>
             </div>
             <div class="col-xl m-0 p-0 ms-1">
@@ -263,12 +247,12 @@
                     <label>Код по МБК ковид</label>
                 </div>
                 <div class="col-xl form-floating p-0 mb-1">
-                    <input type="text" list="listMkbTuderLong" class="form-control" placeholder="Туберкулёз" formControlName="tubercuosisLong">
-                    <label>Туберкулёз</label>
-                </div>
-                <div class="col-xl form-floating p-0 mb-1">
                     <input type="text" list="listMkbPneumoniaLong" class="form-control" placeholder="Наличие пневмонии" formControlName="pneumoniaLong">
                     <label>Наличие пневмонии</label>
+                </div>
+                <div class="col-xl form-floating p-0 mb-1">
+                    <input type="text" list="listMkbTuderLong" class="form-control" placeholder="Туберкулёз" formControlName="tubercuosisLong">
+                    <label>Туберкулёз</label>
                 </div>
             </div>
         </div>
