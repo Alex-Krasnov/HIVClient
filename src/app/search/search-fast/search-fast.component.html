@@ -1,0 +1,78 @@
+<form class="pt-3" [formGroup]="SearchForm" style="background-color: #ade8dd;">
+    <div class="row ms-1 mt-1">
+        <div class="col-xl form-floating p-0 me-1">
+            <input type="text" class="form-control" placeholder="Ид пациента" formControlName="patientId">
+            <label>Ид пациента</label>
+        </div>
+        <div class="col-xl form-floating p-0 me-1">
+            <input type="text" class="form-control" placeholder="№ карты" formControlName="cardNo">
+            <label>№ карты</label>
+        </div>
+        <div class="col-xl form-floating p-0 me-1">
+            <input type="text" class="form-control" placeholder="Фамилия" formControlName="familyName">
+            <label>Фамилия</label>
+        </div>
+        <div class="col-xl form-floating p-0 me-1">
+            <input type="text" class="form-control" placeholder="Имя" formControlName="firstName">
+            <label>Имя</label>
+        </div>
+        <div class="col-xl form-floating p-0 me-1">
+            <input type="text" class="form-control" placeholder="Отчество" formControlName="thirdName">
+            <label>Отчество</label>
+        </div>
+        <div class="col-xl form-floating p-0 me-1">
+            <input type="date" class="form-control" placeholder="Дата росдения с" formControlName="birthDateStart">
+            <label>Дата росдения с</label>
+        </div>
+        <div class="col-xl form-floating p-0 me-3">
+            <input type="date" class="form-control" placeholder="Дата росдения по" formControlName="birthDateEnd">
+            <label>Дата росдения по</label>
+        </div>
+    </div>
+    <br>
+    <div class="rwo justify-content-center" *ngIf="shared.visibleData$| async">
+        <span class="mx-3">Всего найдено: {{resCount$ | async}}</span>
+    </div>
+    <div style="width: 1290px;overflow-x: auto;"> 
+        <app-display-result [(data)]="dataView" *ngIf="shared.visibleData$| async"></app-display-result>
+    </div>
+    <br>
+    <div class="rwo justify-content-center" *ngIf="shared.visibleData$| async">
+        <button type="button" class="btn btn-success me-1" (click)="firstPage()">
+            <svg 
+                width="16" height="16" fill="currentColor" 
+                 viewBox="0 0 16 16">
+                 <path d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                 <path d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </button>
+        <button type="button" class="btn btn-success" (click)="prevPage()">
+          <svg 
+              width="16" height="16" fill="currentColor" 
+               viewBox="0 0 16 16">
+              <path 
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z">
+              </path>
+          </svg>
+        </button>
+        <span class="mx-3">{{page}} из {{maxPage}}</span>
+        <button type="button" class="btn btn-success" (click)="nextPage()">
+            <svg 
+                width="16" height="16" fill="currentColor" 
+                 viewBox="0 0 16 16">
+                <path 
+                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                </path>
+            </svg>
+        </button>
+        <button type="button" class="btn btn-success ms-1" (click)="lastPage()">
+            <svg 
+                width="16" height="16" fill="currentColor" 
+                 viewBox="0 0 16 16">
+                 <path d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                 <path d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </button>
+    </div>
+    <br>
+</form>

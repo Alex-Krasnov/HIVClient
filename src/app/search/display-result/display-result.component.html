@@ -1,0 +1,19 @@
+<table class="table border" [formGroup]="dataForm" *ngIf="dataForm" style="width: 1500px;">
+    <thead style="position: sticky;top: 0; background: #ade8dd;">
+        <tr>
+            <th scope="col" style="width: 20px;"></th>
+            <th *ngFor="let coluName of data.columName; let colInd = index" 
+                scope="col" style="width: 100px;">
+                {{data.columName[colInd]}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr  *ngFor="let row of rows.controls; let i = index" [formGroup]="formGroup(i)">
+            <td><button type="button" class="btn btn-outline-success" (click)="openPatient(i)"></button></td>
+            <td *ngFor="let col of colName; let colInd = index">
+                <input type="text" class="form-control tbl" [formControlName]="col">
+            </td>
+        </tr>
+    </tbody>
+  </table>

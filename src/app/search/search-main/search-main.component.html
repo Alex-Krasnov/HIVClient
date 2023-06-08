@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-xxl bg-light p-0">
+    <div class="container-fluid m-2">
+        <div class="navbar-collapse">
+            <h4 style="width: 20%;">{{name}}</h4>
+            <ul class="navbar-nav flex-row-reverse" style="width: 80%;">
+                <li class="nav-item mx-1">
+                    <button type="button" class="btn btn-danger" [routerLink]="['/main']">Гл. меню</button>
+                </li>
+                <li class="nav-item mx-1">
+                    <button type="button" class="btn btn-success" [disabled]="!(shared.nextIsActive$| async)">След. форма</button>
+                </li>
+                <li class="nav-item mx-1">
+                    <button type="button" class="btn btn-success" [disabled]="!(shared.prevIsActive$| async)">Пред. форма</button>
+                </li>
+                <li class="nav-item mx-1">
+                    <button type="button" class="btn btn-secondary" [disabled]="!(shared.xlIsActive$| async)">Экспорт</button>
+                </li>
+                <li class="nav-item mx-1">
+                    <button type="button" class="btn btn-secondary" [disabled]="!(shared.printIsActive$| async)">Печать</button>
+                </li>
+                <li class="nav-item mx-1">
+                    <button type="reset" class="btn btn-warning" (click)="reload()">Сбросить</button>
+                </li>
+                <li class="nav-item mx-1">
+                    <button type="button" class="btn btn-success" (click)="shared.searchGive()">Поиск</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<router-outlet></router-outlet>

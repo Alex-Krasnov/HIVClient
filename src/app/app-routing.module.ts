@@ -12,7 +12,10 @@ const routes: Routes = [
   { path: 'main', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'patient_card', 
   loadChildren: () => import('./patient-card/patient-card.module').then(m => m.PatientCardModule), 
-  canActivate: [AuthGuard]} // , canActivate: [AuthGuard]
+  canActivate: [AuthGuard]},
+  { path: 'search', 
+  loadChildren: () => import('./search/search.module').then(m => m.SearchModule), 
+  canActivate: [AuthGuard]},
 ];
 
 @NgModule({
