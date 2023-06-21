@@ -306,4 +306,12 @@ export class ListService {
     InListFullMkb10Long(name: string): Observable<object>{
         return this.http.post(this.url+`getInListFullMkb10Long`,{ str: name});
     };
+
+    InListYNA(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListYNA`,{ str: name});
+    };
+
+    InListAids12(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListAids12`,{ str: name});
+    };
 }

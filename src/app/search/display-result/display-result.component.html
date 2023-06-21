@@ -1,7 +1,7 @@
-<table class="table border" [formGroup]="dataForm" *ngIf="dataForm" style="width: 1500px;">
+<table class="table border" [formGroup]="dataForm" *ngIf="dataForm" style="width: 1500px;" style="table-layout: fixed;">
     <thead style="position: sticky;top: 0; background: #ade8dd;">
         <tr>
-            <th scope="col" style="width: 20px;"></th>
+            <th scope="col" style="width: 30px;"></th>
             <th *ngFor="let coluName of data.columName; let colInd = index" 
                 scope="col" style="width: 100px;">
                 {{data.columName[colInd]}}

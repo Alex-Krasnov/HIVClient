@@ -23,4 +23,8 @@ export class SearchMainComponent implements OnInit{
   reload(){
     window.location.reload();
   }
+
+  searchGive(){
+    this.shared.searchGive(this.name)
+  }
 }

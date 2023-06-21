@@ -53,7 +53,7 @@ export class DisplayResultComponent implements OnInit, OnChanges{
 
   openPatient(i: number){
     this.shared.visibleData$.next(false)
-    this.router.navigate(["/patient_card/main/"+this.formGroup(i).get('patientId').value])
+    this.router.navigate(["/patient_card/main/"+this.formGroup(i).get('PatientId').value])
   }
 
   ngOnChanges(changes: SimpleChanges) {

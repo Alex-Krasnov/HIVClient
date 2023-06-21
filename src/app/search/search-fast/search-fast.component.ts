@@ -46,7 +46,7 @@ export class SearchFastComponent implements OnInit{
     });
 
     this.shared.search$.subscribe(item => {
-      if(item == true)
+      if(item == 'Быстрый поиск')
         this.getSearchRes()
     })
   }

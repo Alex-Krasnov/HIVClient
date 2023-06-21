@@ -830,4 +830,26 @@ export class InList  {
       )
     } 
   }
+
+  static validateYNA( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListYNA(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
+
+  static validateAids12( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListAids12(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
 }

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SearchMainComponent } from './search-main/search-main.component';
 import { SearchFastComponent } from './search-fast/search-fast.component';
+import { SearchMainInfComponent } from './search-main-inf/search-main-inf.component';
 
 
 const routes: Routes = [
@@ -10,7 +11,8 @@ const routes: Routes = [
     path: '',
     component: SearchMainComponent,
     children: [
-      { path: 'fast', component: SearchFastComponent }
+      { path: 'fast', component: SearchFastComponent },
+      { path: 'main', component: SearchMainInfComponent }
     ]
   }
 ];

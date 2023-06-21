@@ -10,7 +10,7 @@ export class SearchSharedServiceService {
   printIsActive$ = new BehaviorSubject<boolean>(false)
   nextIsActive$ = new BehaviorSubject<boolean>(false)
   prevIsActive$ = new BehaviorSubject<boolean>(false)
-  search$ = new BehaviorSubject<boolean>(false)
+  search$ = new BehaviorSubject<string>('')
   
   refreshData$ = new BehaviorSubject<boolean>(false)
   visibleData$ = new BehaviorSubject<boolean>(false)
@@ -34,8 +34,8 @@ export class SearchSharedServiceService {
     }
   }
 
-  searchGive(){
-    this.search$.next(true)
+  searchGive(name: string ){
+    this.search$.next(name)
   }
 
   setNameSearch(val: string){

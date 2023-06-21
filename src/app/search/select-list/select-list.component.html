@@ -1,0 +1,22 @@
+<form style="width: 900px;" class="mx-auto modal-content p-1" [formGroup]="form" *ngIf="form">
+    <div class="row d-flex flex-row-reverse px-3">
+        <button type="button" class="btn btn-success my-auto ms-1" style="width: 200px;" (click)="close()">Закрыть</button>
+    </div>
+    <div class="row d-flex flex-row px-3 my-2">
+        <button type="button" class="btn btn-outline-success my-auto" style="width: 200px;" (click)="markAll()">Выбрать все</button>
+        <button type="button" class="btn btn-outline-success my-auto ms-1" style="width: 200px;" (click)="dismarkAll()">Очистить все</button>
+    </div>
+    <br>
+    <div style="height: 800px; overflow-y: auto; overflow-x: hidden;">
+        <ng-container formArrayName="formArr" *ngFor="let item of formArr.controls; let i = index">
+            <div class="row" formGroupName="{{i}}">
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="name" title="{{modalList[i]}}">
+                </div>
+                <div class="col-1">
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="select">
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</form>

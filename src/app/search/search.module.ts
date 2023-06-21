@@ -6,6 +6,9 @@ import { SearchMainComponent } from './search-main/search-main.component';
 import { DisplayResultComponent } from './display-result/display-result.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { SearchMainInfComponent } from './search-main-inf/search-main-inf.component';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { SelectListComponent } from './select-list/select-list.component';
 
 
 
@@ -13,7 +16,10 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   declarations: [
     SearchFastComponent,
     SearchMainComponent,
-    DisplayResultComponent
+    DisplayResultComponent,
+    SearchMainInfComponent,
+    ModalWindowComponent,
+    SelectListComponent
   ],
   imports: [
     CommonModule,
