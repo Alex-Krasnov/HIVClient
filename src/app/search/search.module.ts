@@ -9,6 +9,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { SearchMainInfComponent } from './search-main-inf/search-main-inf.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { SelectListComponent } from './select-list/select-list.component';
+import { SelectDieListComponent } from './select-die-list/select-die-list.component';
+
 
 
 
@@ -19,7 +21,8 @@ import { SelectListComponent } from './select-list/select-list.component';
     DisplayResultComponent,
     SearchMainInfComponent,
     ModalWindowComponent,
-    SelectListComponent
+    SelectListComponent,
+    SelectDieListComponent
   ],
   imports: [
     CommonModule,

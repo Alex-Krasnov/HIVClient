@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SearchMainComponent } from './search-main/search-main.component';
 import { SearchFastComponent } from './search-fast/search-fast.component';
 import { SearchMainInfComponent } from './search-main-inf/search-main-inf.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 const routes: Routes = [
@@ -11,8 +12,8 @@ const routes: Routes = [
     path: '',
     component: SearchMainComponent,
     children: [
-      { path: 'fast', component: SearchFastComponent },
-      { path: 'main', component: SearchMainInfComponent }
+      { path: 'fast', component: SearchFastComponent, canActivate: [AuthGuard] },
+      { path: 'main', component: SearchMainInfComponent, canActivate: [AuthGuard] }
     ]
   }
 ];

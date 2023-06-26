@@ -305,6 +305,12 @@ export class SearchMainInfComponent implements OnInit{
 
   modalOpen(i: number){
     this.selectedList = i
+    if (i == 7){
+        this.modalList = this.searchLists.listDieCourse
+        this.modal.dieOpen()
+        return null
+    }
+
     switch (i) {
       case 1:
         this.modalList = this.searchLists.listRegion
@@ -323,9 +329,6 @@ export class SearchMainInfComponent implements OnInit{
         break
       case 6:
         this.modalList = this.searchLists.listCheckCourse
-        break
-      case 7:
-        this.modalList = this.searchLists.listDieCourse
         break
       case 8:
         this.modalList = this.searchLists.listInfectCourse

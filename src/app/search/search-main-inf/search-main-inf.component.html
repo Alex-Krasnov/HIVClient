@@ -318,3 +318,7 @@
 <app-modal-window *ngIf="modal.isVisible$ | async">
     <app-select-list [(modalList)]="modalList" (list)="giveList($event)"></app-select-list>
 </app-modal-window>
+
+<app-modal-window *ngIf="modal.dieIsVisible$ | async">
+    <app-select-die-list [(modalList)]="modalList" (list)="giveList($event)"></app-select-die-list>
+</app-modal-window>

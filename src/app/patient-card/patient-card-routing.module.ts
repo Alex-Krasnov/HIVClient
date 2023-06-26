@@ -15,22 +15,23 @@ import { PatientCardPregnantComponent } from './patient-card-pregnant/patient-ca
 import { PatientCardChildComponent } from './patient-card-child/patient-card-child.component';
 import { PatientCardJailComponent } from './patient-card-jail/patient-card-jail.component';
 import { PatientCardCovidComponent } from './patient-card-covid/patient-card-covid.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'main/:id', component: PatientCardMainComponent },
-  { path: 'treatment/:id', component: PatientCardTreatmentComponent },
-  { path: 'epid/:id', component: PatientCardEpidComponent },
-  { path: 'visit/:id', component: PatientCardVisitComponent },
-  { path: 'diagnostics/:id', component: PatientCardDiagnosticsComponent },
-  { path: 'resistence/:id', component: PatientCardResistenceComponent },
-  { path: 'dconcomitant/:id', component: PatientCardDiagnosticConcomitantComponent },
-  { path: 'acl/:id', component: PatientCardAclComponent },
-  { path: 'dmanual/:id', component: PatientCardDiagnosticManualComponent },
-  { path: 'recipe/:id', component: PatientCardRecipeComponent },
-  { path: 'preg/:id', component: PatientCardPregnantComponent },
-  { path: 'child/:id', component: PatientCardChildComponent },
-  { path: 'jail/:id', component: PatientCardJailComponent },
-  { path: 'covid/:id', component: PatientCardCovidComponent }
+  { path: 'main/:id', component: PatientCardMainComponent, canActivate: [AuthGuard]  },
+  { path: 'treatment/:id', component: PatientCardTreatmentComponent, canActivate: [AuthGuard]  },
+  { path: 'epid/:id', component: PatientCardEpidComponent, canActivate: [AuthGuard]  },
+  { path: 'visit/:id', component: PatientCardVisitComponent, canActivate: [AuthGuard]  },
+  { path: 'diagnostics/:id', component: PatientCardDiagnosticsComponent, canActivate: [AuthGuard]  },
+  { path: 'resistence/:id', component: PatientCardResistenceComponent, canActivate: [AuthGuard]  },
+  { path: 'dconcomitant/:id', component: PatientCardDiagnosticConcomitantComponent, canActivate: [AuthGuard]  },
+  { path: 'acl/:id', component: PatientCardAclComponent, canActivate: [AuthGuard]  },
+  { path: 'dmanual/:id', component: PatientCardDiagnosticManualComponent, canActivate: [AuthGuard]  },
+  { path: 'recipe/:id', component: PatientCardRecipeComponent, canActivate: [AuthGuard]  },
+  { path: 'preg/:id', component: PatientCardPregnantComponent, canActivate: [AuthGuard]  },
+  { path: 'child/:id', component: PatientCardChildComponent, canActivate: [AuthGuard]  },
+  { path: 'jail/:id', component: PatientCardJailComponent, canActivate: [AuthGuard]  },
+  { path: 'covid/:id', component: PatientCardCovidComponent, canActivate: [AuthGuard]  }
 ];
 
 @NgModule({
