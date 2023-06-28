@@ -121,6 +121,14 @@
                 <div class=" mt-1" style="height: 367px; overflow: auto;">
                     <app-patient-blot [(blotArr)]="patientBlot" [(patientId)]="patient.patientId" (bIsValid)="giveBlotForUpd($event)"></app-patient-blot>
                 </div>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <button class="btn btn-outline-success w-100" (click)="openPas()">Паспорт</button>
+                    </div>
+                    <div class="col-xl-6">
+                        <button class="btn btn-outline-success w-100" (click)="openDieCourse()">Причины смерти (ф.106/у)</button>
+                    </div>
+                </div>
             </div>
         </div>
         <p class="text-start ms-2 m-0">Место проживания</p>
@@ -305,6 +313,14 @@
                         <input type="checkbox" class="form-check-input" placeholder="Внесен в ФР" formControlName="zamMedPart">
                     </div>
                 </div>
+                    <div class="row g-0">
+                    <div class="col-xl">
+                        <label>Диагноз посмертно</label>
+                    </div>
+                    <div class="col-xl">
+                        <input type="checkbox" class="form-check-input" placeholder="Диагноз посмертно" formControlName="flgDiagnosisAfterDeath">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row g-1 mb-1">
@@ -414,10 +430,17 @@
         <br>
     </div>
     <div class="row g-0">
-        <!-- deletePatient -->
         <div class="row g-0 text-left" (click)="deletePatient()"><button type="button" class="btn btn-lg btn-outline-danger">Удалить карту</button></div>
     </div>
 </form>
+
+<app-modal-window *ngIf="modal.pasIsVisible$ | async">
+    <app-passport [(patientId)]="patient.patientId"></app-passport>
+</app-modal-window>
+
+<app-modal-window *ngIf="modal.dieCourseIsVisible$ | async">
+    <app-die-coures [(patientId)]="patient.patientId" [(listDieCourse)]="patient.listDieCourseLong"></app-die-coures>
+</app-modal-window>
 
 
 <datalist id="listSex"><option *ngFor="let sex of patient.listSex" [value]="sex"></option></datalist>
@@ -430,8 +453,8 @@
 <datalist id="listCheckCourseLong"><option *ngFor="let CheckCourseLong of patient.listCheckCourseLong" [value]="CheckCourseLong"></option></datalist>
 <datalist id="listInfectCourseShort"><option *ngFor="let InfectCourseShort of patient.listInfectCourseShort" [value]="InfectCourseShort"></option></datalist>
 <datalist id="listInfectCourseLong"><option *ngFor="let InfectCourseLong of patient.listInfectCourseLong" [value]="InfectCourseLong"></option></datalist>
-<datalist id="listDieCourseShort"><option *ngFor="let DieCourseShort of patient.listDieCourseShort" [value]="DieCourseShort"></option></datalist> 
-<datalist id="listDieCourseLong"><option *ngFor="let DieCourseLong of patient.listDieCourseLong" [value]="DieCourseLong"></option></datalist> 
+<datalist id="listDieCourseShort"><option *ngFor="let DieCourseShort of patient.listDieCourseLong | dieShortFilter:dieShort" [value]="DieCourseShort"></option></datalist>
+<datalist id="listDieCourseLong"><option *ngFor="let DieCourseLong  of patient.listDieCourseLong | dieLongFilter:dieLong" [value]="DieCourseLong"></option></datalist>
 <datalist id="listVulnerableGroup"><option *ngFor="let VulnerableGroup of patient.listVulnerableGroup" [value]="VulnerableGroup"></option></datalist> 
 <datalist id="listARVT"><option *ngFor="let arvt of patient.listARVT" [value]="arvt"></option></datalist> 
 <datalist id="listInvalid"><option *ngFor="let Invalid of patient.listInvalid" [value]="Invalid"></option></datalist> 

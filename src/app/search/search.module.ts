@@ -10,6 +10,7 @@ import { SearchMainInfComponent } from './search-main-inf/search-main-inf.compon
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { SelectListComponent } from './select-list/select-list.component';
 import { SelectDieListComponent } from './select-die-list/select-die-list.component';
+import { SearchPregnantComponent } from './search-pregnant/search-pregnant.component';
 
 
 
@@ -22,7 +23,8 @@ import { SelectDieListComponent } from './select-die-list/select-die-list.compon
     SearchMainInfComponent,
     ModalWindowComponent,
     SelectListComponent,
-    SelectDieListComponent
+    SelectDieListComponent,
+    SearchPregnantComponent
   ],
   imports: [
     CommonModule,

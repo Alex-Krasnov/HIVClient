@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { SelectSchemaModel } from 'src/app/_interfaces/select-schema.model';
@@ -10,7 +10,7 @@ import { SelectSchemaService } from 'src/app/services/select-schema.service';
   templateUrl: './schema-select.component.html',
   styleUrls: ['./schema-select.component.css']
 })
-export class SchemaSelectComponent {
+export class SchemaSelectComponent implements OnInit{
   data: SelectSchemaModel[] | undefined;
   form: FormGroup;
   arr = new FormArray([]);
@@ -80,7 +80,6 @@ export class SchemaSelectComponent {
         this.possibleSchems = this.possibleSchems.filter( i => this.data[e].schemaId.includes(i))
       }
     })
-    // console.log('possibleSchems',this.possibleSchems, 'selectedMedicine',this.selectedMedicine);
     this.arr
   }
 

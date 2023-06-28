@@ -1,6 +1,7 @@
 
 body {
     color: #252323!important;
+    font-family: var(--bs-body-font-family)!important;
 }
 
 .btn {

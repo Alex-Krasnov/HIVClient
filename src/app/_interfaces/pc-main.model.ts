@@ -41,6 +41,7 @@
   weightOld?: number
   flgZamMedPart?: boolean
   flgHeadPhysician?: boolean
+  flgDiagnosisAfterDeath?: boolean
 
   checkCourseId?: string
   infectCourseId?: string

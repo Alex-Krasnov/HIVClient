@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 import { PatientCardMainService } from 'src/app/services/patient-card-main.service';
@@ -8,6 +8,7 @@ import { PatientCardMainForm } from './patient-card-main-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
 import { pcMain } from 'src/app/_interfaces/pc-main.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-patient-card-main',
@@ -35,6 +36,8 @@ export class PatientCardMainComponent implements OnInit {
   patientStages = new FormArray([]);
   patientBlot = new FormArray([]);
   pervValue: pcMain;
+  dieLong: string;
+  dieShort: string;
 
 
   constructor(
@@ -42,7 +45,8 @@ export class PatientCardMainComponent implements OnInit {
     private patientService: PatientCardMainService,
     private fb: FormBuilder,
     private router: Router,
-    private listService: ListService
+    private listService: ListService,
+    public modal: ModalService
   ){}
 
   ngOnInit() {
@@ -68,6 +72,8 @@ export class PatientCardMainComponent implements OnInit {
     this.patientService.getPatientData(this.Id)
       .subscribe((data:PatientCardMainModel) => {
         this.patient = data;
+        this.dieLong = this.patient.dieCourseLong
+        this.dieShort = this.patient.dieCourseShort
         this.initForm();
         this.pervValue = {
           patientId: data.patientId,
@@ -192,7 +198,8 @@ export class PatientCardMainComponent implements OnInit {
       snilsFedArchive: this.patientForm.controls['archive'].value,
       codeword: this.patientForm.controls['codeWord'].value,
       snils: this.patientForm.controls['snils'].value,
-      fioChange: this.patientForm.controls['fioChange'].value
+      fioChange: this.patientForm.controls['fioChange'].value,
+      flgDiagnosisAfterDeath: this.patientForm.controls['flgDiagnosisAfterDeath'].value
     };
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
@@ -256,7 +263,8 @@ export class PatientCardMainComponent implements OnInit {
         snilsFedArchive: curValue.snilsFedArchive,
         codeword: curValue.codeword,
         snils: curValue.snils,
-        fioChange: curValue.fioChange
+        fioChange: curValue.fioChange,
+        flgDiagnosisAfterDeath: curValue.flgDiagnosisAfterDeath
       };
 
       this.patientForm.markAsPristine()
@@ -336,80 +344,94 @@ export class PatientCardMainComponent implements OnInit {
         this.needUpd = true;
     })
     this.syncLongNShort()
+
+    this.patientForm.controls['dieCourseShort'].valueChanges.subscribe(item => this.dieShort = item)
+    this.patientForm.controls['dieCourseLong'].valueChanges.subscribe(item => this.dieLong = item)
   }
 
   syncLongNShort(){
-
     this.patientForm.controls['checkCourseShort'].statusChanges.subscribe((status) => {
       let index = this.patient.listCheckCourseShort.indexOf(this.patientForm.controls['checkCourseShort'].value)
       let indexLong = this.patient.listCheckCourseLong.indexOf(this.patientForm.controls['checkCourseLong'].value)
-      if( index == indexLong)
+      if( index == indexLong || status != 'VALID')
         return null
-      if(status != 'VALID')
+      if(this.patientForm.controls['checkCourseShort'].value == null || this.patientForm.controls['checkCourseShort'].value.length == 0){
+        this.patientForm.controls['checkCourseLong'].setValue('')
         return null
-
-      console.log('shortchange');
+      }
+  
       this.patientForm.controls['checkCourseLong'].setValue( this.patient.listCheckCourseLong.at(index))
     })
 
     this.patientForm.controls['checkCourseLong'].statusChanges.subscribe((status) => {
       let index = this.patient.listCheckCourseLong.indexOf(this.patientForm.controls['checkCourseLong'].value)
       let indexShort = this.patient.listCheckCourseShort.indexOf(this.patientForm.controls['checkCourseShort'].value)
-      if( index == indexShort)
+      if( index == indexShort || status != 'VALID')
         return null
-      if(status != 'VALID')
+      if(this.patientForm.controls['checkCourseLong'].value == null || this.patientForm.controls['checkCourseLong'].value.length == 0){
+        this.patientForm.controls['checkCourseShort'].setValue('')
         return null
+      }
 
-      console.log('longchange');
       this.patientForm.controls['checkCourseShort'].setValue( this.patient.listCheckCourseShort.at(index))
     })
 
     this.patientForm.controls['infectCourseShort'].statusChanges.subscribe((status) => {
       let index = this.patient.listInfectCourseShort.indexOf(this.patientForm.controls['infectCourseShort'].value)
       let indexLong = this.patient.listInfectCourseLong.indexOf(this.patientForm.controls['infectCourseLong'].value)
-      if( index == indexLong)
+      if( index == indexLong || status != 'VALID')
         return null
-      if(status != 'VALID')
+      if(this.patientForm.controls['infectCourseShort'].value == null || this.patientForm.controls['infectCourseShort'].value.length == 0){
+        this.patientForm.controls['infectCourseLong'].setValue('')
         return null
+      }
 
-      console.log('shortchange');
       this.patientForm.controls['infectCourseLong'].setValue( this.patient.listInfectCourseLong.at(index))
     })
 
     this.patientForm.controls['infectCourseLong'].statusChanges.subscribe((status) => {
       let index = this.patient.listInfectCourseLong.indexOf(this.patientForm.controls['infectCourseLong'].value)
       let indexShort = this.patient.listInfectCourseShort.indexOf(this.patientForm.controls['infectCourseShort'].value)
-      if( index == indexShort)
+      if( index == indexShort || status != 'VALID')
         return null
-      if(status != 'VALID')
+      if(this.patientForm.controls['infectCourseLong'].value == null || this.patientForm.controls['infectCourseLong'].value.length == 0){
+        this.patientForm.controls['infectCourseShort'].setValue('')
         return null
+      }
 
-      console.log('longchange');
       this.patientForm.controls['infectCourseShort'].setValue( this.patient.listInfectCourseShort.at(index))
     })
 
-    this.patientForm.controls['dieCourseShort'].statusChanges.subscribe((status) => {
-      let index = this.patient.listDieCourseShort.indexOf(this.patientForm.controls['dieCourseShort'].value)
-      let indexLong = this.patient.listDieCourseLong.indexOf(this.patientForm.controls['dieCourseLong'].value)
-      if( index == indexLong)
-        return null
-      if(status != 'VALID')
-        return null
 
-      console.log('shortchange', index, indexLong);
-      this.patientForm.controls['dieCourseLong'].setValue( this.patient.listDieCourseLong.at(index))
+
+
+    this.patientForm.controls['dieCourseShort'].statusChanges.subscribe((status) => {
+      let index = this.patient.listDieCourseLong.findIndex(e => e.short == this.patientForm.controls['dieCourseShort'].value)
+      if(index == this.patient.listDieCourseLong.findIndex(e => e.long == this.patientForm.controls['dieCourseLong'].value) || status != 'VALID')
+        return null
+        
+      if(this.patientForm.controls['dieCourseShort'].value == null || this.patientForm.controls['dieCourseShort'].value.length == 0){
+        this.patientForm.controls['dieCourseLong'].setValue('')
+        return null
+      }
+      console.log('short');
+
+      this.patientForm.controls['dieCourseLong'].setValue( this.patient.listDieCourseLong.at(index).long)
     })
 
     this.patientForm.controls['dieCourseLong'].statusChanges.subscribe((status) => {
-      let index = this.patient.listDieCourseLong.indexOf(this.patientForm.controls['dieCourseLong'].value)
-      let indexShort = this.patient.listDieCourseShort.indexOf(this.patientForm.controls['dieCourseShort'].value)
-      if( index == indexShort)
+      let index = this.patient.listDieCourseLong.findIndex(e => e.long == this.patientForm.controls['dieCourseLong'].value)
+      
+      if(index == this.patient.listDieCourseLong.findIndex(e => e.short == this.patientForm.controls['dieCourseShort'].value) || status != 'VALID')
         return null
-      if(status != 'VALID')
+      
+      if(this.patientForm.controls['dieCourseLong'].value == null || this.patientForm.controls['dieCourseLong'].value.length == 0){
+        this.patientForm.controls['dieCourseShort'].setValue('')
         return null
-
-      console.log('longchange',index, indexShort);
-      this.patientForm.controls['dieCourseShort'].setValue( this.patient.listDieCourseShort.at(index))
+      }
+      console.log('long');
+      
+      this.patientForm.controls['dieCourseShort'].setValue( this.patient.listDieCourseLong.at(index).short)
     })
   }
 
@@ -431,5 +453,13 @@ export class PatientCardMainComponent implements OnInit {
       )
       confirm(`Ошибка в заполнении данных!`)
     }
+  }
+
+  openPas(){
+    this.modal.pasOpen()
+  }
+
+  openDieCourse(){
+    this.modal.dieCourseOpen()
   }
 }

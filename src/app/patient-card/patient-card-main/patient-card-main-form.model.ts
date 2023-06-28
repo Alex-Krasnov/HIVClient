@@ -43,10 +43,10 @@ export class PatientCardMainForm {
     weightOld = new FormControl()
     checkCourseShort = new FormControl('', {updateOn: 'blur'})
     infectCourseShort = new FormControl('', {updateOn: 'blur'})
-    dieCourseShort = new FormControl('', {updateOn: 'blur'})
+    dieCourseShort = new FormControl('', {updateOn: 'change'})
     checkCourseLong = new FormControl('', {updateOn: 'blur'})
     infectCourseLong = new FormControl('', {updateOn: 'blur'})
-    dieCourseLong = new FormControl('', {updateOn: 'blur'})
+    dieCourseLong = new FormControl('', {updateOn: 'change'})
     transfAreaDate = new FormControl()
     transfFederDate = new FormControl()
     ufsinDate = new FormControl()
@@ -61,6 +61,7 @@ export class PatientCardMainForm {
     fioChange = new FormControl()
     headPhysician = new FormControl()
     zamMedPart = new FormControl()
+    flgDiagnosisAfterDeath = new FormControl()
 
     constructor(data: PatientCardMainModel, private listService: ListService) 
     {
@@ -108,6 +109,8 @@ export class PatientCardMainForm {
       this.fioChange.setValue(data.fioChange)
       this.headPhysician.setValue(data.headPhysician)
       this.zamMedPart.setValue(data.zamMedPart)
+      
+      this.flgDiagnosisAfterDeath.setValue(data.flgDiagnosisAfterDeath)
 
       this.sex.setValue(data.sex)
       this.sex.setAsyncValidators(InList.validateSex(this.listService))

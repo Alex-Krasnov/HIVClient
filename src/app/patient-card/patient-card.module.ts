@@ -58,6 +58,10 @@ import { SubCovidComponent } from './sub-covid/sub-covid.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PassportComponent } from './passport/passport.component';
+import { DieCouresComponent } from './die-coures/die-coures.component';
+import { DieLongFilterPipe } from './patient-card-main/die-long-filter.pipe';
+import { DieShortFilterPipe } from './patient-card-main/die-short-filter.pipe ';
 
 
 
@@ -109,7 +113,11 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     JailComponent,
     PatientCardCovidComponent,
     CovidComponent,
-    SubCovidComponent
+    SubCovidComponent,
+    PassportComponent,
+    DieCouresComponent,
+    DieLongFilterPipe,
+    DieShortFilterPipe
   ],
   imports: [
     CommonModule, 

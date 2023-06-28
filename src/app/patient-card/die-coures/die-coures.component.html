@@ -1,0 +1,65 @@
+<form style="width: 1000px;" class="mx-auto modal-content p-1" [formGroup]="dieForm" *ngIf="dieForm">
+    <div class="row border m-1">
+        <div class="row mt-1 pe-0">
+            <div class="col-xl-4 p-0 d-flex justify-content-start ps-2">
+                <label class="mt-2">а) Непосредственная причина смерти</label>
+            </div>
+            <div class="col-xl-2 p-0">
+                <input type="text" class="form-control" placeholder="Мкб" list="listDieCourseShort" formControlName="dieCourseShort1">
+            </div>
+            <div class="col-xl p-0">
+                <input type="text" class="form-control" placeholder="Наим." list="listDieCourseLong" formControlName="dieCourseLong1">
+            </div>
+        </div>
+        <div class="row mt-1 pe-0">
+            <div class="col-xl-4 p-0 d-flex justify-content-start ps-2">
+                <label style="text-align: initial;">б) Патологическое состояние, которое привело к возникновению смерти</label>
+            </div>
+            <div class="col-xl-2 p-0 my-auto">
+                <input type="text" class="form-control" placeholder="Мкб" list="listDieCourseShort" formControlName="dieCourseShort2">
+            </div>
+            <div class="col-xl p-0 my-auto">
+                <input type="text" class="form-control" placeholder="Наим." list="listDieCourseLong" formControlName="dieCourseLong2">
+            </div>
+        </div>
+        <div class="row mt-1 pe-0">
+            <div class="col-xl-4 p-0 d-flex justify-content-start ps-2">
+                <label class="mt-2">в) Первоначальная причина смерти</label>
+            </div>
+            <div class="col-xl-2 p-0">
+                <input type="text" class="form-control" placeholder="Мкб" list="listDieCourseShort" formControlName="dieCourseShort3">
+            </div>
+            <div class="col-xl p-0">
+                <input type="text" class="form-control" placeholder="Наим." list="listDieCourseLong" formControlName="dieCourseLong3">
+            </div>
+        </div>
+        <div class="row mt-1 pe-0">
+            <div class="col-xl-4 p-0 d-flex justify-content-start ps-2">
+                <label class="mt-2">г) Внешняя причина смерти</label>
+            </div>
+            <div class="col-xl-2 p-0">
+                <input type="text" class="form-control" placeholder="Мкб" list="listDieCourseShort" formControlName="dieCourseShort4">
+            </div>
+            <div class="col-xl p-0">
+                <input type="text" class="form-control" placeholder="Наим." list="listDieCourseLong" formControlName="dieCourseLong4">
+            </div>
+        </div>
+        <div class="row mt-1 pe-0">
+            <div class="col-xl-4 p-0 d-flex justify-content-start ps-2">
+                <label style="text-align: initial;">Прочие состояния, способствовавшие смерти</label>
+            </div>
+            <div class="col-xl-2 p-0">
+                <input type="text" class="form-control" placeholder="Мкб" list="listDieCourseShort" formControlName="dieCourseShort5">
+            </div>
+            <div class="col-xl p-0">
+                <input type="text" class="form-control" placeholder="Наим." list="listDieCourseLong" formControlName="dieCourseLong5">
+            </div>
+        </div>
+    </div>
+    <div class="row m-2">
+        <button class="btn btn-outline-success" (click)="close()">Закрыть</button>
+    </div>
+</form>
+
+<datalist id="listDieCourseShort"><option *ngFor="let DieCourseShort of listDieCourse | dieShortFilter:dieShort" [value]="DieCourseShort"></option></datalist>
+<datalist id="listDieCourseLong"><option *ngFor="let DieCourseLong  of listDieCourse | dieLongFilter:dieLong" [value]="DieCourseLong"></option></datalist>

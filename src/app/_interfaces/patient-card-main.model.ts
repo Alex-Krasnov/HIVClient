@@ -1,6 +1,7 @@
 import { Blot } from "./blot.model";
 import { Stage } from "./stage.model";
 import { SecondDeseases } from "./second-deseases.model";
+import { Course } from "./course.model";
 
 export interface PatientCardMainModel {
   patientId: number;
@@ -62,6 +63,7 @@ export interface PatientCardMainModel {
   invalid?: string;
   archive?: string;
   codeWord?: string;
+  flgDiagnosisAfterDeath?: boolean; 
 
   listSex?: string[];
   listRegOffReason?: string[];
@@ -74,7 +76,7 @@ export interface PatientCardMainModel {
   listInfectCourseShort?: string[];
   listInfectCourseLong?: string[];
   listDieCourseShort?: string[];
-  listDieCourseLong?: string[];
+  listDieCourseLong?: Course[];
   listVulnerableGroup?: string[];
   listARVT?: string[];
   listInvalid?: string[];

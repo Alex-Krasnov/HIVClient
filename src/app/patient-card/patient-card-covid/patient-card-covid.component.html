@@ -111,11 +111,14 @@
 <datalist id="listCommitment"><option  *ngFor="let item of patient.listCommitment" [value]="item"></option></datalist>
 <datalist id="listAvlType"><option  *ngFor="let item of patient.listAvlType" [value]="item"></option></datalist>
 
-<cdk-virtual-scroll-viewport itemSize="100">       
-    <datalist id="listFullMKB10Long"><option  *ngFor="let item of patient.listFullMKB10Long" [value]="item"></option></datalist>
-</cdk-virtual-scroll-viewport>
+     
+<datalist id="listFullMKB10Long">
+    <cdk-virtual-scroll-viewport itemSize="1000">  
+        <option  *ngFor="let item of patient.listFullMKB10Long" [value]="item"></option>
+    </cdk-virtual-scroll-viewport>
+</datalist>
 
-<cdk-virtual-scroll-viewport itemSize="100">       
+<cdk-virtual-scroll-viewport itemSize="1000">       
     <datalist id="listFullMKB10Short"><option  *ngFor="let item of patient.listFullMKB10Short" [value]="item"></option></datalist>
 </cdk-virtual-scroll-viewport>
 </ng-container>

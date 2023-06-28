@@ -1,0 +1,193 @@
+<form style="width: 1000px;" class="mx-auto modal-content p-1" [formGroup]="pasForm" *ngIf="pasForm">
+    <label>Место регистрации</label>
+    <div class="row border m-1">
+        <div class="row mt-1">
+            <div class="col-xl-1">
+                <label class="mt-2">Регион</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Регион" list="listRegion" formControlName="region">
+            </div>
+            <div class="col-xl-1">
+                <label class="mt-2">Улица</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Улица" formControlName="addrStreat">
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-xl-1">
+                <label class="mt-2">Город</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Город" formControlName="cityName">
+            </div>
+            <div class="col-xl-1">
+                <label class="mt-2">Дом</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Дом" formControlName="addrHouse">
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-xl-2" style="width: 18%;">
+                <label class="mt-2">Населённый пункт</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Населённый пункт" formControlName="locationName">
+            </div>
+            <div class="col-xl-1">
+                <label class="mt-2">Корпус</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Корпус" formControlName="addrExt">
+            </div>
+        </div>
+        <div class="row my-1">
+            <div class="col-xl-1">
+                <label class="mt-2">Индекс</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Индекс" formControlName="index">
+            </div>
+            <div class="col-xl-1">
+                <label class="mt-2">Квартира</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Квартира" formControlName="addrFlat">
+            </div>
+        </div>
+    </div>
+    <label>Место фактического проживания</label>
+    <div class="row border m-1">
+        <div class="row mt-1">
+            <div class="col-xl-1">
+                <label class="mt-2">Регион</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Регион" list="listRegion" formControlName="regionFact">
+            </div>
+            <div class="col-xl-1">
+                <label class="mt-2">Улица</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Улица" formControlName="addrStreatFact">
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-xl-1">
+                <label class="mt-2">Город</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Город" formControlName="cityNameFact">
+            </div>
+            <div class="col-xl-1">
+                <label class="mt-2">Дом</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Дом" formControlName="addrHouseFact">
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-xl-2" style="width: 18%;">
+                <label class="mt-2">Населённый пункт</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Населённый пункт" formControlName="locationNameFact">
+            </div>
+            <div class="col-xl-1">
+                <label class="mt-2">Корпус</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Корпус" formControlName="addrExtFact">
+            </div>
+        </div>
+        <div class="row my-1">
+            <div class="col-xl-1">
+                <label class="mt-2">Индекс</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Индекс" formControlName="indexFact">
+            </div>
+            <div class="col-xl-1">
+                <label class="mt-2">Квартира</label>
+            </div>
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Квартира" formControlName="addrFlatFact">
+            </div>
+        </div>
+        <div class="row my-1">
+            <div class="col-xl-1" style="width: 13%;">
+                <label class="mt-2">Дата рег.нач.</label>
+            </div>
+            <div class="col-xl">
+                <input type="date" class="form-control" placeholder="Дата рег.нач." formControlName="dtRegBeg">
+            </div>
+            <div class="col-xl-1" style="width: 13%;">
+                <label class="mt-2">Дата рег.кон.</label>
+            </div>
+            <div class="col-xl">
+                <input type="date" class="form-control" placeholder="Дата рег.кон." formControlName="dtRegEnd">
+            </div>
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="row my-1">
+            <div class="col-xl-1 p-0 pe-2" style="width: 14%;">
+                <label class="mt-2">Серия паспорта</label>
+            </div>
+            <div class="col-xl p-0 pe-2">
+                <input type="text" class="form-control" placeholder="Серия паспорта" formControlName="pasSer">
+            </div>
+            <div class="col-xl-1 p-0 pe-2" style="width: 2%;">
+                <label class="mt-2">№</label>
+            </div>
+            <div class="col-xl p-0 pe-2">
+                <input type="text" class="form-control" placeholder="№" formControlName="pasNum">
+            </div>
+            <div class="col-xl-1 p-0 pe-2" style="width: 10%;">
+                <label class="mt-2">Серия ОМС</label>
+            </div>
+            <div class="col-xl p-0 pe-2">
+                <input type="text" class="form-control" placeholder="Серия ОМС" formControlName="omsSer">
+            </div>
+            <div class="col-xl-1 p-0 pe-2" style="width: 2%;">
+                <label class="mt-2">№</label>
+            </div>
+            <div class="col-xl p-0 pe-2">
+                <input type="text" class="form-control" placeholder="№" formControlName="omsNum">
+            </div>
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="row my-1">
+            <div class="col-xl-1 p-0 pe-2" style="width: 12%;">
+                <label class="mt-2">Когда выдан</label>
+            </div>
+            <div class="col-xl p-0 pe-2">
+                <input type="date" class="form-control" placeholder="Когда выдан" formControlName="pasWhen">
+            </div>
+            <div class="col-xl-1 p-0 pe-2 ms-5" style="width: 12%;">
+                <label class="mt-2">Когда выдан</label>
+            </div>
+            <div class="col-xl p-0 pe-2">
+                <input type="date" class="form-control" placeholder="Когда выдан" formControlName="omsWhen">
+            </div>
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="row my-1">
+            <div class="col-xl-1 p-0 pe-2" style="width: 12%;">
+                <label class="mt-2">Кем выдан</label>
+            </div>
+            <div class="col-xl p-0 pe-2">
+                <input type="text" class="form-control" placeholder="Кем выдан" formControlName="pasWhom">
+            </div>
+        </div>
+    </div>
+    <div class="row m-2">
+        <button class="btn btn-outline-success" (click)="close()">Закрыть</button>
+    </div>
+</form>
+
+<datalist id="listRegion"><option *ngFor="let item of pasport.listRegion" [value]="item"></option></datalist>
