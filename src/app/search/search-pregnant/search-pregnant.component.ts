@@ -328,7 +328,7 @@ export class SearchPregnantComponent implements OnInit{
         this.modalList = this.searchLists.listStage
         break
       case 6:
-        this.modalList = this.searchLists.listCheckCourse
+        // this.modalList = this.searchLists.listCheckCourse
         break
       case 8:
         this.modalList = this.searchLists.listInfectCourse

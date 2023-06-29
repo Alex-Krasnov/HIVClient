@@ -1,3 +1,5 @@
+import { Course } from "./course.model"
+
  export interface  SearchMainInfModelLists{
     listSex?: string[]
     listRegion?: string[]
@@ -5,7 +7,7 @@
     listInfectCourse?: string[]
     listCheckPlace?: string[]
     listStage?: string[]
-    listCheckCourse?: string[]
+    listCheckCourse?: Course[]
     listDieCourse?: string[]
     listShowIllness?: string[]
     listResIb?: string[]
@@ -18,4 +20,6 @@
     listYNA?: string[]
     listAids12?: string[]
     listChemop?: string[]
+    listDiePreset?: string[]
+    listRegionPreset?: string[]
  }

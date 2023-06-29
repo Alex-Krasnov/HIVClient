@@ -9,6 +9,7 @@ import { SearchMainInfService } from 'src/app/services/search-main-inf.service';
 import { SearchMainInfModelLists } from 'src/app/_interfaces/search-main-inf-lists.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { SearchMainInfModel } from 'src/app/_interfaces/search-main-inf.model';
+import { Course } from 'src/app/_interfaces/course.model';
 
 @Component({
   selector: 'app-search-main-inf',
@@ -26,8 +27,9 @@ export class SearchMainInfComponent implements OnInit{
   dataView: Search
   resCount$ = new BehaviorSubject<number>(0)
   page = 1
-  maxPage = 1
+  maxPage = 0
   modalList: string[]
+  modal2ColList: Course[]
   selectedList: number
 
   constructor(
@@ -71,6 +73,9 @@ export class SearchMainInfComponent implements OnInit{
 
   async getSearchRes(){
     if(this.searchForm.valid){
+      this.dataView = {columName: [], resPage: []}
+      this.maxPage = 0
+      this.resCount$.next(0)
       
       let formValue: SearchMainInfModel = {
         dateInpStart: this.searchForm.controls['dateInpStart'].value,
@@ -104,6 +109,7 @@ export class SearchMainInfComponent implements OnInit{
         dateDieAidsEnd: this.searchForm.controls['dateDieAidsEnd'].value,
         checkCourse: this.searchForm.controls['checkCourse'].value,
         dieCourse: this.searchForm.controls['dieCourse'].value,
+        diePreset: this.searchForm.controls['diePreset'].value,
         infectCourse: this.searchForm.controls['infectCourse'].value,
         showIllnes: this.searchForm.controls['showIllnes'].value,
         dateShowIllnesStart: this.searchForm.controls['dateShowIllnesStart'].value,
@@ -144,6 +150,8 @@ export class SearchMainInfComponent implements OnInit{
         dateChemprofEndEnd: this.searchForm.controls['dateChemprofEndEnd'].value,
         dateRegStart: this.searchForm.controls['dateRegStart'].value,
         dateRegEnd: this.searchForm.controls['dateRegEnd'].value,
+        regionPreset: this.searchForm.controls['regionPreset'].value,
+        factRegionPreset: this.searchForm.controls['factRegionPreset'].value,
       
         selectInpDate: this.searchForm.controls['selectInpDate'].value,
         selectPatientId: this.searchForm.controls['selectPatientId'].value,
@@ -305,11 +313,11 @@ export class SearchMainInfComponent implements OnInit{
 
   modalOpen(i: number){
     this.selectedList = i
-    if (i == 7){
-        this.modalList = this.searchLists.listDieCourse
-        this.modal.dieOpen()
-        return null
-    }
+    // if (i == 7){
+    //     this.modalList = this.searchLists.listDieCourse
+    //     this.modal.dieOpen()
+    //     return null
+    // }
 
     switch (i) {
       case 1:
@@ -327,8 +335,15 @@ export class SearchMainInfComponent implements OnInit{
       case 5:
         this.modalList = this.searchLists.listStage
         break
-      case 6:
-        this.modalList = this.searchLists.listCheckCourse
+      case 6:        
+        this.modal2ColList = this.searchLists.listCheckCourse
+        this.modal.course2ColOpen()
+        return null
+        break
+      case 7:
+        this.modalList = this.searchLists.listDieCourse
+        this.modal.dieOpen()
+        return null
         break
       case 8:
         this.modalList = this.searchLists.listInfectCourse

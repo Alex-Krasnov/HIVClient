@@ -70,6 +70,9 @@
     dateChemprofEndEnd?: string 
     dateRegStart?: string 
     dateRegEnd?: string 
+    diePreset?: string 
+    regionPreset?: string 
+    factRegionPreset?: string 
   
     selectInpDate: boolean
     selectPatientId: boolean

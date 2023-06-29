@@ -9,12 +9,15 @@
     <br>
     <div style="height: 800px; overflow-y: auto; overflow-x: hidden;">
         <ng-container formArrayName="formArr" *ngFor="let item of formArr.controls; let i = index">
-            <div class="row" formGroupName="{{i}}">
+            <div class="row mt-1" formGroupName="{{i}}">
                 <div class="col-1">
                     <input type="checkbox" class="form-check-input mt-2" formControlName="select">
                 </div>
-                <div class="col">
-                    <input type="text" class="form-control" formControlName="name" title="{{modalList[i]}}">
+                <div class="col-2 m-0 p-0">
+                    <input type="text" class="form-control" formControlName="short" title="{{modalList[i].short}}">
+                </div>
+                <div class="col m-0 p-0">
+                    <input type="text" class="form-control" formControlName="long" title="{{modalList[i].long}}">
                 </div>
             </div>
         </ng-container>

@@ -11,6 +11,7 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { SelectListComponent } from './select-list/select-list.component';
 import { SelectDieListComponent } from './select-die-list/select-die-list.component';
 import { SearchPregnantComponent } from './search-pregnant/search-pregnant.component';
+import { SelectList2ColComponent } from './select-list2-col/select-list2-col.component';
 
 
 
@@ -24,7 +25,8 @@ import { SearchPregnantComponent } from './search-pregnant/search-pregnant.compo
     ModalWindowComponent,
     SelectListComponent,
     SelectDieListComponent,
-    SearchPregnantComponent
+    SearchPregnantComponent,
+    SelectList2ColComponent
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,7 @@ export class ModalService {
   dieIsVisible$ = new BehaviorSubject<boolean>(false)
   pasIsVisible$ = new BehaviorSubject<boolean>(false)
   dieCourseIsVisible$ = new BehaviorSubject<boolean>(false)
+  course2ColIsVisible$ = new BehaviorSubject<boolean>(false)
 
   open() {
     this.isVisible$.next(true)
@@ -20,6 +21,7 @@ export class ModalService {
     this.dieIsVisible$.next(false)
     this.pasIsVisible$.next(false)
     this.dieCourseIsVisible$.next(false)
+    this.course2ColIsVisible$.next(false)
   }
 
   dieOpen() {
@@ -32,5 +34,9 @@ export class ModalService {
 
   dieCourseOpen() {
     this.dieCourseIsVisible$.next(true)
+  }
+
+  course2ColOpen() {
+    this.course2ColIsVisible$.next(true)
   }
 }
