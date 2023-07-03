@@ -1,9 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Search } from '../_interfaces/search.model';
+import { SearchPregnantListsModel } from '../_interfaces/search-pregnant-lists.model';
+import { SearchPregnantModel } from '../_interfaces/search-pregnant.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchPregnantService {
+  url: string = 'https://localhost:5001/api/SearchPregnant';
+  constructor(private http: HttpClient){}
 
-  constructor() { }
+  getLists(): Observable<SearchPregnantListsModel>{
+      return this.http.get(this.url);
+  };
+
+  getData(item: SearchPregnantModel): Observable<Search>{
+      return this.http.post<Search>(this.url+`/GetRes`, item);
+  };
 }

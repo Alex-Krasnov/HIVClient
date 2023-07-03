@@ -8,8 +8,6 @@ export class SearchSharedServiceService {
   nameSearch$ = new BehaviorSubject<string>('')
   xlIsActive$ = new BehaviorSubject<boolean>(false)
   printIsActive$ = new BehaviorSubject<boolean>(false)
-  nextIsActive$ = new BehaviorSubject<boolean>(false)
-  prevIsActive$ = new BehaviorSubject<boolean>(false)
   search$ = new BehaviorSubject<string>('')
   
   refreshData$ = new BehaviorSubject<boolean>(false)
@@ -24,12 +22,6 @@ export class SearchSharedServiceService {
         break;
       case "print":
         this.printIsActive$.next(val)
-        break;
-      case "next":
-        this.nextIsActive$.next(val)
-        break;
-      case "prev":
-        this.prevIsActive$.next(val)
         break;
     }
   }

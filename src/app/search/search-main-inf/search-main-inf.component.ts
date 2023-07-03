@@ -44,8 +44,6 @@ export class SearchMainInfComponent implements OnInit{
   ngOnInit() {
     this.shared.switchVal('xl', false)
     this.shared.switchVal('print', false)
-    this.shared.switchVal('next', false)
-    this.shared.switchVal('prev', false)
     this.shared.setNameSearch('Общие данные')
     this.shared.visibleData$.next(false)
 
@@ -313,11 +311,6 @@ export class SearchMainInfComponent implements OnInit{
 
   modalOpen(i: number){
     this.selectedList = i
-    // if (i == 7){
-    //     this.modalList = this.searchLists.listDieCourse
-    //     this.modal.dieOpen()
-    //     return null
-    // }
 
     switch (i) {
       case 1:

@@ -27,13 +27,6 @@
                 <input type="text" class="form-control tbl w-auto" formControlName="firstName">
                 <span class="w-auto my-auto">Отчество</span>
                 <input type="text" class="form-control tbl w-auto" formControlName="thirdName">
-                <span class="w-auto my-auto">Смена ФИО</span>
-                <input type="text" class="form-control tbl w-auto" formControlName="fioChange">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectSex">
-                <span class="w-auto my-auto">Пол</span>
-                <input type="text" class="form-control tbl w-auto" list="listSex" formControlName="sex">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectBirthDate">
@@ -45,30 +38,19 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectRegion">
                 <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(1)">Регион (рег.)</button>
-                <input type="text" class="form-control tbl" style="width: 88.5%;" formControlName="regionReg">
+                <input type="text" class="form-control tbl" style="width: 10%;" list="listRegionPreset" formControlName="regionPreset">
+                <input type="text" class="form-control tbl" style="width: 78.5%;" formControlName="regionReg">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectRegionFact">
                 <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(2)">Регион (факт.)</button>
-                <input type="text" class="form-control tbl" style="width: 87.5%;" formControlName="regionFact">
+                <input type="text" class="form-control tbl" style="width: 10%;" list="listRegionPreset" formControlName="factRegionPreset">
+                <input type="text" class="form-control tbl" style="width: 77.8%;" formControlName="regionFact">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectCountry">
                 <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(3)">Страна</button>
                 <input type="text" class="form-control tbl" style="width: 91.8%;" formControlName="country">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectAddr">
-                <span class="w-auto my-auto">Город</span>
-                <input type="text" class="form-control tbl" style="width: 15%;" formControlName="city">
-                <span class="w-auto my-auto">Насел.пункт</span>
-                <input type="text" class="form-control tbl" style="width: 15%;" formControlName="location">
-                <span class="w-auto my-auto">Индекс</span>
-                <input type="text" class="form-control tbl" style="width: 10%;" formControlName="indx">
-                <span class="w-auto my-auto">Улица</span>
-                <input type="text" class="form-control tbl" style="width: 10%;" formControlName="street">
-                <span class="w-auto my-auto">Дом</span>
-                <input type="text" class="form-control tbl" style="width: 10%;" formControlName="home">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectRegOnDate">
@@ -80,102 +62,30 @@
                 <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateUnRegStart">
                 <span class="w-auto my-auto">по</span>
                 <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateUnRegEnd">
-                <input type="text" class="form-control tbl ms-1" style="width: 13.5%;" list="listInfectCourse" formControlName="unRegCourse">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectBlotCheckPlace">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(4)">Место лаб.исследования</button>
-                <input type="text" class="form-control tbl" style="width: 81%;" formControlName="blotCheckPlace">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectStage">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(5)">Стадия</button>
-                <input type="text" class="form-control tbl" style="width: 91.6%;" formControlName="stage">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectDieDate">
-                <span class="w-auto my-auto">Дата смерти с </span>
-                <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateDieStart">
-                <span class="w-auto my-auto">по</span>
-                <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateDieEnd">
-                <span class="w-auto my-auto">Дата смерти от СПИДа с </span>
-                <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateDieAidsStart">
-                <span class="w-auto my-auto">по</span>
-                <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateDieAidsEnd">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(4)">Стадия</button>
+                <input type="text" class="form-control tbl" style="width: 91.8%;" formControlName="stage">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectCheckCourse">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(6)">Причина обращения</button>
-                <input type="text" class="form-control tbl" style="width: 84%;" formControlName="checkCourse">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectDieCourse">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(7)">Причина смерти</button>
-                <input type="text" class="form-control tbl" style="width: 86.4%;" formControlName="dieCourse">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(5)">Причина обращения</button>
+                <input type="text" class="form-control tbl" style="width: 83.8%;" formControlName="checkCourse">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectInfectCourse">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(8)">Фактор риска заражения</button>
-                <input type="text" class="form-control tbl" style="width: 81.2%;" formControlName="infectCourse">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(6)">Фактор риска заражения</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="infectCourse">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectShowIllnes">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(9)">Вторичное заболевание</button>
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(7)">Вторичное заболевание</button>
                 <input type="text" class="form-control tbl" style="width: 50.5%;" formControlName="showIllnes">
                 <span class="w-auto my-auto">с </span>
                 <input type="date" class="form-control tbl w-auto" formControlName="dateShowIllnesStart">
                 <span class="w-auto my-auto">по</span>
                 <input type="date" class="form-control tbl w-auto" formControlName="dateShowIllnesEnd">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectIb">
-                <span class="w-auto my-auto">Результат референс</span>
-                <input type="text" class="form-control tbl" style="width: 15%;" list="listResIb" formControlName="ibRes">
-                <span class="w-auto my-auto">Дата с </span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateIbResStart">
-                <span class="w-auto my-auto">по</span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateIbResEnd">
-                <span class="w-auto my-auto">Номер</span>
-                <input type="text" class="form-control tbl" style="width: 29.5%;" formControlName="ibNum">
-            </div>
-            <div class="row row-control mb-1">
-                <span class="w-auto my-auto">Дата ввода с </span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateInpIbStart">
-                <span class="w-auto my-auto">по</span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateInpIbEnd">
-                <span class="w-auto my-auto">Выбор блотов</span>
-                <input type="text" class="form-control tbl" style="width: 15%;" list="listSelectBlot" formControlName="ibSelect">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectHospCourse">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(10)">Причина госпитализации</button>
-                <input type="text" class="form-control tbl" style="width: 81%;" formControlName="hospCourse">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectAge">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(11)">Группы возрастов</button>
-                <input type="text" class="form-control tbl" style="width: 85.2%;" formControlName="age">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectCardNo">
-                <span class="w-auto my-auto">№ карты</span>
-                <input type="text" class="form-control tbl w-auto" formControlName="cardNo">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectArt">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(12)">АРТ</button>
-                <input type="text" class="form-control tbl" style="width: 93.7%;" formControlName="art">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectMkb10">
-                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(13)">МКБ10</button>
-                <input type="text" class="form-control tbl" style="width: 92%;" formControlName="mkb10">
-            </div>
-            <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectArchive">
-                <span class="w-auto my-auto">Архив</span>
-                <input type="text" class="form-control tbl w-auto me-1" list="listYNA" formControlName="archiveYNA">
-                <input type="text" class="form-control tbl w-auto" formControlName="archive">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectTransfArea">
@@ -194,15 +104,6 @@
                 <input type="text" class="form-control tbl w-auto" formControlName="zavApoYNA">
             </div>
             <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectTransfFeder">
-                <span class="w-auto my-auto">Передан в Суб.Фед.</span>
-                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="transfFederYNA">
-                <span class="w-auto my-auto">Дата передачи с </span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateTransfFederStart">
-                <span class="w-auto my-auto">по</span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateTransfFederEnd">
-            </div>
-            <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectUfsin">
                 <span class="w-auto my-auto">На учете в УФСИН</span>
                 <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="ufsinYNA">
@@ -212,50 +113,103 @@
                 <input type="date" class="form-control tbl w-auto" formControlName="dateUfsinEnd">
             </div>
             <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectAids12">
-                <span class="w-auto my-auto">ВИЧ 1/2</span>
-                <input type="text" class="form-control tbl w-auto" list="listAids12" formControlName="aids12">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPregCheck">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(8)">Выявление</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="pregCheck">
             </div>
             <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectUnrz">
-                <span class="w-auto my-auto">УНРЗ</span>
-                <input type="text" class="form-control tbl w-auto me-1" list="listYNA" formControlName="unrzYNA">
-                <input type="text" class="form-control tbl w-auto" formControlName="unrz">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPregMonthNo">
+                <span class="w-auto my-auto">Срок беременности</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="pregMonthNo">
             </div>
             <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectDieDiag">
-                <span class="w-auto my-auto">Диагноз посмертно</span>
-                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="dieDiagYNA">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectBirthType">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(9)">Вид родов</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="birthType">
             </div>
             <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectChemprof">
-                <span class="w-auto my-auto">Химиопроф.</span>
-                <input type="text" class="form-control tbl" style="width: 10%;" list="listChemop" formControlName="chemprof">
-                <span class="w-auto my-auto">Дата нач. с </span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateChemprofStartStart">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectMedecineStartMonthNo">
+                <span class="w-auto my-auto">Срок начала приёма медик.</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="medecineStartMonthNo">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectChildBirthDate">
+                <span class="w-auto my-auto">Дата родов с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="childBirthDateStart">
                 <span class="w-auto my-auto">по</span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateChemprofStartEnd">
-                <span class="w-auto my-auto">Дата оконч. с </span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateChemprofEndStart">
-                <span class="w-auto my-auto">по</span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateChemprofEndEnd">
+                <input type="date" class="form-control tbl w-auto" formControlName="childBirthDateEnd">
             </div>
             <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectDateReg">
-                <span class="w-auto my-auto">Даты регистрации c</span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateRegStart">
-                <span class="w-auto my-auto">по</span>
-                <input type="date" class="form-control tbl w-auto" formControlName="dateRegEnd">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectChildFio">
+                <span class="w-auto my-auto">Фамилия ребенка</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="childFamilyName">
+                <span class="w-auto my-auto">Имя ребенка</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="childFirstName">
+                <span class="w-auto my-auto">Отчество ребенка</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="childThirdName">
             </div>
             <div class="row row-control mb-1">
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPasSer">
-                <span class="w-auto my-auto">Паспорт (серия)</span>
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPasNum">
-                <span class="w-auto my-auto">Паспорт (номер)</span>
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPasWhom">
-                <span class="w-auto my-auto">Выдан</span>
-                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPasWhen">
-                <span class="w-auto my-auto">Дата выдачи</span>
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectCardNo">
+                <span class="w-auto my-auto">№ Карты пац.</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="cardNo">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPhpSchema1">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(10)">ПХП1 (схема)</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="phpSchema1">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPhpSchema2">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(11)">ПХП2 (схема)</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="phpSchema2">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPhpSchema3">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(12)">ПХП3 (схема)</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="phpSchema3">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectMedecineForSchema1">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(13)">ПХП1 (препараты)</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="medecineForSchema1">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectMedecineForSchema2">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(14)">ПХП2 (препараты)</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="medecineForSchema2">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectMedecineForSchema3">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(15)">ПХП3 (препараты)</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="medecineForSchema3">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectArt">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(16)">АРТ</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="art">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectAddr">
+                <span class="w-auto my-auto">Адрес</span>
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectMaterhome">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(17)">Роддом</button>
+                <input type="text" class="form-control tbl" style="width: 81.5%;" formControlName="materhome">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectAclDate">
+                <span class="w-auto my-auto">Дата опред.иммун.стат. с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="aclDateStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="aclDateEnd">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectAclMcnCode">
+                <span class="w-auto my-auto">CD4+(abc):</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="aclMcnCodeStart">
+                <span class="w-auto my-auto"> - </span>
+                <input type="text" class="form-control tbl w-auto" formControlName="aclMcnCodeEnd">
             </div>
         </div>
     </div>
@@ -313,6 +267,8 @@
     <datalist id="listYNA"><option *ngFor="let item of searchLists.listYNA" [value]="item"></option></datalist>
     <datalist id="listChemop"><option *ngFor="let item of searchLists.listChemop" [value]="item"></option></datalist>
     <datalist id="listAids12"><option *ngFor="let item of searchLists.listAids12" [value]="item"></option></datalist>
+    <datalist id="listDiePreset"><option *ngFor="let item of searchLists.listDiePreset" [value]="item"></option></datalist>
+    <datalist id="listRegionPreset"><option *ngFor="let item of searchLists.listRegionPreset" [value]="item"></option></datalist>
 </form>
 
 <app-modal-window *ngIf="modal.isVisible$ | async">
@@ -321,4 +277,8 @@
 
 <app-modal-window *ngIf="modal.dieIsVisible$ | async">
     <app-select-die-list [(modalList)]="modalList" (list)="giveList($event)"></app-select-die-list>
+</app-modal-window>
+
+<app-modal-window *ngIf="modal.course2ColIsVisible$ | async">
+    <app-select-list2-col [(modalList)]="modal2ColList" (list)="giveList($event)"></app-select-list2-col>
 </app-modal-window>
