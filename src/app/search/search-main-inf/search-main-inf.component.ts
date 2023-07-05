@@ -191,15 +191,15 @@ export class SearchMainInfComponent implements OnInit{
         page: this.page 
       }
 
-      const a = firstValueFrom(this.searchService.getData(formValue))
+      const res = firstValueFrom(this.searchService.getData(formValue))
 
       this.dataView = {
-        columName: (await a.then()).columName,
-        resPage: (await a.then()).resPage
+        columName: (await res.then()).columName,
+        resPage: (await res.then()).resPage
       }
-      this.maxPage = Math.ceil((await a.then()).resCount / 100)
+      this.maxPage = Math.ceil((await res.then()).resCount / 100)
       
-      this.resCount$.next((await a.then()).resCount)
+      this.resCount$.next((await res.then()).resCount)
       this.shared.visibleData$.next(true)
       this.shared.refreshData$.next(true)
     }

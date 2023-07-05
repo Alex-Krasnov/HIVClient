@@ -1,0 +1,84 @@
+ export interface SearchChildModel{
+    dateInpStart?: string 
+    dateInpEnd?: string 
+    patientId?: string 
+    familyName?: string 
+    firstName?: string 
+    thirdName?: string 
+    birthDateStart?: string 
+    birthDateEnd?: string 
+    ageDayStart?: string 
+    ageDayEnd?: string 
+    regionReg?: string[] 
+    regionPreset?: string 
+    regionFact?: string[]
+    factRegionPreset?: string 
+    country?: string[]
+    dateRegOnStart?: string 
+    dateRegOnEnd?: string 
+    dateUnRegStart?: string 
+    dateUnRegEnd?: string 
+    unRegCourse?: string
+    stage?: string[]
+    checkCourse?: string[]
+    infectCourse?: string[]
+    showIllnes?: string[]
+    dateShowIllnesStart?: string 
+    dateShowIllnesEnd?: string 
+    transfAreaYNA?: string 
+    dateTransfAreaStart?: string 
+    dateTransfAreaEnd?: string 
+    frYNA?: string 
+    zavApoYNA?: string 
+
+    familyType?: string[]
+    firstCheckDateStart?: string 
+    firstCheckDateEnd?: string 
+    childPlace?: string[]
+    breastMonthNoStart?: string 
+    breastMonthNoEnd?: string 
+    childPhp?: string[]
+    sex?: string 
+    cardNo?: string 
+    motherPatientId?: string 
+    fatherPatientId?: string 
+    arvt?: string[]
+    dieDateStart?: string 
+    dieDateEnd?: string 
+    dieAidsDateStart?: string 
+    dieAidsDateEnd?: string 
+    materHome?: string[]
+    form309?: string 
+
+
+    selectInpDate: boolean
+    selectPatientId: boolean
+    selectFio: boolean
+    selectBirthDate: boolean
+    selectRegion: boolean
+    selectRegionFact: boolean
+    selectCountry: boolean
+    selectRegOnDate: boolean
+    selectStage: boolean
+    selectCheckCourse: boolean
+    selectInfectCourse: boolean
+    selectShowIllnes: boolean
+    selectTransfArea: boolean
+    selectFr: boolean
+
+    selectFamilyType: boolean
+    selectFirstCheckDate: boolean
+    selectChildPlace: boolean
+    selectBreastMonthNo: boolean
+    selectChildPhp: boolean
+    selectSex: boolean
+    selectCardNo: boolean
+    selectParentId: boolean
+    selectAddr: boolean
+    selectArvt: boolean
+    selectDieDate: boolean
+    selectMaterHome: boolean
+    selectForm309: boolean
+    
+    page: number
+ }

@@ -3,24 +3,24 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription, firstValueFrom } from 'rxjs';
 import { Search } from 'src/app/_interfaces/search.model';
 import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
-import { SearchPregnantForm } from './search-pregnant-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { Course } from 'src/app/_interfaces/course.model';
-import { SearchPregnantService } from 'src/app/services/search-pregnant.service';
-import { SearchPregnantListsModel } from 'src/app/_interfaces/search-pregnant-lists.model';
-import { SearchPregnantModel } from 'src/app/_interfaces/search-pregnant.model';
+import { SearchChildService } from 'src/app/services/search-child.service';
+import { SearchChildForm } from './search-child-form.model';
+import { SearchChildListsModel } from 'src/app/_interfaces/search-child-lists.model';
+import { SearchChildModel } from 'src/app/_interfaces/search-child.model';
 
 @Component({
-  selector: 'app-search-pregnant',
-  templateUrl: './search-pregnant.component.html',
-  styleUrls: ['./search-pregnant.component.css']
+  selector: 'app-search-child',
+  templateUrl: './search-child.component.html',
+  styleUrls: ['./search-child.component.css']
 })
-export class SearchPregnantComponent implements OnInit{
+export class SearchChildComponent  implements OnInit{
   private SearchForm: BehaviorSubject<FormGroup | undefined>
   SearchForm$: Observable<FormGroup>
   SearchFormSub: Subscription
-  searchLists: SearchPregnantListsModel
+  searchLists: SearchChildListsModel
 
   @Input() search: boolean
   searchForm: FormGroup
@@ -33,7 +33,7 @@ export class SearchPregnantComponent implements OnInit{
   selectedList: number
 
   constructor(
-    private searchService: SearchPregnantService,
+    private searchService: SearchChildService,
     private fb: FormBuilder,
     public shared: SearchSharedServiceService,
     private listService: ListService,
@@ -44,23 +44,23 @@ export class SearchPregnantComponent implements OnInit{
   ngOnInit() {
     this.shared.switchVal('xl', false)
     this.shared.switchVal('print', false)
-    this.shared.setNameSearch('Беременные')
+    this.shared.setNameSearch('Дети')
     this.shared.visibleData$.next(false)
 
     this.initForm()
 
     this.shared.search$.subscribe(item => {
-      if(item == 'Беременные')
+      if(item == 'Дети')
         this.getSearchRes()
     })
   }
 
   initForm(){
-    this.searchService.getLists().subscribe((item: SearchPregnantListsModel) => {
+    this.searchService.getLists().subscribe((item: SearchChildListsModel) => {
       this.searchLists = item
     })
-
-    this.SearchForm = new BehaviorSubject(this.fb.group(new SearchPregnantForm(this.listService)));
+    
+    this.SearchForm = new BehaviorSubject(this.fb.group(new SearchChildForm(this.listService)));
     this.SearchForm$ = this.SearchForm.asObservable();
 
     this.SearchFormSub = this.SearchForm$
@@ -75,7 +75,7 @@ export class SearchPregnantComponent implements OnInit{
       this.maxPage = 0
       this.resCount$.next(0)
       
-      let formValue: SearchPregnantModel = {
+      let formValue: SearchChildModel = {
         dateInpStart: this.searchForm.controls['dateInpStart'].value,
         dateInpEnd: this.searchForm.controls['dateInpEnd'].value,
         patientId: this.searchForm.controls['patientId'].value,
@@ -84,6 +84,8 @@ export class SearchPregnantComponent implements OnInit{
         thirdName: this.searchForm.controls['thirdName'].value,
         birthDateStart: this.searchForm.controls['birthDateStart'].value,
         birthDateEnd: this.searchForm.controls['birthDateEnd'].value,
+        ageDayStart: this.searchForm.controls['ageDayStart'].value,
+        ageDayEnd: this.searchForm.controls['ageDayEnd'].value,
         regionReg: this.searchForm.controls['regionReg'].value,
         regionPreset: this.searchForm.controls['regionPreset'].value,
         regionFact: this.searchForm.controls['regionFact'].value,
@@ -93,6 +95,7 @@ export class SearchPregnantComponent implements OnInit{
         dateRegOnEnd: this.searchForm.controls['dateRegOnEnd'].value,
         dateUnRegStart: this.searchForm.controls['dateUnRegStart'].value,
         dateUnRegEnd: this.searchForm.controls['dateUnRegEnd'].value,
+        unRegCourse: this.searchForm.controls['unRegCourse'].value,
         stage: this.searchForm.controls['stage'].value,
         checkCourse: this.searchForm.controls['checkCourse'].value,
         infectCourse: this.searchForm.controls['infectCourse'].value,
@@ -104,32 +107,27 @@ export class SearchPregnantComponent implements OnInit{
         dateTransfAreaEnd: this.searchForm.controls['dateTransfAreaEnd'].value,
         frYNA: this.searchForm.controls['frYNA'].value,
         zavApoYNA: this.searchForm.controls['zavApoYNA'].value,
-        ufsinYNA: this.searchForm.controls['ufsinYNA'].value,
-        dateUfsinStart: this.searchForm.controls['dateUfsinStart'].value,
-        dateUfsinEnd: this.searchForm.controls['dateUfsinEnd'].value,
-        pregCheck: this.searchForm.controls['pregCheck'].value,
-        pregMonthNo: this.searchForm.controls['pregMonthNo'].value,
-        birthType: this.searchForm.controls['birthType'].value,
-        medecineStartMonthNo: this.searchForm.controls['medecineStartMonthNo'].value,
-        childBirthDateStart: this.searchForm.controls['childBirthDateStart'].value,
-        childBirthDateEnd: this.searchForm.controls['childBirthDateEnd'].value,
-        childFamilyName: this.searchForm.controls['childFamilyName'].value,
-        childFirstName: this.searchForm.controls['childFirstName'].value,
-        childThirdName: this.searchForm.controls['childThirdName'].value,
+
+        familyType: this.searchForm.controls['familyType'].value,
+        firstCheckDateStart: this.searchForm.controls['firstCheckDateStart'].value,
+        firstCheckDateEnd: this.searchForm.controls['firstCheckDateEnd'].value,
+        childPlace: this.searchForm.controls['childPlace'].value,
+        breastMonthNoStart: this.searchForm.controls['breastMonthNoStart'].value,
+        breastMonthNoEnd: this.searchForm.controls['breastMonthNoEnd'].value,
+        childPhp: this.searchForm.controls['childPhp'].value,
+        sex: this.searchForm.controls['sex'].value,
         cardNo: this.searchForm.controls['cardNo'].value,
-        phpSchema1: this.searchForm.controls['phpSchema1'].value,
-        phpSchema2: this.searchForm.controls['phpSchema2'].value,
-        phpSchema3: this.searchForm.controls['phpSchema3'].value,
-        medecineForSchema1: this.searchForm.controls['medecineForSchema1'].value,
-        medecineForSchema2: this.searchForm.controls['medecineForSchema2'].value,
-        medecineForSchema3: this.searchForm.controls['medecineForSchema3'].value,
-        art: this.searchForm.controls['art'].value,
-        materhome: this.searchForm.controls['materhome'].value,
-        aclDateStart: this.searchForm.controls['aclDateStart'].value,
-        aclDateEnd: this.searchForm.controls['aclDateEnd'].value,
-        aclMcnCodeStart: this.searchForm.controls['aclMcnCodeStart'].value,
-        aclMcnCodeEnd: this.searchForm.controls['aclMcnCodeEnd'].value,
-        
+        motherPatientId: this.searchForm.controls['motherPatientId'].value,
+        fatherPatientId: this.searchForm.controls['fatherPatientId'].value,
+        arvt: this.searchForm.controls['arvt'].value,
+        dieDateStart: this.searchForm.controls['dieDateStart'].value,
+        dieDateEnd: this.searchForm.controls['dieDateEnd'].value,
+        dieAidsDateStart: this.searchForm.controls['dieAidsDateStart'].value,
+        dieAidsDateEnd: this.searchForm.controls['dieAidsDateEnd'].value,
+        materHome: this.searchForm.controls['materHome'].value,
+        form309: this.searchForm.controls['form309'].value,
+
+
         selectInpDate: this.searchForm.controls['selectInpDate'].value,
         selectPatientId: this.searchForm.controls['selectPatientId'].value,
         selectFio: this.searchForm.controls['selectFio'].value,
@@ -144,25 +142,20 @@ export class SearchPregnantComponent implements OnInit{
         selectShowIllnes: this.searchForm.controls['selectShowIllnes'].value,
         selectTransfArea: this.searchForm.controls['selectTransfArea'].value,
         selectFr: this.searchForm.controls['selectFr'].value,
-        selectUfsin: this.searchForm.controls['selectUfsin'].value,
-        selectPregCheck: this.searchForm.controls['selectPregCheck'].value,
-        selectPregMonthNo: this.searchForm.controls['selectPregMonthNo'].value,
-        selectBirthType: this.searchForm.controls['selectBirthType'].value,
-        selectMedecineStartMonthNo: this.searchForm.controls['selectMedecineStartMonthNo'].value,
-        selectChildBirthDate: this.searchForm.controls['selectChildBirthDate'].value,
-        selectChildFio: this.searchForm.controls['selectChildFio'].value,
+
+        selectFamilyType: this.searchForm.controls['selectFamilyType'].value,
+        selectFirstCheckDate: this.searchForm.controls['selectFirstCheckDate'].value,
+        selectChildPlace: this.searchForm.controls['selectChildPlace'].value,
+        selectBreastMonthNo: this.searchForm.controls['selectBreastMonthNo'].value,
+        selectChildPhp: this.searchForm.controls['selectChildPhp'].value,
+        selectSex: this.searchForm.controls['selectSex'].value,
         selectCardNo: this.searchForm.controls['selectCardNo'].value,
-        selectPhpSchema1: this.searchForm.controls['selectPhpSchema1'].value,
-        selectPhpSchema2: this.searchForm.controls['selectPhpSchema2'].value,
-        selectPhpSchema3: this.searchForm.controls['selectPhpSchema3'].value,
-        selectMedecineForSchema1: this.searchForm.controls['selectMedecineForSchema1'].value,
-        selectMedecineForSchema2: this.searchForm.controls['selectMedecineForSchema2'].value,
-        selectMedecineForSchema3: this.searchForm.controls['selectMedecineForSchema3'].value,
-        selectArt: this.searchForm.controls['selectArt'].value,
+        selectParentId: this.searchForm.controls['selectParentId'].value,
         selectAddr: this.searchForm.controls['selectAddr'].value,
-        selectMaterhome: this.searchForm.controls['selectMaterhome'].value,
-        selectAclDate: this.searchForm.controls['selectAclDate'].value,
-        selectAclMcnCode: this.searchForm.controls['selectAclMcnCode'].value,
+        selectArvt: this.searchForm.controls['selectArvt'].value,
+        selectDieDate: this.searchForm.controls['selectDieDate'].value,
+        selectMaterHome: this.searchForm.controls['selectMaterHome'].value,
+        selectForm309: this.searchForm.controls['selectForm309'].value,
 
         page: this.page 
       }
@@ -220,29 +213,24 @@ export class SearchPregnantComponent implements OnInit{
     this.searchForm.controls['selectShowIllnes'].setValue(true)
     this.searchForm.controls['selectTransfArea'].setValue(true)
     this.searchForm.controls['selectFr'].setValue(true)
-    this.searchForm.controls['selectUfsin'].setValue(true)
 
-    this.searchForm.controls['selectPregCheck'].setValue(true)
-    this.searchForm.controls['selectPregMonthNo'].setValue(true)
-    this.searchForm.controls['selectBirthType'].setValue(true)
-    this.searchForm.controls['selectMedecineStartMonthNo'].setValue(true)
-    this.searchForm.controls['selectChildBirthDate'].setValue(true)
-    this.searchForm.controls['selectChildFio'].setValue(true)
+    this.searchForm.controls['selectFamilyType'].setValue(true)
+    this.searchForm.controls['selectFirstCheckDate'].setValue(true)
+    this.searchForm.controls['selectChildPlace'].setValue(true)
+    this.searchForm.controls['selectBreastMonthNo'].setValue(true)
+    this.searchForm.controls['selectChildPhp'].setValue(true)
+    this.searchForm.controls['selectSex'].setValue(true)
     this.searchForm.controls['selectCardNo'].setValue(true)
-    this.searchForm.controls['selectPhpSchema1'].setValue(true)
-    this.searchForm.controls['selectPhpSchema2'].setValue(true)
-    this.searchForm.controls['selectPhpSchema3'].setValue(true)
-    this.searchForm.controls['selectMedecineForSchema1'].setValue(true)
-    this.searchForm.controls['selectMedecineForSchema2'].setValue(true)
-    this.searchForm.controls['selectMedecineForSchema3'].setValue(true)
-    this.searchForm.controls['selectArt'].setValue(true)
+    this.searchForm.controls['selectParentId'].setValue(true)
     this.searchForm.controls['selectAddr'].setValue(true)
-    this.searchForm.controls['selectMaterhome'].setValue(true)
-    this.searchForm.controls['selectAclDate'].setValue(true)
-    this.searchForm.controls['selectAclMcnCode'].setValue(true)
+    this.searchForm.controls['selectArvt'].setValue(true)
+    this.searchForm.controls['selectDieDate'].setValue(true)
+    this.searchForm.controls['selectMaterHome'].setValue(true)
+    this.searchForm.controls['selectForm309'].setValue(true)
   }
 
   dismarkAll(){
+    
     this.searchForm.controls['selectInpDate'].setValue(false)
     this.searchForm.controls['selectPatientId'].setValue(false)
     this.searchForm.controls['selectFio'].setValue(false)
@@ -257,26 +245,20 @@ export class SearchPregnantComponent implements OnInit{
     this.searchForm.controls['selectShowIllnes'].setValue(false)
     this.searchForm.controls['selectTransfArea'].setValue(false)
     this.searchForm.controls['selectFr'].setValue(false)
-    this.searchForm.controls['selectUfsin'].setValue(false)
 
-    this.searchForm.controls['selectPregCheck'].setValue(false)
-    this.searchForm.controls['selectPregMonthNo'].setValue(false)
-    this.searchForm.controls['selectBirthType'].setValue(false)
-    this.searchForm.controls['selectMedecineStartMonthNo'].setValue(false)
-    this.searchForm.controls['selectChildBirthDate'].setValue(false)
-    this.searchForm.controls['selectChildFio'].setValue(false)
+    this.searchForm.controls['selectFamilyType'].setValue(false)
+    this.searchForm.controls['selectFirstCheckDate'].setValue(false)
+    this.searchForm.controls['selectChildPlace'].setValue(false)
+    this.searchForm.controls['selectBreastMonthNo'].setValue(false)
+    this.searchForm.controls['selectChildPhp'].setValue(false)
+    this.searchForm.controls['selectSex'].setValue(false)
     this.searchForm.controls['selectCardNo'].setValue(false)
-    this.searchForm.controls['selectPhpSchema1'].setValue(false)
-    this.searchForm.controls['selectPhpSchema2'].setValue(false)
-    this.searchForm.controls['selectPhpSchema3'].setValue(false)
-    this.searchForm.controls['selectMedecineForSchema1'].setValue(false)
-    this.searchForm.controls['selectMedecineForSchema2'].setValue(false)
-    this.searchForm.controls['selectMedecineForSchema3'].setValue(false)
-    this.searchForm.controls['selectArt'].setValue(false)
+    this.searchForm.controls['selectParentId'].setValue(false)
     this.searchForm.controls['selectAddr'].setValue(false)
-    this.searchForm.controls['selectMaterhome'].setValue(false)
-    this.searchForm.controls['selectAclDate'].setValue(false)
-    this.searchForm.controls['selectAclMcnCode'].setValue(false)
+    this.searchForm.controls['selectArvt'].setValue(false)
+    this.searchForm.controls['selectDieDate'].setValue(false)
+    this.searchForm.controls['selectMaterHome'].setValue(false)
+    this.searchForm.controls['selectForm309'].setValue(false)
   }
 
   modalOpen(i: number){
@@ -307,34 +289,19 @@ export class SearchPregnantComponent implements OnInit{
         this.modalList = this.searchLists.listShowIllness
         break
       case 8:
-        this.modalList = this.searchLists.listPregCheck
+        this.modalList = this.searchLists.listFamilyType
         break
       case 9:
-        this.modalList = this.searchLists.listBirthType
+        this.modalList = this.searchLists.listChildPlace
         break
       case 10:
-        this.modalList = this.searchLists.listSchema
+        this.modalList = this.searchLists.listPhp
         break
       case 11:
-        this.modalList = this.searchLists.listSchema
-        break
-      case 12:
-        this.modalList = this.searchLists.listSchema
-        break
-      case 13:
-        this.modalList = this.searchLists.listMedecineForSchema
-        break
-      case 14:
-        this.modalList = this.searchLists.listMedecineForSchema
-        break
-      case 15:
-        this.modalList = this.searchLists.listMedecineForSchema
-        break
-      case 16:
         this.modalList = this.searchLists.listArvt
         break
-      case 17:
-        this.modalList = this.searchLists.listMaterHome
+      case 12:
+        this.modalList = this.searchLists.listMaterhome
         break
     }
 
@@ -365,34 +332,19 @@ export class SearchPregnantComponent implements OnInit{
         this.searchForm.controls['showIllnes'].setValue(lst)
         break
       case 8:
-        this.searchForm.controls['pregCheck'].setValue(lst)
+        this.searchForm.controls['familyType'].setValue(lst)
         break
       case 9:
-        this.searchForm.controls['birthType'].setValue(lst)
+        this.searchForm.controls['childPlace'].setValue(lst)
         break
       case 10:
-        this.searchForm.controls['phpSchema1'].setValue(lst)
+        this.searchForm.controls['childPhp'].setValue(lst)
         break
       case 11:
-        this.searchForm.controls['phpSchema2'].setValue(lst)
+        this.searchForm.controls['arvt'].setValue(lst)
         break
       case 12:
-        this.searchForm.controls['phpSchema3'].setValue(lst)
-        break
-      case 13:
-        this.searchForm.controls['medecineForSchema1'].setValue(lst)
-        break
-      case 14:
-        this.searchForm.controls['medecineForSchema2'].setValue(lst)
-        break
-      case 15:
-        this.searchForm.controls['medecineForSchema3'].setValue(lst)
-        break
-      case 16:
-        this.searchForm.controls['art'].setValue(lst)
-        break
-      case 17:
-        this.searchForm.controls['materhome'].setValue(lst)
+        this.searchForm.controls['materHome'].setValue(lst)
         break
     }
   }
