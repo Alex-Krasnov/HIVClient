@@ -247,6 +247,34 @@
                 <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(19)">Ряд терапии</button>
                 <input type="text" class="form-control tbl" style="width: 71.5%;" formControlName="rangeTherapy">
             </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectVlDate">
+                <span class="w-auto my-auto">Дата опред.вир.нагр. с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateVlStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateVlEnd">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectVlRes">
+                <span class="w-auto my-auto">Вирусн.нагр. с </span>
+                <input type="text" class="form-control tbl w-auto" formControlName="resVlStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="resVlEnd">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectImDate">
+                <span class="w-auto my-auto">Дата опред.вир.нагр. с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateIMStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateImEnd">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectImRes">
+                <span class="w-auto my-auto">Вирусн.нагр. с </span>
+                <input type="text" class="form-control tbl w-auto" formControlName="resImStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="resImEnd">
+            </div>
         </div>
     </div>
     <br>

@@ -146,6 +146,14 @@ export class SearchTreatmentComponent implements OnInit{
         finSource: this.searchForm.controls['finSource'].value,
         art: this.searchForm.controls['art'].value,
         rangeTherapy: this.searchForm.controls['rangeTherapy'].value,
+        dateVlStart: this.searchForm.controls['dateVlStart'].value,
+        dateVlEnd: this.searchForm.controls['dateVlEnd'].value,
+        resVlStart: this.searchForm.controls['resVlStart'].value,
+        resVlEnd: this.searchForm.controls['resVlEnd'].value,
+        dateIMStart: this.searchForm.controls['dateIMStart'].value,
+        dateImEnd: this.searchForm.controls['dateImEnd'].value,
+        resImStart: this.searchForm.controls['resImStart'].value,
+        resImEnd: this.searchForm.controls['resImEnd'].value,
         
         selectInpDate: this.searchForm.controls['selectInpDate'].value,
         selectPatientId: this.searchForm.controls['selectPatientId'].value,
@@ -181,6 +189,10 @@ export class SearchTreatmentComponent implements OnInit{
         selectFinSource: this.searchForm.controls['selectFinSource'].value,
         selectArt: this.searchForm.controls['selectArt'].value,
         selectRangeTherapy: this.searchForm.controls['selectRangeTherapy'].value,
+        selectVlDate: this.searchForm.controls['selectVlDate'].value,
+        selectVlRes: this.searchForm.controls['selectVlRes'].value,
+        selectImDate: this.searchForm.controls['selectImDate'].value,
+        selectImRes: this.searchForm.controls['selectImRes'].value,
 
         page: this.page 
       }
@@ -258,6 +270,10 @@ export class SearchTreatmentComponent implements OnInit{
     this.searchForm.controls['selectFinSource'].setValue(true)
     this.searchForm.controls['selectArt'].setValue(true)
     this.searchForm.controls['selectRangeTherapy'].setValue(true)
+    this.searchForm.controls['selectVlDate'].setValue(true)
+    this.searchForm.controls['selectVlRes'].setValue(true)
+    this.searchForm.controls['selectImDate'].setValue(true)
+    this.searchForm.controls['selectImRes'].setValue(true)
   }
 
   dismarkAll(){
@@ -295,6 +311,10 @@ export class SearchTreatmentComponent implements OnInit{
     this.searchForm.controls['selectFinSource'].setValue(false)
     this.searchForm.controls['selectArt'].setValue(false)
     this.searchForm.controls['selectRangeTherapy'].setValue(false)
+    this.searchForm.controls['selectVlDate'].setValue(false)
+    this.searchForm.controls['selectVlRes'].setValue(false)
+    this.searchForm.controls['selectImDate'].setValue(false)
+    this.searchForm.controls['selectImRes'].setValue(false)
   }
 
   modalOpen(i: number){

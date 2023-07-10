@@ -74,6 +74,14 @@ export class SearchTreatmentForm {
     finSource = new FormControl()
     art = new FormControl()
     rangeTherapy = new FormControl()
+    dateVlStart = new FormControl()
+    dateVlEnd = new FormControl()
+    resVlStart = new FormControl()
+    resVlEnd = new FormControl()
+    dateIMStart = new FormControl()
+    dateImEnd = new FormControl()
+    resImStart = new FormControl()
+    resImEnd = new FormControl()
 
 
     selectInpDate = new FormControl()
@@ -111,6 +119,10 @@ export class SearchTreatmentForm {
     selectFinSource = new FormControl()
     selectArt = new FormControl()
     selectRangeTherapy = new FormControl()
+    selectVlDate = new FormControl()
+    selectVlRes = new FormControl()
+    selectImDate = new FormControl()
+    selectImRes = new FormControl()
 
     constructor(private listService: ListService) 
     {
@@ -204,6 +216,14 @@ export class SearchTreatmentForm {
       this.art.disable()
       this.rangeTherapy.setValue(['Все'])
       this.rangeTherapy.disable()
+      this.dateVlStart.setValue('')
+      this.dateVlEnd.setValue('')
+      this.resVlStart.setValue('')
+      this.resVlEnd.setValue('')
+      this.dateIMStart.setValue('')
+      this.dateImEnd.setValue('')
+      this.resImStart.setValue('')
+      this.resImEnd.setValue('')
 
       this.selectInpDate.setValue(true)
       this.selectPatientId.setValue(true)
@@ -240,6 +260,10 @@ export class SearchTreatmentForm {
       this.selectFinSource.setValue(true)
       this.selectArt.setValue(true)
       this.selectRangeTherapy.setValue(true)
+      this.selectVlDate.setValue(true)
+      this.selectVlRes.setValue(true)
+      this.selectImDate.setValue(true)
+      this.selectImRes.setValue(true)
 
       this.transfAreaYNA.addAsyncValidators(InList.validateYNA(this.listService))
       this.frYNA.addAsyncValidators(InList.validateYNA(this.listService))

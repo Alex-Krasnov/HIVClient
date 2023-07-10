@@ -69,6 +69,14 @@
     finSource?: string[]
     art?: string[]
     rangeTherapy?: string[]
+    dateVlStart?: string
+    dateVlEnd?: string
+    resVlStart?: string
+    resVlEnd?: string
+    dateIMStart?: string
+    dateImEnd?: string
+    resImStart?: string
+    resImEnd?: string
     
 
     selectInpDate: boolean
@@ -105,6 +113,10 @@
     selectFinSource: boolean
     selectArt: boolean
     selectRangeTherapy: boolean
+    selectVlDate: boolean
+    selectVlRes: boolean
+    selectImDate: boolean
+    selectImRes: boolean
 
     page: number
  }
