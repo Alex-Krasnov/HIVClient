@@ -7,6 +7,7 @@ import { SearchFastComponent } from './search-fast/search-fast.component';
 import { SearchMainInfComponent } from './search-main-inf/search-main-inf.component';
 import { SearchPregnantComponent } from './search-pregnant/search-pregnant.component';
 import { SearchChildComponent } from './search-child/search-child.component';
+import { SearchTreatmentComponent } from './search-treatment/search-treatment.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
       { path: 'fast', component: SearchFastComponent, canActivate: [AuthGuard] },
       { path: 'main', component: SearchMainInfComponent, canActivate: [AuthGuard] },
       { path: 'preg', component: SearchPregnantComponent, canActivate: [AuthGuard] },
-      { path: 'child', component: SearchChildComponent, canActivate: [AuthGuard] }
+      { path: 'child', component: SearchChildComponent, canActivate: [AuthGuard] },
+      { path: 'treatment', component: SearchTreatmentComponent, canActivate: [AuthGuard] }
     ]
   }
 ];

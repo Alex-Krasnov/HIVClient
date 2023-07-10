@@ -13,6 +13,7 @@ import { SelectDieListComponent } from './select-die-list/select-die-list.compon
 import { SearchPregnantComponent } from './search-pregnant/search-pregnant.component';
 import { SelectList2ColComponent } from './select-list2-col/select-list2-col.component';
 import { SearchChildComponent } from './search-child/search-child.component';
+import { SearchTreatmentComponent } from './search-treatment/search-treatment.component';
 
 
 
@@ -28,7 +29,8 @@ import { SearchChildComponent } from './search-child/search-child.component';
     SelectDieListComponent,
     SearchPregnantComponent,
     SelectList2ColComponent,
-    SearchChildComponent
+    SearchChildComponent,
+    SearchTreatmentComponent
   ],
   imports: [
     CommonModule,
