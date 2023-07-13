@@ -1,6 +1,6 @@
 import { Course } from "./course.model"
 
-export interface  SearchTreatmentListsModel{
+export interface  SearchAnalyseListsModel{
   listSex?: string[]
   listRegion?: string[]
   listRegionPreset?: string[]
@@ -12,18 +12,10 @@ export interface  SearchTreatmentListsModel{
   listCheckCourse?: Course[]
   listInfectCourse?: string[]
   listShowIllness?: string[]
-  listInvalid?: string[]
-  listCorrespIllness?: string[]
-  listSchema?: string[]
-  listSchemaMedecine?: string[]
-  listMedecine?: string[]
-  listDoctor?: string[]
-  listSchemaChange?: string[]
-  listFinSourse?: string[]
-  listArvt?: string[]
-  listRangeTherapy?: string[]
   listYN?: string[]
   listYNA?: string[]
   listResIb?: string[]
+  listArvt?: string[]
+  listPNA?: string[]
   listSelectBlot?: string[]
 }

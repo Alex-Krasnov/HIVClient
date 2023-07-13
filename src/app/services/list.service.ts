@@ -314,4 +314,8 @@ export class ListService {
     InListAids12(name: string): Observable<object>{
         return this.http.post(this.url+`getInListAids12`,{ str: name});
     };
+
+    InListPNA(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListPNA`,{ str: name});
+    };
 }

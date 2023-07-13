@@ -137,7 +137,7 @@
                 <span class="w-auto my-auto">Внесено в ФР</span>
                 <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="frYNA">
                 <span class="w-auto my-auto">Зав. АПО</span>
-                <input type="text" class="form-control tbl w-auto" formControlName="zavApoYNA">
+                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="zavApoYNA">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectIb">
@@ -270,7 +270,7 @@
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectImRes">
-                <span class="w-auto my-auto">Вирусн.нагр. с </span>
+                <span class="w-auto my-auto">CD4+(abc) с </span>
                 <input type="text" class="form-control tbl w-auto" formControlName="resImStart">
                 <span class="w-auto my-auto">по</span>
                 <input type="text" class="form-control tbl w-auto" formControlName="resImEnd">
@@ -329,6 +329,8 @@
     <datalist id="listRegOff"><option *ngFor="let item of searchLists.listRegOff" [value]="item"></option></datalist>
     <datalist id="listSex"><option *ngFor="let item of searchLists.listSex" [value]="item"></option></datalist>
     <datalist id="listResIb"><option *ngFor="let item of searchLists.listResIb" [value]="item"></option></datalist>
+    <datalist id="listSelectBlot"><option *ngFor="let item of searchLists.listSelectBlot" [value]="item"></option></datalist>
+    <datalist id="listDiePreset"><option *ngFor="let item of searchLists.listDiePreset" [value]="item"></option></datalist>
 </form>
 
 <app-modal-window *ngIf="modal.isVisible$ | async">
