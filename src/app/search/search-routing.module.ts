@@ -9,6 +9,7 @@ import { SearchPregnantComponent } from './search-pregnant/search-pregnant.compo
 import { SearchChildComponent } from './search-child/search-child.component';
 import { SearchTreatmentComponent } from './search-treatment/search-treatment.component';
 import { SearchAnalysisComponent } from './search-analysis/search-analysis.component';
+import { SearchAclComponent } from './search-acl/search-acl.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: 'preg', component: SearchPregnantComponent, canActivate: [AuthGuard] },
       { path: 'child', component: SearchChildComponent, canActivate: [AuthGuard] },
       { path: 'treatment', component: SearchTreatmentComponent, canActivate: [AuthGuard] },
-      { path: 'analysis', component: SearchAnalysisComponent, canActivate: [AuthGuard] }
+      { path: 'analysis', component: SearchAnalysisComponent, canActivate: [AuthGuard] },
+      { path: 'acl', component: SearchAclComponent, canActivate: [AuthGuard] }
     ]
   }
 ];

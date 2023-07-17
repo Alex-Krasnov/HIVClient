@@ -15,6 +15,7 @@ import { SelectList2ColComponent } from './select-list2-col/select-list2-col.com
 import { SearchChildComponent } from './search-child/search-child.component';
 import { SearchTreatmentComponent } from './search-treatment/search-treatment.component';
 import { SearchAnalysisComponent } from './search-analysis/search-analysis.component';
+import { SearchAclComponent } from './search-acl/search-acl.component';
 
 
 
@@ -32,7 +33,8 @@ import { SearchAnalysisComponent } from './search-analysis/search-analysis.compo
     SelectList2ColComponent,
     SearchChildComponent,
     SearchTreatmentComponent,
-    SearchAnalysisComponent
+    SearchAnalysisComponent,
+    SearchAclComponent
   ],
   imports: [
     CommonModule,

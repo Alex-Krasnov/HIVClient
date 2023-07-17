@@ -1,0 +1,191 @@
+<form class="pt-3" style="background-color: #ade8dd;" [formGroup]="searchForm" *ngIf="searchLists">
+    <div class="row ms-1 mt-1">
+        <div class="col-xl">
+            <div class="row mb-1">
+                <div class="col-1 btn-group mr-2 btn-group-sm">
+                    <button class="w-70 btn btn-success btn-sm" (click)="markAll()">x</button>
+                    <button class="w-70 btn btn-success btn-sm" (click)="dismarkAll()">o</button>
+                </div>
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectInpDate">
+                <span class="w-auto my-auto">Дата ввода с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateInpStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateInpEnd">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPatientId">
+                <span class="w-auto my-auto">ИД пациента</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="patientId">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectFio">
+                <span class="w-auto my-auto">Фамилия</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="familyName">
+                <span class="w-auto my-auto">Имя</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="firstName">
+                <span class="w-auto my-auto">Отчество</span>
+                <input type="text" class="form-control tbl w-auto" formControlName="thirdName">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectSex">
+                <span class="w-auto my-auto">Пол</span>
+                <input type="text" class="form-control tbl w-auto" list="listSex" formControlName="sex">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectBirthDate">
+                <span class="w-auto my-auto">Дата рождения с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="birthDateStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="birthDateEnd">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectRegion">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(1)">Регион (рег.)</button>
+                <input type="text" class="form-control tbl" style="width: 10%;" list="listRegionPreset" formControlName="regionPreset">
+                <input type="text" class="form-control tbl" style="width: 78.5%;" formControlName="regionReg">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectRegionFact">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(2)">Регион (факт.)</button>
+                <input type="text" class="form-control tbl" style="width: 10%;" list="listRegionPreset" formControlName="factRegionPreset">
+                <input type="text" class="form-control tbl" style="width: 77.8%;" formControlName="regionFact">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectRegOnDate">
+                <span class="w-auto my-auto">Дата пост.на учёт с </span>
+                <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateRegOnStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateRegOnEnd">
+                <span class="w-auto my-auto">Дата снят.с учёта с </span>
+                <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateUnRegStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateUnRegEnd">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectStage">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(3)">Стадия</button>
+                <input type="text" class="form-control tbl" style="width: 91.8%;" formControlName="stage">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectCheckCourse">
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(4)">Причина обращения</button>
+                <input type="text" class="form-control tbl" style="width: 83.8%;" formControlName="checkCourse">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectIb">
+                <span class="w-auto my-auto">Результат референс</span>
+                <input type="text" class="form-control tbl" style="width: 15%;" list="listResIb" formControlName="ibRes">
+                <span class="w-auto my-auto">Дата с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateIbResStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateIbResEnd">
+                <span class="w-auto my-auto">Номер</span>
+                <input type="text" class="form-control tbl" style="width: 29.5%;" formControlName="ibNum">
+            </div>
+            <div class="row row-control mb-1">
+                <span class="w-auto my-auto">Дата ввода с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateInpIbStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="dateInpIbEnd">
+                <span class="w-auto my-auto">Выбор блотов</span>
+                <input type="text" class="form-control tbl" style="width: 15%;" list="listSelectBlot" formControlName="ibSelect">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectTestCode">
+                <span class="w-auto my-auto">Код теста</span>
+                <input type="text" class="form-control tbl" style="width: 9%;" formControlName="aclTestCode1">
+                <span class="w-auto my-auto">или</span>
+                <input type="text" class="form-control tbl" style="width: 9%;" formControlName="aclTestCode2">
+                <span class="w-auto my-auto">или</span>
+                <input type="text" class="form-control tbl" style="width: 9%;" formControlName="aclTestCode3">
+                <span class="w-auto my-auto">или</span>
+                <input type="text" class="form-control tbl" style="width: 9%;" formControlName="aclTestCode4">
+                <span class="w-auto my-auto">или</span>
+                <input type="text" class="form-control tbl" style="width: 9%;" formControlName="aclTestCode5">
+                <span class="w-auto my-auto">или</span>
+                <input type="text" class="form-control tbl" style="width: 9%;" formControlName="aclTestCode6">
+                <span class="w-auto my-auto">или</span>
+                <input type="text" class="form-control tbl" style="width: 9%;" formControlName="aclTestCode7">
+            </div>
+            <div class="row row-control mb-1">
+                <span class="w-auto my-auto">Биохимия</span>
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="biochemistry">
+                <span class="w-auto my-auto">Гемaтология</span>
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="hematology">
+            </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectSampleDate">
+                <span class="w-auto my-auto">Дата теста с</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="aclSampleDateStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="aclSampleDateEnd">
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="rwo justify-content-center" *ngIf="shared.visibleData$| async">
+        <span class="mx-3">Всего найдено: {{resCount$ | async}}</span>
+    </div>
+    <div style="width: 1290px;overflow-x: auto;"> 
+        <app-display-result [(data)]="dataView" *ngIf="shared.visibleData$| async"></app-display-result>
+    </div>
+    <br>
+    <div class="rwo justify-content-center" *ngIf="shared.visibleData$| async">
+        <button type="button" class="btn btn-success me-1" (click)="firstPage()">
+            <svg 
+                width="16" height="16" fill="currentColor" 
+                 viewBox="0 0 16 16">
+                 <path d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                 <path d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </button>
+        <button type="button" class="btn btn-success" (click)="prevPage()">
+          <svg 
+              width="16" height="16" fill="currentColor" 
+               viewBox="0 0 16 16">
+              <path 
+                  d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z">
+              </path>
+          </svg>
+        </button>
+        <span class="mx-3">{{page}} из {{maxPage}}</span>
+        <button type="button" class="btn btn-success" (click)="nextPage()">
+            <svg 
+                width="16" height="16" fill="currentColor" 
+                 viewBox="0 0 16 16">
+                <path 
+                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                </path>
+            </svg>
+        </button>
+        <button type="button" class="btn btn-success ms-1" (click)="lastPage()">
+            <svg 
+                width="16" height="16" fill="currentColor" 
+                 viewBox="0 0 16 16">
+                 <path d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+                 <path d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </button>
+    </div>
+    <br>
+    
+    <datalist id="listYNA"><option *ngFor="let item of searchLists.listYNA" [value]="item"></option></datalist>
+    <datalist id="listRegionPreset"><option *ngFor="let item of searchLists.listRegionPreset" [value]="item"></option></datalist>
+    <datalist id="listResIb"><option *ngFor="let item of searchLists.listResIb" [value]="item"></option></datalist>
+    <datalist id="listSelectBlot"><option *ngFor="let item of searchLists.listSelectBlot" [value]="item"></option></datalist>
+    <datalist id="listSex"><option *ngFor="let item of searchLists.listSex" [value]="item"></option></datalist>
+</form>
+
+<app-modal-window *ngIf="modal.isVisible$ | async">
+    <app-select-list [(modalList)]="modalList" (list)="giveList($event)"></app-select-list>
+</app-modal-window>
+
+<app-modal-window *ngIf="modal.dieIsVisible$ | async">
+    <app-select-die-list [(modalList)]="modalList" (list)="giveList($event)"></app-select-die-list>
+</app-modal-window>
+
+<app-modal-window *ngIf="modal.course2ColIsVisible$ | async">
+    <app-select-list2-col [(modalList)]="modal2ColList" (list)="giveList($event)"></app-select-list2-col>
+</app-modal-window>
