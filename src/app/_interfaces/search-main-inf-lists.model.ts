@@ -3,6 +3,7 @@ import { Course } from "./course.model"
  export interface  SearchMainInfModelLists{
     listSex?: string[]
     listRegion?: string[]
+    listRegOff?: string[]
     listCountry?: string[]
     listInfectCourse?: string[]
     listCheckPlace?: string[]
