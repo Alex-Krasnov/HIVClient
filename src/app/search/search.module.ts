@@ -18,6 +18,7 @@ import { SearchAnalysisComponent } from './search-analysis/search-analysis.compo
 import { SearchAclComponent } from './search-acl/search-acl.component';
 import { SearchVisitComponent } from './search-visit/search-visit.component';
 import { SearchEpidComponent } from './search-epid/search-epid.component';
+import { SearchHospComponent } from './search-hosp/search-hosp.component';
 
 
 
@@ -38,7 +39,8 @@ import { SearchEpidComponent } from './search-epid/search-epid.component';
     SearchAnalysisComponent,
     SearchAclComponent,
     SearchVisitComponent,
-    SearchEpidComponent
+    SearchEpidComponent,
+    SearchHospComponent
   ],
   imports: [
     CommonModule,
