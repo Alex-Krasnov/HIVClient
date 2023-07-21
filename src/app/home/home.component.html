@@ -13,7 +13,7 @@
                 <h4>Настройка классификаторов</h4>
             </div>
             <div class="row pt-2 pb-2 border">
-                <!-- <div class="col-6">
+                <div class="col-6">
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина обращения</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Фактор риска зараж.</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Место лаб. исслед.</button>
@@ -50,7 +50,7 @@
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">ЛПУ</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Исход госпитализации</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Количество детей</button>
-                </div> -->
+                </div>
             </div>
         </div>
         <div class="col-4 p-2 left-col-m">
@@ -59,7 +59,6 @@
             </div>
             <div class="row border">
                 <div class="col pt-2 pb-2">
-                    <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/fast']">Быстрый поиск</button>
                     <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/main']">Общие данные</button>
                     <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/preg']">Беременные</button>
                     <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/child']">Дети</button>
@@ -69,25 +68,31 @@
                     <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/visit']">Явка на приём</button>
                     <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/epid']">Эпид. данные</button>
                     <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/hosp']">Госпитализации</button>
-                    <button class="w-70 btn btn-lg btn-primary btn-w">Иногородние</button>
+                    <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/nonresident']">Иногородние</button>
                     <button class="w-70 btn btn-lg btn-primary btn-w">COVID</button>
                 </div>
             </div>
+            <!-- <br>
+            <div class="row border">
+                <div class="col pt-2 pb-2">
+                </div>
+            </div> -->
             <div class="row mt-3">
                 <div class="col">
-                    <!-- <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary btn-w">Ввод пациента</button> -->
+                    <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/fast']">Быстрый поиск</button>
+                    <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary btn-w">Ввод пациента</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="row g-0">
         <div class="col-7 m-2">
-            <!-- <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary  btn-w">Поиск дубликатов</button>
-            <button [disabled]="!isAdmin" class="w-70 btn btn-lg btn-outline-primary btn-w">Импорт данных из ИС "Корвет"</button> -->
+            <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary  btn-w">Поиск дубликатов</button>
+            <button [disabled]="!isAdmin" class="w-70 btn btn-lg btn-outline-primary btn-w">Импорт данных из ИС "Корвет"</button>
         </div>
         <div class="col-4 left-col-m" style="margin-top: 0.5rem;">
-            <!-- <button class="w-70 btn btn-lg btn-outline-primary btn-w">Запись на прием</button>
-            <button class="w-70 btn btn-lg btn-outline-primary btn-w">Сохранение талонов</button> -->
+            <button class="w-70 btn btn-lg btn-outline-primary btn-w">Запись на прием</button>
+            <button class="w-70 btn btn-lg btn-outline-primary btn-w">Сохранение талонов</button>
         </div>
     </div>
     <div class="row g-0 m-2">

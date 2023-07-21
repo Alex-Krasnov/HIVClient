@@ -13,6 +13,7 @@ import { SearchAclComponent } from './search-acl/search-acl.component';
 import { SearchVisitComponent } from './search-visit/search-visit.component';
 import { SearchEpidComponent } from './search-epid/search-epid.component';
 import { SearchHospComponent } from './search-hosp/search-hosp.component';
+import { SearchNonresidentComponent } from './search-nonresident/search-nonresident.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,8 @@ const routes: Routes = [
       { path: 'acl', component: SearchAclComponent, canActivate: [AuthGuard] },
       { path: 'visit', component: SearchVisitComponent, canActivate: [AuthGuard] },
       { path: 'epid', component: SearchEpidComponent, canActivate: [AuthGuard] },
-      { path: 'hosp', component: SearchHospComponent, canActivate: [AuthGuard] }
+      { path: 'hosp', component: SearchHospComponent, canActivate: [AuthGuard] },
+      { path: 'nonresident', component: SearchNonresidentComponent, canActivate: [AuthGuard] }
     ]
   }
 ];
