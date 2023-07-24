@@ -1,0 +1,27 @@
+import { Course } from "./course.model"
+
+export interface  SearchCovidListsModel{
+   listSex?: string[]
+   listRegion?: string[]
+   listRegionPreset?: string[]
+   listCountry?: string[]
+   listRegOff?: string[]
+   listStage?: string[]
+   listCheckCourse?: Course[]
+   listDieCourse?: string[]
+   listDiePreset?: string[]
+   listInfectCourse?: string[]
+   listShowIllness?: string[]
+   listResIb?: string[]
+   listSelectBlot?: string[]
+   listHospCourse?: string[]
+   listArvt?: string[]
+   listCodeMKB10?: string[]
+   listMkb10Covid?: string[]
+   listMkb10Tuber?: string[]
+   listMkb10Pneumonia?: string[]
+   listOutHosp?: string[]
+   listClinVarCovid?: string[]
+   listCourseCovid?: string[]
+   listYNA?: string[]
+}

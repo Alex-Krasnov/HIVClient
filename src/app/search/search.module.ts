@@ -20,6 +20,7 @@ import { SearchVisitComponent } from './search-visit/search-visit.component';
 import { SearchEpidComponent } from './search-epid/search-epid.component';
 import { SearchHospComponent } from './search-hosp/search-hosp.component';
 import { SearchNonresidentComponent } from './search-nonresident/search-nonresident.component';
+import { SearchCovidComponent } from './search-covid/search-covid.component';
 
 
 
@@ -42,7 +43,8 @@ import { SearchNonresidentComponent } from './search-nonresident/search-nonresid
     SearchVisitComponent,
     SearchEpidComponent,
     SearchHospComponent,
-    SearchNonresidentComponent
+    SearchNonresidentComponent,
+    SearchCovidComponent
   ],
   imports: [
     CommonModule,

@@ -46,8 +46,8 @@
    hospCourse?: string[]
    age?: string[]
    cardNo?: string 
-   art?: string 
-   mkb10?: string 
+   art?: string[] 
+   mkb10?: string[] 
    transfAreaYNA?: string 
    dateTransfAreaStart?: string 
    dateTransfAreaEnd?: string 
