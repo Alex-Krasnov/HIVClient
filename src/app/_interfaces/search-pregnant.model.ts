@@ -91,4 +91,5 @@
     selectAclMcnCode: boolean
 
     page: number
+    excel: boolean
  }

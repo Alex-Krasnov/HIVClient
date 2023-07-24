@@ -69,4 +69,5 @@
     selectAddr: boolean
 
     page: number
+    excel: boolean
  }

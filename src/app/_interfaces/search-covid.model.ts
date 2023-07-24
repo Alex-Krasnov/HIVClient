@@ -117,4 +117,5 @@
   selectDischarge: boolean
    
   page: number
+  excel: boolean
  }

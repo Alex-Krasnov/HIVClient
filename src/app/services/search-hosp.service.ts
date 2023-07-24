@@ -19,4 +19,8 @@ export class SearchHospService {
   getData(item: SearchHospModel): Observable<Search>{
       return this.http.post<Search>(this.url+`/GetRes`, item);
   };
+  
+  downloadFile(item: SearchHospModel): Observable<Blob> {
+    return this.http.post(this.url+`/GetRes`, item, { responseType: 'blob'});
+  };
 }

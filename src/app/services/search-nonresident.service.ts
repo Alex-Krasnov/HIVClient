@@ -19,4 +19,8 @@ export class SearchNonresidentService {
   getData(item: SearchNonresidentModel): Observable<Search>{
       return this.http.post<Search>(this.url+`/GetRes`, item);
   };
+  
+  downloadFile(item: SearchNonresidentModel): Observable<Blob> {
+    return this.http.post(this.url+`/GetRes`, item, { responseType: 'blob'});
+  };
 }

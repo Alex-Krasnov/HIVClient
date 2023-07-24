@@ -19,4 +19,8 @@ export class SearchCovidService {
   getData(item: SearchCovidModel): Observable<Search>{
       return this.http.post<Search>(this.url+`/GetRes`, item);
   };
+  
+  downloadFile(item: SearchCovidModel): Observable<Blob> {
+    return this.http.post(this.url+`/GetRes`, item, { responseType: 'blob'});
+  };
 }

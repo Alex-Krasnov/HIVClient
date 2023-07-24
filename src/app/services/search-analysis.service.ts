@@ -19,4 +19,8 @@ export class SearchAnalysisService {
   getData(item: SearchAnalyseModel): Observable<Search>{
       return this.http.post<Search>(this.url+`/GetRes`, item);
   };
+  
+  downloadFile(item: SearchAnalyseModel): Observable<Blob> {
+    return this.http.post(this.url+`/GetRes`, item, { responseType: 'blob'});
+  };
 }

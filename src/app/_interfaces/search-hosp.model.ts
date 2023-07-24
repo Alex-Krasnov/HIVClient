@@ -68,4 +68,5 @@
     
 
     page: number
+    excel: boolean
  }

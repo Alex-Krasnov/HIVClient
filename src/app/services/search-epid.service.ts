@@ -19,4 +19,8 @@ export class SearchEpidService {
   getData(item: SearchEpidModel): Observable<Search>{
       return this.http.post<Search>(this.url+`/GetRes`, item);
   };
+  
+  downloadFile(item: SearchEpidModel): Observable<Blob> {
+    return this.http.post(this.url+`/GetRes`, item, { responseType: 'blob'});
+  };
 }

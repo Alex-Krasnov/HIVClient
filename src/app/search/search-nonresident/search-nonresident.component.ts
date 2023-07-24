@@ -41,7 +41,7 @@ export class SearchNonresidentComponent  implements OnInit{
 
 
   ngOnInit() {
-    this.shared.switchVal('xl', false)
+    this.shared.switchVal('xl', true)
     this.shared.switchVal('print', false)
     this.shared.setNameSearch('Иногородние')
     this.shared.visibleData$.next(false)
@@ -50,7 +50,12 @@ export class SearchNonresidentComponent  implements OnInit{
 
     this.shared.search$.subscribe(item => {
       if(item == 'Иногородние')
-        this.getSearchRes()
+        this.setData(false)
+    })
+
+    this.shared.excel$.subscribe(item => {
+      if(item == 'Иногородние')
+        this.setData(true)
     })
   }
 
@@ -68,7 +73,7 @@ export class SearchNonresidentComponent  implements OnInit{
     });
   }
 
-  async getSearchRes(){
+  setData(needXl: boolean){
     if(this.searchForm.valid){
       this.dataView = {columName: [], resPage: []}
       this.maxPage = 0
@@ -144,45 +149,74 @@ export class SearchNonresidentComponent  implements OnInit{
         selectDateDeparture: this.searchForm.controls['selectDateDeparture'].value,
         selectAddr: this.searchForm.controls['selectAddr'].value,
 
-        page: this.page 
+        page: this.page,
+        excel: needXl
       }
 
-      const res = firstValueFrom(this.searchService.getData(formValue))
-
-      this.dataView = {
-        columName: (await res.then()).columName,
-        resPage: (await res.then()).resPage
+      if(needXl){
+        this.getExcel(formValue)
+      }else{
+        this.getSearchRes(formValue)
       }
-      this.maxPage = Math.ceil((await res.then()).resCount / 100)
-      
-      this.resCount$.next((await res.then()).resCount)
-      this.shared.visibleData$.next(true)
-      this.shared.refreshData$.next(true)
     }
+  }
+  
+  async getSearchRes(value: SearchNonresidentModel){
+    const res = firstValueFrom(this.searchService.getData(value))
+
+    this.dataView = {
+      columName: (await res.then()).columName,
+      resPage: (await res.then()).resPage
+    }
+    this.maxPage = Math.ceil((await res.then()).resCount / 100)
+    
+    this.resCount$.next((await res.then()).resCount)
+    this.shared.visibleData$.next(true)
+    this.shared.refreshData$.next(true)
+  }
+
+  async getExcel(value: SearchNonresidentModel){
+    this.searchService.downloadFile(value).subscribe((data: Blob) => {
+      const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'res_search.xlsx';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+  
+      URL.revokeObjectURL(downloadLink.href);
+      document.body.removeChild(downloadLink);
+    }, error => {
+      console.error('Ошибка при скачивании файла:', error);
+    });
+
+    this.shared.visibleData$.next(false)
+    this.shared.refreshData$.next(false)
   }
 
   nextPage(){
     if(this.page < this.maxPage){
       this.page += 1
-      this.getSearchRes()
+      this.setData(false)
     }
   }
 
   prevPage(){
     if(this.page > 1){
       this.page -= 1
-      this.getSearchRes()
+      this.setData(false)
     }
   }
 
   firstPage(){
     this.page = 1
-    this.getSearchRes()
+    this.setData(false)
   }
 
   lastPage(){
     this.page = this.maxPage
-    this.getSearchRes()
+    this.setData(false)
   }
 
   markAll(){

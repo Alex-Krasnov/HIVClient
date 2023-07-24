@@ -116,4 +116,5 @@
     selectHepB: boolean
 
     page: number
+    excel: boolean
  }

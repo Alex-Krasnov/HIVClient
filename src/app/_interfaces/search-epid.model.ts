@@ -134,4 +134,5 @@
    selectTimeInfect: boolean
    
    page: number
+   excel: boolean
  }

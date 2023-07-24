@@ -81,4 +81,5 @@
     selectForm309: boolean
     
     page: number
+    excel: boolean
  }

@@ -55,4 +55,5 @@
     
     
     page: number
+    excel: boolean
  }

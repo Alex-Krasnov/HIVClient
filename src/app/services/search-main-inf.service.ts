@@ -22,5 +22,5 @@ export class SearchMainInfService {
   
   downloadFile(item: SearchMainInfModel): Observable<Blob> {
     return this.http.post(this.url+`/GetRes`, item, { responseType: 'blob'});
-  }
+  };
 }

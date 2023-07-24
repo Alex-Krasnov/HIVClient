@@ -68,4 +68,5 @@
     selectRegCheck: boolean
 
     page: number
+    excel: boolean
  }

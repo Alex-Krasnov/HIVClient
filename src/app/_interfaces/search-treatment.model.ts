@@ -119,4 +119,5 @@
     selectImRes: boolean
 
     page: number
+    excel: boolean
  }

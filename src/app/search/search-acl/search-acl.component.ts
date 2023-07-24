@@ -42,7 +42,7 @@ export class SearchAclComponent  implements OnInit{
 
 
   ngOnInit() {
-    this.shared.switchVal('xl', false)
+    this.shared.switchVal('xl', true)
     this.shared.switchVal('print', false)
     this.shared.setNameSearch('Acl')
     this.shared.visibleData$.next(false)
@@ -51,7 +51,12 @@ export class SearchAclComponent  implements OnInit{
 
     this.shared.search$.subscribe(item => {
       if(item == 'Acl')
-        this.getSearchRes()
+        this.setData(false)
+    })
+
+    this.shared.excel$.subscribe(item => {
+      if(item == 'Acl')
+        this.setData(true)
     })
   }
 
@@ -68,8 +73,8 @@ export class SearchAclComponent  implements OnInit{
         this.searchForm = data;
     });
   }
-
-  async getSearchRes(){
+  
+  setData(needXl: boolean){
     if(this.searchForm.valid){
       this.dataView = {columName: [], resPage: []}
       this.maxPage = 0
@@ -128,45 +133,150 @@ export class SearchAclComponent  implements OnInit{
         selectTestCode: this.searchForm.controls['selectTestCode'].value,
         selectSampleDate: this.searchForm.controls['selectSampleDate'].value,
         
-        page: this.page 
+        page: this.page,
+        excel: needXl
       }
 
-      const res = firstValueFrom(this.searchService.getData(formValue))
-
-      this.dataView = {
-        columName: (await res.then()).columName,
-        resPage: (await res.then()).resPage
+      if(needXl){
+        this.getExcel(formValue)
+      }else{
+        this.getSearchRes(formValue)
       }
-      this.maxPage = Math.ceil((await res.then()).resCount / 100)
-      
-      this.resCount$.next((await res.then()).resCount)
-      this.shared.visibleData$.next(true)
-      this.shared.refreshData$.next(true)
     }
   }
+  
+  async getSearchRes(value: SearchAclModel){
+    const res = firstValueFrom(this.searchService.getData(value))
+
+    this.dataView = {
+      columName: (await res.then()).columName,
+      resPage: (await res.then()).resPage
+    }
+    this.maxPage = Math.ceil((await res.then()).resCount / 100)
+    
+    this.resCount$.next((await res.then()).resCount)
+    this.shared.visibleData$.next(true)
+    this.shared.refreshData$.next(true)
+  }
+
+  async getExcel(value: SearchAclModel){
+    this.searchService.downloadFile(value).subscribe((data: Blob) => {
+      const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'res_search.xlsx';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+  
+      URL.revokeObjectURL(downloadLink.href);
+      document.body.removeChild(downloadLink);
+    }, error => {
+      console.error('Ошибка при скачивании файла:', error);
+    });
+
+    this.shared.visibleData$.next(false)
+    this.shared.refreshData$.next(false)
+  }
+
+  // async getSearchRes(){
+  //   if(this.searchForm.valid){
+  //     this.dataView = {columName: [], resPage: []}
+  //     this.maxPage = 0
+  //     this.resCount$.next(0)
+      
+  //     let formValue: SearchAclModel = {
+  //       dateInpStart: this.searchForm.controls['dateInpStart'].value,
+  //       dateInpEnd: this.searchForm.controls['dateInpEnd'].value,
+  //       patientId: this.searchForm.controls['patientId'].value,
+  //       familyName: this.searchForm.controls['familyName'].value,
+  //       firstName: this.searchForm.controls['firstName'].value,
+  //       thirdName: this.searchForm.controls['thirdName'].value,
+  //       sex: this.searchForm.controls['sex'].value,
+  //       birthDateStart: this.searchForm.controls['birthDateStart'].value,
+  //       birthDateEnd: this.searchForm.controls['birthDateEnd'].value,
+  //       regionReg: this.searchForm.controls['regionReg'].value,
+  //       regionPreset: this.searchForm.controls['regionPreset'].value,
+  //       regionFact: this.searchForm.controls['regionFact'].value,
+  //       factRegionPreset: this.searchForm.controls['factRegionPreset'].value,
+  //       dateRegOnStart: this.searchForm.controls['dateRegOnStart'].value,
+  //       dateRegOnEnd: this.searchForm.controls['dateRegOnEnd'].value,
+  //       dateUnRegStart: this.searchForm.controls['dateUnRegStart'].value,
+  //       dateUnRegEnd: this.searchForm.controls['dateUnRegEnd'].value,
+  //       stage: this.searchForm.controls['stage'].value,
+  //       checkCourse: this.searchForm.controls['checkCourse'].value,
+  //       ibRes: this.searchForm.controls['ibRes'].value,
+  //       dateIbResStart: this.searchForm.controls['dateIbResStart'].value,
+  //       dateIbResEnd: this.searchForm.controls['dateIbResEnd'].value,
+  //       ibNum: this.searchForm.controls['ibNum'].value,
+  //       dateInpIbStart: this.searchForm.controls['dateInpIbStart'].value,
+  //       dateInpIbEnd: this.searchForm.controls['dateInpIbEnd'].value,
+  //       ibSelect: this.searchForm.controls['ibSelect'].value,
+  //       aclTestCode1: this.searchForm.controls['aclTestCode1'].value,
+  //       aclTestCode2: this.searchForm.controls['aclTestCode2'].value,
+  //       aclTestCode3: this.searchForm.controls['aclTestCode3'].value,
+  //       aclTestCode4: this.searchForm.controls['aclTestCode4'].value,
+  //       aclTestCode5: this.searchForm.controls['aclTestCode5'].value,
+  //       aclTestCode6: this.searchForm.controls['aclTestCode6'].value,
+  //       aclTestCode7: this.searchForm.controls['aclTestCode7'].value,
+  //       biochemistry: this.searchForm.controls['biochemistry'].value,
+  //       hematology: this.searchForm.controls['hematology'].value,
+  //       aclSampleDateStart: this.searchForm.controls['aclSampleDateStart'].value,
+  //       aclSampleDateEnd: this.searchForm.controls['aclSampleDateEnd'].value,
+        
+  //       selectInpDate: this.searchForm.controls['selectInpDate'].value,
+  //       selectPatientId: this.searchForm.controls['selectPatientId'].value,
+  //       selectFio: this.searchForm.controls['selectFio'].value,
+  //       selectSex: this.searchForm.controls['selectSex'].value,
+  //       selectBirthDate: this.searchForm.controls['selectBirthDate'].value,
+  //       selectRegion: this.searchForm.controls['selectRegion'].value,
+  //       selectRegionFact: this.searchForm.controls['selectRegionFact'].value,
+  //       selectRegOnDate: this.searchForm.controls['selectRegOnDate'].value,
+  //       selectStage: this.searchForm.controls['selectStage'].value,
+  //       selectCheckCourse: this.searchForm.controls['selectCheckCourse'].value,
+  //       selectIb: this.searchForm.controls['selectIb'].value,
+  //       selectTestCode: this.searchForm.controls['selectTestCode'].value,
+  //       selectSampleDate: this.searchForm.controls['selectSampleDate'].value,
+        
+  //       page: this.page 
+  //     }
+
+  //     const res = firstValueFrom(this.searchService.getData(formValue))
+
+  //     this.dataView = {
+  //       columName: (await res.then()).columName,
+  //       resPage: (await res.then()).resPage
+  //     }
+  //     this.maxPage = Math.ceil((await res.then()).resCount / 100)
+      
+  //     this.resCount$.next((await res.then()).resCount)
+  //     this.shared.visibleData$.next(true)
+  //     this.shared.refreshData$.next(true)
+  //   }
+  // }
 
   nextPage(){
     if(this.page < this.maxPage){
       this.page += 1
-      this.getSearchRes()
+      this.setData(false)
     }
   }
 
   prevPage(){
     if(this.page > 1){
       this.page -= 1
-      this.getSearchRes()
+      this.setData(false)
     }
   }
 
   firstPage(){
     this.page = 1
-    this.getSearchRes()
+    this.setData(false)
   }
 
   lastPage(){
     this.page = this.maxPage
-    this.getSearchRes()
+    this.setData(false)
   }
 
   markAll(){
