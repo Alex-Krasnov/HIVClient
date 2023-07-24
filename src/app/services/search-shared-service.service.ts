@@ -9,6 +9,7 @@ export class SearchSharedServiceService {
   xlIsActive$ = new BehaviorSubject<boolean>(false)
   printIsActive$ = new BehaviorSubject<boolean>(false)
   search$ = new BehaviorSubject<string>('')
+  excel$ = new BehaviorSubject<string>('')
   
   refreshData$ = new BehaviorSubject<boolean>(false)
   visibleData$ = new BehaviorSubject<boolean>(false)
@@ -28,6 +29,10 @@ export class SearchSharedServiceService {
 
   searchGive(name: string ){
     this.search$.next(name)
+  }
+
+  excelGive(name: string ){
+    this.excel$.next(name)
   }
 
   setNameSearch(val: string){

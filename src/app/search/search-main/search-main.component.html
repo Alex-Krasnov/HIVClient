@@ -7,16 +7,16 @@
                     <button type="button" class="btn btn-danger" [routerLink]="['/main']">Гл. меню</button>
                 </li>
                 <li class="nav-item mx-1">
-                    <button type="button" class="btn btn-secondary" [disabled]="!(shared.xlIsActive$| async)">Экспорт</button>
-                </li>
-                <li class="nav-item mx-1">
-                    <!-- <button type="button" class="btn btn-secondary" [disabled]="!(shared.printIsActive$| async)">Печать</button> -->
+                    <button type="button" class="btn btn-secondary" [disabled]="!(shared.xlIsActive$| async)" (click)="excelGive()">Экспорт</button>
                 </li>
                 <li class="nav-item mx-1">
                     <button type="reset" class="btn btn-warning" (click)="reload()">Сбросить</button>
                 </li>
                 <li class="nav-item mx-1">
                     <button type="button" class="btn btn-success" (click)="searchGive()">Поиск</button>
+                </li>
+                <li class="nav-item mx-1">
+                    <button type="button" class="btn btn-success" (click)="newPatient()">Ввод нового пациента</button>
                 </li>
             </ul>
         </div>

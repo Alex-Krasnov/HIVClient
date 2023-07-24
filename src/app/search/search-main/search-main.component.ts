@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
+import { NewPatientService } from 'src/app/services/new-patient.service';
 import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
 
 @Component({
@@ -13,7 +15,8 @@ export class SearchMainComponent implements OnInit{
 
   constructor(
     public shared: SearchSharedServiceService,
-    private router: Router
+    private router: Router,
+    private service: NewPatientService
   ){}
 
   ngOnInit() {
@@ -26,5 +29,14 @@ export class SearchMainComponent implements OnInit{
 
   searchGive(){
     this.shared.searchGive(this.name)
+  }
+
+  excelGive(){
+    this.shared.excelGive(this.name)
+  }
+
+  async newPatient(){
+    let id = await firstValueFrom(this.service.getData()).then()
+    this.router.navigate(["/patient_card/main/"+id])
   }
 }

@@ -2,6 +2,8 @@ import { Component, OnInit} from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { logOut } from '../services/logout.service';
 import { Router } from '@angular/router';
+import { NewPatientService } from '../services/new-patient.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,8 @@ export class HomeComponent implements OnInit{
   constructor(
     private jwtHelper: JwtHelperService, 
     private logout: logOut, 
-    private router: Router
+    private router: Router,
+    private service: NewPatientService
     ){  }
 
   ngOnInit() { 
@@ -36,6 +39,11 @@ export class HomeComponent implements OnInit{
 
     console.log(this.isWriter, "isWriter",this.isKlassif, "isKlassif",this.isAdmin, "isAdmin");
   }  
+
+  async newPatient(){
+    let id = await firstValueFrom(this.service.getData()).then()
+    this.router.navigate(["/patient_card/main/"+id])
+  }
 
   exit(){
     this.logout.revokeToken();

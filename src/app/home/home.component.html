@@ -14,7 +14,7 @@
             </div>
             <div class="row pt-2 pb-2 border">
                 <div class="col-6">
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина обращения</button>
+                    <!-- <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина обращения</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Фактор риска зараж.</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Место лаб. исслед.</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">УИН</button>
@@ -30,10 +30,10 @@
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Распол.отказн.ребёнка</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Профилактика ПХП</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Группа инвалидности</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Сопут. заболевание</button>
+                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Сопут. заболевание</button> -->
                 </div>
                 <div class="col-6">
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Стадии</button>
+                    <!-- <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Стадии</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Индикаторная болезнь</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина смерти</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Медикаменты</button>
@@ -49,7 +49,7 @@
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Специальность</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">ЛПУ</button>
                     <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Исход госпитализации</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Количество детей</button>
+                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Количество детей</button> -->
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col pt-2 pb-2">
                     <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/fast']">Быстрый поиск</button>
-                    <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary btn-w">Ввод пациента</button>
+                    <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary btn-w" (click)="newPatient()">Ввод нового пациента</button>
                 </div>
             </div>
             <div class="row">
@@ -78,28 +78,16 @@
                     <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/covid']">COVID</button>
                 </div>
             </div>
-            <!-- <br>
-            <div class="row border">
-                <div class="col pt-2 pb-2">
-                    <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/fast']">Быстрый поиск</button>
-                </div>
-            </div> -->
-            <!-- <div class="row mt-3">
-                <div class="col">
-                    <button class="w-70 btn btn-lg btn-primary btn-w" [routerLink]="['/search/fast']">Быстрый поиск</button>
-                    <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary btn-w">Ввод пациента</button>
-                </div>
-            </div> -->
         </div>
     </div>
     <div class="row g-0">
         <div class="col-7 m-2">
-            <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary  btn-w">Поиск дубликатов</button>
-            <button [disabled]="!isAdmin" class="w-70 btn btn-lg btn-outline-primary btn-w">Импорт данных из ИС "Корвет"</button>
+            <!-- <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary  btn-w">Поиск дубликатов</button>
+            <button [disabled]="!isAdmin" class="w-70 btn btn-lg btn-outline-primary btn-w">Импорт данных из ИС "Корвет"</button> -->
         </div>
         <div class="col-4 left-col-m" style="margin-top: 0.5rem;">
-            <button class="w-70 btn btn-lg btn-outline-primary btn-w">Запись на прием</button>
-            <button class="w-70 btn btn-lg btn-outline-primary btn-w">Сохранение талонов</button>
+            <!-- <button class="w-70 btn btn-lg btn-outline-primary btn-w">Запись на прием</button>
+            <button class="w-70 btn btn-lg btn-outline-primary btn-w">Сохранение талонов</button> -->
         </div>
     </div>
     <div class="row g-0 m-2">

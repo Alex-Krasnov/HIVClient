@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SearchMainInfModelLists } from '../_interfaces/search-main-inf-lists.model';
@@ -19,4 +19,8 @@ export class SearchMainInfService {
   getData(item: SearchMainInfModel): Observable<Search>{
       return this.http.post<Search>(this.url+`/GetRes`, item);
   };
+  
+  downloadFile(item: SearchMainInfModel): Observable<Blob> {
+    return this.http.post(this.url+`/GetRes`, item, { responseType: 'blob'});
+  }
 }
