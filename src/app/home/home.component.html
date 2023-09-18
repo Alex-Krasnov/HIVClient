@@ -82,16 +82,16 @@
     </div>
     <div class="row g-0">
         <div class="col-7 m-2">
-            <!-- <button [disabled]="!isWriter" class="w-70 btn btn-lg btn-outline-primary  btn-w">Поиск дубликатов</button>
+            <!-- <button [disabled]="!isAdmin" class="w-70 btn btn-lg btn-outline-primary  btn-w">Поиск дубликатов</button>
             <button [disabled]="!isAdmin" class="w-70 btn btn-lg btn-outline-primary btn-w">Импорт данных из ИС "Корвет"</button> -->
         </div>
         <div class="col-4 left-col-m" style="margin-top: 0.5rem;">
-            <!-- <button class="w-70 btn btn-lg btn-outline-primary btn-w">Запись на прием</button>
-            <button class="w-70 btn btn-lg btn-outline-primary btn-w">Сохранение талонов</button> -->
+            <button class="w-70 btn btn-lg btn-outline-primary btn-w" [routerLink]="['/visit/sldocdabdaterange']">Запись на прием</button>
+            <!-- <button class="w-70 btn btn-lg btn-outline-primary btn-w">Сохранение талонов</button> -->
         </div>
     </div>
     <div class="row g-0 m-2">
-        <div class="row g-0 text-left" (click)="exit()"><button class="btn btn-lg btn-outline-danger">Выход</button></div>
+        <div class="row g-0 text-left" (click)="exit()"><button class="btn btn-lg btn-outline-danger" [routerLink]="['/search/main']">Выход</button></div>
     </div>
 </div>
 <br>

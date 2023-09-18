@@ -16,6 +16,9 @@ const routes: Routes = [
   { path: 'search', 
   loadChildren: () => import('./search/search.module').then(m => m.SearchModule), 
   canActivate: [AuthGuard]},
+  { path: 'visit', 
+  loadChildren: () => import('./visit/visit.module').then(m => m.VisitModule), 
+  canActivate: [AuthGuard]}
 ];
 
 @NgModule({

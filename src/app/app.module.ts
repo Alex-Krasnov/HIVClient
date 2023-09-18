@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {AuthGuard} from './guards/auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { JwtModule } from "@auth0/angular-jwt"; 
 import { logOut } from './services/logout.service';
 import { PatientCardModule } from './patient-card/patient-card.module';
+import { AuthInterceptor } from './http-interceptors/auth-interceptor';
+import { VisitModule } from './visit/visit.module';
 
 
 export function tokenGetter() { 
@@ -37,11 +39,17 @@ export function tokenGetter() {
         disallowedRoutes: []
       }
     }),
-    PatientCardModule
+    PatientCardModule,
+    VisitModule
   ],
   providers: [
     AuthGuard,
-    logOut
+    logOut,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

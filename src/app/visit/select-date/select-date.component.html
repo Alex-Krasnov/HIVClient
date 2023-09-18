@@ -1,0 +1,38 @@
+<ng-container *ngIf="formR">
+    <form style="width: 1000px;" class="mx-auto modal-content p-1 bg ps-5" [formGroup]="formR" *ngIf="formR">
+        <div class="row m-1 ps-3">
+            <div class="col-2">
+                <h6>кол-во записей</h6>
+            </div>
+            <div class="col-3">
+                <h6>дата</h6>
+            </div>
+            <div class="col-3">
+                <h6>день недели</h6>
+            </div>
+        </div>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+            <div class="row m-1 ps-3" formGroupName="{{i}}">
+                <div class="col-2">
+                    <input type="text" class="form-control" placeholder="количество записей" formControlName="cuontRecord">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" placeholder="дата" formControlName="date">
+                </div>
+                <div class="col-3">
+                    <input type="text" class="form-control" placeholder="день недели" formControlName="dayOfWeek">
+                </div>
+                <div class="col-2">
+                    <button type="button" class="w-100 btn btn-outline-success btn-w" [disabled]="!dataCalendar.calendars[i].isActive" (click)="getListTime(i)">Открыть день</button>
+                </div>
+            </div>
+        </ng-container>
+        <div class="row m-1">
+            <div class="row mt-3 d-flex flex-row-reverse">
+                <div class="col-xl-3 p-0">
+                    <button type="button" class="w-100 btn btn-outline-danger btn-w" (click)="goHome()">Гл. меню</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</ng-container>
