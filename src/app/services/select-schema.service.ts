@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable} from "rxjs";
 import { SelectSchemaModel } from "../_interfaces/select-schema.model";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SelectSchemaService {
-  url: string = 'https://localhost:5001/api/SchemaSelect';
+  url: string = `${environment.apiUrl}/api/SchemaSelect`;
   constructor(private http: HttpClient){}
 
   getData(): Observable<SelectSchemaModel[]>{

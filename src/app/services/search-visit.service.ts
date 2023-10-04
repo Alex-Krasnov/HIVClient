@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { Search } from '../_interfaces/search.model';
 import { SearchVisitModelLists } from '../_interfaces/search-visit-lists.model';
 import { SearchVisitModel } from '../_interfaces/search-visit.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchVisitService {
-  url: string = 'https://localhost:5001/api/SearchVisit';
+  url: string = `${environment.apiUrl}/api/SearchVisit`;
   constructor(private http: HttpClient){}
 
   getLists(): Observable<SearchVisitModelLists>{

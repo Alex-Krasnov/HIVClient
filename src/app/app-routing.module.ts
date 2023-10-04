@@ -4,6 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ImportKorvetComponent } from './import-korvet/import-korvet.component';
 
 
 
@@ -18,7 +19,8 @@ const routes: Routes = [
   canActivate: [AuthGuard]},
   { path: 'visit', 
   loadChildren: () => import('./visit/visit.module').then(m => m.VisitModule), 
-  canActivate: [AuthGuard]}
+  canActivate: [AuthGuard]},
+  { path: 'imp-korvet', component: ImportKorvetComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

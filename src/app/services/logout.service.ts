@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthenticatedResponse } from "../_interfaces/authenticated-response.model";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class logOut {
@@ -12,7 +13,7 @@ export class logOut {
         const refreshToken: string = localStorage.getItem("refreshToken");
         const credentials = JSON.stringify({ accessToken: token, refreshToken: refreshToken });
 
-        this.http.post<AuthenticatedResponse>("https://localhost:5001/api/token/revoke", credentials, {
+        this.http.post<AuthenticatedResponse>(`${environment.apiUrl}/api/token/revoke`, credentials, {
             headers: new HttpHeaders({
               "Content-Type": "application/json"
             })

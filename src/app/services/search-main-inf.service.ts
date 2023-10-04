@@ -4,12 +4,13 @@ import { Observable } from 'rxjs';
 import { SearchMainInfModelLists } from '../_interfaces/search-main-inf-lists.model';
 import { Search } from '../_interfaces/search.model';
 import { SearchMainInfModel } from '../_interfaces/search-main-inf.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchMainInfService {
-  url: string = 'https://localhost:5001/api/SearchMainInf';
+  url: string = `${environment.apiUrl}/api/SearchMainInf`;
   constructor(private http: HttpClient){}
 
   getLists(): Observable<SearchMainInfModelLists>{

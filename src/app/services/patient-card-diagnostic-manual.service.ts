@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { PatientCardDiagnosticManualModel } from "../_interfaces/patient-card-diagnostic-manual.model";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientCardDiagnosticManualService {
-  url: string = 'https://localhost:5001/api/PatientCardDiagnosticManual';
+  url: string = `${environment.apiUrl}/api/PatientCardDiagnosticManual`;
   constructor(private http: HttpClient){}
 
   getData(id: number): Observable<PatientCardDiagnosticManualModel>{

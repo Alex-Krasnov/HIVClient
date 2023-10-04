@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {AuthGuard} from './guards/auth.guard';
 
@@ -14,6 +14,7 @@ import { logOut } from './services/logout.service';
 import { PatientCardModule } from './patient-card/patient-card.module';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 import { VisitModule } from './visit/visit.module';
+import { ImportKorvetComponent } from './import-korvet/import-korvet.component';
 
 
 export function tokenGetter() { 
@@ -24,13 +25,15 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    ImportKorvetComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

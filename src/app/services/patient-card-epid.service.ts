@@ -3,10 +3,11 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { PatientCardEpidModel } from "../_interfaces/patient-card-epid.model";
 import { pcEpid } from "../_interfaces/pc-epid.model";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class PatientCardEpidService {
-    url: string = 'https://localhost:5001/api/PatientCardEpid';
+    url: string = `${environment.apiUrl}/api/PatientCardEpid`;
     constructor(private http: HttpClient){}
 
     getData(id: number): Observable<PatientCardEpidModel>{

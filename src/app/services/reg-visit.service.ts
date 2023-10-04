@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RegVisit } from '../_interfaces/reg-visit.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegVisitService {
-  url: string = 'https://localhost:5001/api/RegVisit';
+  url: string = `${environment.apiUrl}/api/RegVisit`;
   constructor(private http: HttpClient){}
 
   getData(): Observable<RegVisit>{

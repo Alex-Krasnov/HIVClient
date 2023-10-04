@@ -1,12 +1,12 @@
-import { ErrorHandler, Injectable } from "@angular/core";
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { catchError, Observable, of, throwError } from "rxjs";
-import { pcMain } from "../_interfaces/pc-main.model";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 import { PatientCardTreatmentModel } from "../_interfaces/patient-card-treatment.model";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class PatientCardTreatmentService {
-    url: string = 'https://localhost:5001/api/PatientCardTreatment';
+    url: string = `${environment.apiUrl}/api/PatientCardTreatment`;
     constructor(private http: HttpClient){}
 
     getData(id: number): Observable<PatientCardTreatmentModel>{

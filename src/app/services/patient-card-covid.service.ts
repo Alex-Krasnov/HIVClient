@@ -3,12 +3,13 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { PatientCardCovidModel } from "../_interfaces/patient-card-covid.model";
 import { Covid } from "../_interfaces/covid.model";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientCardCovidService {
-  url: string = 'https://localhost:5001/api/PatientCardCovid';
+  url: string = `${environment.apiUrl}/api/PatientCardCovid`;
   constructor(private http: HttpClient){}
 
   getData(id: number): Observable<PatientCardCovidModel>{

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class AuthGuard implements CanActivate  {
     let isRefreshSuccess: boolean;
     
     const refreshRes = await new Promise<AuthenticatedResponse>((resolve, reject) => {
-      this.http.post<AuthenticatedResponse>("https://localhost:5001/api/token/refresh", credentials, {
+      this.http.post<AuthenticatedResponse>(`${environment.apiUrl}/api/token/refresh`, credentials, {
         headers: new HttpHeaders({"Content-Type": "application/json"})
       }).subscribe({ 
         next: (res: AuthenticatedResponse) => resolve(res),

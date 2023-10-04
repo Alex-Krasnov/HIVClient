@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { AuthenticatedResponse } from './../_interfaces/authenticated-response.model';
 import { LoginModel } from './../_interfaces/login.model';
 import { NgForm } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit{
 
   login = ( form: NgForm) => {
     if (form.valid) {
-      this.http.post<AuthenticatedResponse>("https://localhost:5001/Login", this.credentials, { 
+      this.http.post<AuthenticatedResponse>(`${environment.apiUrl}/Login`, this.credentials, { 
         headers: new HttpHeaders({ "Content-Type": "application/json"})
       }).subscribe({
         next: (response: AuthenticatedResponse) => {

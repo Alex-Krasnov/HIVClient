@@ -2,10 +2,11 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable} from "rxjs";
 import { PatientCardVisitModel } from "../_interfaces/patient-card-visit.model";
+import { environment } from "src/environments/environment";
 
 @Injectable()
 export class PatientCardVisitService {
-    url: string = 'https://localhost:5001/api/PatientCardVisit';
+    url: string = `${environment.apiUrl}/api/PatientCardVisit`;
     constructor(private http: HttpClient){}
 
     getData(id: number): Observable<PatientCardVisitModel>{

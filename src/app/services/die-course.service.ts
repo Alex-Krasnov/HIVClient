@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DieCourseAdvancedModel } from '../_interfaces/die-course-advanced.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DieCourseService {
-  url: string = 'https://localhost:5001/api/DieCourse';
+  url: string = `${environment.apiUrl}/api/DieCourse`;
   constructor(private http: HttpClient){}
 
   getData(id: number): Observable<DieCourseAdvancedModel>{

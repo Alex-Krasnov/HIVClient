@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { PatientCardPregnantModel } from '../_interfaces/patient-card-pregnant.model';
 import { Observable } from 'rxjs';
 import { pcPregM } from '../_interfaces/pc-preg-m.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientCardPregnantService {
-  url: string = 'https://localhost:5001/api/PatientCardPregnant';
+  url: string = `${environment.apiUrl}/api/PatientCardPregnant`;
   constructor(private http: HttpClient){}
 
   getData(id: number): Observable<PatientCardPregnantModel>{

@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TalonModel } from '../_interfaces/talon.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TalonService {
-  url: string = 'https://localhost:5001/api/Talon';
+  url: string = `${environment.apiUrl}/api/Talon`;
   constructor(private http: HttpClient){}
 
   getData(id: string, date: string, cab: string): Observable<TalonModel>{

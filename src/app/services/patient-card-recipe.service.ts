@@ -3,12 +3,13 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { PatientCardRecipeModel } from "../_interfaces/patient-card-recipe.model";
 import { pcRecipe } from "../_interfaces/pc-recipe.model";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientCardRecipeService {
-  url: string = 'https://localhost:5001/api/PatientCardRecipe';
+  url: string = `${environment.apiUrl}/api/PatientCardRecipe`;
   constructor(private http: HttpClient){}
 
   getData(id: number): Observable<PatientCardRecipeModel>{
