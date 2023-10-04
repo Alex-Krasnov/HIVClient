@@ -1,0 +1,19 @@
+<ng-container *ngIf="IsActive">
+    <form style="width: 1000px;" class="mx-auto modal-content p-1 bg ps-5" [formGroup]="formR" *ngIf="formR">
+            <div class="row mt-5">
+                <div class="col-xl-2">
+                    <input type="date" class="form-control" placeholder="Ид пациента" formControlName="date">
+                </div>
+                <div class="col-xl-6">
+                    <input type="text" class="form-control" placeholder="Доктор" list="listDoc" formControlName="docName">
+                </div>
+            </div>
+        <div class="row m-1">
+            <div class="d-flex flex-row-reverse me-3">
+                <button type="button" class="btn btn btn-outline-danger" (click)="goHome()">Гл. меню</button>
+                <button type="button" class="btn btn btn-success me-5" (click)="sendForm()">Выгрузиь</button>
+            </div>
+        </div>
+    </form>
+    <datalist id="listDoc"><option *ngFor="let item of dataList" [value]="item"></option></datalist>
+</ng-container>

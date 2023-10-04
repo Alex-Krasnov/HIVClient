@@ -5,6 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ImportKorvetComponent } from './import-korvet/import-korvet.component';
+import { SerchRegistryComponent } from './serch-registry/serch-registry.component';
 
 
 
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'visit', 
   loadChildren: () => import('./visit/visit.module').then(m => m.VisitModule), 
   canActivate: [AuthGuard]},
-  { path: 'imp-korvet', component: ImportKorvetComponent, canActivate: [AuthGuard]}
+  { path: 'imp-korvet', component: ImportKorvetComponent, canActivate: [AuthGuard]},
+  { path: 'search-registry', component: SerchRegistryComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

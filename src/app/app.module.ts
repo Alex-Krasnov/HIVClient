@@ -15,6 +15,7 @@ import { PatientCardModule } from './patient-card/patient-card.module';
 import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 import { VisitModule } from './visit/visit.module';
 import { ImportKorvetComponent } from './import-korvet/import-korvet.component';
+import { SerchRegistryComponent } from './serch-registry/serch-registry.component';
 
 
 export function tokenGetter() { 
@@ -26,7 +27,8 @@ export function tokenGetter() {
     AppComponent,
     HomeComponent,
     LoginComponent,
-    ImportKorvetComponent
+    ImportKorvetComponent,
+    SerchRegistryComponent
   ],
   imports: [
     BrowserModule,
