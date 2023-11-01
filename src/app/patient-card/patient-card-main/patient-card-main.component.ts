@@ -9,6 +9,7 @@ import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
 import { pcMain } from 'src/app/_interfaces/pc-main.model';
 import { ModalService } from 'src/app/services/modal.service';
+import { ReceivedRolesService } from 'src/app/services/received-roles.service';
 
 @Component({
   selector: 'app-patient-card-main',
@@ -28,6 +29,8 @@ export class PatientCardMainComponent implements OnInit {
   IsErr: boolean = false;
   needUpd: boolean = false;
 
+  isDeleter: boolean = false;
+
   Id: number;
   patient: PatientCardMainModel | undefined;
   patientForm: FormGroup;
@@ -46,11 +49,14 @@ export class PatientCardMainComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private listService: ListService,
-    public modal: ModalService
+    public modal: ModalService,
+    private roleService: ReceivedRolesService
   ){}
 
   ngOnInit() {
     this.route.params.subscribe(params => { this.Id = params['id'] })
+    this.isDeleter = this.roleService.IsDeleter
+    
     this.getPatientData()
   }
 
@@ -339,12 +345,12 @@ export class PatientCardMainComponent implements OnInit {
         this.patientBlot.push(blotForm);
       }
     );
+
     this.patientForm.statusChanges.subscribe( (status) => {
       if(status == 'VALID')
         this.needUpd = true;
     })
     this.syncLongNShort()
-
     this.patientForm.controls['dieCourseShort'].valueChanges.subscribe(item => this.dieShort = item)
     this.patientForm.controls['dieCourseLong'].valueChanges.subscribe(item => this.dieLong = item)
   }
@@ -448,7 +454,7 @@ export class PatientCardMainComponent implements OnInit {
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {
           if(this.patientForm.controls[data].invalid)
-            console.log(data);          
+            console.log("err", data);          
         }
       )
       confirm(`Ошибка в заполнении данных!`)

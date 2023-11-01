@@ -74,6 +74,9 @@ export class PatientBlotComponent implements OnInit {
     let Last = this.formB.get('newLast').value
     let FlgIfa = this.formB.get('newIfa').value
 
+    if(typeof BlotNo == 'string' && BlotNo.length == 0)
+      BlotNo = null as number
+
     if(
       this.formB.controls['newBlotId'].valid && 
       this.formB.controls['newBlotNo'].valid && 

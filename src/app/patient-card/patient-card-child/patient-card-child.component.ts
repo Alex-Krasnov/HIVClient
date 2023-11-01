@@ -7,6 +7,7 @@ import { PatientCardChildForm } from './patient-card-child-form.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { PatientCardChildModel } from 'src/app/_interfaces/patient-card-child.model';
 import { PatientCardChildService } from 'src/app/services/patient-card-child.service';
+import { pcChild } from 'src/app/_interfaces/pc-child.model';
 
 @Component({
   selector: 'app-patient-card-child',
@@ -124,7 +125,22 @@ export class PatientCardChildComponent implements OnInit {
       refusalResearch: this.patientForm.controls['refusalResearch'].value,
       refusalTherapy: this.patientForm.controls['refusalTherapy'].value,
     };
-    
+
+    if(typeof curValue.mId == 'string' && curValue.mId.length == 0)
+      curValue.mId = null as number
+
+    if(typeof curValue.fId == 'string' && curValue.fId.length == 0)
+      curValue.fId = null as number
+
+    if(typeof curValue.breastMonth == 'string' && curValue.breastMonth.length == 0)
+      curValue.breastMonth = null as number
+
+    if(typeof curValue.growth == 'string' && curValue.growth.length == 0)
+      curValue.growth = null as number
+
+    if(typeof curValue.weight == 'string' && curValue.weight.length == 0)
+      curValue.weight = null as number
+
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
       this.patientService.updatePatient( curValue).subscribe()
 
@@ -159,7 +175,7 @@ export class PatientCardChildComponent implements OnInit {
       if(this.needUpd)
         this.updatePatient()
       if(name == '/main'){
-        this.router.navigate([name]);
+        this.router.navigate([name])
         return null
       }
       this.router.navigate([name+this.Id])

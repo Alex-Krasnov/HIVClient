@@ -4,6 +4,7 @@ import { logOut } from '../services/logout.service';
 import { Router } from '@angular/router';
 import { NewPatientService } from '../services/new-patient.service';
 import { firstValueFrom } from 'rxjs';
+import { ReceivedRolesService } from '../services/received-roles.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit{
     private jwtHelper: JwtHelperService, 
     private logout: logOut, 
     private router: Router,
-    private service: NewPatientService
+    private service: NewPatientService,
+    private roleService: ReceivedRolesService
     ){  }
 
   ngOnInit() { 
@@ -30,12 +32,25 @@ export class HomeComponent implements OnInit{
 
     console.log(this.jwtHelper.getTokenExpirationDate(localStorage.getItem("jwt")));
     
-    if(roles.find(e => e == "Klassif") != null)
+    if(roles.find(e => e == "Klassif") != null){
+      this.roleService.isKlassif = true
       this.isKlassif = true;
-    if(roles.find(e => e == "Admin") != null)
+    }
+    if(roles.find(e => e == "Admin") != null){
+      this.roleService.isAdmin = true
       this.isAdmin = true;
-    if(roles.find(e => e == "Writer") != null)
+    }
+    if(roles.find(e => e == "Writer") != null){
+      this.roleService.isWriter = true
       this.isWriter = true;
+    }
+
+    if(roles.find(e => e == "Deleter") != null)
+      this.roleService.IsDeleter = true
+
+    if(roles.find(e => e == "Excel") != null)
+      this.roleService.isExcel = true
+    
 
     console.log(this.isWriter, "isWriter",this.isKlassif, "isKlassif",this.isAdmin, "isAdmin");
   }  

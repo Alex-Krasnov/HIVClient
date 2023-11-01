@@ -430,7 +430,7 @@
         <br>
     </div>
     <div class="row g-0">
-        <div class="row g-0 text-left" (click)="deletePatient()"><button type="button" class="btn btn-lg btn-outline-danger">Удалить карту</button></div>
+        <div class="row g-0 text-left"><button [disabled]="!isDeleter" [hidden]="!isDeleter" type="button" class="btn btn-lg btn-outline-danger" (click)="deletePatient()">Удалить карту</button></div>
     </div>
 </form>
 
