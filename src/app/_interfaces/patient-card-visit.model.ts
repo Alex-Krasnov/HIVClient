@@ -10,7 +10,6 @@ export interface PatientCardVisitModel {
   listCab?: string[];
   listRegTime?: string[];
 
-  checks?: PatientCheck[];
   checksOut?: PatientCheck[];
   registries?: Registry[];
 }

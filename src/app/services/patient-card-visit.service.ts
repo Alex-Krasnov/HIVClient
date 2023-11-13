@@ -13,33 +13,6 @@ export class PatientCardVisitService {
         return this.http.get<PatientCardVisitModel>(this.url+`?patientId=${id}`);
     };
 
-    delChecks(patientId: number, date: string, spec: string): Observable<unknown>{
-        return this.http.delete(this.url+`/DelCheck?patientId=${patientId}&date=${date}&spec=${spec}`)
-    };
-
-    createChecks(patientId: number, checkDate: string, specName: string, checkDateNetx: string, checkDocName: string){
-        return this.http.post(this.url+`/CreateCheck`, {
-            patientId: patientId,
-            checkDate: checkDate,
-            specName: specName,
-            checkDateNetx: checkDateNetx,
-            checkDocName: checkDocName
-        })
-    };
-
-    updateChecks(patientId: number, checkDate: string, specName: string, checkDateNetx: string, checkDocName: string, checkDateOld: string, specNameOld: string, checkDocNameOld: string){
-            return this.http.post(this.url+`/UpdateCheck`, {
-                patientId: patientId,
-                checkDate: checkDate,
-                specName: specName,
-                checkDateNetx: checkDateNetx,
-                checkDocName: checkDocName,
-                checkDateOld: checkDateOld,
-                specNameOld: specNameOld,
-                checkDocNameOld: checkDocNameOld
-            })
-    };
-
     delCheckOuts(patientId: number, date: string, spec: string): Observable<unknown>{
         return this.http.delete(this.url+`/DelCheckOut?patientId=${patientId}&date=${date}&spec=${spec}`)
     };
@@ -79,5 +52,9 @@ export class PatientCardVisitService {
             regDateOld: regDateOld,
             regCabOld: regCabOld
         })
-};
+    };
+
+    delRegistry(patientId: number, date: string, cab: string): Observable<unknown>{
+        return this.http.delete(this.url+`/DelRegistry?patientId=${patientId}&date=${date}&cab=${cab}`)
+    };
 }

@@ -7,6 +7,7 @@ import { InList } from 'src/app/validators/in-lst';
 import { PatientCardVisitService } from 'src/app/services/patient-card-visit.service';
 import { PatientCardVisitModel } from 'src/app/_interfaces/patient-card-visit.model';
 import { PatientCardVisitForm } from './patient-card-visit-form.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-patient-visit',
@@ -26,6 +27,8 @@ export class PatientCardVisitComponent implements OnInit {
   IsErr: boolean = false;
   needUpd: boolean = false;
 
+  isModal: boolean = true;
+
   Id: number;
   patient: PatientCardVisitModel | undefined;
   patientForm: FormGroup;
@@ -39,7 +42,8 @@ export class PatientCardVisitComponent implements OnInit {
     private patientService: PatientCardVisitService,
     private fb: FormBuilder,
     private router: Router,
-    private listService: ListService
+    private listService: ListService,
+    private modal: ModalService
   ){}
 
   ngOnInit() {
@@ -63,26 +67,6 @@ export class PatientCardVisitComponent implements OnInit {
       .subscribe(data => {
         this.patientForm = data;
     });
-
-    this.patient.checks.map(
-        (item: any) => {
-          const sForm = new FormGroup ({
-            checkDateNext: new FormControl(item.checkDateNext),
-            checkDate: new FormControl(item.checkDate, Validators.required),
-            checkDoc: new FormControl(item.checkDoc, {
-              validators: Validators.required,
-              asyncValidators: [InList.validateDoctor(this.listService)],
-              updateOn: 'blur'
-            }),
-            checkSpec: new FormControl(item.checkSpec, {
-              validators: Validators.required,
-              asyncValidators: [InList.validateSpec(this.listService)],
-              updateOn: 'blur'
-            })
-          });
-          this.patientChecks.push(sForm);
-        }
-    );
     
     this.patient.checksOut.map(
       (item: any) => {
@@ -176,5 +160,10 @@ export class PatientCardVisitComponent implements OnInit {
       )
       confirm(`Ошибка в заполнении данных!`)
     }
+  }
+
+  openReg(){
+    this.modal.regOpen()
+    this.modal.regIsVisible1$.next(true)
   }
 }

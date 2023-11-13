@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, FormArray} from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
@@ -20,6 +20,9 @@ export class SelectDateComponent implements OnInit{
   IsActive: Boolean = false ;
   dataCalendar: ShareDataRegVisit;
   calendar = new FormArray([]);
+  infStr: string;
+  
+  @Input() isModal: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +33,7 @@ export class SelectDateComponent implements OnInit{
 
   ngOnInit() {
     this.dataCalendar = JSON.parse(localStorage.getItem('calendar'))
+    this.infStr = localStorage.getItem('inf_str_reg')
     
     this.dataCalendar.calendars.forEach(data => {
       let dayOfWeek;
@@ -78,15 +82,37 @@ export class SelectDateComponent implements OnInit{
 
   async getListTime( index: number){
     let time =  await firstValueFrom(this.service.getUnregTime(this.dataCalendar.patientId, this.dataCalendar.docId, this.dataCalendar.cabId, this.dataCalendar.calendars[index].date.toString()))
-      
-    localStorage.removeItem('calendar')
+    
     localStorage.setItem('time',JSON.stringify(time))
-    this.router.navigate(['sltime'])
+    localStorage.removeItem('inf_str_reg')
+    localStorage.setItem('inf_str_reg', this.infStr+'  Дата: '+formatDate(this.dataCalendar.calendars[index].date, 'dd-MM-yyyy', 'en-US'))
+
+    if(!this.isModal){
+      this.router.navigate(['sltime'])
+      return null
+    }
+
+    this.modal.regIsVisible3$.next(true)
+    this.modal.regIsVisible2$.next(false)
+  }
+
+  goBack(){
+    localStorage.removeItem('calendar')
+    localStorage.removeItem('time')
+    
+    if(!this.isModal){
+      this.router.navigate(['sldocdabdaterange'])
+      return null
+    }
+
+    this.modal.regIsVisible1$.next(true)
+    this.modal.regIsVisible2$.next(false)
   }
 
   goHome(){
     localStorage.removeItem('calendar')
     localStorage.removeItem('time')
+    localStorage.removeItem('inf_str_reg')
     this.router.navigate(['main'])
   }
 }

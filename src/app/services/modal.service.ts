@@ -7,6 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 export class ModalService {
   
   isVisible$ = new BehaviorSubject<boolean>(false)
+  regIsVisible$ = new BehaviorSubject<boolean>(false)
+  regIsVisible1$ = new BehaviorSubject<boolean>(false)
+  regIsVisible2$ = new BehaviorSubject<boolean>(false)
+  regIsVisible3$ = new BehaviorSubject<boolean>(false)
   dieIsVisible$ = new BehaviorSubject<boolean>(false)
   pasIsVisible$ = new BehaviorSubject<boolean>(false)
   dieCourseIsVisible$ = new BehaviorSubject<boolean>(false)
@@ -22,6 +26,10 @@ export class ModalService {
     this.pasIsVisible$.next(false)
     this.dieCourseIsVisible$.next(false)
     this.course2ColIsVisible$.next(false)
+    this.regIsVisible$.next(false)
+    this.regIsVisible1$.next(false)
+    this.regIsVisible2$.next(false)
+    this.regIsVisible3$.next(false)
   }
 
   dieOpen() {
@@ -38,5 +46,9 @@ export class ModalService {
 
   course2ColOpen() {
     this.course2ColIsVisible$.next(true)
+  }
+
+  regOpen() { 
+    this.regIsVisible$.next(true)
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
@@ -20,6 +20,10 @@ export class SelectDocCabDateRangeComponent implements OnInit{
   formR: FormGroup;
   IsActive: Boolean = false ;
 
+  
+  @Input() patientId: string;
+  @Input() isModal: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -38,7 +42,7 @@ export class SelectDocCabDateRangeComponent implements OnInit{
 
   initForm(){
     this.formR = this.fb.group({
-      patientId: new FormControl(),
+      patientId: new FormControl(this.patientId),
       docName: new FormControl('', {
         asyncValidators: [InList.validateDoctor(this.listService)],
         updateOn: 'blur'
@@ -64,13 +68,28 @@ export class SelectDocCabDateRangeComponent implements OnInit{
       
       let calendar: ShareDataRegVisit =  await firstValueFrom(this.service.getUnregDate(patientId, docName, cabName, startDate, endDate)) as ShareDataRegVisit
       
-      localStorage.setItem('calendar',JSON.stringify(calendar))      
-      this.router.navigate(['sldate'])
-    }   
+      localStorage.setItem('calendar',JSON.stringify(calendar))
+      localStorage.setItem('inf_str_reg', 'ИД: '+patientId+'  Доктор: '+docName+'  Каб.: '+cabName)
+
+      if(!this.isModal){
+        this.router.navigate(['sldate'])
+        return null
+      }
+
+      this.modal.regIsVisible2$.next(true)
+      this.modal.regIsVisible1$.next(false)
+    }
   }
 
   goHome(){
     localStorage.removeItem('calendar')
-    this.router.navigate(['main'])
+    localStorage.removeItem('inf_str_reg')
+
+    if(!this.isModal){
+      this.router.navigate(['main'])
+      return null
+    }
+
+    this.modal.close()
   }
 }

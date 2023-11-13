@@ -24,7 +24,6 @@ import { PatientCardEpidService } from '../services/patient-card-epid.service';
 import { PatientPavNotInjComponent } from './patient-pav-not-inj/patient-pav-not-inj.component';
 import { PatientCardVisitComponent } from './patient-card-visit/patient-card-visit.component';
 import { PatientCardVisitService } from '../services/patient-card-visit.service';
-import { PatientCheckComponent } from './patient-check/patient-check.component';
 import { PatientCheckOutComponent } from './patient-check-out/patient-check-out.component';
 import { PatientRegistryComponent } from './patient-registry/patient-registry.component';
 import { TalonComponent } from './talon/talon.component';
@@ -62,6 +61,8 @@ import { PassportComponent } from './passport/passport.component';
 import { DieCouresComponent } from './die-coures/die-coures.component';
 import { DieLongFilterPipe } from './patient-card-main/die-long-filter.pipe';
 import { DieShortFilterPipe } from './patient-card-main/die-short-filter.pipe ';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { VisitModule } from '../visit/visit.module';
 
 
 
@@ -83,7 +84,6 @@ import { DieShortFilterPipe } from './patient-card-main/die-short-filter.pipe ';
     PatientCovidEpidComponent,
     PatientPavNotInjComponent,
     PatientCardVisitComponent,
-    PatientCheckComponent,
     PatientCheckOutComponent,
     PatientRegistryComponent,
     TalonComponent,
@@ -126,7 +126,10 @@ import { DieShortFilterPipe } from './patient-card-main/die-short-filter.pipe ';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    ScrollingModule
+    ScrollingModule,
+    NgxMaskDirective,
+    NgxMaskPipe,
+    VisitModule
   ],
   providers:[
     PatientCardMainService,
@@ -134,7 +137,8 @@ import { DieShortFilterPipe } from './patient-card-main/die-short-filter.pipe ';
     PatientCardEpidService,
     PatientCardVisitService,
     ListService,
-    InList
+    InList,
+    provideNgxMask()
   ]
 })
 export class PatientCardModule { }

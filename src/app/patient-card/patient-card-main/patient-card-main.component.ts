@@ -41,7 +41,7 @@ export class PatientCardMainComponent implements OnInit {
   pervValue: pcMain;
   dieLong: string;
   dieShort: string;
-
+  mask = '000-000-000 00'
 
   constructor(
     private route: ActivatedRoute,

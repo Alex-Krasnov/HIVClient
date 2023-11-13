@@ -8,6 +8,7 @@
         <th scope="col">Примечание</th>
         <th scope="col">Явка</th>
         <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,7 @@
             <td><input type="text" class="form-control tbl" formControlName="regCom" title="{{pervValue[i].regCom}}"></td>
             <td><input type="checkbox" class="form-check-input mt-2 ng-pristine ng-valid ng-touched" formControlName="regCheck"></td>
             <td><button type="button" class="btn btn-warning" (click)="openTalon(i)"></button></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="delReg(i)"></button></td>
         </tr>
         </ng-container>
     </tbody>

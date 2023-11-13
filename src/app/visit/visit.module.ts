@@ -25,6 +25,14 @@ import { MatInputModule } from '@angular/material/input';
   providers:[
     MatAutocompleteModule,
     MatInputModule
+  ],
+  exports: [
+    VisitRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SelectDocCabDateRangeComponent,
+    SelectDateComponent,
+    SelectTimeComponent
   ]
 })
 export class VisitModule { }

@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, FormArray} from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
 import { RegVisitService } from 'src/app/services/reg-visit.service';
 import { RegVisit } from 'src/app/_interfaces/reg-visit.model';
 import { ShareDataRegVisit } from 'src/app/_interfaces/share-data-reg-visit';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-select-time',
@@ -20,6 +18,9 @@ export class SelectTimeComponent implements OnInit{
   IsActive: Boolean = false ;
   dataTime: ShareDataRegVisit;
   time = new FormArray([]);
+  infStr: string;
+  
+  @Input() isModal: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -30,6 +31,7 @@ export class SelectTimeComponent implements OnInit{
 
   ngOnInit() {
     this.dataTime = JSON.parse(localStorage.getItem('time'))
+    this.infStr = localStorage.getItem('inf_str_reg')
 
     this.dataTime.regTimes.forEach(data => {
       const sForm = new FormGroup ({
@@ -49,13 +51,33 @@ export class SelectTimeComponent implements OnInit{
   }
 
   setVisit( index: number){
-      this.service.setVisit(this.dataTime.patientId, this.dataTime.docId, this.dataTime.cabId, this.dataTime.date, this.dataTime.regTimes[index].timeName).subscribe()
+    this.service.setVisit(this.dataTime.patientId, this.dataTime.docId, this.dataTime.cabId, this.dataTime.date, this.dataTime.regTimes[index].timeName).subscribe()
     localStorage.removeItem('time')
-    this.router.navigate(['main'])
+    localStorage.removeItem('inf_str_reg')
+
+    if(!this.isModal){
+      this.router.navigate(['main'])
+      return null
+    }
+    
+    this.modal.close()
+  }
+
+  goBack(){
+    localStorage.removeItem('time')
+    
+    if(!this.isModal){
+      this.router.navigate(['sldate'])
+      return null
+    }
+
+    this.modal.regIsVisible2$.next(true)
+    this.modal.regIsVisible3$.next(false)
   }
 
   goHome(){
     localStorage.removeItem('time')
+    localStorage.removeItem('inf_str_reg')
     this.router.navigate(['main'])
   }
 }

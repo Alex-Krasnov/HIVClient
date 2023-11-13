@@ -6,7 +6,6 @@ import { ModalService } from 'src/app/services/modal.service';
 import { TalonService } from 'src/app/services/talon.service';
 import { TalonForm } from './talon-form.model';
 import { ListService } from 'src/app/services/list.service';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-talon',

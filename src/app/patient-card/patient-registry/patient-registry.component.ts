@@ -77,4 +77,12 @@ export class PatientRegistryComponent implements OnInit{
     
     this.modal.open()
   }
+
+  delReg(index: number){
+    let e = this.subs.value.at(index)
+    
+    this.patientService.delRegistry(this.patientId, e.regDate, e.regCab).subscribe();
+    this.pervValue.splice(index, 1);
+    this.subs.removeAt(index);
+  }
 }
