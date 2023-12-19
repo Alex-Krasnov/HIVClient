@@ -91,19 +91,19 @@ export class PatientCardVisitComponent implements OnInit {
     this.patient.registries.map(
       (item: any) => {
         const sForm = new FormGroup ({
-          regDate: new FormControl(item.regDate, Validators.required),
-          regCheck: new FormControl(item.regCheck),
-          regCom: new FormControl(item.regCom),
-          regCab: new FormControl(item.regCab, {
+          regDate: new FormControl({value: item.regDate, disabled: false}, Validators.required),
+          regCheck: new FormControl({value: item.regCheck, disabled: false}),
+          regCom: new FormControl({value: item.regCom, disabled: false}),
+          regCab: new FormControl({value: item.regCab, disabled: false}, {
             validators: Validators.required,
             asyncValidators: [InList.validateCabinet(this.listService)],
             updateOn: 'blur'
           }),
-          regTime: new FormControl(item.regTime, {
+          regTime: new FormControl({value: item.regTime, disabled: false}, {
             asyncValidators: [InList.validateRegTime(this.listService)],
             updateOn: 'blur'
           }),
-          regDoc: new FormControl(item.regDoc, {
+          regDoc: new FormControl({value: item.regDoc, disabled: false}, {
             asyncValidators: [InList.validateDoctor(this.listService)],
             updateOn: 'blur'
           })

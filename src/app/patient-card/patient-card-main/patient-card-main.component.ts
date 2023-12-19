@@ -420,8 +420,7 @@ export class PatientCardMainComponent implements OnInit {
         this.patientForm.controls['dieCourseLong'].setValue('')
         return null
       }
-      console.log('short');
-
+      
       this.patientForm.controls['dieCourseLong'].setValue( this.patient.listDieCourseLong.at(index).long)
     })
 
@@ -435,7 +434,6 @@ export class PatientCardMainComponent implements OnInit {
         this.patientForm.controls['dieCourseShort'].setValue('')
         return null
       }
-      console.log('long');
       
       this.patientForm.controls['dieCourseShort'].setValue( this.patient.listDieCourseLong.at(index).short)
     })
