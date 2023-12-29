@@ -16,6 +16,7 @@ import { PatientCardChildComponent } from './patient-card-child/patient-card-chi
 import { PatientCardJailComponent } from './patient-card-jail/patient-card-jail.component';
 import { PatientCardCovidComponent } from './patient-card-covid/patient-card-covid.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { PatientCardFilesComponent } from './patient-card-files/patient-card-files.component';
 
 const routes: Routes = [
   { path: 'main/:id', component: PatientCardMainComponent, canActivate: [AuthGuard]  },
@@ -31,7 +32,8 @@ const routes: Routes = [
   { path: 'preg/:id', component: PatientCardPregnantComponent, canActivate: [AuthGuard]  },
   { path: 'child/:id', component: PatientCardChildComponent, canActivate: [AuthGuard]  },
   { path: 'jail/:id', component: PatientCardJailComponent, canActivate: [AuthGuard]  },
-  { path: 'covid/:id', component: PatientCardCovidComponent, canActivate: [AuthGuard]  }
+  { path: 'covid/:id', component: PatientCardCovidComponent, canActivate: [AuthGuard]  },
+  { path: 'files/:id', component: PatientCardFilesComponent, canActivate: [AuthGuard]  }
 ];
 
 @NgModule({

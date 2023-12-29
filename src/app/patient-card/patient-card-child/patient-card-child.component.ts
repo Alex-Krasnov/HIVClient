@@ -21,6 +21,7 @@ export class PatientCardChildComponent implements OnInit {
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  isVisibleAddit:boolean = false;
   IsErr: boolean = false;
   needUpd: boolean = false;
 
@@ -99,6 +100,9 @@ export class PatientCardChildComponent implements OnInit {
         break;
       case "Меню":
         this.isVisibleMenu = !this.isVisibleMenu;
+        break;
+      case "Дополнительно":
+        this.isVisibleAddit = !this.isVisibleAddit;
         break;
     } 
   }

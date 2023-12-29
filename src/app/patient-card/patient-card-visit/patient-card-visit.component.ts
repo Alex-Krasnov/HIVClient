@@ -21,6 +21,7 @@ export class PatientCardVisitComponent implements OnInit {
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  isVisibleAddit:boolean = false;
   cIsValid: boolean = true;
   coIsValid: boolean = true;
   rIsValid: boolean = true;
@@ -128,6 +129,9 @@ export class PatientCardVisitComponent implements OnInit {
         break;
       case "Меню":
         this.isVisibleMenu = !this.isVisibleMenu;
+        break;
+      case "Дополнительно":
+        this.isVisibleAddit = !this.isVisibleAddit;
         break;
     } 
   }

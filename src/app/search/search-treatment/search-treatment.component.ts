@@ -10,6 +10,7 @@ import { SearchTreatmentForm } from './search-treatment-form.model';
 import { SearchTreatmentService } from 'src/app/services/search-treatment.service';
 import { SearchTreatmentModel } from 'src/app/_interfaces/search-treatment.model';
 import { SearchTreatmentListsModel } from 'src/app/_interfaces/search-treatment-lists.model';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-search-treatment',
@@ -37,7 +38,8 @@ export class SearchTreatmentComponent implements OnInit{
     private fb: FormBuilder,
     public shared: SearchSharedServiceService,
     private listService: ListService,
-    public modal: ModalService
+    public modal: ModalService,
+    private loading: LoadingService
   ){}
 
 
@@ -212,6 +214,7 @@ export class SearchTreatmentComponent implements OnInit{
   }
   
   async getSearchRes(value: SearchTreatmentModel){
+    this.loading.open()
     const res = firstValueFrom(this.searchService.getData(value))
 
     this.dataView = {
@@ -223,24 +226,25 @@ export class SearchTreatmentComponent implements OnInit{
     this.resCount$.next((await res.then()).resCount)
     this.shared.visibleData$.next(true)
     this.shared.refreshData$.next(true)
+    this.loading.close()
   }
 
   async getExcel(value: SearchTreatmentModel){
-    this.searchService.downloadFile(value).subscribe((data: Blob) => {
-      const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = 'res_search.xlsx';
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-  
-      URL.revokeObjectURL(downloadLink.href);
-      document.body.removeChild(downloadLink);
-    }, error => {
-      console.error('Ошибка при скачивании файла:', error);
-    });
+    this.loading.open()
 
+    const data = firstValueFrom(this.searchService.downloadFile(value))
+    const blob = new Blob([await data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  
+    const downloadLink = document.createElement('a');
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = 'res_search.xlsx';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    URL.revokeObjectURL(downloadLink.href);
+    document.body.removeChild(downloadLink);
+    
+    this.loading.close()
     this.shared.visibleData$.next(false)
     this.shared.refreshData$.next(false)
   }

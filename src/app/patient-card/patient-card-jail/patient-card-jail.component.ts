@@ -20,6 +20,7 @@ export class PatientCardJailComponent implements OnInit {
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  isVisibleAddit:boolean = false;
   sIsValid: boolean = true;
   IsErr: boolean = false;
   needUpd: boolean = false;
@@ -101,6 +102,9 @@ export class PatientCardJailComponent implements OnInit {
         break;
       case "Меню":
         this.isVisibleMenu = !this.isVisibleMenu;
+        break;
+      case "Дополнительно":
+        this.isVisibleAddit = !this.isVisibleAddit;
         break;
     } 
   }

@@ -10,6 +10,7 @@ import { SearchHospForm } from './search-hosp-form.model';
 import { SearchHospModelLists } from 'src/app/_interfaces/search-hosp-lists.model';
 import { SearchHospService } from 'src/app/services/search-hosp.service';
 import { SearchHospModel } from 'src/app/_interfaces/search-hosp.model';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-search-hosp',
@@ -37,7 +38,8 @@ export class SearchHospComponent implements OnInit{
     private fb: FormBuilder,
     public shared: SearchSharedServiceService,
     private listService: ListService,
-    public modal: ModalService
+    public modal: ModalService,
+    private loading: LoadingService
   ){}
 
 
@@ -161,6 +163,7 @@ export class SearchHospComponent implements OnInit{
   }
   
   async getSearchRes(value: SearchHospModel){
+    this.loading.open()
     const res = firstValueFrom(this.searchService.getData(value))
 
     this.dataView = {
@@ -172,24 +175,25 @@ export class SearchHospComponent implements OnInit{
     this.resCount$.next((await res.then()).resCount)
     this.shared.visibleData$.next(true)
     this.shared.refreshData$.next(true)
+    this.loading.close()
   }
 
   async getExcel(value: SearchHospModel){
-    this.searchService.downloadFile(value).subscribe((data: Blob) => {
-      const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  
-      const downloadLink = document.createElement('a');
-      downloadLink.href = URL.createObjectURL(blob);
-      downloadLink.download = 'res_search.xlsx';
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-  
-      URL.revokeObjectURL(downloadLink.href);
-      document.body.removeChild(downloadLink);
-    }, error => {
-      console.error('Ошибка при скачивании файла:', error);
-    });
+    this.loading.open()
 
+    const data = firstValueFrom(this.searchService.downloadFile(value))
+    const blob = new Blob([await data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  
+    const downloadLink = document.createElement('a');
+    downloadLink.href = URL.createObjectURL(blob);
+    downloadLink.download = 'res_search.xlsx';
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+
+    URL.revokeObjectURL(downloadLink.href);
+    document.body.removeChild(downloadLink);
+    
+    this.loading.close()
     this.shared.visibleData$.next(false)
     this.shared.refreshData$.next(false)
   }

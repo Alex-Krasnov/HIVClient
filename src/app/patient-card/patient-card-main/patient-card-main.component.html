@@ -50,6 +50,12 @@
                         <li><a class="dropdown-item">other_print</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Дополнительно')" (mouseleave)="openDropdown('Дополнительно')">Дополнительно</a>
+                    <ul [class.visibleDropdown]="isVisibleAddit" class="dropdown-menu" (mouseenter)="openDropdown('Дополнительно')" (mouseleave)="openDropdown('Дополнительно')">
+                        <li><a class="dropdown-item" (click)="leaveComponent('/patient_card/files/')" [routerLink]="['/patient_card/files/']" routerLinkActive="disabled">Сохранение файлов</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" (click)="leaveComponent('/main')">Гл. меню</a>
                 </li>

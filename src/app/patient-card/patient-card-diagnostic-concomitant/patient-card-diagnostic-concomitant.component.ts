@@ -19,6 +19,7 @@ export class PatientCardDiagnosticConcomitantComponent implements OnInit {
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  isVisibleAddit:boolean = false;
 
   Id: number;
   patient: PatientCardDiagnosticConcomitantModel | undefined;
@@ -156,6 +157,9 @@ export class PatientCardDiagnosticConcomitantComponent implements OnInit {
         break;
       case "Меню":
         this.isVisibleMenu = !this.isVisibleMenu;
+        break;
+      case "Дополнительно":
+        this.isVisibleAddit = !this.isVisibleAddit;
         break;
     } 
   }

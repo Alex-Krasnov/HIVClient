@@ -1,0 +1,13 @@
+<div [formGroup]="formF" class="me-1">
+    <ng-container formArrayName="files" *ngFor="let item of files.controls; let i = index">
+    <div class="row my-2" formGroupName="{{i}}">
+        <div class="col-10"><input type="text" class="form-control tbl" formControlName="filePath"></div>
+        <div class="col"><button type="button" class="btn btn-outline-success" (click)="downloadFile(i)">Скачать</button></div>
+        <div class="col"><button type="button" class="btn btn-outline-danger" (click)="delFile(i)">Удалить</button></div>
+    </div>
+    </ng-container>
+    <div class="row">
+        <div class="col-10"><input type="file" class="form-control tbl" formControlName="newFilePath" (change)="onFileSelect($event)"></div>
+        <div class="col"><button type="button" class="btn btn-outline-success" (click)="uploadFile()">Добавить</button></div>
+    </div>
+</div>

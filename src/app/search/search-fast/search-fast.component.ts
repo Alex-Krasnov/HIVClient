@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { SearchFastFormModel } from 'src/app/_interfaces/search-fast-form.model';
 import { Search } from 'src/app/_interfaces/search.model';
+import { LoadingService } from 'src/app/services/loading.service';
 import { SearchFastService } from 'src/app/services/search-fast.service';
 import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
 
@@ -23,7 +24,8 @@ export class SearchFastComponent implements OnInit{
   constructor(
     private searchService: SearchFastService,
     private fb: FormBuilder,
-    public shared: SearchSharedServiceService
+    public shared: SearchSharedServiceService,
+    private loading: LoadingService
   ){}
 
 
@@ -52,6 +54,7 @@ export class SearchFastComponent implements OnInit{
   }
 
   async getSearchRes(){
+    this.loading.open()
 
     let IsNull: boolean = this.SearchForm.controls['patientId'].value == null &&
       this.SearchForm.get('familyName').value == null &&
@@ -83,6 +86,7 @@ export class SearchFastComponent implements OnInit{
       this.resCount$.next((await a.then()).resCount)
       this.shared.visibleData$.next(true)
       this.shared.refreshData$.next(true)
+      this.loading.close()
     }
   }
 

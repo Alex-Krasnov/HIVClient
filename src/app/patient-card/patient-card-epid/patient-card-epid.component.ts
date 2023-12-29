@@ -21,6 +21,7 @@ export class PatientCardEpidComponent implements OnInit {
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  isVisibleAddit:boolean = false;
   ccIsValid: boolean = true;
   rcIsValid: boolean = true;
   ocIsValid: boolean = true;
@@ -243,6 +244,9 @@ export class PatientCardEpidComponent implements OnInit {
         break;
       case "Меню":
         this.isVisibleMenu = !this.isVisibleMenu;
+        break;
+      case "Дополнительно":
+        this.isVisibleAddit = !this.isVisibleAddit;
         break;
     } 
   }

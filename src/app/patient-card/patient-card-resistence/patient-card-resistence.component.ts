@@ -18,6 +18,7 @@ export class PatientCardResistenceComponent implements OnInit {
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  isVisibleAddit:boolean = false;
 
   Id: number;
   patient: PatientCardResistenceModel | undefined;
@@ -95,6 +96,9 @@ export class PatientCardResistenceComponent implements OnInit {
         break;
       case "Меню":
         this.isVisibleMenu = !this.isVisibleMenu;
+        break;
+      case "Дополнительно":
+        this.isVisibleAddit = !this.isVisibleAddit;
         break;
     } 
   }

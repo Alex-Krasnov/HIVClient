@@ -63,6 +63,8 @@ import { DieLongFilterPipe } from './patient-card-main/die-long-filter.pipe';
 import { DieShortFilterPipe } from './patient-card-main/die-short-filter.pipe ';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { VisitModule } from '../visit/visit.module';
+import { PatientCardFilesComponent } from './patient-card-files/patient-card-files.component';
+import { FilesComponent } from './files/files.component';
 
 
 
@@ -117,7 +119,9 @@ import { VisitModule } from '../visit/visit.module';
     PassportComponent,
     DieCouresComponent,
     DieLongFilterPipe,
-    DieShortFilterPipe
+    DieShortFilterPipe,
+    PatientCardFilesComponent,
+    FilesComponent
   ],
   imports: [
     CommonModule, 

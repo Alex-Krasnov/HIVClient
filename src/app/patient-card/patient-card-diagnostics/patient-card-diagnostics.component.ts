@@ -18,6 +18,7 @@ export class PatientCardDiagnosticsComponent implements OnInit {
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
   isVisibleMenu:boolean = false;
+  isVisibleAddit:boolean = false;
 
   Id: number;
   patient: PatientCardDiagnosticsModel | undefined;
@@ -136,6 +137,9 @@ export class PatientCardDiagnosticsComponent implements OnInit {
         break;
       case "Меню":
         this.isVisibleMenu = !this.isVisibleMenu;
+        break;
+      case "Дополнительно":
+        this.isVisibleAddit = !this.isVisibleAddit;
         break;
     } 
   }

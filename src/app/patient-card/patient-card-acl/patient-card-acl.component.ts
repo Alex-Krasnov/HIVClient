@@ -18,6 +18,7 @@ export class PatientCardAclComponent implements OnInit {
     isVisibleSystem: boolean = false;
     isVisibleDiagn: boolean = false;
     isVisibleMenu:boolean = false;
+    isVisibleAddit:boolean = false;
   
     Id: number;
     patient: PatientCardAclModel | undefined;
@@ -128,6 +129,9 @@ export class PatientCardAclComponent implements OnInit {
           break;
         case "Меню":
           this.isVisibleMenu = !this.isVisibleMenu;
+          break;
+        case "Дополнительно":
+          this.isVisibleAddit = !this.isVisibleAddit;
           break;
       } 
     }

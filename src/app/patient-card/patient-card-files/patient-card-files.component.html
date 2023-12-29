@@ -80,35 +80,13 @@
         </div>
     </nav>
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
-    <div *ngIf="!cIsValid || !coIsValid || !rIsValid" class="alert alert-danger">Ошибка...</div>
-    <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
+    <div *ngIf="patientForm.invalid" class="alert alert-danger">Ошибка...</div>
+    <form class="pt-1" style="background-color: #ade8dd;" [formGroup]="patientForm" *ngIf="patientForm">
         <div class="row ms-1 mt-1">
-            <div class="col-xl-10">
-                <div class="row" style="height: 220px; overflow: auto;">
-                    <app-patient-registry [(subArr)]="patientRegistries" [(patientId)]="patient.patientId" (isValid)="giveRForUpd($event)"></app-patient-registry>
-                </div>
-                <p class="text-start m-0">Явка на выезде</p>
-                <div class="row" style="height: 220px; overflow: auto;">
-                    <app-patient-check-out [(subArr)]="patientCheckOuts" [(patientId)]="patient.patientId" (isValid)="giveCForUpd($event)"></app-patient-check-out>
-                </div>
-                <br>
-                <br>
-                <div class="row">
-                    <button class="btn btn-outline-success" type="button" (click)="openReg()">Записать на приём</button>
-                </div>
-            </div>
+            <app-files [(fileArr)]="patientFiles" [(patientId)]="patient.patientId" (fIsValid)="giveFileForUpd($event)"></app-files>
         </div>
         <br>
         <br>
+        <button style="display: none;" type="button"></button>
     </form>
-    <app-modal-window *ngIf="modal.regIsVisible$ | async">
-        <app-select-doc-cab-date-range *ngIf="modal.regIsVisible1$ | async" [(patientId)]="Id" [(isModal)]="isModal"></app-select-doc-cab-date-range>
-        <app-select-date *ngIf="modal.regIsVisible2$ | async" [(isModal)]="isModal"></app-select-date>
-        <app-select-time *ngIf="modal.regIsVisible3$ | async" [(isModal)]="isModal"></app-select-time>
-    </app-modal-window>
-
-<datalist id="listSpec"><option *ngFor="let item of patient.listSpec" [value]="item"></option></datalist>
-<datalist id="listDoctor"><option *ngFor="let item of patient.listDoctor" [value]="item"></option></datalist>
-<datalist id="listCab"><option *ngFor="let item of patient.listCab" [value]="item"></option></datalist>
-<datalist id="listRegTime"><option *ngFor="let item of patient.listRegTime" [value]="item"></option></datalist>
 </ng-container>
