@@ -86,7 +86,7 @@ export class PatientCardFilesComponent implements OnInit {
   }
   
   leaveComponent(name: string){
-    if(this.patientForm.valid || this.fIsValid){
+    if(true){
       if(name == '/main'){
         this.router.navigate([name]);
         return null
