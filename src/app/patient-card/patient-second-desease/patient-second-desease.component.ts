@@ -62,7 +62,7 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
 
     if(this.formSd.controls['newStartDate'].valid && 
         this.formSd.controls['newEndDate'].valid && 
-        this.formSd.controls['newDeseas'].valid &&
+        this.formSd.controls['newDeseas'].valid && this.formSd.controls['newDeseas'].value.length != 0 &&
         this.formSd.controls['newStartDate'].value.length != 0){
           
       const desForm = new FormGroup ({
@@ -78,7 +78,7 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
         endDate: EndDate,
         deseas: Deseas
       }
-  
+      
       this.patientService.createPatientSecondDesease(this.patientId, StartDate, EndDate, Deseas)
       .subscribe()
   
@@ -96,6 +96,9 @@ export class PatientSecondDeseaseComponent implements OnInit, OnDestroy{
   }
 
   updateDesease(){
+    if(this.formSd.controls['deseas'].value == 0)
+      return null
+
     let oldValue = this.pervValue;
     let curValue = this.formSd.controls['secondDeseases'].value;
 

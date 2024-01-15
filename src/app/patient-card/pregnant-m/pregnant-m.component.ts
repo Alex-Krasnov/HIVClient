@@ -213,6 +213,16 @@ export class PregnantMComponent implements OnInit, OnChanges{
     
     if(!(JSON.stringify(oldValue) === JSON.stringify(curValue)))
       for (let index = 0; index < oldValue.length; index++) {
+    
+        if(curValue[index].startMonth.length == 0)
+          curValue[index].startMonth = null
+
+        if(curValue[index].pwMonth.length == 0)
+          curValue[index].pwMonth = null
+
+        if(curValue[index].childId.length == 0)
+          curValue[index].childId = null
+
         if(!(JSON.stringify(oldValue[index]) === JSON.stringify(curValue[index]))){
           let item: pcPregM ={
             patientId: this.patientId,
