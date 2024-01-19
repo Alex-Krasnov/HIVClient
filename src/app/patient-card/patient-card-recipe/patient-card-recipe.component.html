@@ -60,10 +60,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">Системные</a>
                         <ul [class.visibleDropdown]="isVisibleSystem" class="dropdown-menu" (mouseenter)="openDropdown('Системные')" (mouseleave)="openDropdown('Системные')">
-                            <li><a class="dropdown-item">setup_print</a></li>
-                            <li><a class="dropdown-item">print</a></li>
-                            <li><a class="dropdown-item">research_frm</a></li>
-                            <li><a class="dropdown-item">other_print</a></li>
+                            <li><a class="dropdown-item" (click)="openReferalAnalysis()">Направление на анализы</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -96,3 +93,6 @@
     <datalist id="listMedicine"><option  *ngFor="let item of patient.listMedicine" [value]="item"></option></datalist>
     <datalist id="listFinSource"><option  *ngFor="let item of patient.listFinSource" [value]="item"></option></datalist>
 </ng-container>
+<app-modal-window *ngIf="modal.referalAnalysisIsVisible$ | async">
+    <app-modal-referal-analysis [(patientId)]="patient.patientId"></app-modal-referal-analysis>
+</app-modal-window>

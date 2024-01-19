@@ -166,6 +166,4 @@ export class PatientBlotComponent implements OnInit {
       } 
     }
   }
-
-  ngOnDestroy() {}
 }

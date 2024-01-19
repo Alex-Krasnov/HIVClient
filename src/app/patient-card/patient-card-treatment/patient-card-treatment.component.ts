@@ -218,4 +218,8 @@ export class PatientCardTreatmentComponent implements OnInit{
   giveSchema (schema: string){
     this.updSchema = schema
   }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
+  }
 }

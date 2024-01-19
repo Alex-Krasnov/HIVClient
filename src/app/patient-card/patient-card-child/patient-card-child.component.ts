@@ -193,4 +193,8 @@ export class PatientCardChildComponent implements OnInit {
       confirm(`Ошибка в заполнении данных!`)
     }
   }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
+  }
 }

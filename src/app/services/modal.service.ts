@@ -15,6 +15,7 @@ export class ModalService {
   pasIsVisible$ = new BehaviorSubject<boolean>(false)
   dieCourseIsVisible$ = new BehaviorSubject<boolean>(false)
   course2ColIsVisible$ = new BehaviorSubject<boolean>(false)
+  referalAnalysisIsVisible$ = new BehaviorSubject<boolean>(false)
 
   open() {
     this.isVisible$.next(true)
@@ -30,6 +31,7 @@ export class ModalService {
     this.regIsVisible1$.next(false)
     this.regIsVisible2$.next(false)
     this.regIsVisible3$.next(false)
+    this.referalAnalysisIsVisible$.next(false)
   }
 
   dieOpen() {
@@ -50,5 +52,9 @@ export class ModalService {
 
   regOpen() { 
     this.regIsVisible$.next(true)
+  }
+
+  referalAnalysisOpen() { 
+    this.referalAnalysisIsVisible$.next(true)
   }
 }

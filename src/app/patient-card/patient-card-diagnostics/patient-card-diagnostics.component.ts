@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardDiagnosticsModel } from 'src/app/_interfaces/patient-card-diagnostics.model';
 import { PatientCardDiagnosticsService } from 'src/app/services/patient-card-diagnostics.service';
 import { PatientCardDiagnosticsForm } from './patient-card-diagnostics-form.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-patient-card-diagnostics',
@@ -36,6 +37,7 @@ export class PatientCardDiagnosticsComponent implements OnInit {
     private route: ActivatedRoute,
     private patientService: PatientCardDiagnosticsService,
     private fb: FormBuilder,
+    public modal: ModalService,
     private router: Router
   ){}
 
@@ -160,5 +162,9 @@ export class PatientCardDiagnosticsComponent implements OnInit {
       )
       confirm(`Ошибка в заполнении данных!`)
     }
+  }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
   }
 }

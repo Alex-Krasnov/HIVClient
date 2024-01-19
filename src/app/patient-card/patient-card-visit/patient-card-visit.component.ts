@@ -44,7 +44,7 @@ export class PatientCardVisitComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private listService: ListService,
-    private modal: ModalService
+    public modal: ModalService
   ){}
 
   ngOnInit() {
@@ -169,5 +169,9 @@ export class PatientCardVisitComponent implements OnInit {
   openReg(){
     this.modal.regOpen()
     this.modal.regIsVisible1$.next(true)
+  }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
   }
 }

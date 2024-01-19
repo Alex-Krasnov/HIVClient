@@ -7,6 +7,7 @@ import { ListService } from 'src/app/services/list.service';
 import { PatientCardRecipeService } from 'src/app/services/patient-card-recipe.service';
 import { InList } from 'src/app/validators/in-lst';
 import { PatientCardRecipeForm } from './patient-card-recipe-form.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-patient-card-recipe',
@@ -37,6 +38,7 @@ export class PatientCardRecipeComponent implements OnInit {
     private patientService: PatientCardRecipeService,
     private fb: FormBuilder,
     private router: Router,
+    public modal: ModalService,
     private listService: ListService
   ){}
 
@@ -133,5 +135,9 @@ export class PatientCardRecipeComponent implements OnInit {
       )
       confirm(`Ошибка в заполнении данных!`)
     }
+  }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
   }
 }

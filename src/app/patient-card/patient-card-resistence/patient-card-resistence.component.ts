@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardResistenceService } from 'src/app/services/patient-card-resistence.service';
 import { PatientCardResistenceForm } from './patient-card-resistence-form.model';
 import { PatientCardResistenceModel } from 'src/app/_interfaces/patient-card-resistence.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-patient-card-resistence',
@@ -31,6 +32,7 @@ export class PatientCardResistenceComponent implements OnInit {
     private route: ActivatedRoute,
     private patientService: PatientCardResistenceService,
     private fb: FormBuilder,
+    public modal: ModalService,
     private router: Router
   ){}
 
@@ -119,5 +121,9 @@ export class PatientCardResistenceComponent implements OnInit {
       )
       confirm(`Ошибка в заполнении данных!`)
     }
+  }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
   }
 }

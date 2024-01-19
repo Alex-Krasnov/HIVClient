@@ -38,15 +38,15 @@ export class PregnantMComponent implements OnInit, OnChanges{
       newPwMonth: new FormControl(),
       newPregDate: new FormControl(),
       newChildBirthDate: new FormControl(),
-      newBirthType: new FormControl('', {
+      newBirthType: new FormControl(null, {
         asyncValidators: [InList.validateBirthType(this.listService)],
         updateOn: 'blur'
       }),
-      newChildCount: new FormControl('', {
+      newChildCount: new FormControl(null, {
         asyncValidators: [InList.validateChildCount(this.listService)],
         updateOn: 'blur'
       }),
-      newChildId: new FormControl('', {
+      newChildId: new FormControl(null, {
         asyncValidators: [InList.validatePatientCard(this.listService)],
         updateOn: 'blur'
       }),
@@ -114,6 +114,8 @@ export class PregnantMComponent implements OnInit, OnChanges{
         phpSchema2: this.formS.controls['newPhpSchema2'].value,
         phpSchema3: this.formS.controls['newPhpSchema3'].value
       };
+      console.log(item);
+      
 
       this.patientService.createPregM(item).subscribe()
 
@@ -173,37 +175,37 @@ export class PregnantMComponent implements OnInit, OnChanges{
       this.isValid.emit(true);
       this.pervValue.push(sData)
     }
-    this.formS.get('newPregId').setValue('')
+    this.formS.get('newPregId').setValue(null)
     this.formS.get('newPregId').markAsPristine()
-    this.formS.get('newPwCheck').setValue('')
+    this.formS.get('newPwCheck').setValue(null)
     this.formS.get('newPwCheck').markAsPristine()
-    this.formS.get('newPwMonth').setValue('')
+    this.formS.get('newPwMonth').setValue(null)
     this.formS.get('newPwMonth').markAsPristine()
-    this.formS.get('newPregDate').setValue('')
+    this.formS.get('newPregDate').setValue(null)
     this.formS.get('newPregDate').markAsPristine()
-    this.formS.get('newChildBirthDate').setValue('')
+    this.formS.get('newChildBirthDate').setValue(null)
     this.formS.get('newChildBirthDate').markAsPristine()
-    this.formS.get('newBirthType').setValue('')
+    this.formS.get('newBirthType').setValue(null)
     this.formS.get('newBirthType').markAsPristine()
-    this.formS.get('newChildCount').setValue('')
+    this.formS.get('newChildCount').setValue(null)
     this.formS.get('newChildCount').markAsPristine()
-    this.formS.get('newChildId').setValue('')
+    this.formS.get('newChildId').setValue(null)
     this.formS.get('newChildId').markAsPristine()
-    this.formS.get('newStartMonth').setValue('')
+    this.formS.get('newStartMonth').setValue(null)
     this.formS.get('newStartMonth').markAsPristine()
-    this.formS.get('newChildFamilyName').setValue('')
+    this.formS.get('newChildFamilyName').setValue(null)
     this.formS.get('newChildFamilyName').markAsPristine()
-    this.formS.get('newChildFirstName').setValue('')
+    this.formS.get('newChildFirstName').setValue(null)
     this.formS.get('newChildFirstName').markAsPristine()
-    this.formS.get('newChildThirdName').setValue('')
+    this.formS.get('newChildThirdName').setValue(null)
     this.formS.get('newChildThirdName').markAsPristine()
-    this.formS.get('newPregDescr').setValue('')
+    this.formS.get('newPregDescr').setValue(null)
     this.formS.get('newPregDescr').markAsPristine()
-    this.formS.get('newPhpSchema1').setValue('')
+    this.formS.get('newPhpSchema1').setValue(null)
     this.formS.get('newPhpSchema1').markAsPristine()
-    this.formS.get('newPhpSchema2').setValue('')
+    this.formS.get('newPhpSchema2').setValue(null)
     this.formS.get('newPhpSchema2').markAsPristine()
-    this.formS.get('newPhpSchema3').setValue('')
+    this.formS.get('newPhpSchema3').setValue(null)
     this.formS.get('newPhpSchema3').markAsPristine()
   }
 

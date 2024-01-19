@@ -470,4 +470,8 @@ export class PatientCardMainComponent implements OnInit {
   openDieCourse(){
     this.modal.dieCourseOpen()
   }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
+  }
 }

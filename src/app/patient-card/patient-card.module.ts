@@ -65,6 +65,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { VisitModule } from '../visit/visit.module';
 import { PatientCardFilesComponent } from './patient-card-files/patient-card-files.component';
 import { FilesComponent } from './files/files.component';
+import { ModalReferalAnalysisComponent } from './modal-referal-analysis/modal-referal-analysis.component';
 
 
 
@@ -121,7 +122,8 @@ import { FilesComponent } from './files/files.component';
     DieLongFilterPipe,
     DieShortFilterPipe,
     PatientCardFilesComponent,
-    FilesComponent
+    FilesComponent,
+    ModalReferalAnalysisComponent
   ],
   imports: [
     CommonModule, 

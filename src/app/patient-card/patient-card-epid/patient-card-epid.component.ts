@@ -8,6 +8,7 @@ import { PatientCardEpidService } from 'src/app/services/patient-card-epid.servi
 import { InList } from 'src/app/validators/in-lst';
 import { PatientCardEpidForm } from './patient-card-epid-form.model';
 import { pcEpid } from 'src/app/_interfaces/pc-epid.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-patient-card-epid',
@@ -54,6 +55,7 @@ export class PatientCardEpidComponent implements OnInit {
     private patientService: PatientCardEpidService,
     private fb: FormBuilder,
     private router: Router,
+    public modal: ModalService,
     private listService: ListService
   ){}
 
@@ -337,5 +339,9 @@ export class PatientCardEpidComponent implements OnInit {
       )
       confirm(`Ошибка в заполнении данных!`)
     }
+  }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
   }
 }

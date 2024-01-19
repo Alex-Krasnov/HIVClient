@@ -1,0 +1,23 @@
+<form style="width: 1000px;" class="mx-auto modal-content p-1" [formGroup]="formR" *ngIf="formR">
+    <div style="overflow-y: auto;  height: 700px;" class="row border m-1">
+        <div class="row mt-1">
+            <div class="col-xl">
+                <input type="text" class="form-control" placeholder="Врач" list="listDoc" formControlName="docName">
+            </div>
+        </div>
+        <ng-container formArrayName="researchList" *ngFor="let item of researchList.controls; let i = index">
+            <div class="row mt-2" formGroupName="{{i}}">
+                <div class="col-xl-1 m-0">
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="select">
+                </div>
+                <div class="col-xl">
+                    <input type="text" class="form-control" formControlName="researchName">
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="row m-2">
+        <button class="btn btn-outline-success" (click)="getFile()">Направление</button>
+    </div>
+    <datalist id="listDoc"><option *ngFor="let item of answer.listDoc" [value]="item"></option></datalist>
+</form>

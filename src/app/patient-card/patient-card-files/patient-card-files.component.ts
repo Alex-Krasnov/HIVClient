@@ -6,6 +6,7 @@ import { PatientCardAclModel } from 'src/app/_interfaces/patient-card-acl.model'
 import { PatientCardFilesModel } from 'src/app/_interfaces/patient-card-files.model';
 import { PatientCardFilesService } from 'src/app/services/patient-card-files.service';
 import { PatientCardFilesForm } from './patient-card-files-form.model';
+import { ModalService } from 'src/app/services/modal.service';
 
 @Component({
   selector: 'app-patient-files',
@@ -33,6 +34,7 @@ export class PatientCardFilesComponent implements OnInit {
     private route: ActivatedRoute,
     private patientService: PatientCardFilesService,
     private fb: FormBuilder,
+    public modal: ModalService,
     private router: Router
   ){}
 
@@ -105,5 +107,9 @@ export class PatientCardFilesComponent implements OnInit {
 
   giveFileForUpd(isValid: boolean){
     this.fIsValid = isValid;    
+  }
+
+  openReferalAnalysis(){
+    this.modal.referalAnalysisOpen()
   }
 }
