@@ -7,7 +7,7 @@
     birthType?: string
     childCount?: string
     childId?: number
-    startMonth?: number
+    startMonth?: Date
     childFamilyName?: string
     childFirstName?: string
     childThirdName?: string

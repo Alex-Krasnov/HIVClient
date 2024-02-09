@@ -81,6 +81,12 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
     let protNum = this.formCS.get('newProtNum').value
     let last = this.formCS.get('newLast').value
 
+    if(name == null || date == null || name.length == 0){
+      confirm("Поля Схема терапии и Дата начала обязательны к заполнению")
+      return(null)
+    }
+    
+
     if(this.formCS.controls['newCureSchemaName'].valid && 
     this.formCS.controls['newCureChangeName'].valid && 
     this.formCS.controls['newRangeTherapy'].valid &&

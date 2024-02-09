@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { ReferalAnalysis } from 'src/app/_interfaces/referal-analysis';
 import { ListService } from 'src/app/services/list.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ModalService } from 'src/app/services/modal.service';
 import { ReferalAnalysisService } from 'src/app/services/referal-analysis.service';
 import { InList } from 'src/app/validators/in-lst';
 
@@ -23,6 +24,7 @@ export class ModalReferalAnalysisComponent  implements OnInit{
     private fb: FormBuilder,
     private listService: ListService,
     private service: ReferalAnalysisService,
+    public modal: ModalService,
     private loading: LoadingService
   ){}
 
@@ -80,5 +82,6 @@ export class ModalReferalAnalysisComponent  implements OnInit{
     document.body.removeChild(downloadLink);
 
     this.loading.close()
+    this.modal.close()
   }
 }
