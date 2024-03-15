@@ -22,7 +22,10 @@ const routes: Routes = [
   loadChildren: () => import('./visit/visit.module').then(m => m.VisitModule), 
   canActivate: [AuthGuard]},
   { path: 'imp-korvet', component: ImportKorvetComponent, canActivate: [AuthGuard]},
-  { path: 'search-registry', component: SerchRegistryComponent, canActivate: [AuthGuard]}
+  { path: 'search-registry', component: SerchRegistryComponent, canActivate: [AuthGuard]},
+  { path: 'lists', 
+  loadChildren: () => import('./lists/lists.module').then(m => m.ListsModule), 
+  canActivate: [AuthGuard]},
 ];
 
 @NgModule({

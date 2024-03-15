@@ -14,23 +14,14 @@
             </div>
             <div class="row pt-2 pb-2 border">
                 <div class="col-6">
-                    <!-- <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина обращения</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Фактор риска зараж.</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Место лаб. исслед.</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">УИН</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Страны</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Регионы</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Пол</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Состав семьи</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Результат ИБ</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Стадия CDC</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">ВИЧ 1/2</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Кодировка МКБ-10</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина госпитализации</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Распол.отказн.ребёнка</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Профилактика ПХП</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Группа инвалидности</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Сопут. заболевание</button> -->
+                    <button [routerLink]="['/lists/check-place']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">МО, направ. матер.</button>
+                    <button [routerLink]="['/lists/country']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Страны</button>
+                    <button [routerLink]="['/lists/code-mkb10']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Кодировка МКБ 10</button>
+                    <button [routerLink]="['/lists/diagnosis']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Стадии</button>
+                    <button [routerLink]="['/lists/showillness']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Вторичное заболевание</button>
+                    <button [routerLink]="['/lists/check-course']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Код контингента</button>
+                    <button [routerLink]="['/lists/infect-course']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина заражения</button>
+                    <button [routerLink]="['/lists/arvt']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">АРТ</button>
                 </div>
                 <div class="col-6">
                     <!-- <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Стадии</button>
