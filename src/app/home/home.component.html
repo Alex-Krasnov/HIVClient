@@ -20,27 +20,19 @@
                     <button [routerLink]="['/lists/diagnosis']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Стадии</button>
                     <button [routerLink]="['/lists/showillness']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Вторичное заболевание</button>
                     <button [routerLink]="['/lists/check-course']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Код контингента</button>
-                    <button [routerLink]="['/lists/infect-course']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина заражения</button>
-                    <button [routerLink]="['/lists/arvt']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">АРТ</button>
+                    <button [routerLink]="['/lists/epid-doctor']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Врач проводивший расследование</button>
+                    <button [routerLink]="['/lists/coresp-illnes']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Сопутствующие заболевания</button>
                 </div>
                 <div class="col-6">
-                    <!-- <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Стадии</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Индикаторная болезнь</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина смерти</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Медикаменты</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Выявл. у беременных</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Тип родов</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">??Месяца</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Группы возрастов</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Резистентность</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Статус льготника</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Принадлежность</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Источник фин.</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">АРВТ</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Специальность</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">ЛПУ</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Исход госпитализации</button>
-                    <button [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Количество детей</button> -->
+                    <button [routerLink]="['/lists/cure-change']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина смены терапии</button>
+                    <button [routerLink]="['/lists/range-therapy']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Ряд терапии</button>
+                    <button [routerLink]="['/lists/lpu']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">МО</button>
+                    <button [routerLink]="['/lists/arvt']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">АРТ</button>
+                    <button [routerLink]="['/lists/invalid']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Гр. инвалидности</button>
+                    <button [routerLink]="['/lists/hosp-course']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина госпитализации</button>
+                    <button [routerLink]="['/lists/hosp-result']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Исход госпитализации</button>
+                    <button [routerLink]="['/lists/cabinet']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Кабинет</button>
+                    <button [routerLink]="['/lists/infect-course']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина заражения</button>
                 </div>
             </div>
         </div>

@@ -1,0 +1,42 @@
+<form class="mx-auto modal-content p-1" style="background-color: #ade8dd;" [formGroup]="listForm" *ngIf="listForm">
+    <div>
+        <div class="row mt-1">
+            <div class="col-2">
+                <h5>Короткое наим.</h5>
+            </div>
+            <div class="col">
+                <h5>Полное наим.</h5>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+    </div>
+    <div>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+            <div class="row mt-1" formGroupName="{{i}}">
+                <div class="col-2">
+                    <input type="text" class="form-control" formControlName="shortName">
+                </div>
+                <div class="col pe-0">
+                    <input type="text" class="form-control" formControlName="longName">
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-outline-danger" style="width: 100px !important;" (click)="delRow(i)">Удалить</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div>
+        <div class="row mt-1">
+            <div class="col-2">
+                <input type="text" class="form-control" formControlName="newShortName">
+            </div>
+            <div class="col pe-0">
+                <input type="text" class="form-control" formControlName="newLongName">
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-outline-success" style="width: 100px !important;" (click)="createRow()">Добавить</button>
+            </div>
+        </div>
+    </div>
+</form>
