@@ -20,6 +20,14 @@ import { LpuComponent } from './lpu/lpu.component';
 import { HospCourseComponent } from './hosp-course/hosp-course.component';
 import { HospResultComponent } from './hosp-result/hosp-result.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
+import { PlaceCheckComponent } from './place-check/place-check.component';
+import { VulnerableGroupComponent } from './vulnerable-group/vulnerable-group.component';
+import { EducationComponent } from './education/education.component';
+import { FamilyStatusComponent } from './family-status/family-status.component';
+import { EmploymentComponent } from './employment/employment.component';
+import { TransmisionMechComponent } from './transmision-mech/transmision-mech.component';
+import { SituationDetectComponent } from './situation-detect/situation-detect.component';
+import { VacComponent } from './vac/vac.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +48,15 @@ import { CabinetComponent } from './cabinet/cabinet.component';
     LpuComponent,
     HospCourseComponent,
     HospResultComponent,
-    CabinetComponent
+    CabinetComponent,
+    PlaceCheckComponent,
+    VulnerableGroupComponent,
+    EducationComponent,
+    FamilyStatusComponent,
+    EmploymentComponent,
+    TransmisionMechComponent,
+    SituationDetectComponent,
+    VacComponent
   ],
   imports: [
     CommonModule,

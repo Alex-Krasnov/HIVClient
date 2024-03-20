@@ -20,8 +20,12 @@
                     <button [routerLink]="['/lists/diagnosis']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Стадии</button>
                     <button [routerLink]="['/lists/showillness']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Вторичное заболевание</button>
                     <button [routerLink]="['/lists/check-course']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Код контингента</button>
-                    <button [routerLink]="['/lists/epid-doctor']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Врач проводивший расследование</button>
-                    <button [routerLink]="['/lists/coresp-illnes']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Сопутствующие заболевания</button>
+                    <button [routerLink]="['/lists/place-check']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Место выявления</button>
+                    <button [routerLink]="['/lists/vac']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Наименование вакцины</button>
+                    <button [routerLink]="['/lists/transmision-mech']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Вероятный мех. передачи</button>
+                    <button [routerLink]="['/lists/situation-detect']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Обстоятельства выяв.</button>
+                    <button [routerLink]="['/lists/epid-doctor']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Врач проводивший рассл.</button>
+                    <button [routerLink]="['/lists/coresp-illnes']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Сопутствующие забол.</button>
                 </div>
                 <div class="col-6">
                     <button [routerLink]="['/lists/cure-change']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина смены терапии</button>
@@ -33,6 +37,10 @@
                     <button [routerLink]="['/lists/hosp-result']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Исход госпитализации</button>
                     <button [routerLink]="['/lists/cabinet']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Кабинет</button>
                     <button [routerLink]="['/lists/infect-course']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Причина заражения</button>
+                    <button [routerLink]="['/lists/vulnerable-group']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Кат. уязвимой группы</button>
+                    <button [routerLink]="['/lists/education']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Образование</button>
+                    <button [routerLink]="['/lists/family-status']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Семейное положение</button>
+                    <button [routerLink]="['/lists/employment']" [disabled]="!isKlassif" class="w-100 btn btn-lg btn-primary">Занятость</button>
                 </div>
             </div>
         </div>

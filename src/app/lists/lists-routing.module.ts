@@ -19,6 +19,14 @@ import { LpuComponent } from './lpu/lpu.component';
 import { HospCourseComponent } from './hosp-course/hosp-course.component';
 import { HospResultComponent } from './hosp-result/hosp-result.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
+import { PlaceCheckComponent } from './place-check/place-check.component';
+import { VulnerableGroupComponent } from './vulnerable-group/vulnerable-group.component';
+import { EducationComponent } from './education/education.component';
+import { FamilyStatusComponent } from './family-status/family-status.component';
+import { EmploymentComponent } from './employment/employment.component';
+import { TransmisionMechComponent } from './transmision-mech/transmision-mech.component';
+import { SituationDetectComponent } from './situation-detect/situation-detect.component';
+import { VacComponent } from './vac/vac.component';
 
 
 const routes: Routes = [{
@@ -41,7 +49,15 @@ const routes: Routes = [{
     { path: 'lpu', component: LpuComponent, canActivate: [AuthGuard] },
     { path: 'hosp-course', component: HospCourseComponent, canActivate: [AuthGuard] },
     { path: 'hosp-result', component: HospResultComponent, canActivate: [AuthGuard] },
-    { path: 'cabinet', component: CabinetComponent, canActivate: [AuthGuard] }
+    { path: 'cabinet', component: CabinetComponent, canActivate: [AuthGuard] },
+    { path: 'place-check', component: PlaceCheckComponent, canActivate: [AuthGuard] },
+    { path: 'vulnerable-group', component: VulnerableGroupComponent, canActivate: [AuthGuard] },
+    { path: 'education', component: EducationComponent, canActivate: [AuthGuard] },
+    { path: 'family-status', component: FamilyStatusComponent, canActivate: [AuthGuard] },
+    { path: 'employment', component: EmploymentComponent, canActivate: [AuthGuard] },
+    { path: 'transmision-mech', component: TransmisionMechComponent, canActivate: [AuthGuard] },
+    { path: 'situation-detect', component: SituationDetectComponent, canActivate: [AuthGuard] },
+    { path: 'vac', component: VacComponent, canActivate: [AuthGuard] }
   ]
 }];
 
