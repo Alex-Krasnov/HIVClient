@@ -1,0 +1,96 @@
+<form class="mx-auto modal-content p-1" style="background-color: #ade8dd;" [formGroup]="listForm" *ngIf="listForm">
+    <div>
+        <div class="row mt-1">
+            <div class="col-2">
+                <h5>Логин</h5>
+            </div>
+            <div class="col-2">
+                <h5>Пароль</h5>
+            </div>
+            <div class="col-2">
+                <h5>Имя пользователя</h5>
+            </div>
+            <div class="col">
+                <h5>excel</h5>
+            </div>
+            <div class="col">
+                <h5>write</h5>
+            </div>
+            <div class="col">
+                <h5>admin</h5>
+            </div>
+            <div class="col">
+                <h5>deleter</h5>
+            </div>
+            <div class="col">
+                <h5>klassif</h5>
+            </div>
+            <div class="col-2">
+            </div>
+        </div>
+    </div>
+    <div>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+            <div class="row mt-1" formGroupName="{{i}}">
+                <div class="col-2">
+                    <input type="text" class="form-control" formControlName="uid">
+                </div>
+                <div class="col-2 pe-0">
+                    <input type="text" class="form-control" formControlName="pwd">
+                </div>
+                <div class="col-2 pe-0">
+                    <input type="text" class="form-control" formControlName="userName">
+                </div>
+                <div class="col pe-0">
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="excel">
+                </div>
+                <div class="col pe-0">
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="write">
+                </div>
+                <div class="col pe-0">
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="admin">
+                </div>
+                <div class="col pe-0">
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="deleter">
+                </div>
+                <div class="col pe-0">
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="klassif">
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-outline-danger" style="width: 100px !important;" (click)="delRow(i)">Удалить</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div>
+        <div class="row mt-1">
+            <div class="col-2">
+                <input type="text" class="form-control" formControlName="newUid">
+            </div>
+            <div class="col-2 pe-0">
+                <input type="text" class="form-control" formControlName="newPwd">
+            </div>
+            <div class="col-2 pe-0">
+                <input type="text" class="form-control" formControlName="newUserName">
+            </div>
+            <div class="col pe-0">
+                <input type="checkbox" class="form-check-input mt-2" formControlName="newExcel">
+            </div>
+            <div class="col pe-0">
+                <input type="checkbox" class="form-check-input mt-2" formControlName="newWrite">
+            </div>
+            <div class="col pe-0">
+                <input type="checkbox" class="form-check-input mt-2" formControlName="newAdmin">
+            </div>
+            <div class="col pe-0">
+                <input type="checkbox" class="form-check-input mt-2" formControlName="newDeleter">
+            </div>
+            <div class="col pe-0">
+                <input type="checkbox" class="form-check-input mt-2" formControlName="newKlassif">
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-outline-success" style="width: 100px !important;" (click)="createRow()">Добавить</button>
+            </div>
+        </div>
+    </div>
+</form>
