@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ImportKorvetService } from '../services/import-korvet.service';
 import { InList } from 'src/app/validators/in-lst';
 import { ListService } from 'src/app/services/list.service';
+import { LoadingService } from '../services/loading.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-import-korvet',
@@ -20,7 +22,8 @@ export class ImportKorvetComponent implements OnInit{
     private service: ImportKorvetService,
     private fb: FormBuilder,
     private router: Router,
-    private listService: ListService
+    private listService: ListService,
+    public loading: LoadingService
   ){}
 
   ngOnInit() {
@@ -51,22 +54,26 @@ export class ImportKorvetComponent implements OnInit{
 
   async sendForm(){
     if (this.formR.valid){
-      const a = new FormData()
-      a.append('file', this.selectedFile)
-      a.append('finSource', this.formR.get('finSource').value)
+      this.loading.open()
 
-      this.service.sendFile(a).subscribe((data: Blob) => {
-        const blob = new Blob([data], { type: 'text/plain' });
-    
-        const downloadLink = document.createElement('a');
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = 'errList.txt';
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-    
-        URL.revokeObjectURL(downloadLink.href);
-        document.body.removeChild(downloadLink);
-      })
+      const formData = new FormData()
+      formData.append('file', this.selectedFile)
+      formData.append('finSource', this.formR.get('finSource').value)
+      
+      const file = firstValueFrom(this.service.sendFile(formData))
+
+      const blob = new Blob([await file], { type: 'text/plain' });
+  
+      const downloadLink = document.createElement('a');
+      downloadLink.href = URL.createObjectURL(blob);
+      downloadLink.download = 'errList.txt';
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+  
+      URL.revokeObjectURL(downloadLink.href);
+      document.body.removeChild(downloadLink);
+
+      this.loading.close()
     }
   }
 }
