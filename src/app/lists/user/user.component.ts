@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
-import { List2Col, Row2Col } from 'src/app/_interfaces/list-2-col.model';
 import { ListUser } from 'src/app/_interfaces/list-user.model';
 import { ListSharedServiceService } from 'src/app/services/lists-services/list-shared-service.service';
 import { UserService } from 'src/app/services/lists-services/user.service';

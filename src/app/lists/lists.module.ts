@@ -29,6 +29,7 @@ import { TransmisionMechComponent } from './transmision-mech/transmision-mech.co
 import { SituationDetectComponent } from './situation-detect/situation-detect.component';
 import { VacComponent } from './vac/vac.component';
 import { UserComponent } from './user/user.component';
+import { DoctorComponent } from './doctor/doctor.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { UserComponent } from './user/user.component';
     TransmisionMechComponent,
     SituationDetectComponent,
     VacComponent,
-    UserComponent
+    UserComponent,
+    DoctorComponent
   ],
   imports: [
     CommonModule,

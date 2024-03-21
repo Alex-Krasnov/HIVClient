@@ -28,6 +28,7 @@ import { TransmisionMechComponent } from './transmision-mech/transmision-mech.co
 import { SituationDetectComponent } from './situation-detect/situation-detect.component';
 import { VacComponent } from './vac/vac.component';
 import { UserComponent } from './user/user.component';
+import { DoctorComponent } from './doctor/doctor.component';
 
 
 const routes: Routes = [{
@@ -59,7 +60,8 @@ const routes: Routes = [{
     { path: 'transmision-mech', component: TransmisionMechComponent, canActivate: [AuthGuard] },
     { path: 'situation-detect', component: SituationDetectComponent, canActivate: [AuthGuard] },
     { path: 'vac', component: VacComponent, canActivate: [AuthGuard] },
-    { path: 'user', component: UserComponent, canActivate: [AuthGuard] }
+    { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
+    { path: 'doctor', component: DoctorComponent, canActivate: [AuthGuard] }
   ]
 }];
 
