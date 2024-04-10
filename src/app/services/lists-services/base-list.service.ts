@@ -9,13 +9,13 @@ import { environment } from 'src/environments/environment';
 })
 export abstract class BaseListService {
   url: string = `${environment.apiUrl}/api/ListCheckPlace`;
-  constructor(private http: HttpClient){}
+  constructor(public http: HttpClient){}
 
   getData(): Observable<List2Col>{
       return this.http.get<List2Col>(this.url);
   };
 
-  del(longName: number): Observable<any>{
+  del(longName: string): Observable<any>{
       return this.http.delete(this.url+`/Del?longName=${longName}`).pipe(map((data:any) =>{
         return data
       }),
@@ -42,6 +42,13 @@ export abstract class BaseListService {
         id: id, 
         longName: longName,
         shortName: shortName
-      })
+      }).pipe(map((data:any) =>{
+        return data
+      }),
+      catchError(err =>{
+        confirm(err.error)
+        console.log(err);
+        return 'e'
+      }))
   };
 }

@@ -16,6 +16,7 @@ export class ModalService {
   dieCourseIsVisible$ = new BehaviorSubject<boolean>(false)
   course2ColIsVisible$ = new BehaviorSubject<boolean>(false)
   referalAnalysisIsVisible$ = new BehaviorSubject<boolean>(false)
+  listCureSchema$ = new BehaviorSubject<boolean>(false)
 
   open() {
     this.isVisible$.next(true)
@@ -32,6 +33,7 @@ export class ModalService {
     this.regIsVisible2$.next(false)
     this.regIsVisible3$.next(false)
     this.referalAnalysisIsVisible$.next(false)
+    this.listCureSchema$.next(false)
   }
 
   dieOpen() {
@@ -56,5 +58,9 @@ export class ModalService {
 
   referalAnalysisOpen() { 
     this.referalAnalysisIsVisible$.next(true)
+  }
+
+  listCureSchemaOpen() { 
+    this.listCureSchema$.next(true)
   }
 }

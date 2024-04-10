@@ -1,0 +1,25 @@
+<form style="width: 900px;" class="mx-auto modal-content p-1" [formGroup]="form" >
+    <div class="row">
+        <div class="col ">
+            <input type="text" id="floatingInput" class="form-control" formControlName="schemaName">
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-outline-success my-auto"(click)="confirm()">Подтвердить</button>
+      </div>
+    </div>
+    <br>
+    <div style="height: 800px; overflow-y: scroll; overflow-x: hidden;">
+      <ng-container formArrayName="formArr" *ngFor="let item of formArr.controls ; let i = index">
+        <div class="row" formGroupName="{{i}}">
+          <div class="col">
+              <input type="text" class="form-control" formControlName="name" title="{{data[i].name}}">
+          </div>
+          <div class="col-1">
+              <input type="checkbox" class="form-check-input mt-2" formControlName="includeFlg">
+          </div>
+        </div>
+      </ng-container>
+    </div>
+</form>

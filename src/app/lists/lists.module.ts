@@ -30,6 +30,10 @@ import { SituationDetectComponent } from './situation-detect/situation-detect.co
 import { VacComponent } from './vac/vac.component';
 import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { CureSchemaComponent } from './cure-schema/cure-schema.component';
+import { ModalWindowComponent } from './modal-window/modal-window.component';
+import { MedForSchemaComponent } from './med-for-schema/med-for-schema.component';
+import { SchemaSelectComponent } from './schema-select/schema-select.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,11 @@ import { DoctorComponent } from './doctor/doctor.component';
     SituationDetectComponent,
     VacComponent,
     UserComponent,
-    DoctorComponent
+    DoctorComponent,
+    CureSchemaComponent,
+    ModalWindowComponent,
+    MedForSchemaComponent,
+    SchemaSelectComponent
   ],
   imports: [
     CommonModule,

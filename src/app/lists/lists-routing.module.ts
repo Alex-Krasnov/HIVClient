@@ -29,6 +29,8 @@ import { SituationDetectComponent } from './situation-detect/situation-detect.co
 import { VacComponent } from './vac/vac.component';
 import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
+import { CureSchemaComponent } from './cure-schema/cure-schema.component';
+import { MedForSchemaComponent } from './med-for-schema/med-for-schema.component';
 
 
 const routes: Routes = [{
@@ -61,7 +63,9 @@ const routes: Routes = [{
     { path: 'situation-detect', component: SituationDetectComponent, canActivate: [AuthGuard] },
     { path: 'vac', component: VacComponent, canActivate: [AuthGuard] },
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
-    { path: 'doctor', component: DoctorComponent, canActivate: [AuthGuard] }
+    { path: 'doctor', component: DoctorComponent, canActivate: [AuthGuard] },
+    { path: 'cure-schema', component: CureSchemaComponent, canActivate: [AuthGuard] },
+    { path: 'med-for-schema', component: MedForSchemaComponent, canActivate: [AuthGuard] }
   ]
 }];
 
