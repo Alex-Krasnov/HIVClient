@@ -1,0 +1,35 @@
+<table class="table border" [formGroup]="formC">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col">Дата Рожд.</th>
+        <th scope="col" style="width: 300px;">Фамилия</th>
+        <th scope="col" style="width: 300px;">Имя</th>
+        <th scope="col" style="width: 300px;">Отчество</th>
+        <th scope="col">Пол</th>
+        <th scope="col">Обсл.</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="child" *ngFor="let item of child.controls; let i = index">
+        <tr  formGroupName="{{i}}">
+            <td><input type="date" class="form-control tbl" formControlName="birthDate" title="{{pervValue[i].birthDate}}"></td>
+            <td><input type="text" class="form-control tbl" formControlName="familyName" title="{{pervValue[i].familyName}}"></td>
+            <td><input type="text" class="form-control tbl" formControlName="firstName" title="{{pervValue[i].firstName}}"></td>
+            <td><input type="text" class="form-control tbl" formControlName="thirdName" title="{{pervValue[i].thirdName}}"></td>
+            <td><input type="text" list="listSex" class="form-control tbl" formControlName="sexName" title="{{pervValue[i].sexName}}"></td>
+            <td><input type="checkbox" class="form-check-input mt-2" formControlName="exam"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="date" class="form-control tbl" formControlName="newBirthDate"></td>
+            <td><input type="text" class="form-control tbl" formControlName="newFamilyName"></td>
+            <td><input type="text" class="form-control tbl" formControlName="newFirstName"></td>
+            <td><input type="text" class="form-control tbl" formControlName="newThirdName"></td>
+            <td><input type="text" list="listSex" class="form-control tbl" formControlName="newSexName"></td>
+            <td><input type="checkbox" class="form-check-input mt-2" formControlName="newExam"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
+        </tr>
+    </tbody>
+</table>

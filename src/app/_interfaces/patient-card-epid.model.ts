@@ -2,6 +2,8 @@ import { Chemsex } from "./chemsex.model";
 import { Contact } from "./contact.model";
 import { CovidEpid } from "./covid-epid.model";
 import { CovidVacEpid } from "./covid-vac-epid.model";
+import { EpidChild } from "./epid-child.model";
+import { PatientCall } from "./patient-call.model";
 import { Pav } from "./pav.model";
 
 export interface PatientCardEpidModel {
@@ -19,6 +21,8 @@ export interface PatientCardEpidModel {
   situationDetectName?: string;
   transName?: string;
   transmitionMechName?: string;
+  maxIdEpidChil: number;
+  maxIdCall: number;
 
   listCovidMKB?: string[];
   listEdu?: string[];
@@ -31,6 +35,8 @@ export interface PatientCardEpidModel {
   listTypeContacts?: string[];
   listVac?: string[];
   listYn?: string[];
+  listSex?: string[];
+  listCallStatus?: string[];
 
   chemsex?: Chemsex[]; 
   constantContact?: Contact[];
@@ -40,4 +46,6 @@ export interface PatientCardEpidModel {
   pavNotInj?: Pav[];
   covidVac?: CovidVacEpid[];
   covid?: CovidEpid[];
+  callStatuses?: PatientCall[];
+  epidChild?: EpidChild[];
 }

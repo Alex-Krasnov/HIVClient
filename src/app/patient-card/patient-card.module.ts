@@ -66,6 +66,8 @@ import { VisitModule } from '../visit/visit.module';
 import { PatientCardFilesComponent } from './patient-card-files/patient-card-files.component';
 import { FilesComponent } from './files/files.component';
 import { ModalReferalAnalysisComponent } from './modal-referal-analysis/modal-referal-analysis.component';
+import { PatientCallComponent } from './patient-call/patient-call.component';
+import { PatientEpidChildComponent } from './patient-epid-child/patient-epid-child.component';
 
 
 
@@ -123,7 +125,9 @@ import { ModalReferalAnalysisComponent } from './modal-referal-analysis/modal-re
     DieShortFilterPipe,
     PatientCardFilesComponent,
     FilesComponent,
-    ModalReferalAnalysisComponent
+    ModalReferalAnalysisComponent,
+    PatientCallComponent,
+    PatientEpidChildComponent
   ],
   imports: [
     CommonModule, 

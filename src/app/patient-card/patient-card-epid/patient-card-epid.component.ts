@@ -9,6 +9,8 @@ import { InList } from 'src/app/validators/in-lst';
 import { PatientCardEpidForm } from './patient-card-epid-form.model';
 import { pcEpid } from 'src/app/_interfaces/pc-epid.model';
 import { ModalService } from 'src/app/services/modal.service';
+import { PatientCall } from 'src/app/_interfaces/patient-call.model';
+import { EpidChild } from 'src/app/_interfaces/epid-child.model';
 
 @Component({
   selector: 'app-patient-card-epid',
@@ -30,6 +32,8 @@ export class PatientCardEpidComponent implements OnInit {
   pniIsValid: boolean = true;
   cvIsValid: boolean = true;
   cIsValid: boolean = true;
+  chIsValid: boolean = true;
+  pcIsValid: boolean = true;
   IsErr: boolean = false;
   needUpd: boolean = false;
 
@@ -37,6 +41,8 @@ export class PatientCardEpidComponent implements OnInit {
   type1 = 1;
   type2 = 2;
   type3 = 6;
+  maxIdEpidChil: number;
+  maxIdCall: number;
   patient: PatientCardEpidModel | undefined;
   patientForm: FormGroup;
   patientFormSub: Subscription;
@@ -48,6 +54,8 @@ export class PatientCardEpidComponent implements OnInit {
   patientPavNotInjs = new FormArray([]);
   patientCovidVac = new FormArray([]);
   patientCovid = new FormArray([]);
+  patientCall = new FormArray([]);
+  epidChild = new FormArray([]);
   pervValue: object;
 
   constructor(
@@ -68,6 +76,9 @@ export class PatientCardEpidComponent implements OnInit {
     this.patientService.getData(this.Id)
       .subscribe((data:PatientCardEpidModel) => {
         this.patient = data;
+        
+        this.maxIdEpidChil= data.maxIdEpidChil;
+        this.maxIdCall= data.maxIdCall;
         this.initForm();
         this.pervValue = {
           patientId: this.Id,
@@ -230,6 +241,38 @@ export class PatientCardEpidComponent implements OnInit {
       }
     );
 
+    this.patient.callStatuses.map(
+      (item: PatientCall) => {
+        const sForm = new FormGroup ({
+          id: new FormControl(item.id),
+          callDate: new FormControl(item.callDate),
+          callStatus: new FormControl(item.callStatus, {
+            asyncValidators: [InList.validateCallStatuses(this.listService)],
+            updateOn: 'blur'
+          })
+        });
+        this.patientCall.push(sForm);
+      }
+    );
+
+    this.patient.epidChild.map(
+      (item: EpidChild) => {
+        const sForm = new FormGroup ({
+          id: new FormControl(item.id),
+          birthDate: new FormControl(item.birthDate),
+          familyName: new FormControl(item.familyName, {updateOn: 'blur'}),
+          firstName: new FormControl(item.firstName, {updateOn: 'blur'}),
+          thirdName: new FormControl(item.thirdName, {updateOn: 'blur'}),
+          exam: new FormControl(item.exam),
+          sexName: new FormControl(item.sexName, {
+            asyncValidators: [InList.validateSex(this.listService)],
+            updateOn: 'blur'
+          })
+        });
+        this.epidChild.push(sForm);
+      }
+    );
+
     this.patientForm.statusChanges.subscribe( (status) => {
       if(status == 'VALID')
         this.needUpd = true;
@@ -281,6 +324,14 @@ export class PatientCardEpidComponent implements OnInit {
     this.cIsValid = isValid;
   }
 
+  giveChForUpd(isValid: boolean){
+    this.chIsValid = isValid;
+  }
+
+  givePcForUpd(isValid: boolean){
+    this.pcIsValid = isValid;
+  }
+
   updatePatient(){
     let curValue: pcEpid = {
       patientId: this.patientForm.controls['patientId'].value,
@@ -322,7 +373,8 @@ export class PatientCardEpidComponent implements OnInit {
   }
 
   leaveComponent(name: string){
-    if(this.patientForm.valid && this.ccIsValid && this.rcIsValid && this.ocIsValid && this.piIsValid && this.pniIsValid && this.cvIsValid && this.cIsValid){
+    if(this.patientForm.valid && this.ccIsValid && this.rcIsValid && this.ocIsValid && this.piIsValid && 
+      this.pniIsValid && this.cvIsValid && this.cIsValid && this.chIsValid && this.pcIsValid){
       if(this.needUpd)
         this.updatePatient()
       if(name == '/main'){

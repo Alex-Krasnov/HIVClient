@@ -105,6 +105,14 @@
                 <div class="row" style="height: 115px; overflow: auto;">
                     <app-patient-pav-not-inj [(subArr)]="patientPavNotInjs" [(patientId)]="patient.patientId" (isValid)="givePNIForUpd($event)"></app-patient-pav-not-inj>
                 </div>
+                <p class="text-start m-0">Дети</p>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-patient-epid-child [(childArr)]="epidChild" [(maxId)]="maxIdEpidChil" [(patientId)]="patient.patientId" (isValid)="giveChForUpd($event)"></app-patient-epid-child>
+                </div>
+                <p class="text-start m-0">Звонки</p>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-patient-call [(callArr)]="patientCall" [(maxId)]="maxIdCall" [(patientId)]="patient.patientId" (isValid)="givePcForUpd($event)"></app-patient-call>
+                </div>
             </div>
             <div class="col-xl">
                 <div class="row me-3">
@@ -129,7 +137,7 @@
                 </div>
                 <div class="row my-1 me-3">
                     <div class="col-xl form-floating p-0">
-                        <input type="text" list="listEmloyment" class="form-control" placeholder="Занятость" formControlName="employmentName" title="{{pervValue.employmentName}}">
+                        <input type="text" list="listEmployment" class="form-control" placeholder="Занятость" formControlName="employmentName" title="{{pervValue.employmentName}}">
                         <label>Занятость</label>
                     </div>
                     <div class="col-xl form-floating p-0 ms-3">
@@ -186,7 +194,7 @@
 
 <datalist id="listCovidMKB"><option  *ngFor="let item of patient.listCovidMKB" [value]="item"></option></datalist>
 <datalist id="listEdu"><option  *ngFor="let item of patient.listEdu" [value]="item"></option></datalist>
-<datalist id="listEmloyment"><option  *ngFor="let item of patient.listEmloyment" [value]="item"></option></datalist>
+<datalist id="listEmployment"><option  *ngFor="let item of patient.listEmployment" [value]="item"></option></datalist>
 <datalist id="listEpidDoc"><option  *ngFor="let item of patient.listEpidDoc" [value]="item"></option></datalist>
 <datalist id="listFamilyStatus"><option  *ngFor="let item of patient.listFamilyStatus" [value]="item"></option></datalist>
 <datalist id="listSituationDetect"><option  *ngFor="let item of patient.listSituationDetect" [value]="item"></option></datalist>
@@ -195,6 +203,8 @@
 <datalist id="listTypeContacts"><option  *ngFor="let item of patient.listTypeContacts" [value]="item"></option></datalist>
 <datalist id="listVac"><option  *ngFor="let item of patient.listVac" [value]="item"></option></datalist>
 <datalist id="listYn"><option *ngFor="let item of patient.listYn" [value]="item"></option></datalist>
+<datalist id="listSex"><option *ngFor="let item of patient.listSex" [value]="item"></option></datalist>
+<datalist id="listCallStatus"><option *ngFor="let item of patient.listCallStatus" [value]="item"></option></datalist>
 
 </ng-container>
 <app-modal-window *ngIf="modal.referalAnalysisIsVisible$ | async">

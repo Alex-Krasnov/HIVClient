@@ -154,4 +154,56 @@ export class PatientCardEpidService {
     updatePatient(patient: pcEpid){
         return this.http.post(this.url+`/UpdatePatient`, patient)
     };
+
+    delEpidChild(id: number): Observable<unknown>{
+        return this.http.delete(this.url+`/DelEpidChild?id=${id}`)
+    };
+
+    createEpidChild(id: number, patientId: number, sexName: string, childFamilyName: string, childFirstName: string, childThirdName: string, birthDate: string, exam: boolean){
+        return this.http.post(this.url+`/CreateEpidChild`, {
+            id: id,
+            patientId: patientId,
+            sexName: sexName,
+            childFamilyName: childFamilyName,
+            childFirstName: childFirstName,
+            childThirdName: childThirdName,
+            birthDate: birthDate,
+            exam: exam
+        })
+    };
+    
+    updateEpidChild(id: number, patientId: number, sexName: string, childFamilyName: string, childFirstName: string, childThirdName: string, birthDate: string, exam: boolean){
+        return this.http.post(this.url+`/UpdateEpidChild`, {
+            id: id,
+            patientId: patientId,
+            sexName: sexName,
+            childFamilyName: childFamilyName,
+            childFirstName: childFirstName,
+            childThirdName: childThirdName,
+            birthDate: birthDate,
+            exam: exam
+        })
+    };
+
+    delCall(id: number): Observable<unknown>{
+        return this.http.delete(this.url+`/DelCall?id=${id}`)
+    };
+
+    createCall(id: number, patientId: number, callStatusName: string, callDate: string){
+        return this.http.post(this.url+`/CreateCall`, {
+            id: id,
+            callStatusName: callStatusName,
+            patientId: patientId,
+            callDate: callDate
+        })
+    };
+    
+    updateCall(id: number, patientId: number, callStatusName: string, callDate: string){
+        return this.http.post(this.url+`/UpdateCall`, {
+            id: id,
+            callStatusName: callStatusName,
+            patientId: patientId,
+            callDate: callDate
+        })
+    };
 }

@@ -1,0 +1,23 @@
+<table class="table border" [formGroup]="formC">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col">Дата</th>
+        <th scope="col" style="width: 300px;">Статус</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="call" *ngFor="let item of call.controls; let i = index">
+        <tr  formGroupName="{{i}}">
+            <td><input type="date" class="form-control tbl" formControlName="callDate" title="{{pervValue[i].birthDate}}"></td>
+            <td><input type="text" list="listCallStatus" class="form-control tbl" formControlName="callStatus" title="{{pervValue[i].sexName}}"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="date" class="form-control tbl" formControlName="newCallDate"></td>
+            <td><input type="text" list="listCallStatus" class="form-control tbl" formControlName="newCallStatus"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
+        </tr>
+    </tbody>
+</table>

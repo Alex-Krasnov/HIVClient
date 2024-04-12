@@ -319,4 +319,8 @@ export class ListService {
     InListPNA(name: string): Observable<object>{
         return this.http.post(this.url+`getInListPNA`,{ str: name});
     };
+
+    InListCallStatuses(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListCallStatuses`,{ str: name});
+    };
 }
