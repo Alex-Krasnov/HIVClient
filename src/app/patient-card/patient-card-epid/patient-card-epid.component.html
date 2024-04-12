@@ -81,6 +81,14 @@
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1">
             <div class="col-xl">
+                <p class="text-start m-0">Контактные дети</p>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-patient-epid-child [(childArr)]="epidChild" [(maxId)]="maxIdEpidChil" [(patientId)]="patient.patientId" (isValid)="giveChForUpd($event)"></app-patient-epid-child>
+                </div>
+                <p class="text-start m-0">Вызов пациента</p>
+                <div class="row" style="height: 115px; overflow: auto;">
+                    <app-patient-call [(callArr)]="patientCall" [(maxId)]="maxIdCall" [(patientId)]="patient.patientId" (isValid)="givePcForUpd($event)"></app-patient-call>
+                </div>
                 <p class="text-start m-0">Постоянные партнеры</p>
                 <div class="row" style="height: 115px; overflow: auto;">
                     <app-patient-contact [(contactArr)]="patientConstantContacts" [(patientId)]="patient.patientId" [(type)]="type1" (cIsValid)="giveCCForUpd($event)"></app-patient-contact>
@@ -104,14 +112,6 @@
                 <p class="text-start m-0">Употребление ПАВ неинъекционно</p>
                 <div class="row" style="height: 115px; overflow: auto;">
                     <app-patient-pav-not-inj [(subArr)]="patientPavNotInjs" [(patientId)]="patient.patientId" (isValid)="givePNIForUpd($event)"></app-patient-pav-not-inj>
-                </div>
-                <p class="text-start m-0">Дети</p>
-                <div class="row" style="height: 115px; overflow: auto;">
-                    <app-patient-epid-child [(childArr)]="epidChild" [(maxId)]="maxIdEpidChil" [(patientId)]="patient.patientId" (isValid)="giveChForUpd($event)"></app-patient-epid-child>
-                </div>
-                <p class="text-start m-0">Звонки</p>
-                <div class="row" style="height: 115px; overflow: auto;">
-                    <app-patient-call [(callArr)]="patientCall" [(maxId)]="maxIdCall" [(patientId)]="patient.patientId" (isValid)="givePcForUpd($event)"></app-patient-call>
                 </div>
             </div>
             <div class="col-xl">
