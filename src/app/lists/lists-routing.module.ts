@@ -31,6 +31,7 @@ import { UserComponent } from './user/user.component';
 import { DoctorComponent } from './doctor/doctor.component';
 import { CureSchemaComponent } from './cure-schema/cure-schema.component';
 import { MedForSchemaComponent } from './med-for-schema/med-for-schema.component';
+import { CallStatusComponent } from './call-status/call-status.component';
 
 
 const routes: Routes = [{
@@ -65,7 +66,8 @@ const routes: Routes = [{
     { path: 'user', component: UserComponent, canActivate: [AuthGuard] },
     { path: 'doctor', component: DoctorComponent, canActivate: [AuthGuard] },
     { path: 'cure-schema', component: CureSchemaComponent, canActivate: [AuthGuard] },
-    { path: 'med-for-schema', component: MedForSchemaComponent, canActivate: [AuthGuard] }
+    { path: 'med-for-schema', component: MedForSchemaComponent, canActivate: [AuthGuard] },
+    { path: 'call-status', component: CallStatusComponent, canActivate: [AuthGuard] }
   ]
 }];
 

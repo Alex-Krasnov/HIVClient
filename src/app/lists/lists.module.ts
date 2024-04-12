@@ -34,6 +34,7 @@ import { CureSchemaComponent } from './cure-schema/cure-schema.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { MedForSchemaComponent } from './med-for-schema/med-for-schema.component';
 import { SchemaSelectComponent } from './schema-select/schema-select.component';
+import { CallStatusComponent } from './call-status/call-status.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { SchemaSelectComponent } from './schema-select/schema-select.component';
     CureSchemaComponent,
     ModalWindowComponent,
     MedForSchemaComponent,
-    SchemaSelectComponent
+    SchemaSelectComponent,
+    CallStatusComponent
   ],
   imports: [
     CommonModule,
