@@ -68,6 +68,7 @@ import { FilesComponent } from './files/files.component';
 import { ModalReferalAnalysisComponent } from './modal-referal-analysis/modal-referal-analysis.component';
 import { PatientCallComponent } from './patient-call/patient-call.component';
 import { PatientEpidChildComponent } from './patient-epid-child/patient-epid-child.component';
+import { ModalReferalAnalysisIbComponent } from './modal-referal-analysis-ib/modal-referal-analysis-ib.component';
 
 
 
@@ -127,7 +128,8 @@ import { PatientEpidChildComponent } from './patient-epid-child/patient-epid-chi
     FilesComponent,
     ModalReferalAnalysisComponent,
     PatientCallComponent,
-    PatientEpidChildComponent
+    PatientEpidChildComponent,
+    ModalReferalAnalysisIbComponent
   ],
   imports: [
     CommonModule, 

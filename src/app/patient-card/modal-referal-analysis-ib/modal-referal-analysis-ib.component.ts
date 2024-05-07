@@ -5,25 +5,24 @@ import { ReferalAnalysis } from 'src/app/_interfaces/referal-analysis';
 import { ListService } from 'src/app/services/list.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ModalService } from 'src/app/services/modal.service';
-import { ReferalAnalysisService } from 'src/app/services/referal-analysis.service';
+import { ReferalAnalysisIbService } from 'src/app/services/referal-analysis-ib.service';
 import { InList } from 'src/app/validators/in-lst';
 
 @Component({
-  selector: 'app-modal-referal-analysis',
-  templateUrl: './modal-referal-analysis.component.html',
-  styleUrls: ['./modal-referal-analysis.component.css']
+  selector: 'app-modal-referal-analysis-ib',
+  templateUrl: './modal-referal-analysis-ib.component.html',
+  styleUrls: ['./modal-referal-analysis-ib.component.css']
 })
-export class ModalReferalAnalysisComponent implements OnInit{
+export class ModalReferalAnalysisIbComponent  implements OnInit{
   @Input() patientId: number;
   formR: FormGroup;
   IsActive: Boolean = false;
-  researchForm = new FormArray([]);
-  answer: any
+  answer: string[]
 
   constructor(
     private fb: FormBuilder,
     private listService: ListService,
-    private service: ReferalAnalysisService,
+    private service: ReferalAnalysisIbService,
     public modal: ModalService,
     private loading: LoadingService
   ){}
@@ -32,26 +31,14 @@ export class ModalReferalAnalysisComponent implements OnInit{
     this.initForm()
   }
   
-
   async initForm(){
     this.answer = await firstValueFrom(this.service.getData())
     
-    this.answer.listResearch.map(
-      (e: any) => {
-        const itemForm = new FormGroup ({
-          researchName: new FormControl(e),
-          select: new FormControl(false)
-        });
-        this.researchForm.push(itemForm);
-      }
-    )
-
     this.formR = this.fb.group({
       docName: new FormControl(null, {
         asyncValidators: [InList.validateDoctor(this.listService)],
         updateOn: 'blur'
-      }),
-      researchList: this.researchForm as FormArray 
+      })
     });
   }
   
@@ -61,15 +48,9 @@ export class ModalReferalAnalysisComponent implements OnInit{
 
   async getFile(){
     this.loading.open()
-    var research: string[] = []
-    this.researchList.value.forEach(e => {
-      if(e.select == true)
-        research.push(e.researchName)
-    });
     var referalAnalysis: ReferalAnalysis = {
       patientId: this.patientId,
-      docName: this.formR.get('docName').value,
-      listResearch: research
+      docName: this.formR.get('docName').value
     }
     const data = firstValueFrom(this.service.getFile(referalAnalysis))
     const blob = new Blob([await data], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });

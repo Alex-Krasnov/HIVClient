@@ -474,4 +474,8 @@ export class PatientCardMainComponent implements OnInit {
   openReferalAnalysis(){
     this.modal.referalAnalysisOpen()
   }
+
+  openReferalAnalysisIb(){
+    this.modal.referalAnalysisIbOpen()
+  }
 }
