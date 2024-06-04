@@ -51,6 +51,7 @@ export class ModalReferalAnalysisComponent implements OnInit{
         asyncValidators: [InList.validateDoctor(this.listService)],
         updateOn: 'blur'
       }),
+      isExtended: new FormControl(true, {updateOn: 'blur'}),
       researchList: this.researchForm as FormArray 
     });
   }
@@ -67,6 +68,7 @@ export class ModalReferalAnalysisComponent implements OnInit{
         research.push(e.researchName)
     });
     var referalAnalysis: ReferalAnalysis = {
+      isExtended:this.formR.get('isExtended').value,
       patientId: this.patientId,
       docName: this.formR.get('docName').value,
       listResearch: research

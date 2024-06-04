@@ -4,6 +4,9 @@
             <div class="col-xl">
                 <input type="text" class="form-control" placeholder="Врач" list="listDoc" formControlName="docName">
             </div>
+            <div class="col-xl-1">
+                <input type="checkbox" class="form-check-input" formControlName="isExtended">
+            </div>
         </div>
         <ng-container formArrayName="researchList" *ngFor="let item of researchList.controls; let i = index">
             <div class="row mt-2" formGroupName="{{i}}">

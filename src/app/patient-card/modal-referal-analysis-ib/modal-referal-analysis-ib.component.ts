@@ -49,6 +49,7 @@ export class ModalReferalAnalysisIbComponent  implements OnInit{
   async getFile(){
     this.loading.open()
     var referalAnalysis: ReferalAnalysis = {
+      isExtended: false,
       patientId: this.patientId,
       docName: this.formR.get('docName').value
     }
