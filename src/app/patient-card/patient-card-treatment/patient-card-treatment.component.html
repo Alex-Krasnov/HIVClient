@@ -105,10 +105,29 @@
                 <textarea class="form-control" rows="2" formControlName="patientCom"></textarea>
             </div>
         </div>
+        <div class="row ms-1 mt-1">
+            <label class="text-start">Хр ВГВ</label>
+            <div class="col-xl-2 form-floating p-0">
+                <input type="date" class="form-control" placeholder="Дата постановки на ДУ" formControlName="hepBdate">
+                <label>Дата постановки на ДУ</label>
+            </div>
+            <div class="col-xl-1">
+                <label>Комментарий </label>
+            </div>
+            <div class="col-xl">
+                <textarea class="form-control" rows="2" formControlName="hepBDescr"></textarea>
+            </div>
+        </div>
         <div class="row mt-1 ms-1">
-            <div class="col-xl-5">
+            <div class="col-xl-5 mt-4">
                 <div class=" mt-1" style="height: 220px; overflow: auto;">
                     <app-patient-correp-illnesses [(correpIllnessesArr)]="patientCorrespIllnesses" [(patientId)]="patient.patientId" (ciIsValid)="giveSIForUpd($event)"></app-patient-correp-illnesses>
+                </div>
+            </div>
+            <div class="col-xl">
+                <label class="text-start">Хр ВГС</label>
+                <div class="mt-1 me-1" style="height: 220px; overflow: auto;">
+                    <app-hep-c [(hepCArr)]="patientHepCs" [(patientId)]="patient.patientId" (hepCIsValid)="giveHepCForUpd($event)"></app-hep-c>
                 </div>
             </div>
         </div>

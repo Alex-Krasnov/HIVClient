@@ -98,12 +98,37 @@ export class PatientCardTreatmentService {
             })
     };
 
-    updatePatient(patientId: number, stageCom: string, com: string, invalid: string){
+    updatePatient(patientId: number, stageCom: string, com: string, invalid: string, hepBDate: Date, hepBDescr: string){
         return this.http.post(this.url+`/UpdatePatient`, {
             PatientId: patientId, 
             StageCom: stageCom,
             Com: com,
-            Invalid: invalid
+            Invalid: invalid,
+            HepBDate: hepBDate,
+            HepBDescr: hepBDescr
         })
-};
+    };
+
+    delHepC(id: number): Observable<unknown>{
+        return this.http.delete(this.url+`/DelHepC?id=${id}`)
+    };
+    
+    createHepC(patientId: number, dateStart: Date, dateEnd: Date, descr: string){
+        return this.http.post(this.url+`/CreateHepC`, {
+            patientId: patientId,
+            dateStart: dateStart,
+            dateEnd: dateEnd,
+            descr: descr
+        })
+    };
+    
+    updateHepC(id: number, patientId: number, dateStart: Date, dateEnd: Date, descr: string){
+        return this.http.post(this.url+`/UpdateHepC`, {
+            id: id,
+            patientId: patientId,
+            dateStart: dateStart,
+            dateEnd: dateEnd,
+            descr: descr
+        })
+    };
 }

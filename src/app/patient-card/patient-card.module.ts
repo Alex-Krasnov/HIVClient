@@ -69,6 +69,7 @@ import { ModalReferalAnalysisComponent } from './modal-referal-analysis/modal-re
 import { PatientCallComponent } from './patient-call/patient-call.component';
 import { PatientEpidChildComponent } from './patient-epid-child/patient-epid-child.component';
 import { ModalReferalAnalysisIbComponent } from './modal-referal-analysis-ib/modal-referal-analysis-ib.component';
+import { HepCComponent } from './hep-c/hep-c.component';
 
 
 
@@ -129,7 +130,8 @@ import { ModalReferalAnalysisIbComponent } from './modal-referal-analysis-ib/mod
     ModalReferalAnalysisComponent,
     PatientCallComponent,
     PatientEpidChildComponent,
-    ModalReferalAnalysisIbComponent
+    ModalReferalAnalysisIbComponent,
+    HepCComponent
   ],
   imports: [
     CommonModule, 

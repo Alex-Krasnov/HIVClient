@@ -1,5 +1,6 @@
 import { CorrespIllnesses } from "./corresp-illnesses.model";
 import { CureSchemas } from "./cure-schemas.model";
+import { HepC } from "./hep-c.model";
 import { HospResultRs } from "./hosp-result-rs.model";
 
 export interface PatientCardTreatmentModel {
@@ -9,6 +10,8 @@ export interface PatientCardTreatmentModel {
   stageCom: string;
   patientCom: string;
   invalidName: string;
+  hepBdate: Date;
+  hepBDescr: string;
 
   listInvalids?: string[];
   listCorrespIllness?: string[];
@@ -22,4 +25,5 @@ export interface PatientCardTreatmentModel {
   correspIllnesses?: CorrespIllnesses[]; 
   cureSchemas?: CureSchemas[];
   hospResultRs?: HospResultRs[];
+  hepCs?: HepC[];
 }

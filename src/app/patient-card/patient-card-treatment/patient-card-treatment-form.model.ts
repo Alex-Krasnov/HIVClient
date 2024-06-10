@@ -9,6 +9,8 @@ export class PatientCardTreatmentForm {
     stageName = new FormControl()
     stageCom = new FormControl()
     patientCom = new FormControl()
+    hepBdate = new FormControl()
+    hepBDescr = new FormControl()
     invalidName = new FormControl('', {updateOn: 'blur'})
 
     constructor(data: PatientCardTreatmentModel, private listService: ListService) 
@@ -22,6 +24,8 @@ export class PatientCardTreatmentForm {
       this.stageCom.setValue(data.stageCom)
       this.patientCom.setValue(data.patientCom)
       this.invalidName.setValue(data.invalidName)
+      this.hepBdate.setValue(data.hepBdate)
+      this.hepBDescr.setValue(data.hepBDescr)
       this.invalidName.setAsyncValidators(InList.validateInvalid(this.listService))
     }
 }

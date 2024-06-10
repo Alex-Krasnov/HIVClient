@@ -1,0 +1,29 @@
+<table class="table border" [formGroup]="formHepC">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 136px;">Дата постановки</th>
+        <th scope="col" style="width: 136px;">Дата снятия</th>
+        <th scope="col" style="width: 300px;">ПВТ</th>
+        <th scope="col" style="width: 136px;">Дата ввода</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="hepCs" *ngFor="let item of hepCs.controls; let i = index">
+        <tr formGroupName="{{i}}">
+            <td><input type="date" class="form-control tbl" formControlName="dateStart"></td>
+            <td><input type="date" class="form-control tbl" formControlName="dateEnd"></td>
+            <td><textarea class="form-control py-0" style="min-height: 30px;" rows="1" formControlName="descr"></textarea></td>
+            <td><input type="date" class="form-control tbl" formControlName="dateCreate"></td>
+            <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
+        </tr>
+        </ng-container>
+        <tr>
+            <td><input type="date" class="form-control tbl" formControlName="dateStart"></td>
+            <td><input type="date" class="form-control tbl" formControlName="dateEnd"></td>
+            <td><textarea class="form-control py-0" style="min-height: 30px;" rows="1" formControlName="descr"></textarea></td>
+            <td><input type="date" class="form-control tbl" formControlName="dateCreate"></td>
+            <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
+        </tr>
+    </tbody>
+  </table>

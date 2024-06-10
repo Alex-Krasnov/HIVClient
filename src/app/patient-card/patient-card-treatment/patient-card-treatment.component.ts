@@ -25,6 +25,7 @@ export class PatientCardTreatmentComponent implements OnInit{
   siIsValid: boolean = true;
   csIsValid: boolean = true;
   hrIsValid: boolean = true;
+  hepCIsValid: boolean = true;
   IsErr: boolean = false;
   needUpd: boolean = false;
 
@@ -35,6 +36,7 @@ export class PatientCardTreatmentComponent implements OnInit{
   patientCorrespIllnesses = new FormArray([]);
   patientCureSchemas = new FormArray([]);
   patientHospResultRs = new FormArray([]);
+  patientHepCs = new FormArray([]);
   pervValue: object;
   updSchema: string;
 
@@ -62,6 +64,8 @@ export class PatientCardTreatmentComponent implements OnInit{
           invalidName: data.invalidName,
           stageCom: data.stageCom,
           patientCom: data.patientCom,
+          hepBdate: data.hepBdate,
+          hepBDescr: data.hepBDescr
         }
       });
   }
@@ -138,6 +142,19 @@ export class PatientCardTreatmentComponent implements OnInit{
       }
     );
 
+    this.patient.hepCs.map(
+      (hep: any) => {
+        const curForm = new FormGroup ({
+          id: new FormControl(hep.id, {updateOn: 'blur'}),
+          dateStart: new FormControl(hep.dateStart, {updateOn: 'blur'}),
+          dateEnd: new FormControl(hep.dateEnd, {updateOn: 'blur'}),
+          descr: new FormControl(hep.descr, {updateOn: 'blur'}),
+          dateCreate: new FormControl({value: hep.dateCreate, disabled: true})
+        });
+        this.patientHepCs.push(curForm);
+      }
+    );
+
     this.patientForm.statusChanges.subscribe( (status) => {
       if(status == 'VALID')
         this.needUpd = true;
@@ -173,22 +190,30 @@ export class PatientCardTreatmentComponent implements OnInit{
     this.hrIsValid = isValid;    
   }
 
+  giveHepCForUpd(isValid: boolean){
+    this.hepCIsValid = isValid;    
+  }
+
   updatePatient(){
     let curValue = {
       patientId: this.Id,
       invalidName: this.patientForm.controls['invalidName'].value,
       stageCom: this.patientForm.controls['stageCom'].value,
       patientCom: this.patientForm.controls['patientCom'].value,
+      hepBdate: this.patientForm.controls['hepBdate'].value,
+      hepBDescr: this.patientForm.controls['hepBDescr'].value,
     };
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-      this.patientService.updatePatient(curValue.patientId, curValue.stageCom, curValue.patientCom, curValue.invalidName).subscribe()
+      this.patientService.updatePatient(curValue.patientId, curValue.stageCom, curValue.patientCom, curValue.invalidName, curValue.hepBdate, curValue.hepBDescr).subscribe()
 
       this.pervValue = {
         patientId: curValue.patientId,
         invalidName: curValue.invalidName,
         stageCom: curValue.stageCom,
-        patientCom: curValue.patientCom
+        patientCom: curValue.patientCom,
+        hepBdate: curValue.hepBdate,
+        hepBDescr: curValue.hepBDescr
       };
 
       this.patientForm.markAsPristine()
@@ -196,7 +221,7 @@ export class PatientCardTreatmentComponent implements OnInit{
   }
 
   leaveComponent(name: string){
-    if(this.patientForm.valid && this.siIsValid && this.csIsValid && this.hrIsValid){
+    if(this.patientForm.valid && this.siIsValid && this.csIsValid && this.hrIsValid &&  this.hepCIsValid){
       if(this.needUpd)
         this.updatePatient()
       if(name == '/main'){
