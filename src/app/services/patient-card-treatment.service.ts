@@ -68,7 +68,7 @@ export class PatientCardTreatmentService {
         })
     };
 
-    createCureSchemas(patientId: number, name: string, date: string, endDate: string, schemaCom: string, cureChangeName: string, protNum: string, rangeTherapyName: string, last: string){
+    createCureSchemas(patientId: number, name: string, date: string, endDate: string, schemaCom: string, cureChangeName: string, protNum: string, rangeTherapyName: string, last: boolean){
         return this.http.post(this.url+`/CreateCureSchema`, {
             PatientId: patientId, 
             CureSchemaName: name,

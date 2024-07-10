@@ -134,7 +134,7 @@
         <div class="row mt-1 ms-1">
             <div class="col-xl">
                 <div class=" mt-1" style="height: 230px; overflow: auto;">
-                    <app-patient-cure-schemas [(updSchema)]="updSchema" [(cureSchemaArr)]="patientCureSchemas" [(patientId)]="patient.patientId" (csIsValid)="giveCSForUpd($event)"></app-patient-cure-schemas>
+                    <app-patient-cure-schemas [(updSchema)]="updSchema" [(cureSchemaFormArr)]="patient.cureSchemas" [(patientId)]="patient.patientId" (csIsValid)="giveCSForUpd($event)"></app-patient-cure-schemas>
                 </div>
             </div>
         </div>

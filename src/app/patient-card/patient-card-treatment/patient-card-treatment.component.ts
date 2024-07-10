@@ -8,6 +8,7 @@ import { PatientCardTreatmentService } from 'src/app/services/patient-card-treat
 import { PatientCardTreatmentForm } from './patient-card-treatment-form.model';
 import { InList } from 'src/app/validators/in-lst';
 import { ModalService } from 'src/app/services/modal.service';
+import { endDateValidator } from 'src/app/validators/cure-schema';
 
 @Component({
   selector: 'app-patient-card-treatment',
@@ -93,31 +94,33 @@ export class PatientCardTreatmentComponent implements OnInit{
         }
     );
 
-    this.patient.cureSchemas.map(
-      (cur: any) => {
-        const curForm = new FormGroup ({
-          cureSchemaName: new FormControl(cur.cureSchemaName, {
-            validators: Validators.required,
-            asyncValidators: [InList.validateCureSchemaName(this.listService)],
-            updateOn: 'blur'
-          }),
-          cureChangeName: new FormControl(cur.cureChangeName, {
-            asyncValidators: [InList.validateCureChangeName(this.listService)],
-            updateOn: 'blur'
-          }),
-          rangeTherapy: new FormControl(cur.rangeTherapy, {
-            asyncValidators: [InList.validateRangeTherapy(this.listService)],
-            updateOn: 'blur'
-          }),
-          startDate: new FormControl(cur.startDate, Validators.required),
-          endDate: new FormControl(cur.endDate),
-          schemaComm: new FormControl(cur.schemaComm),
-          protNum: new FormControl(cur.protNum),
-          last: new FormControl(cur.last)
-        });
-        this.patientCureSchemas.push(curForm);
-      }
-    );
+    // this.patient.cureSchemas.map(
+    //   (cur: any) => {
+    //     const curForm = new FormGroup ({
+    //       cureSchemaName: new FormControl(cur.cureSchemaName, {
+    //         validators: Validators.required,
+    //         asyncValidators: [InList.validateCureSchemaName(this.listService)],
+    //         updateOn: 'blur'
+    //       }),
+    //       cureChangeName: new FormControl(cur.cureChangeName, {
+    //         asyncValidators: [InList.validateCureChangeName(this.listService)],
+    //         updateOn: 'blur'
+    //       }),
+    //       rangeTherapy: new FormControl(cur.rangeTherapy, {
+    //         asyncValidators: [InList.validateRangeTherapy(this.listService)],
+    //         updateOn: 'blur'
+    //       }),
+    //       startDate: new FormControl(cur.startDate, Validators.required),
+    //       endDate: new FormControl(cur.endDate),
+    //       schemaComm: new FormControl(cur.schemaComm),
+    //       protNum: new FormControl(cur.protNum),
+    //       last: new FormControl({value: cur.last, disabled: false})
+    //     }, { 
+    //       validators: endDateValidator(),
+    //       updateOn: 'blur' });
+    //     this.patientCureSchemas.push(curForm);
+    //   }
+    // );
 
     this.patient.hospResultRs.map(
       (hosp: any) => {

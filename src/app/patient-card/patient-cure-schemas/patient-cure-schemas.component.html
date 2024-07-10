@@ -1,4 +1,4 @@
-<table class="table border" [formGroup]="formCS">
+<table class="table border" *ngIf="formCS" [formGroup]="formCS">
     <thead style="position: sticky; top: 0; background: #ade8dd;">
       <tr>
         <th scope="col" style="width: 300px;">Схема терапии</th>
