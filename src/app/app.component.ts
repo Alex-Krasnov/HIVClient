@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoadingService } from './services/loading.service';
+import { ErrService } from './services/err.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent{
   title = 'HIV';
 
   constructor(
-    public loading: LoadingService
+    public loading: LoadingService,
+    public err: ErrService
   ){}
 }

@@ -16,6 +16,8 @@ import { AuthInterceptor } from './http-interceptors/auth-interceptor';
 import { VisitModule } from './visit/visit.module';
 import { ImportKorvetComponent } from './import-korvet/import-korvet.component';
 import { SerchRegistryComponent } from './serch-registry/serch-registry.component';
+import { ErrInterceptor } from './http-interceptors/err-interceptor';
+import { ModalErrComponent } from './modal-err/modal-err.component';
 
 
 export function tokenGetter() { 
@@ -28,7 +30,8 @@ export function tokenGetter() {
     HomeComponent,
     LoginComponent,
     ImportKorvetComponent,
-    SerchRegistryComponent
+    SerchRegistryComponent,
+    ModalErrComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,11 @@ export function tokenGetter() {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: ErrInterceptor, 
+      multi: true 
     }
   ],
   bootstrap: [AppComponent]
