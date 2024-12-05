@@ -161,6 +161,10 @@ export class SearchTreatmentComponent implements OnInit{
         dateImEnd: this.searchForm.controls['dateImEnd'].value,
         resImStart: this.searchForm.controls['resImStart'].value,
         resImEnd: this.searchForm.controls['resImEnd'].value,
+        unrzYNA: this.searchForm.controls['unrzYNA'].value,
+        unrz: this.searchForm.controls['unrz'].value,
+        snilsYNA: this.searchForm.controls['snilsYNA'].value,
+        snils: this.searchForm.controls['snils'].value,
         
         selectInpDate: this.searchForm.controls['selectInpDate'].value,
         selectPatientId: this.searchForm.controls['selectPatientId'].value,
@@ -200,6 +204,8 @@ export class SearchTreatmentComponent implements OnInit{
         selectVlRes: this.searchForm.controls['selectVlRes'].value,
         selectImDate: this.searchForm.controls['selectImDate'].value,
         selectImRes: this.searchForm.controls['selectImRes'].value,
+        selectUnrz: this.searchForm.controls['selectUnrz'].value,
+        selectSnils: this.searchForm.controls['selectSnils'].value,
 
         page: this.page,
         excel: needXl

@@ -77,6 +77,10 @@
     dateImEnd?: string
     resImStart?: string
     resImEnd?: string
+    unrzYNA?: string 
+    unrz?: string 
+    snilsYNA?: string 
+    snils?: string 
     
 
     selectInpDate: boolean
@@ -117,6 +121,8 @@
     selectVlRes: boolean
     selectImDate: boolean
     selectImRes: boolean
+    selectUnrz: boolean
+    selectSnils: boolean
 
     page: number
     excel: boolean

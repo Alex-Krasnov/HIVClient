@@ -82,6 +82,10 @@ export class SearchTreatmentForm {
     dateImEnd = new FormControl()
     resImStart = new FormControl()
     resImEnd = new FormControl()
+    unrzYNA = new FormControl()
+    unrz = new FormControl()
+    snilsYNA = new FormControl()
+    snils = new FormControl()
 
 
     selectInpDate = new FormControl()
@@ -123,9 +127,15 @@ export class SearchTreatmentForm {
     selectVlRes = new FormControl()
     selectImDate = new FormControl()
     selectImRes = new FormControl()
+    selectSnils = new FormControl()
+    selectUnrz = new FormControl()
 
     constructor(private listService: ListService) 
     {
+      this.unrz.setValue('')
+      this.unrzYNA.setValue('Все')
+      this.snils.setValue('')
+      this.snilsYNA.setValue('Все')
       this.dateInpStart.setValue('')
       this.dateInpEnd.setValue('')
       this.patientId.setValue('')
@@ -264,10 +274,14 @@ export class SearchTreatmentForm {
       this.selectVlRes.setValue(false)
       this.selectImDate.setValue(false)
       this.selectImRes.setValue(false)
+      this.selectUnrz.setValue(false)
+      this.selectSnils.setValue(false)
 
       this.transfAreaYNA.addAsyncValidators(InList.validateYNA(this.listService))
       this.frYNA.addAsyncValidators(InList.validateYNA(this.listService))
       this.zavApoYNA.addAsyncValidators(InList.validateYNA(this.listService))
       this.ufsinYNA.addAsyncValidators(InList.validateYNA(this.listService))
+      this.unrzYNA.addAsyncValidators(InList.validateYNA(this.listService))
+      this.snilsYNA.addAsyncValidators(InList.validateYNA(this.listService))
     }
 }
