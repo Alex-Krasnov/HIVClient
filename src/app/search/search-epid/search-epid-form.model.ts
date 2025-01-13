@@ -310,6 +310,7 @@ export class SearchEpidForm {
     this.selectTimeInfect.setValue(true)
     this.selectUnrz.setValue(true)
     this.selectSnils.setValue(true)
+    this.selectEpidDescr.setValue(true)
 
     this.sex.addAsyncValidators(InList.validateSex(this.listService))
     this.unRegCourse.addAsyncValidators(InList.validateInfectCourseLong(this.listService))
