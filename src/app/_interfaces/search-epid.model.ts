@@ -60,6 +60,11 @@
    dateUfsinStart?: string 
    dateUfsinEnd?: string 
    aids12?: string 
+   unrzYNA?: string 
+   unrz?: string 
+   snilsYNA?: string 
+   snils?: string 
+   epidDescr?: string 
 
    dtMailRegStart?: string
    dtMailRegEnd?: string
@@ -132,6 +137,9 @@
    selectPavInj: boolean
    selectPavNotInj: boolean
    selectTimeInfect: boolean
+   selectUnrz: boolean
+   selectSnils: boolean
+   selectEpidDescr: boolean
    
    page: number
    excel: boolean

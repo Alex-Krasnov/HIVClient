@@ -171,6 +171,11 @@ export class SearchEpidComponent implements OnInit{
         pavNotInjDateEnd: this.searchForm.controls['pavNotInjDateEnd'].value,
         timeInfectDateStart: this.searchForm.controls['timeInfectDateStart'].value,
         timeInfectDateEnd: this.searchForm.controls['timeInfectDateEnd'].value,
+        unrzYNA: this.searchForm.controls['unrzYNA'].value,
+        unrz: this.searchForm.controls['unrz'].value,
+        snilsYNA: this.searchForm.controls['snilsYNA'].value,
+        snils: this.searchForm.controls['snils'].value,
+        epidDescr: this.searchForm.controls['epidDescr'].value,
 
       
         selectInpDate: this.searchForm.controls['selectInpDate'].value,
@@ -217,7 +222,10 @@ export class SearchEpidComponent implements OnInit{
         selectPavInj: this.searchForm.controls['selectPavInj'].value,
         selectPavNotInj: this.searchForm.controls['selectPavNotInj'].value,
         selectTimeInfect: this.searchForm.controls['selectTimeInfect'].value,
-
+        selectUnrz: this.searchForm.controls['selectUnrz'].value,
+        selectSnils: this.searchForm.controls['selectSnils'].value,
+        selectEpidDescr: this.searchForm.controls['selectEpidDescr'].value,
+        
         page: this.page,
         excel: needXl
       }
