@@ -126,11 +126,11 @@ export class SearchChildComponent  implements OnInit{
         cardNo: this.searchForm.controls['cardNo'].value,
         motherPatientId: this.searchForm.controls['motherPatientId'].value,
         fatherPatientId: this.searchForm.controls['fatherPatientId'].value,
-        arvt: this.searchForm.controls['arvt'].value,
-        dieDateStart: this.searchForm.controls['dieDateStart'].value,
-        dieDateEnd: this.searchForm.controls['dieDateEnd'].value,
-        dieAidsDateStart: this.searchForm.controls['dieAidsDateStart'].value,
-        dieAidsDateEnd: this.searchForm.controls['dieAidsDateEnd'].value,
+        art: this.searchForm.controls['art'].value,
+        dateDieStart: this.searchForm.controls['dateDieStart'].value,
+        dateDieEnd: this.searchForm.controls['dateDieEnd'].value,
+        dateDieAidsStart: this.searchForm.controls['dateDieAidsStart'].value,
+        dateDieAidsEnd: this.searchForm.controls['dateDieAidsEnd'].value,
         materHome: this.searchForm.controls['materHome'].value,
         form309: this.searchForm.controls['form309'].value,
 
@@ -159,7 +159,7 @@ export class SearchChildComponent  implements OnInit{
         selectCardNo: this.searchForm.controls['selectCardNo'].value,
         selectParentId: this.searchForm.controls['selectParentId'].value,
         selectAddr: this.searchForm.controls['selectAddr'].value,
-        selectArvt: this.searchForm.controls['selectArvt'].value,
+        selectArt: this.searchForm.controls['selectArt'].value,
         selectDieDate: this.searchForm.controls['selectDieDate'].value,
         selectMaterHome: this.searchForm.controls['selectMaterHome'].value,
         selectForm309: this.searchForm.controls['selectForm309'].value,
@@ -261,7 +261,7 @@ export class SearchChildComponent  implements OnInit{
     this.searchForm.controls['selectCardNo'].setValue(true)
     this.searchForm.controls['selectParentId'].setValue(true)
     this.searchForm.controls['selectAddr'].setValue(true)
-    this.searchForm.controls['selectArvt'].setValue(true)
+    this.searchForm.controls['selectArt'].setValue(true)
     this.searchForm.controls['selectDieDate'].setValue(true)
     this.searchForm.controls['selectMaterHome'].setValue(true)
     this.searchForm.controls['selectForm309'].setValue(true)
@@ -293,7 +293,7 @@ export class SearchChildComponent  implements OnInit{
     this.searchForm.controls['selectCardNo'].setValue(false)
     this.searchForm.controls['selectParentId'].setValue(false)
     this.searchForm.controls['selectAddr'].setValue(false)
-    this.searchForm.controls['selectArvt'].setValue(false)
+    this.searchForm.controls['selectArt'].setValue(false)
     this.searchForm.controls['selectDieDate'].setValue(false)
     this.searchForm.controls['selectMaterHome'].setValue(false)
     this.searchForm.controls['selectForm309'].setValue(false)
@@ -379,7 +379,7 @@ export class SearchChildComponent  implements OnInit{
         this.searchForm.controls['childPhp'].setValue(lst)
         break
       case 11:
-        this.searchForm.controls['arvt'].setValue(lst)
+        this.searchForm.controls['art'].setValue(lst)
         break
       case 12:
         this.searchForm.controls['materHome'].setValue(lst)

@@ -42,11 +42,11 @@
     cardNo?: string 
     motherPatientId?: string 
     fatherPatientId?: string 
-    arvt?: string[]
-    dieDateStart?: string 
-    dieDateEnd?: string 
-    dieAidsDateStart?: string 
-    dieAidsDateEnd?: string 
+    art?: string[]
+    dateDieStart?: string 
+    dateDieEnd?: string 
+    dateDieAidsStart?: string 
+    dateDieAidsEnd?: string 
     materHome?: string[]
     form309?: string 
 
@@ -75,7 +75,7 @@
     selectCardNo: boolean
     selectParentId: boolean
     selectAddr: boolean
-    selectArvt: boolean
+    selectArt: boolean
     selectDieDate: boolean
     selectMaterHome: boolean
     selectForm309: boolean
