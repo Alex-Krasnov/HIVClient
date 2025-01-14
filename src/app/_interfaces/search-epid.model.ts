@@ -92,6 +92,9 @@
    pavNotInjDateEnd?: string
    timeInfectDateStart?: string
    timeInfectDateEnd?: string
+   callstatus?: string[]
+   callDateStart?: string
+   callDateEnd?: string
   
    selectInpDate: boolean
    selectPatientId: boolean
@@ -140,6 +143,7 @@
    selectUnrz: boolean
    selectSnils: boolean
    selectEpidDescr: boolean
+   selectPatientCall: boolean
    
    page: number
    excel: boolean

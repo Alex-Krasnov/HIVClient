@@ -31,5 +31,6 @@ export interface  SearchEpidListsModel{
    listCovidVac?: string[]
    listMkb10Covid?: string[]
    listContactType?: string[]
+   listCallStatus?: string[]
    listYNA?: string[]
 }

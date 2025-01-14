@@ -325,6 +325,16 @@
                 <span class="w-auto my-auto">Эпид. примечание</span>
                 <input type="text" class="form-control tbl" style="width: 82%;" formControlName="epidDescr">
             </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPatientCall">
+                <span class="w-auto my-auto">Вызов пациента</span>
+                <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(22)">Статус вызова</button>
+                <input type="text" class="form-control tbl" style="width: 40.5%;" formControlName="callstatus">
+                <span class="w-auto my-auto">Дата вызова с </span>
+                <input type="date" class="form-control tbl w-auto" formControlName="callDateStart">
+                <span class="w-auto my-auto">по</span>
+                <input type="date" class="form-control tbl w-auto" formControlName="callDateEnd">
+            </div>
         </div>
     </div>
     <br>

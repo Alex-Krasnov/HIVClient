@@ -96,7 +96,9 @@ export class SearchEpidForm {
   snilsYNA = new FormControl()
   snils = new FormControl()
   epidDescr = new FormControl()
-
+  callstatus = new FormControl()
+  callDateStart = new FormControl()
+  callDateEnd = new FormControl()
 
   selectInpDate = new FormControl()
   selectPatientId = new FormControl()
@@ -145,6 +147,7 @@ export class SearchEpidForm {
   selectSnils = new FormControl()
   selectUnrz = new FormControl()
   selectEpidDescr = new FormControl()
+  selectPatientCall = new FormControl()
 
   constructor(private listService: ListService) 
   {
@@ -263,6 +266,10 @@ export class SearchEpidForm {
     this.pavNotInjDateEnd.setValue('')
     this.timeInfectDateStart.setValue('')
     this.timeInfectDateEnd.setValue('')
+    this.callstatus.setValue(['Все'])
+    this.callstatus.disable()
+    this.callDateStart.setValue('')
+    this.callDateEnd.setValue('')
 
     this.selectInpDate.setValue(true)
     this.selectPatientId.setValue(true)
@@ -311,6 +318,7 @@ export class SearchEpidForm {
     this.selectUnrz.setValue(true)
     this.selectSnils.setValue(true)
     this.selectEpidDescr.setValue(true)
+    this.selectPatientCall.setValue(true)
 
     this.sex.addAsyncValidators(InList.validateSex(this.listService))
     this.unRegCourse.addAsyncValidators(InList.validateInfectCourseLong(this.listService))

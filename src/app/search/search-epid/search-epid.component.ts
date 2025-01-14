@@ -176,6 +176,9 @@ export class SearchEpidComponent implements OnInit{
         snilsYNA: this.searchForm.controls['snilsYNA'].value,
         snils: this.searchForm.controls['snils'].value,
         epidDescr: this.searchForm.controls['epidDescr'].value,
+        callstatus: this.searchForm.controls['callstatus'].value,
+        callDateStart: this.searchForm.controls['callDateStart'].value,
+        callDateEnd: this.searchForm.controls['callDateEnd'].value,
 
       
         selectInpDate: this.searchForm.controls['selectInpDate'].value,
@@ -225,6 +228,7 @@ export class SearchEpidComponent implements OnInit{
         selectUnrz: this.searchForm.controls['selectUnrz'].value,
         selectSnils: this.searchForm.controls['selectSnils'].value,
         selectEpidDescr: this.searchForm.controls['selectEpidDescr'].value,
+        selectPatientCall: this.searchForm.controls['selectPatientCall'].value,
         
         page: this.page,
         excel: needXl
@@ -343,6 +347,10 @@ export class SearchEpidComponent implements OnInit{
     this.searchForm.controls['selectPavInj'].setValue(true)
     this.searchForm.controls['selectPavNotInj'].setValue(true)
     this.searchForm.controls['selectTimeInfect'].setValue(true)
+    this.searchForm.controls['selectUnrz'].setValue(true)
+    this.searchForm.controls['selectSnils'].setValue(true)
+    this.searchForm.controls['selectEpidDescr'].setValue(true)
+    this.searchForm.controls['selectPatientCall'].setValue(true)
   }
 
   dismarkAll(){
@@ -390,6 +398,10 @@ export class SearchEpidComponent implements OnInit{
     this.searchForm.controls['selectPavInj'].setValue(false)
     this.searchForm.controls['selectPavNotInj'].setValue(false)
     this.searchForm.controls['selectTimeInfect'].setValue(false)
+    this.searchForm.controls['selectUnrz'].setValue(false)
+    this.searchForm.controls['selectSnils'].setValue(false)
+    this.searchForm.controls['selectEpidDescr'].setValue(false)
+    this.searchForm.controls['selectPatientCall'].setValue(false)
   }
 
   modalOpen(i: number){
@@ -463,6 +475,9 @@ export class SearchEpidComponent implements OnInit{
       case 21:
         this.modalList = this.searchLists.listVulnerableGroup
         break
+      case 22:
+        this.modalList = this.searchLists.listCallStatus
+        break
     }
 
     this.modal.open()
@@ -532,6 +547,9 @@ export class SearchEpidComponent implements OnInit{
         break
       case 21:
         this.searchForm.controls['vulnerableGroup'].setValue(lst)
+        break
+      case 22:
+        this.searchForm.controls['callstatus'].setValue(lst)
         break
     }
   }
