@@ -4,8 +4,8 @@ import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { SearchFastFormModel } from 'src/app/_interfaces/search-fast-form.model';
 import { Search } from 'src/app/_interfaces/search.model';
 import { LoadingService } from 'src/app/services/loading.service';
-import { SearchFastService } from 'src/app/services/search-fast.service';
-import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
+import { SearchFastService } from 'src/app/services/search/search-fast.service';
+import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
 
 @Component({
   selector: 'app-search-fast',

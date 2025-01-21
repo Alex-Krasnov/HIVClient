@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PatientCardAclModel } from '../_interfaces/patient-card-acl.model';
+import { PatientCardAclModel } from '../../_interfaces/patient-card-acl.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

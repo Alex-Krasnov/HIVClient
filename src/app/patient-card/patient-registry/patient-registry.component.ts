@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ModalService } from 'src/app/services/modal.service';
-import { PatientCardVisitService } from 'src/app/services/patient-card-visit.service';
+import { PatientCardVisitService } from 'src/app/services/patient-card/patient-card-visit.service';
 
 @Component({
   selector: 'app-patient-registry',

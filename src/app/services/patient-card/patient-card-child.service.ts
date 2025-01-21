@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { PatientCardChildModel } from '../_interfaces/patient-card-child.model';
+import { PatientCardChildModel } from '../../_interfaces/patient-card-child.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { pcChild } from '../_interfaces/pc-child.model';
+import { pcChild } from '../../_interfaces/pc-child.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

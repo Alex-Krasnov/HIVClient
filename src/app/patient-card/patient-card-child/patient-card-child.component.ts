@@ -6,7 +6,7 @@ import { ListService } from 'src/app/services/list.service';
 import { PatientCardChildForm } from './patient-card-child-form.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { PatientCardChildModel } from 'src/app/_interfaces/patient-card-child.model';
-import { PatientCardChildService } from 'src/app/services/patient-card-child.service';
+import { PatientCardChildService } from 'src/app/services/patient-card/patient-card-child.service';
 import { pcChild } from 'src/app/_interfaces/pc-child.model';
 
 @Component({

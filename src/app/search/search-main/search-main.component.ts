@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { NewPatientService } from 'src/app/services/new-patient.service';
-import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
+import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
 
 @Component({
   selector: 'app-search-main',

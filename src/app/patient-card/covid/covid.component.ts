@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { Covid } from 'src/app/_interfaces/covid.model';
 import { ListService } from 'src/app/services/list.service';
-import { PatientCardCovidService } from 'src/app/services/patient-card-covid.service';
+import { PatientCardCovidService } from 'src/app/services/patient-card/patient-card-covid.service';
 import { InList } from 'src/app/validators/in-lst';
 
 @Component({

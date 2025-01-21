@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription, firstValueFrom } from 'rxjs';
 import { Search } from 'src/app/_interfaces/search.model';
-import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
+import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { Course } from 'src/app/_interfaces/course.model';
 import { SearchHospForm } from './search-hosp-form.model';
 import { SearchHospModelLists } from 'src/app/_interfaces/search-hosp-lists.model';
-import { SearchHospService } from 'src/app/services/search-hosp.service';
+import { SearchHospService } from 'src/app/services/search/search-hosp.service';
 import { SearchHospModel } from 'src/app/_interfaces/search-hosp.model';
 import { LoadingService } from 'src/app/services/loading.service';
 

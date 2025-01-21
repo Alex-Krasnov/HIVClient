@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardDiagnosticConcomitantModel } from 'src/app/_interfaces/patient-card-diagnostic-concomitant.model';
-import { PatientCardDiagnosticConcomitantService } from 'src/app/services/patient-card-diagnostic-concomitant.service';
+import { PatientCardDiagnosticConcomitantService } from 'src/app/services/patient-card/patient-card-diagnostic-concomitant.service';
 import { PatientCardDiagnosticConcomitantForm } from './patient-card-diagnostic-concomintant-form.model';
 import { ModalService } from 'src/app/services/modal.service';
 

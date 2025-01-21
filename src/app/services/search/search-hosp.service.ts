@@ -1,27 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SearchChildListsModel } from '../_interfaces/search-child-lists.model';
-import { SearchChildModel } from '../_interfaces/search-child.model';
-import { Search } from '../_interfaces/search.model';
+import { Search } from '../../_interfaces/search.model';
+import { SearchHospModelLists } from '../../_interfaces/search-hosp-lists.model';
+import { SearchHospModel } from '../../_interfaces/search-hosp.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SearchChildService {
-  url: string = `${environment.apiUrl}/api/SearchChild`;
+export class SearchHospService {
+  url: string = `${environment.apiUrl}/api/SearchHosp`;
   constructor(private http: HttpClient){}
 
-  getLists(): Observable<SearchChildListsModel>{
+  getLists(): Observable<SearchHospModelLists>{
       return this.http.get(this.url);
   };
 
-  getData(item: SearchChildModel): Observable<Search>{
+  getData(item: SearchHospModel): Observable<Search>{
       return this.http.post<Search>(this.url+`/GetRes`, item);
   };
   
-  downloadFile(item: SearchChildModel): Observable<Blob> {
+  downloadFile(item: SearchHospModel): Observable<Blob> {
     return this.http.post(this.url+`/GetRes`, item, { responseType: 'blob'});
   };
 }

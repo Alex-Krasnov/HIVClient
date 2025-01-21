@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Search } from '../_interfaces/search.model';
-import { SearchFastFormModel } from '../_interfaces/search-fast-form.model';
+import { Search } from '../../_interfaces/search.model';
+import { SearchFastFormModel } from '../../_interfaces/search-fast-form.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

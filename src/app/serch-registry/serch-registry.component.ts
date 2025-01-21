@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, FormControl} from '@angular/forms';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
 import { ModalService } from 'src/app/services/modal.service';
-import { SeachRegistryService } from '../services/seach-registry.service';
+import { SeachRegistryService } from '../services/search/seach-registry.service';
 
 @Component({
   selector: 'app-serch-registry',

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { firstValueFrom } from 'rxjs';
 import { PatientFileUploadResponse } from 'src/app/_interfaces/patient-file-upload-response.model';
 import { LoadingService } from 'src/app/services/loading.service';
-import { PatientCardFilesService } from 'src/app/services/patient-card-files.service';
+import { PatientCardFilesService } from 'src/app/services/patient-card/patient-card-files.service';
 
 @Component({
   selector: 'app-files',

@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient} from "@angular/common/http";
-import { PatientCardMainModel } from "../_interfaces/patient-card-main.model";
+import { PatientCardMainModel } from "../../_interfaces/patient-card-main.model";
 import { Observable } from "rxjs";
-import { pcMain } from "../_interfaces/pc-main.model";
+import { pcMain } from "../../_interfaces/pc-main.model";
 import { environment } from "src/environments/environment";
 
 @Injectable()

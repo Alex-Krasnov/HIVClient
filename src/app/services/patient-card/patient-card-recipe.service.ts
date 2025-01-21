@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { PatientCardRecipeModel } from "../_interfaces/patient-card-recipe.model";
-import { pcRecipe } from "../_interfaces/pc-recipe.model";
+import { PatientCardRecipeModel } from "../../_interfaces/patient-card-recipe.model";
+import { pcRecipe } from "../../_interfaces/pc-recipe.model";
 import { environment } from "src/environments/environment";
 
 @Injectable({

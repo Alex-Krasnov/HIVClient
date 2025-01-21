@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PatientCardPregnantModel } from '../_interfaces/patient-card-pregnant.model';
+import { PatientCardPregnantModel } from '../../_interfaces/patient-card-pregnant.model';
 import { Observable } from 'rxjs';
-import { pcPregM } from '../_interfaces/pc-preg-m.model';
+import { pcPregM } from '../../_interfaces/pc-preg-m.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

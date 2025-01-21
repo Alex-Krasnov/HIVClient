@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardEpidModel } from 'src/app/_interfaces/patient-card-epid.model';
 import { ListService } from 'src/app/services/list.service';
-import { PatientCardEpidService } from 'src/app/services/patient-card-epid.service';
+import { PatientCardEpidService } from 'src/app/services/patient-card/patient-card-epid.service';
 import { InList } from 'src/app/validators/in-lst';
 import { PatientCardEpidForm } from './patient-card-epid-form.model';
 import { pcEpid } from 'src/app/_interfaces/pc-epid.model';

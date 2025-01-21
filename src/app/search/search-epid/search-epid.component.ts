@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription, firstValueFrom } from 'rxjs';
 import { Search } from 'src/app/_interfaces/search.model';
-import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
+import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { Course } from 'src/app/_interfaces/course.model';
 import { SearchEpidForm } from './search-epid-form.model';
 import { SearchEpidListsModel } from 'src/app/_interfaces/search-epid-lists.model';
-import { SearchEpidService } from 'src/app/services/search-epid.service';
+import { SearchEpidService } from 'src/app/services/search/search-epid.service';
 import { SearchEpidModel } from 'src/app/_interfaces/search-epid.model';
 import { LoadingService } from 'src/app/services/loading.service';
 

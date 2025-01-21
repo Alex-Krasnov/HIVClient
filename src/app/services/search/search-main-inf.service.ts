@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SearchMainInfModelLists } from '../_interfaces/search-main-inf-lists.model';
-import { Search } from '../_interfaces/search.model';
-import { SearchMainInfModel } from '../_interfaces/search-main-inf.model';
+import { SearchMainInfModelLists } from '../../_interfaces/search-main-inf-lists.model';
+import { Search } from '../../_interfaces/search.model';
+import { SearchMainInfModel } from '../../_interfaces/search-main-inf.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
