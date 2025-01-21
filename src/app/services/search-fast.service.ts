@@ -13,6 +13,6 @@ export class SearchFastService {
   constructor(private http: HttpClient){}
 
   getData(item: SearchFastFormModel): Observable<Search>{
-      return this.http.post<Search>(this.url, item);
+      return this.http.post<Search>(this.url+`/GetRes`, item);
   };
 }

@@ -38,13 +38,13 @@ export class SearchFastComponent implements OnInit{
     this.shared.visibleData$.next(false)
 
     this.SearchForm = this.fb.group({
-      patientId: new FormControl(),
-      cardNo: new FormControl(),
-      familyName: new FormControl(),
-      firstName: new FormControl(),
-      thirdName: new FormControl(),
-      birthDateStart: new FormControl(),
-      birthDateEnd: new FormControl()
+      patientId: new FormControl(''),
+      cardNo: new FormControl(''),
+      familyName: new FormControl(''),
+      firstName: new FormControl(''),
+      thirdName: new FormControl(''),
+      birthDateStart: new FormControl(''),
+      birthDateEnd: new FormControl('')
     });
 
     this.shared.search$.subscribe(item => {
