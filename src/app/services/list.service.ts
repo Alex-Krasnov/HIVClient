@@ -323,4 +323,8 @@ export class ListService {
     InListCallStatuses(name: string): Observable<object>{
         return this.http.post(this.url+`getInListCallStatuses`,{ str: name});
     };
+
+    InListReferenceMos(name: string): Observable<object>{
+        return this.http.post(this.url+`getInListReferenceMos`,{ str: name});
+    };
 }

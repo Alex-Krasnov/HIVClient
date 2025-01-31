@@ -8,4 +8,5 @@
     Last?: boolean
     Ifa?: boolean
     InputDate?: Date
+    ReferenceMo?: string
   }

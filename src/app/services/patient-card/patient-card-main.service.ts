@@ -19,7 +19,7 @@ export class PatientCardMainService {
     };
 
     createPatientBlot(patientId: number, blotId: number, blotNo: number, blotDate: Date, 
-        ibResultId: string, checkPlaceId: string, first: boolean, last: boolean, flgIfa: boolean){
+        ibResultId: string, checkPlaceId: string, first: boolean, last: boolean, flgIfa: boolean, referenceMo: string){
         return this.http.post(this.url+`/CreateBlot`, {
             PatientId: patientId, 
             BlotId: blotId,
@@ -29,12 +29,13 @@ export class PatientCardMainService {
             CheckPlaceId: checkPlaceId,
             First1: first,
             Last1: last,
-            FlgIfa: flgIfa
+            FlgIfa: flgIfa,
+            ReferenceMo: referenceMo
         })
     };
 
     updatePatientBlot(patientId: number, blotId: number, blotIdOld: number, blotNo: number, blotDate: Date, 
-        ibResultId: string, checkPlaceId: string, first: boolean, last: boolean, flgIfa: boolean){
+        ibResultId: string, checkPlaceId: string, first: boolean, last: boolean, flgIfa: boolean, referenceMo: string){
             return this.http.post(this.url+`/UpdateBlot`, {
                 PatientId: patientId, 
                 BlotId: blotId,
@@ -45,7 +46,8 @@ export class PatientCardMainService {
                 First1: first,
                 Last1: last,
                 FlgIfa: flgIfa,
-                BlotIdOld: blotIdOld
+                BlotIdOld: blotIdOld,
+                ReferenceMo: referenceMo
             })
     };
 
