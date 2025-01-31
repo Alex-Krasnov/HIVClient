@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardJailModel } from 'src/app/_interfaces/patient-card-jail.model';
 import { ListService } from 'src/app/services/list.service';
-import { PatientCardJailService } from 'src/app/services/patient-card-jail.service';
+import { PatientCardJailService } from 'src/app/services/patient-card/patient-card-jail.service';
 import { InList } from 'src/app/validators/in-lst';
 import { PatientCardJailForm } from './patient-card-jail-form.model';
 

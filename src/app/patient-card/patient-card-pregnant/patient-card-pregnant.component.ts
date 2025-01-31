@@ -6,7 +6,7 @@ import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
 import { PatientCardPregnantForm } from './patient-card-pregnant-form.model';
 import { PatientCardPregnantModel } from 'src/app/_interfaces/patient-card-pregnant.model';
-import { PatientCardPregnantService } from 'src/app/services/patient-card-pregnant.service';
+import { PatientCardPregnantService } from 'src/app/services/patient-card/patient-card-pregnant.service';
 import { ModalService } from 'src/app/services/modal.service';
 
 @Component({

@@ -1,270 +1,163 @@
 import { FormControl} from '@angular/forms'
+import { BaseSearchForm } from 'src/app/base/models/base-search-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
 
-export class SearchMainInfForm {
-    dateInpStart = new FormControl()
-    dateInpEnd = new FormControl()
-    patientId = new FormControl()
-    familyName = new FormControl()
-    firstName = new FormControl()
-    thirdName = new FormControl()
-    fioChange = new FormControl()
-    sex = new FormControl()
-    birthDateStart = new FormControl()
-    birthDateEnd = new FormControl()
-    regionReg = new FormControl()
-    regionFact = new FormControl()
-    country = new FormControl()
-    city = new FormControl()
-    location = new FormControl()
-    indx = new FormControl()
-    street = new FormControl()
-    home = new FormControl()
-    dateRegOnStart = new FormControl()
-    dateRegOnEnd = new FormControl()
-    dateUnRegStart = new FormControl()
-    dateUnRegEnd = new FormControl()
-    unRegCourse = new FormControl()
-    blotCheckPlace = new FormControl()
-    stage = new FormControl()
-    dateDieStart = new FormControl()
-    dateDieEnd = new FormControl()
-    dateDieAidsStart = new FormControl()
-    dateDieAidsEnd = new FormControl()
-    checkCourse = new FormControl()
-    dieCourse = new FormControl()
-    infectCourse = new FormControl()
-    showIllnes = new FormControl()
-    dateShowIllnesStart = new FormControl()
-    dateShowIllnesEnd = new FormControl()
-    ibRes = new FormControl()
-    dateIbResStart = new FormControl()
-    dateIbResEnd = new FormControl()
-    ibNum = new FormControl()
-    dateInpIbStart = new FormControl()
-    dateInpIbEnd = new FormControl()
-    ibSelect = new FormControl()
-    hospCourse = new FormControl()
-    age = new FormControl()
-    cardNo = new FormControl()
-    art = new FormControl()
-    mkb10 = new FormControl()
-    archiveYNA = new FormControl()
-    archive = new FormControl()
-    transfAreaYNA = new FormControl()
-    dateTransfAreaStart = new FormControl()
-    dateTransfAreaEnd = new FormControl()
-    frYNA = new FormControl()
-    zavApoYNA = new FormControl()
-    transfFederYNA = new FormControl()
-    dateTransfFederStart = new FormControl()
-    dateTransfFederEnd = new FormControl()
-    ufsinYNA = new FormControl()
-    dateUfsinStart = new FormControl()
-    dateUfsinEnd = new FormControl()
-    aids12 = new FormControl()
-    unrzYNA = new FormControl()
-    unrz = new FormControl()
-    dieDiagYNA = new FormControl()
-    chemprof = new FormControl()
-    dateChemprofStartStart = new FormControl()
-    dateChemprofStartEnd = new FormControl()
-    dateChemprofEndStart = new FormControl()
-    dateChemprofEndEnd = new FormControl()
-    dateRegStart = new FormControl()
-    dateRegEnd = new FormControl()
-    diePreset = new FormControl()
-    regionPreset = new FormControl()
-    factRegionPreset = new FormControl()
+export class SearchMainInfForm extends BaseSearchForm{
 
-    selectInpDate = new FormControl()
-    selectPatientId = new FormControl()
-    selectFio = new FormControl()
-    selectSex = new FormControl()
-    selectBirthDate = new FormControl()
-    selectRegion = new FormControl()
-    selectRegionFact = new FormControl()
-    selectCountry = new FormControl()
-    selectAddr = new FormControl()
-    selectRegOnDate = new FormControl()
-    selectBlotCheckPlace = new FormControl()
-    selectStage = new FormControl()
-    selectDieDate = new FormControl()
-    selectCheckCourse = new FormControl()
-    selectDieCourse = new FormControl()
-    selectInfectCourse = new FormControl()
-    selectShowIllnes = new FormControl()
-    selectIb = new FormControl()
-    selectHospCourse = new FormControl()
-    selectAge = new FormControl()
-    selectCardNo = new FormControl()
-    selectArt = new FormControl()
-    selectMkb10 = new FormControl()
-    selectArchive = new FormControl()
-    selectTransfArea = new FormControl()
-    selectFr = new FormControl()
-    selectTransfFeder = new FormControl()
-    selectUfsin = new FormControl()
-    selectAids12 = new FormControl()
-    selectUnrz = new FormControl()
-    selectChemprof = new FormControl()
-    selectDieDiag = new FormControl()
-    selectDateReg = new FormControl()
-    selectPasSer = new FormControl()
-    selectPasNum = new FormControl()
-    selectPasWhom = new FormControl()
-    selectPasWhen = new FormControl()
+  constructor(protected listService: ListService){
+    super(listService);
 
-    constructor(private listService: ListService) 
-    {
-      this.dateInpStart.setValue('')
-      this.dateInpEnd.setValue('')
-      this.patientId.setValue('')
-      this.familyName.setValue('')
-      this.firstName.setValue('')
-      this.thirdName.setValue('')
-      this.fioChange.setValue('')
-      this.sex.setValue('')
-      this.birthDateStart.setValue('')
-      this.birthDateEnd.setValue('')
-      this.city.setValue('')
-      this.location.setValue('')
-      this.indx.setValue('')
-      this.street.setValue('')
-      this.home.setValue('')
-      this.dateRegOnStart.setValue('')
-      this.dateRegOnEnd.setValue('')
-      this.dateUnRegStart.setValue('')
-      this.dateUnRegEnd.setValue('')
-      this.unRegCourse.setValue('')
-      this.dateDieStart.setValue('')
-      this.dateDieEnd.setValue('')
-      this.dateDieAidsStart.setValue('')
-      this.dateDieAidsEnd.setValue('')
-      this.dateShowIllnesStart.setValue('')
-      this.dateShowIllnesEnd.setValue('')
-      this.ibRes.setValue('')
-      this.dateIbResStart.setValue('')
-      this.dateIbResEnd.setValue('')
-      this.ibNum.setValue('')
-      this.dateInpIbStart.setValue('')
-      this.dateInpIbEnd.setValue('')
-      this.ibSelect.setValue('Все')
-      this.cardNo.setValue('')
-      this.archiveYNA.setValue('')
-      this.archive.setValue('')
-      this.transfAreaYNA.setValue('')
-      this.dateTransfAreaStart.setValue('')
-      this.dateTransfAreaEnd.setValue('')
-      this.frYNA.setValue('')
-      this.zavApoYNA.setValue('')
-      this.transfFederYNA.setValue('')
-      this.dateTransfFederStart.setValue('')
-      this.dateTransfFederEnd.setValue('')
-      this.ufsinYNA.setValue('')
-      this.dateUfsinStart.setValue('')
-      this.dateUfsinEnd.setValue('')
-      this.aids12.setValue('')
-      this.unrzYNA.setValue('')
-      this.unrz.setValue('')
-      this.dieDiagYNA.setValue('')
-      this.chemprof.setValue('')
-      this.dateChemprofStartStart.setValue('')
-      this.dateChemprofStartEnd.setValue('')
-      this.dateChemprofEndStart.setValue('')
-      this.dateChemprofEndEnd.setValue('')
-      this.dateRegStart.setValue('')
-      this.dateRegEnd.setValue('')
+    //#region поля
 
-      this.archiveYNA.setValue('Все')
-      this.transfAreaYNA.setValue('Все')
-      this.frYNA.setValue('Все')
-      this.zavApoYNA.setValue('Все')
-      this.transfFederYNA.setValue('Все')
-      this.ufsinYNA.setValue('Все')
-      this.unrzYNA.setValue('Все')
-      this.dieDiagYNA.setValue('Все')
-      this.diePreset.setValue('Все')
+    this.form.addControl('fioChange', new FormControl(''));
+    this.form.addControl('sex', new FormControl('', [], InList.validateSex(this.listService)));
+    this.form.addControl('blotCheckPlace', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('dateDieStart', new FormControl(''));
+    this.form.addControl('dateDieEnd', new FormControl(''));
+    this.form.addControl('dateDieAidsStart', new FormControl(''));
+    this.form.addControl('dateDieAidsEnd', new FormControl(''));
+    this.form.addControl('dieCourse', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('showIllnes', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('dateShowIllnesStart', new FormControl(''));
+    this.form.addControl('dateShowIllnesEnd', new FormControl(''));
+    this.form.addControl('ibRes', new FormControl('', [], InList.validateIbResult(this.listService)));
+    this.form.addControl('dateIbResStart', new FormControl(''));
+    this.form.addControl('dateIbResEnd', new FormControl(''));
+    this.form.addControl('ibNum', new FormControl(''));
+    this.form.addControl('dateInpIbStart', new FormControl(''));
+    this.form.addControl('dateInpIbEnd', new FormControl(''));
+    this.form.addControl('ibSelect', new FormControl(''));
+    this.form.addControl('hospCourse', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('age', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('cardNo', new FormControl(''));
+    this.form.addControl('art', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('mkb10', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('archiveYNA', new FormControl('Все', [], InList.validateYNA(this.listService)));
+    this.form.addControl('archive', new FormControl(''));
+    this.form.addControl('transfFederYNA', new FormControl('Все', [], InList.validateYNA(this.listService)));
+    this.form.addControl('dateTransfFederStart', new FormControl(''));
+    this.form.addControl('dateTransfFederEnd', new FormControl(''));
+    this.form.addControl('ufsinYNA', new FormControl('Все', [], InList.validateYNA(this.listService)));
+    this.form.addControl('dateUfsinStart', new FormControl(''));
+    this.form.addControl('dateUfsinEnd', new FormControl(''));
+    this.form.addControl('aids12', new FormControl(''));
+    this.form.addControl('dieDiagYNA', new FormControl('Все', [], InList.validateYNA(this.listService)));
+    this.form.addControl('chemprof', new FormControl(''));
+    this.form.addControl('dateChemprofStartStart', new FormControl(''));
+    this.form.addControl('dateChemprofStartEnd', new FormControl(''));
+    this.form.addControl('dateChemprofEndStart', new FormControl(''));
+    this.form.addControl('dateChemprofEndEnd', new FormControl(''));
+    this.form.addControl('dateRegStart', new FormControl(''));
+    this.form.addControl('dateRegEnd', new FormControl(''));
+    this.form.addControl('diePreset', new FormControl(''));
 
-      this.regionReg.setValue(['Все'])
-      this.regionReg.disable()
-      this.regionFact.setValue(['Все'])
-      this.regionFact.disable()
-      this.country.setValue(['Все'])
-      this.country.disable()
-      this.blotCheckPlace.setValue(['Все'])
-      this.blotCheckPlace.disable()
-      this.stage.setValue(['Все'])
-      this.stage.disable()
-      this.checkCourse.setValue(['Все'])
-      this.checkCourse.disable()
-      this.dieCourse.setValue(['Все'])
-      this.dieCourse.disable()
-      this.infectCourse.setValue(['Все'])
-      this.infectCourse.disable()
-      this.showIllnes.setValue(['Все'])
-      this.showIllnes.disable()
-      this.hospCourse.setValue(['Все'])
-      this.hospCourse.disable()
-      this.age.setValue(['Все'])
-      this.age.disable()
-      this.art.setValue(['Все'])
-      this.art.disable()
-      this.mkb10.setValue(['Все'])
-      this.mkb10.disable()
-      this.regionPreset.setValue('Все')
-      this.factRegionPreset.setValue('Все')
+    //#endregion
 
-      this.selectInpDate.setValue(true)
-      this.selectPatientId.setValue(true)
-      this.selectFio.setValue(true)
-      this.selectSex.setValue(true)
-      this.selectBirthDate.setValue(true)
-      this.selectRegion.setValue(true)
-      this.selectRegionFact.setValue(true)
-      this.selectCountry.setValue(true)
-      this.selectAddr.setValue(true)
-      this.selectRegOnDate.setValue(true)
-      this.selectBlotCheckPlace.setValue(false)
-      this.selectStage.setValue(false)
-      this.selectDieDate.setValue(true)
-      this.selectCheckCourse.setValue(true)
-      this.selectDieCourse.setValue(true)
-      this.selectInfectCourse.setValue(true)
-      this.selectShowIllnes.setValue(false)
-      this.selectIb.setValue(false)
-      this.selectHospCourse.setValue(false)
-      this.selectAge.setValue(true)
-      this.selectCardNo.setValue(true)
-      this.selectArt.setValue(true)
-      this.selectMkb10.setValue(true)
-      this.selectArchive.setValue(true)
-      this.selectTransfArea.setValue(true)
-      this.selectFr.setValue(true)
-      this.selectTransfFeder.setValue(true)
-      this.selectUfsin.setValue(true)
-      this.selectAids12.setValue(true)
-      this.selectUnrz.setValue(true)
-      this.selectChemprof.setValue(true)
-      this.selectDieDiag.setValue(true)
-      this.selectDateReg.setValue(true)
-      this.selectPasSer.setValue(true)
-      this.selectPasNum.setValue(true)
-      this.selectPasWhom.setValue(true)
-      this.selectPasWhen.setValue(true)
+    //#region select поля
 
-      this.sex.addAsyncValidators(InList.validateSex(this.listService))
-      this.unRegCourse.addAsyncValidators(InList.validateInfectCourseLong(this.listService))
-      this.ibRes.addAsyncValidators(InList.validateIbResult(this.listService))
-      this.archiveYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.transfAreaYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.frYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.zavApoYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.transfFederYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.ufsinYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.aids12.addAsyncValidators(InList.validateAids12(this.listService))
-      this.unrzYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.dieDiagYNA.addAsyncValidators(InList.validateYNA(this.listService))
-    }
+    this.form.addControl('selectSex', new FormControl(false));
+    this.form.addControl('selectBlotCheckPlace', new FormControl(false));
+    this.form.addControl('selectDieDate', new FormControl(false));
+    this.form.addControl('selectDieCourse', new FormControl(false));
+    this.form.addControl('selectShowIllnes', new FormControl(false));
+    this.form.addControl('selectIb', new FormControl(false));
+    this.form.addControl('selectHospCourse', new FormControl(false));
+    this.form.addControl('selectAge', new FormControl(false));
+    this.form.addControl('selectCardNo', new FormControl(false));
+    this.form.addControl('selectArt', new FormControl(false));
+    this.form.addControl('selectMkb10', new FormControl(false));
+    this.form.addControl('selectArchive', new FormControl(false));
+    this.form.addControl('selectTransfFeder', new FormControl(false));
+    this.form.addControl('selectUfsin', new FormControl(false));
+    this.form.addControl('selectAids12', new FormControl(false));
+    this.form.addControl('selectChemprof', new FormControl(false));
+    this.form.addControl('selectDieDiag', new FormControl(false));
+    this.form.addControl('selectDateReg', new FormControl(false));
+    this.form.addControl('selectPasSer', new FormControl(false));
+    this.form.addControl('selectPasNum', new FormControl(false));
+    this.form.addControl('selectPasWhom', new FormControl(false));
+    this.form.addControl('selectPasWhen', new FormControl(false));
+
+    //#endregion
+  }
+  
+  setDefaultValues() {
+    super.setDefaultValues();
+
+    this.form.patchValue({
+      //#region поля
+
+      fioChange:'',
+      sex:'',
+      blotCheckPlace:['Все'],
+      dateDieStart:'',
+      dateDieEnd:'',
+      dateDieAidsStart:'',
+      dateDieAidsEnd:'',
+      dieCourse: ['Все'],
+      showIllnes: ['Все'],
+      dateShowIllnesStart:'',
+      dateShowIllnesEnd:'',
+      ibRes:'',
+      dateIbResStart:'',
+      dateIbResEnd:'',
+      ibNum:'',
+      dateInpIbStart:'',
+      dateInpIbEnd:'',
+      ibSelect:'',
+      hospCourse: ['Все'],
+      age: ['Все'],
+      cardNo:'',
+      art: ['Все'],
+      mkb10: ['Все'],
+      archiveYNA:'Все',
+      archive:'',
+      transfFederYNA:'Все',
+      dateTransfFederStart:'',
+      dateTransfFederEnd:'',
+      ufsinYNA:'Все',
+      dateUfsinStart:'',
+      dateUfsinEnd:'',
+      aids12:'',
+      dieDiagYNA:'Все',
+      chemprof:'',
+      dateChemprofStartStart:'',
+      dateChemprofStartEnd:'',
+      dateChemprofEndStart:'',
+      dateChemprofEndEnd:'',
+      dateRegStart:'',
+      dateRegEnd:'',
+      diePreset:'',
+
+      //#endregion
+
+      //#region select поля
+
+      selectSex: false,
+      selectBlotCheckPlace: false,
+      selectDieDate: false,
+      selectDieCourse: false,
+      selectShowIllnes: false,
+      selectIb: false,
+      selectHospCourse: false,
+      selectAge: false,
+      selectCardNo: false,
+      selectArt: false,
+      selectMkb10: false,
+      selectArchive: false,
+      selectTransfFeder: false,
+      selectUfsin: false,
+      selectAids12: false,
+      selectChemprof: false,
+      selectDieDiag: false,
+      selectDateReg: false,
+      selectPasSer: false,
+      selectPasNum: false,
+      selectPasWhom: false,
+      selectPasWhen: false
+
+      //#endregion
+    });
+  }
 }

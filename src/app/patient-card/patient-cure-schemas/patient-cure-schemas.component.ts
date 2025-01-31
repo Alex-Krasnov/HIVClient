@@ -4,7 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { CureSchemas } from 'src/app/_interfaces/cure-schemas.model';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
-import { PatientCardTreatmentService } from 'src/app/services/patient-card-treatment.service';
+import { PatientCardTreatmentService } from 'src/app/services/patient-card/patient-card-treatment.service';
 import { endDateValidator } from 'src/app/validators/cure-schema';
 import { InList } from 'src/app/validators/in-lst';
 

@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Search } from 'src/app/_interfaces/search.model';
-import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
+import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
 
 @Component({
   selector: 'app-display-result',

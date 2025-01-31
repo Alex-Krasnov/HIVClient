@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ListService } from 'src/app/services/list.service';
-import { PatientCardVisitService } from 'src/app/services/patient-card-visit.service';
+import { PatientCardVisitService } from 'src/app/services/patient-card/patient-card-visit.service';
 import { InList } from 'src/app/validators/in-lst';
 
 @Component({

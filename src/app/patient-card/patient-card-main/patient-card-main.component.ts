@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
-import { PatientCardMainService } from 'src/app/services/patient-card-main.service';
+import { PatientCardMainService } from 'src/app/services/patient-card/patient-card-main.service';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators} from '@angular/forms';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardMainForm } from './patient-card-main-form.model';

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, firstValueFrom, map, startWith } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
-import { PatientCardCovidService } from 'src/app/services/patient-card-covid.service';
+import { PatientCardCovidService } from 'src/app/services/patient-card/patient-card-covid.service';
 import { InList } from 'src/app/validators/in-lst';
 
 @Component({

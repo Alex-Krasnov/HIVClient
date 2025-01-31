@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { PatientCardResistenceService } from 'src/app/services/patient-card-resistence.service';
+import { PatientCardResistenceService } from 'src/app/services/patient-card/patient-card-resistence.service';
 import { PatientCardResistenceForm } from './patient-card-resistence-form.model';
 import { PatientCardResistenceModel } from 'src/app/_interfaces/patient-card-resistence.model';
 import { ModalService } from 'src/app/services/modal.service';

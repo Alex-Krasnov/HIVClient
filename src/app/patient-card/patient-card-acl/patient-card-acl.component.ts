@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardAclModel } from 'src/app/_interfaces/patient-card-acl.model';
-import { PatientCardAclService } from 'src/app/services/patient-card-acl.service';
+import { PatientCardAclService } from 'src/app/services/patient-card/patient-card-acl.service';
 import { PatientCardAclForm } from './patient-card-acl-form.model';
 import { ModalService } from 'src/app/services/modal.service';
 

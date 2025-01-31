@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardRecipeModel } from 'src/app/_interfaces/patient-card-recipe.model';
 import { ListService } from 'src/app/services/list.service';
-import { PatientCardRecipeService } from 'src/app/services/patient-card-recipe.service';
+import { PatientCardRecipeService } from 'src/app/services/patient-card/patient-card-recipe.service';
 import { InList } from 'src/app/validators/in-lst';
 import { PatientCardRecipeForm } from './patient-card-recipe-form.model';
 import { ModalService } from 'src/app/services/modal.service';

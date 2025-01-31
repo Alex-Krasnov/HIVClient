@@ -4,7 +4,7 @@ import { firstValueFrom, lastValueFrom } from 'rxjs';
 import { pcPregM } from 'src/app/_interfaces/pc-preg-m.model';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
-import { PatientCardPregnantService } from 'src/app/services/patient-card-pregnant.service';
+import { PatientCardPregnantService } from 'src/app/services/patient-card/patient-card-pregnant.service';
 import { InList } from 'src/app/validators/in-lst';
 
 @Component({

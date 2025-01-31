@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { pcRecipe } from 'src/app/_interfaces/pc-recipe.model';
 import { ListService } from 'src/app/services/list.service';
-import { PatientCardRecipeService } from 'src/app/services/patient-card-recipe.service';
+import { PatientCardRecipeService } from 'src/app/services/patient-card/patient-card-recipe.service';
 import { InList } from 'src/app/validators/in-lst';
 
 @Component({
