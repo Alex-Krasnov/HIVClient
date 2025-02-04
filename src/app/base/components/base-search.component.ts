@@ -31,7 +31,7 @@ export abstract class BaseSearchComponent<T extends BaseSearchModel, F extends B
   selectedList: number;
 
   constructor(
-    protected searchService: UniversalSearchService<any>, // Use a more specific type if possible
+    protected searchService: UniversalSearchService<T>,
     protected fb: FormBuilder,
     public shared: SearchSharedServiceService,
     protected listService: ListService,

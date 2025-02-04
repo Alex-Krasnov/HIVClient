@@ -25,6 +25,7 @@ export class SearchMainInfForm extends BaseSearchForm{
     this.form.addControl('dateIbResStart', new FormControl(''));
     this.form.addControl('dateIbResEnd', new FormControl(''));
     this.form.addControl('ibNum', new FormControl(''));
+    this.form.addControl('referenceMO', new FormControl(''));
     this.form.addControl('dateInpIbStart', new FormControl(''));
     this.form.addControl('dateInpIbEnd', new FormControl(''));
     this.form.addControl('ibSelect', new FormControl(''));
@@ -103,6 +104,7 @@ export class SearchMainInfForm extends BaseSearchForm{
       dateIbResStart:'',
       dateIbResEnd:'',
       ibNum:'',
+      referenceMO:'',
       dateInpIbStart:'',
       dateInpIbEnd:'',
       ibSelect:'',
