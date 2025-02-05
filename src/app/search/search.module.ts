@@ -14,8 +14,6 @@ import { SearchPregnantComponent } from './search-pregnant/search-pregnant.compo
 import { SelectList2ColComponent } from './select-list2-col/select-list2-col.component';
 import { SearchChildComponent } from './search-child/search-child.component';
 import { SearchTreatmentComponent } from './search-treatment/search-treatment.component';
-import { SearchAnalysisComponent } from './search-analysis/search-analysis.component';
-import { SearchAclComponent } from './search-acl/search-acl.component';
 import { SearchVisitComponent } from './search-visit/search-visit.component';
 import { SearchEpidComponent } from './search-epid/search-epid.component';
 import { SearchHospComponent } from './search-hosp/search-hosp.component';
@@ -38,8 +36,6 @@ import { SearchCovidComponent } from './search-covid/search-covid.component';
     SelectList2ColComponent,
     SearchChildComponent,
     SearchTreatmentComponent,
-    SearchAnalysisComponent,
-    SearchAclComponent,
     SearchVisitComponent,
     SearchEpidComponent,
     SearchHospComponent,
