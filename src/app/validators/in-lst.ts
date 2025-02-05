@@ -874,4 +874,15 @@ export class InList  {
       )
     } 
   }
+
+  static validateReferenceMos( lst: ListService): AsyncValidatorFn  
+  {   
+    return (control: AbstractControl): Observable<ValidationErrors> =>{
+      return lst.InListReferenceMos(control.value)
+      .pipe(
+        map((isTaken: Boolean) => ( (!isTaken) ? { inList: true } : null)),
+        catchError(() => of(null))
+      )
+    } 
+  }
 }

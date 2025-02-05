@@ -23,4 +23,5 @@ import { Course } from "./course.model"
     listChemop?: string[]
     listDiePreset?: string[]
     listRegionPreset?: string[]
+    listReferenceMO?: string[]
  }

@@ -22,6 +22,7 @@ export class SearchMainInfModel extends BaseSearchModel{
    dateInpIbStart:  string = ''
    dateInpIbEnd:  string = ''
    ibSelect:  string = ''
+   referenceMO:  string = ''
    hospCourse: string[] = ['Все']
    age: string[] = ['Все']
    cardNo:  string = ''

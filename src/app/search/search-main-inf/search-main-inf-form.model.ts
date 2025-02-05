@@ -25,6 +25,7 @@ export class SearchMainInfForm extends BaseSearchForm{
     this.form.addControl('dateIbResStart', new FormControl(''));
     this.form.addControl('dateIbResEnd', new FormControl(''));
     this.form.addControl('ibNum', new FormControl(''));
+    this.form.addControl('referenceMO', new FormControl(''));
     this.form.addControl('dateInpIbStart', new FormControl(''));
     this.form.addControl('dateInpIbEnd', new FormControl(''));
     this.form.addControl('ibSelect', new FormControl(''));
@@ -56,28 +57,28 @@ export class SearchMainInfForm extends BaseSearchForm{
 
     //#region select поля
 
-    this.form.addControl('selectSex', new FormControl(false));
-    this.form.addControl('selectBlotCheckPlace', new FormControl(false));
-    this.form.addControl('selectDieDate', new FormControl(false));
-    this.form.addControl('selectDieCourse', new FormControl(false));
-    this.form.addControl('selectShowIllnes', new FormControl(false));
-    this.form.addControl('selectIb', new FormControl(false));
-    this.form.addControl('selectHospCourse', new FormControl(false));
-    this.form.addControl('selectAge', new FormControl(false));
-    this.form.addControl('selectCardNo', new FormControl(false));
-    this.form.addControl('selectArt', new FormControl(false));
-    this.form.addControl('selectMkb10', new FormControl(false));
-    this.form.addControl('selectArchive', new FormControl(false));
-    this.form.addControl('selectTransfFeder', new FormControl(false));
-    this.form.addControl('selectUfsin', new FormControl(false));
-    this.form.addControl('selectAids12', new FormControl(false));
-    this.form.addControl('selectChemprof', new FormControl(false));
-    this.form.addControl('selectDieDiag', new FormControl(false));
-    this.form.addControl('selectDateReg', new FormControl(false));
-    this.form.addControl('selectPasSer', new FormControl(false));
-    this.form.addControl('selectPasNum', new FormControl(false));
-    this.form.addControl('selectPasWhom', new FormControl(false));
-    this.form.addControl('selectPasWhen', new FormControl(false));
+    this.form.addControl('selectSex', new FormControl(true));
+    this.form.addControl('selectBlotCheckPlace', new FormControl(true));
+    this.form.addControl('selectDieDate', new FormControl(true));
+    this.form.addControl('selectDieCourse', new FormControl(true));
+    this.form.addControl('selectShowIllnes', new FormControl(true));
+    this.form.addControl('selectIb', new FormControl(true));
+    this.form.addControl('selectHospCourse', new FormControl(true));
+    this.form.addControl('selectAge', new FormControl(true));
+    this.form.addControl('selectCardNo', new FormControl(true));
+    this.form.addControl('selectArt', new FormControl(true));
+    this.form.addControl('selectMkb10', new FormControl(true));
+    this.form.addControl('selectArchive', new FormControl(true));
+    this.form.addControl('selectTransfFeder', new FormControl(true));
+    this.form.addControl('selectUfsin', new FormControl(true));
+    this.form.addControl('selectAids12', new FormControl(true));
+    this.form.addControl('selectChemprof', new FormControl(true));
+    this.form.addControl('selectDieDiag', new FormControl(true));
+    this.form.addControl('selectDateReg', new FormControl(true));
+    this.form.addControl('selectPasSer', new FormControl(true));
+    this.form.addControl('selectPasNum', new FormControl(true));
+    this.form.addControl('selectPasWhom', new FormControl(true));
+    this.form.addControl('selectPasWhen', new FormControl(true));
 
     //#endregion
   }
@@ -103,6 +104,7 @@ export class SearchMainInfForm extends BaseSearchForm{
       dateIbResStart:'',
       dateIbResEnd:'',
       ibNum:'',
+      referenceMO:'',
       dateInpIbStart:'',
       dateInpIbEnd:'',
       ibSelect:'',
@@ -133,29 +135,45 @@ export class SearchMainInfForm extends BaseSearchForm{
       //#endregion
 
       //#region select поля
+      selectFio: true,
+      selectBirthDate: true,
+      selectAddr: true,
+      selectCheckCourse: true,
+      selectCountry: true,
+      selectFr: true,
+      selectInfectCourse: true,
+      selectInpDate: true,
+      selectPatientId: true,
+      selectRegion: true,
+      selectRegionFact: true,
+      selectRegOnDate: true,
+      selectSnils: true,
+      selectStage: false,
+      selectTransfArea: true,
+      selectUnrz: true,
 
-      selectSex: false,
+      selectSex: true,
       selectBlotCheckPlace: false,
-      selectDieDate: false,
-      selectDieCourse: false,
+      selectDieDate: true,
+      selectDieCourse: true,
       selectShowIllnes: false,
       selectIb: false,
       selectHospCourse: false,
-      selectAge: false,
-      selectCardNo: false,
-      selectArt: false,
-      selectMkb10: false,
-      selectArchive: false,
-      selectTransfFeder: false,
-      selectUfsin: false,
-      selectAids12: false,
-      selectChemprof: false,
-      selectDieDiag: false,
-      selectDateReg: false,
-      selectPasSer: false,
-      selectPasNum: false,
-      selectPasWhom: false,
-      selectPasWhen: false
+      selectAge: true,
+      selectCardNo: true,
+      selectArt: true,
+      selectMkb10: true,
+      selectArchive: true,
+      selectTransfFeder: true,
+      selectUfsin: true,
+      selectAids12: true,
+      selectChemprof: true,
+      selectDieDiag: true,
+      selectDateReg: true,
+      selectPasSer: true,
+      selectPasNum: true,
+      selectPasWhom: true,
+      selectPasWhen: true
 
       //#endregion
     });

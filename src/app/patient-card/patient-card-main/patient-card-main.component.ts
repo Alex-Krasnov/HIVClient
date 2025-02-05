@@ -344,7 +344,11 @@ export class PatientCardMainComponent implements OnInit {
           first: new FormControl(e.first),
           last: new FormControl(e.last),
           ifa: new FormControl(e.ifa),
-          inputDate: new FormControl({value: e.inputDate, disabled: true})
+          inputDate: new FormControl({value: e.inputDate, disabled: true}),
+          referenceMo: new FormControl(e.referenceMo, {
+                asyncValidators: [InList.validateReferenceMos(this.listService)],
+                updateOn: 'blur'
+              })
         });
         this.patientBlot.push(blotForm);
       }

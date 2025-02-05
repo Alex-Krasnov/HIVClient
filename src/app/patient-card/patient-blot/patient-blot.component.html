@@ -6,6 +6,7 @@
         <th scope="col" style="width: 135px;">Дата</th>
         <th scope="col" style="width: 35px;">Рез.</th>
         <th scope="col">МО, направ. матер.</th>
+        <th scope="col" style="width: 123px;">Референс</th>
         <th scope="col" style="width: 30px;">1й</th>
         <th scope="col" style="width: 47px;">Посл.</th>
         <th scope="col" style="width: 41px;">ИФА</th>
@@ -21,6 +22,7 @@
           <td><input type="date" class="form-control tbl" formControlName="blotDate"></td>
           <td><input type="text" list="listRes" class="form-control tbl" formControlName="blotRes"></td>
           <td><input type="text" list="listCheckPlace" class="form-control tbl" formControlName="checkPlace" title="{{pervValue[i].checkPlace}}"></td>
+          <td><input type="text" list="listReferenceMo" class="form-control tbl" formControlName="referenceMo" title="{{pervValue[i].referenceMo}}"></td>
           <td><input type="checkbox" class="form-check-input mt-2" formControlName="first"></td>
           <td><input type="checkbox" class="form-check-input mt-2" formControlName="last"></td>
           <td><input type="checkbox" class="form-check-input mt-2" formControlName="ifa"></td>
@@ -34,6 +36,7 @@
         <td><input type="date" class="form-control tbl" formControlName="newBlotDate"></td>
         <td><input type="text" list="listRes" class="form-control tbl" formControlName="newBlotRes"></td>
         <td><input type="text" list="listCheckPlace" class="form-control tbl" formControlName="newCheckPlace"></td>
+        <td><input type="text" list="listReferenceMo" class="form-control tbl" formControlName="newReferenceMo"></td>
         <td><input type="checkbox" class="form-check-input mt-2" formControlName="newFirst"></td>
         <td><input type="checkbox" class="form-check-input mt-2" formControlName="newLast"></td>
         <td><input type="checkbox" class="form-check-input mt-2" formControlName="newIfa"></td>

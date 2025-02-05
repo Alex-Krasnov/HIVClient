@@ -148,6 +148,8 @@
                 <input type="date" class="form-control tbl w-auto" formControlName="dateInpIbEnd">
                 <span class="w-auto my-auto">Выбор блотов</span>
                 <input type="text" class="form-control tbl" style="width: 15%;" list="listSelectBlot" formControlName="ibSelect">
+                <span class="w-auto my-auto">Референс</span>
+                <input type="text" class="form-control tbl" style="width: 15%;" list="listReferenceMO" formControlName="referenceMO">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectHospCourse">
@@ -318,6 +320,7 @@
     <datalist id="listAids12"><option *ngFor="let item of searchLists.listAids12" [value]="item"></option></datalist>
     <datalist id="listDiePreset"><option *ngFor="let item of searchLists.listDiePreset" [value]="item"></option></datalist>
     <datalist id="listRegionPreset"><option *ngFor="let item of searchLists.listRegionPreset" [value]="item"></option></datalist>
+    <datalist id="listReferenceMO"><option *ngFor="let item of searchLists.listReferenceMO" [value]="item"></option></datalist>
 </form>
 
 <app-modal-window *ngIf="modal.isVisible$ | async">

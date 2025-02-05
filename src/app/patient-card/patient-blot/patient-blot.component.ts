@@ -40,7 +40,11 @@ export class PatientBlotComponent implements OnInit {
       }),
       newFirst: new FormControl(),
       newLast: new FormControl(),
-      newIfa: new FormControl()
+      newIfa: new FormControl(),
+      newReferenceMo: new FormControl('', {
+        asyncValidators: [InList.validateReferenceMos(this.listService)],
+        updateOn: 'blur'
+      })
     }, {updateOn: 'blur'});
     this.pervValue = this.blotArr.value as FormArray;
 
@@ -73,6 +77,7 @@ export class PatientBlotComponent implements OnInit {
     let First = this.formB.get('newFirst').value
     let Last = this.formB.get('newLast').value
     let FlgIfa = this.formB.get('newIfa').value
+    let ReferenceMo = this.formB.get('newReferenceMo').value
 
     if(typeof BlotNo == 'string' && BlotNo.length == 0)
       BlotNo = null as number
@@ -82,7 +87,8 @@ export class PatientBlotComponent implements OnInit {
       this.formB.controls['newBlotNo'].valid && 
       this.formB.controls['newBlotRes'].valid && 
       this.formB.controls['newCheckPlace'].valid &&
-      this.formB.controls['newBlotId'].value.length != 0
+      this.formB.controls['newBlotId'].value.length != 0 && 
+      this.formB.controls['newReferenceMo'].valid
       ){
       const blotForm = new FormGroup ({
         blotId: new FormControl(BlotId, (Validators.required, Validators.pattern("^[0-9]*$"))),
@@ -99,7 +105,11 @@ export class PatientBlotComponent implements OnInit {
         first: new FormControl(First),
         last: new FormControl(Last),
         ifa: new FormControl(FlgIfa),
-        inputDate: new FormControl({value: Date.now(), disabled: true})
+        inputDate: new FormControl({value: Date.now(), disabled: true}),
+        referenceMo: new FormControl(ReferenceMo, {
+              asyncValidators: [InList.validateReferenceMos(this.listService)],
+              updateOn: 'blur'
+            })
       });
   
       const blotData = {
@@ -111,10 +121,11 @@ export class PatientBlotComponent implements OnInit {
         first: First,
         last: Last,
         ifa: FlgIfa,
-        inputDate: Date.now()
+        inputDate: Date.now(),
+        referenceMo: ReferenceMo
       }
   
-      this.patientService.createPatientBlot(this.patientId, BlotId, BlotNo, BlotDate, ibResult, CheckPlace, First, Last, FlgIfa)
+      this.patientService.createPatientBlot(this.patientId, BlotId, BlotNo, BlotDate, ibResult, CheckPlace, First, Last, FlgIfa, ReferenceMo)
       .subscribe()
   
       this.blots.push(blotForm)
@@ -130,6 +141,7 @@ export class PatientBlotComponent implements OnInit {
     this.formB.get('newFirst').setValue('')
     this.formB.get('newLast').setValue('')
     this.formB.get('newIfa').setValue('')
+    this.formB.get('newReferenceMo').setValue('')
     this.formB.get('newBlotId').markAsPristine()
     this.formB.get('newBlotNo').markAsPristine()
     this.formB.get('newBlotDate').markAsPristine()
@@ -138,6 +150,7 @@ export class PatientBlotComponent implements OnInit {
     this.formB.get('newFirst').markAsPristine()
     this.formB.get('newLast').markAsPristine()
     this.formB.get('newIfa').markAsPristine()
+    this.formB.get('newReferenceMo').markAsPristine()
   }
 
   updateBlot(){
@@ -159,7 +172,8 @@ export class PatientBlotComponent implements OnInit {
             curValue[index].checkPlace, 
             curValue[index].first,
             curValue[index].last,
-            curValue[index].ifa
+            curValue[index].ifa,
+            curValue[index].referenceMo
           ).subscribe()
           oldValue[index] = curValue[index]
         }

@@ -58,16 +58,8 @@ export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfMo
     this.searchService.getLists(new SearchMainInfModel()).subscribe((item: SearchMainInfModelLists) => {
       this.searchLists = item
     })
-
+    
     this.searchForm.setDefaultValues();
-
-    // this.SearchForm = new BehaviorSubject(this.fb.group(new SearchMainInfForm(this.listService)));
-    // this.SearchForm$ = this.SearchForm.asObservable();
-
-    // this.SearchFormSub = this.SearchForm$
-    //   .subscribe(data => {
-    //     this.searchForm = data;
-    // });
   }
 
   modalOpen(i: number){
