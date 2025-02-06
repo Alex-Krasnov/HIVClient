@@ -1,214 +1,150 @@
-import { FormControl} from '@angular/forms'
+import { FormControl } from '@angular/forms'
+import { BaseSearchForm } from 'src/app/base/models/base-search-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
 
-export class SearchPregnantForm {
-    dateInpStart = new FormControl()
-    dateInpEnd = new FormControl()
-    patientId = new FormControl()
-    familyName = new FormControl()
-    firstName = new FormControl()
-    thirdName = new FormControl()
-    birthDateStart = new FormControl()
-    birthDateEnd = new FormControl()
-    regionReg = new FormControl()
-    regionPreset = new FormControl()
-    regionFact = new FormControl()
-    factRegionPreset = new FormControl()
-    country = new FormControl()
-    dateRegOnStart = new FormControl()
-    dateRegOnEnd = new FormControl()
-    dateUnRegStart = new FormControl()
-    dateUnRegEnd = new FormControl()
-    stage = new FormControl()
-    checkCourse = new FormControl()
-    infectCourse = new FormControl()
-    showIllnes = new FormControl()
-    dateShowIllnesStart = new FormControl()
-    dateShowIllnesEnd = new FormControl()
-    transfAreaYNA = new FormControl()
-    dateTransfAreaStart = new FormControl()
-    dateTransfAreaEnd = new FormControl()
-    frYNA = new FormControl()
-    zavApoYNA = new FormControl()
-    transfFederYNA = new FormControl()
-    ufsinYNA = new FormControl()
-    dateUfsinStart = new FormControl()
-    dateUfsinEnd = new FormControl()
-    
-    pregCheck = new FormControl()
-    pregMonthNo = new FormControl()
-    birthType = new FormControl()
-    medecineStartMonthNo = new FormControl()
-    childBirthDateStart = new FormControl()
-    childBirthDateEnd = new FormControl()
-    childFamilyName = new FormControl()
-    childFirstName = new FormControl()
-    childThirdName = new FormControl()
-    cardNo = new FormControl()
-    phpSchema1 = new FormControl()
-    phpSchema2 = new FormControl()
-    phpSchema3 = new FormControl()
-    medecineForSchema1 = new FormControl()
-    medecineForSchema2 = new FormControl()
-    medecineForSchema3 = new FormControl()
-    art = new FormControl()
-    materhome = new FormControl()
-    aclDateStart = new FormControl()
-    aclDateEnd = new FormControl()
-    aclMcnCodeStart = new FormControl()
-    aclMcnCodeEnd = new FormControl()
+export class SearchPregnantForm extends BaseSearchForm {
 
+  constructor(protected listService: ListService) {
+    super(listService);
 
-    selectInpDate = new FormControl()
-    selectPatientId = new FormControl()
-    selectFio = new FormControl()
-    selectBirthDate = new FormControl()
-    selectRegion = new FormControl()
-    selectRegionFact = new FormControl()
-    selectCountry = new FormControl()
-    selectRegOnDate = new FormControl()
-    selectStage = new FormControl()
-    selectCheckCourse = new FormControl()
-    selectInfectCourse = new FormControl()
-    selectShowIllnes = new FormControl()
-    selectTransfArea = new FormControl()
-    selectFr = new FormControl()
-    selectUfsin = new FormControl()
+    //#region поля
 
-    selectPregCheck = new FormControl()
-    selectPregMonthNo = new FormControl()
-    selectBirthType = new FormControl()
-    selectMedecineStartMonthNo = new FormControl()
-    selectChildBirthDate = new FormControl()
-    selectChildFio = new FormControl()
-    selectCardNo = new FormControl()
-    selectPhpSchema1 = new FormControl()
-    selectPhpSchema2 = new FormControl()
-    selectPhpSchema3 = new FormControl()
-    selectMedecineForSchema1 = new FormControl()
-    selectMedecineForSchema2 = new FormControl()
-    selectMedecineForSchema3 = new FormControl()
-    selectArt = new FormControl()
-    selectAddr = new FormControl()
-    selectMaterhome = new FormControl()
-    selectAclDate = new FormControl()
-    selectAclMcnCode = new FormControl()
+    this.form.addControl('showIllnes', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('dateShowIllnesStart', new FormControl(''));
+    this.form.addControl('dateShowIllnesEnd', new FormControl(''));
+    this.form.addControl('transfFederYNA', new FormControl('Все', [], InList.validateYNA(this.listService)));
+    this.form.addControl('ufsinYNA', new FormControl('Все', [], InList.validateYNA(this.listService)));
+    this.form.addControl('dateUfsinStart', new FormControl(''));
+    this.form.addControl('dateUfsinEnd', new FormControl(''));
+    this.form.addControl('pregCheck', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('pregMonthNo', new FormControl(''));
+    this.form.addControl('birthType', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('medecineStartMonthNo', new FormControl(''));
+    this.form.addControl('childBirthDateStart', new FormControl(''));
+    this.form.addControl('childBirthDateEnd', new FormControl(''));
+    this.form.addControl('childFamilyName', new FormControl(''));
+    this.form.addControl('childFirstName', new FormControl(''));
+    this.form.addControl('childThirdName', new FormControl(''));
+    this.form.addControl('cardNo', new FormControl(''));
+    this.form.addControl('phpSchema1', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('phpSchema2', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('phpSchema3', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('medecineForSchema1', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('medecineForSchema2', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('medecineForSchema3', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('art', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('materhome', new FormControl({ value: ['Все'], disabled: true }));
+    this.form.addControl('aclDateStart', new FormControl(''));
+    this.form.addControl('aclDateEnd', new FormControl(''));
+    this.form.addControl('aclMcnCodeStart', new FormControl(''));
+    this.form.addControl('aclMcnCodeEnd', new FormControl(''));
 
-    constructor(private listService: ListService) 
-    {
-      this.dateInpStart.setValue('')
-      this.dateInpEnd.setValue('')
-      this.patientId.setValue('')
-      this.familyName.setValue('')
-      this.firstName.setValue('')
-      this.thirdName.setValue('')
-      this.birthDateStart.setValue('')
-      this.birthDateEnd.setValue('')
-      this.regionReg.setValue(['Все'])
-      this.regionReg.disable()
-      this.regionPreset.setValue('Все')
-      this.regionFact.setValue(['Все'])
-      this.regionFact.disable()
-      this.factRegionPreset.setValue('Все')
-      this.country.setValue(['Все'])
-      this.country.disable()
-      this.dateRegOnStart.setValue('')
-      this.dateRegOnEnd.setValue('')
-      this.dateUnRegStart.setValue('')
-      this.dateUnRegEnd.setValue('')
-      this.stage.setValue(['Все'])
-      this.stage.disable()
-      this.checkCourse.setValue(['Все'])
-      this.checkCourse.disable()
-      this.infectCourse.setValue(['Все'])
-      this.infectCourse.disable()
-      this.showIllnes.setValue(['Все'])
-      this.showIllnes.disable()
-      this.dateShowIllnesStart.setValue('')
-      this.dateShowIllnesEnd.setValue('')
-      this.transfAreaYNA.setValue('Все')
-      this.dateTransfAreaStart.setValue('')
-      this.dateTransfAreaEnd.setValue('')
-      this.frYNA.setValue('Все')
-      this.zavApoYNA.setValue('Все')
-      this.transfFederYNA.setValue('Все')
-      this.ufsinYNA.setValue('Все')
-      this.dateUfsinStart.setValue('')
-      this.dateUfsinEnd.setValue('')
+    //#endregion
 
-      this.pregCheck.setValue(['Все'])
-      this.pregCheck.disable()
-      this.pregMonthNo.setValue('')
-      this.birthType.setValue(['Все'])
-      this.birthType.disable()
-      this.medecineStartMonthNo.setValue('')
-      this.childBirthDateStart.setValue('')
-      this.childBirthDateEnd.setValue('')
-      this.childFamilyName.setValue('')
-      this.childFirstName.setValue('')
-      this.childThirdName.setValue('')
-      this.cardNo.setValue('')
-      this.phpSchema1.setValue(['Все'])
-      this.phpSchema1.disable()
-      this.phpSchema2.setValue(['Все'])
-      this.phpSchema2.disable()
-      this.phpSchema3.setValue(['Все'])
-      this.phpSchema3.disable()
-      this.medecineForSchema1.setValue(['Все'])
-      this.medecineForSchema1.disable()
-      this.medecineForSchema2.setValue(['Все'])
-      this.medecineForSchema2.disable()
-      this.medecineForSchema3.setValue(['Все'])
-      this.medecineForSchema3.disable()
-      this.art.setValue(['Все'])
-      this.art.disable()
-      this.materhome.setValue(['Все'])
-      this.materhome.disable()
-      this.aclDateStart.setValue('')
-      this.aclDateEnd.setValue('')
-      this.aclMcnCodeStart.setValue('')
-      this.aclMcnCodeEnd.setValue('')
+    //#region select поля
 
-      this.selectInpDate.setValue(true)
-      this.selectPatientId.setValue(true)
-      this.selectFio.setValue(true)
-      this.selectBirthDate.setValue(true)
-      this.selectRegion.setValue(true)
-      this.selectRegionFact.setValue(true)
-      this.selectCountry.setValue(true)
-      this.selectRegOnDate.setValue(true)
-      this.selectStage.setValue(true)
-      this.selectCheckCourse.setValue(true)
-      this.selectInfectCourse.setValue(true)
-      this.selectShowIllnes.setValue(true)
-      this.selectTransfArea.setValue(true)
-      this.selectFr.setValue(true)
-      this.selectUfsin.setValue(true)
+    this.form.addControl('selectShowIllnes', new FormControl(true));
+    this.form.addControl('selectUfsin', new FormControl(true));
+    this.form.addControl('selectPregCheck', new FormControl(true));
+    this.form.addControl('selectPregMonthNo', new FormControl(true));
+    this.form.addControl('selectBirthType', new FormControl(true));
+    this.form.addControl('selectMedecineStartMonthNo', new FormControl(true));
+    this.form.addControl('selectChildBirthDate', new FormControl(true));
+    this.form.addControl('selectChildFio', new FormControl(true));
+    this.form.addControl('selectCardNo', new FormControl(true));
+    this.form.addControl('selectPhpSchema1', new FormControl(true));
+    this.form.addControl('selectPhpSchema2', new FormControl(true));
+    this.form.addControl('selectPhpSchema3', new FormControl(true));
+    this.form.addControl('selectMedecineForSchema1', new FormControl(true));
+    this.form.addControl('selectMedecineForSchema2', new FormControl(true));
+    this.form.addControl('selectMedecineForSchema3', new FormControl(true));
+    this.form.addControl('selectArt', new FormControl(true));
+    this.form.addControl('selectMaterhome', new FormControl(true));
+    this.form.addControl('selectAclDate', new FormControl(true));
+    this.form.addControl('selectAclMcnCode', new FormControl(true));
 
-      this.selectPregCheck.setValue(true)
-      this.selectPregMonthNo.setValue(true)
-      this.selectBirthType.setValue(true)
-      this.selectMedecineStartMonthNo.setValue(true)
-      this.selectChildBirthDate.setValue(true)
-      this.selectChildFio.setValue(true)
-      this.selectCardNo.setValue(true)
-      this.selectPhpSchema1.setValue(true)
-      this.selectPhpSchema2.setValue(true)
-      this.selectPhpSchema3.setValue(true)
-      this.selectMedecineForSchema1.setValue(true)
-      this.selectMedecineForSchema2.setValue(true)
-      this.selectMedecineForSchema3.setValue(true)
-      this.selectArt.setValue(true)
-      this.selectAddr.setValue(true)
-      this.selectMaterhome.setValue(true)
-      this.selectAclDate.setValue(true)
-      this.selectAclMcnCode.setValue(true)
+    //#endregion
+  }
 
-      this.transfAreaYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.frYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.zavApoYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.transfFederYNA.addAsyncValidators(InList.validateYNA(this.listService))
-      this.ufsinYNA.addAsyncValidators(InList.validateYNA(this.listService))
-    }
+  setDefaultValues() {
+    super.setDefaultValues();
+
+    this.form.patchValue({
+      //#region поля
+
+      showIllnes: ['Все'],
+      dateShowIllnesStart: '',
+      dateShowIllnesEnd: '',
+      transfFederYNA: 'Все',
+      ufsinYNA: 'Все',
+      dateUfsinStart: '',
+      dateUfsinEnd: '',
+      pregCheck: ['Все'],
+      pregMonthNo: '',
+      birthType: ['Все'],
+      medecineStartMonthNo: '',
+      childBirthDateStart: '',
+      childBirthDateEnd: '',
+      childFamilyName: '',
+      childFirstName: '',
+      childThirdName: '',
+      cardNo: '',
+      phpSchema1: ['Все'],
+      phpSchema2: ['Все'],
+      phpSchema3: ['Все'],
+      medecineForSchema1: ['Все'],
+      medecineForSchema2: ['Все'],
+      medecineForSchema3: ['Все'],
+      art: ['Все'],
+      materhome: ['Все'],
+      aclDateStart: '',
+      aclDateEnd: '',
+      aclMcnCodeStart: '',
+      aclMcnCodeEnd: '',
+
+      //#endregion
+
+      //#region select поля
+
+      selectFio: true,
+      selectBirthDate: true,
+      selectAddr: true,
+      selectCheckCourse: true,
+      selectCountry: true,
+      selectFr: true,
+      selectInfectCourse: true,
+      selectInpDate: true,
+      selectPatientId: true,
+      selectRegion: true,
+      selectRegionFact: true,
+      selectRegOnDate: true,
+      selectSnils: true,
+      selectStage: false,
+      selectTransfArea: true,
+      selectUnrz: true,
+
+      selectShowIllnes: false,
+      selectUfsin: false,
+      selectPregCheck: false,
+      selectPregMonthNo: false,
+      selectBirthType: false,
+      selectMedecineStartMonthNo: false,
+      selectChildBirthDate: false,
+      selectChildFio: false,
+      selectCardNo: false,
+      selectPhpSchema1: false,
+      selectPhpSchema2: false,
+      selectPhpSchema3: false,
+      selectMedecineForSchema1: false,
+      selectMedecineForSchema2: false,
+      selectMedecineForSchema3: false,
+      selectArt: false,
+      selectMaterhome: false,
+      selectAclDate: false,
+      selectAclMcnCode: false
+
+      //#endregion
+    });
+  }
 }

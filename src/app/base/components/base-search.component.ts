@@ -14,14 +14,11 @@ import { BaseSearchForm } from '../models/base-search-form.model';
 @Component({
   template: ''
 })
-export abstract class BaseSearchComponent<T extends BaseSearchModel, F extends BaseSearchForm> implements OnInit {
-  // protected SearchForm: BehaviorSubject<FormGroup | undefined>;
-  // SearchForm$: Observable<FormGroup>;
-  // SearchFormSub: Subscription;
-  // searchLists: any; // Use a more specific type if possible
+export abstract class BaseSearchComponent<TSearchModel extends BaseSearchModel, TForm extends BaseSearchForm, TListModel> implements OnInit {
 
+  searchLists: TListModel
+  searchForm: TForm;
   @Input() search: boolean;
-  searchForm: F;
   dataView: Search;
   resCount$ = new BehaviorSubject<number>(0);
   page = 1;
@@ -31,19 +28,27 @@ export abstract class BaseSearchComponent<T extends BaseSearchModel, F extends B
   selectedList: number;
 
   constructor(
-    protected searchService: UniversalSearchService<T>,
+    protected searchService: UniversalSearchService<TSearchModel>,
     protected fb: FormBuilder,
     public shared: SearchSharedServiceService,
     protected listService: ListService,
     public modal: ModalService,
     protected loading: LoadingService
-  ) {}
+  ) { }
 
   ngOnInit() {
   }
-  
-  abstract createFormValue(): T
-  abstract initForm(): void
+
+  abstract createFormValue(): TSearchModel
+
+  /** Инитим реактивную форму */
+  initForm() {
+    this.searchService.getLists(this.createFormValue()).subscribe((item: TListModel) => {
+      this.searchLists = item
+    })
+
+    this.searchForm.setDefaultValues();
+  }
 
   /** Подготовка данных для запроса поиска */
   setData(needXl: boolean) {
@@ -71,8 +76,8 @@ export abstract class BaseSearchComponent<T extends BaseSearchModel, F extends B
       }
     }
   }
-  
-  async getSearchRes(value: T){
+
+  async getSearchRes(value: TSearchModel) {
     this.loading.open()
     const res = firstValueFrom(this.searchService.getData(value))
 
@@ -81,19 +86,19 @@ export abstract class BaseSearchComponent<T extends BaseSearchModel, F extends B
       resPage: (await res.then()).resPage
     }
     this.maxPage = Math.ceil((await res.then()).resCount / 100)
-    
+
     this.resCount$.next((await res.then()).resCount)
     this.shared.visibleData$.next(true)
     this.shared.refreshData$.next(true)
     this.loading.close()
   }
-  
-  async getExcel(value: T){
+
+  async getExcel(value: TSearchModel) {
     this.loading.open()
 
     const data = firstValueFrom(this.searchService.downloadFile(value))
     const blob = new Blob([await data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  
+
     const downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(blob);
     downloadLink.download = 'res_search.xlsx';
@@ -102,14 +107,14 @@ export abstract class BaseSearchComponent<T extends BaseSearchModel, F extends B
 
     URL.revokeObjectURL(downloadLink.href);
     document.body.removeChild(downloadLink);
-    
+
     this.loading.close()
     this.shared.visibleData$.next(false)
     this.shared.refreshData$.next(false)
   }
-  
+
   /** Задать всем select значение true */
-  markAll(){
+  markAll() {
     for (let key of Object.keys(this.searchForm.form.controls)) {
       if (key.indexOf('select') == -1) {
         continue;
@@ -119,7 +124,7 @@ export abstract class BaseSearchComponent<T extends BaseSearchModel, F extends B
   }
 
   /** Задать всем select значение false */
-  dismarkAll(){
+  dismarkAll() {
     for (let key of Object.keys(this.searchForm.form.controls)) {
       if (key.indexOf('select') == -1) {
         continue;
@@ -130,26 +135,26 @@ export abstract class BaseSearchComponent<T extends BaseSearchModel, F extends B
 
   //#region пагинация
 
-  nextPage(){
-    if(this.page < this.maxPage){
+  nextPage() {
+    if (this.page < this.maxPage) {
       this.page += 1
       this.setData(false)
     }
   }
 
-  prevPage(){
-    if(this.page > 1){
+  prevPage() {
+    if (this.page > 1) {
       this.page -= 1
       this.setData(false)
     }
   }
 
-  firstPage(){
+  firstPage() {
     this.page = 1
     this.setData(false)
   }
 
-  lastPage(){
+  lastPage() {
     this.page = this.maxPage
     this.setData(false)
   }

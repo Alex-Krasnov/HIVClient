@@ -1,11 +1,11 @@
-import { FormControl} from '@angular/forms'
+import { FormControl } from '@angular/forms'
 import { BaseSearchForm } from 'src/app/base/models/base-search-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
 
-export class SearchMainInfForm extends BaseSearchForm{
+export class SearchMainInfForm extends BaseSearchForm {
 
-  constructor(protected listService: ListService){
+  constructor(protected listService: ListService) {
     super(listService);
 
     //#region поля
@@ -82,59 +82,60 @@ export class SearchMainInfForm extends BaseSearchForm{
 
     //#endregion
   }
-  
+
   setDefaultValues() {
     super.setDefaultValues();
 
     this.form.patchValue({
       //#region поля
 
-      fioChange:'',
-      sex:'',
-      blotCheckPlace:['Все'],
-      dateDieStart:'',
-      dateDieEnd:'',
-      dateDieAidsStart:'',
-      dateDieAidsEnd:'',
+      fioChange: '',
+      sex: '',
+      blotCheckPlace: ['Все'],
+      dateDieStart: '',
+      dateDieEnd: '',
+      dateDieAidsStart: '',
+      dateDieAidsEnd: '',
       dieCourse: ['Все'],
       showIllnes: ['Все'],
-      dateShowIllnesStart:'',
-      dateShowIllnesEnd:'',
-      ibRes:'',
-      dateIbResStart:'',
-      dateIbResEnd:'',
-      ibNum:'',
-      referenceMO:'',
-      dateInpIbStart:'',
-      dateInpIbEnd:'',
-      ibSelect:'',
+      dateShowIllnesStart: '',
+      dateShowIllnesEnd: '',
+      ibRes: '',
+      dateIbResStart: '',
+      dateIbResEnd: '',
+      ibNum: '',
+      referenceMO: '',
+      dateInpIbStart: '',
+      dateInpIbEnd: '',
+      ibSelect: '',
       hospCourse: ['Все'],
       age: ['Все'],
-      cardNo:'',
+      cardNo: '',
       art: ['Все'],
       mkb10: ['Все'],
-      archiveYNA:'Все',
-      archive:'',
-      transfFederYNA:'Все',
-      dateTransfFederStart:'',
-      dateTransfFederEnd:'',
-      ufsinYNA:'Все',
-      dateUfsinStart:'',
-      dateUfsinEnd:'',
-      aids12:'',
-      dieDiagYNA:'Все',
-      chemprof:'',
-      dateChemprofStartStart:'',
-      dateChemprofStartEnd:'',
-      dateChemprofEndStart:'',
-      dateChemprofEndEnd:'',
-      dateRegStart:'',
-      dateRegEnd:'',
-      diePreset:'',
+      archiveYNA: 'Все',
+      archive: '',
+      transfFederYNA: 'Все',
+      dateTransfFederStart: '',
+      dateTransfFederEnd: '',
+      ufsinYNA: 'Все',
+      dateUfsinStart: '',
+      dateUfsinEnd: '',
+      aids12: '',
+      dieDiagYNA: 'Все',
+      chemprof: '',
+      dateChemprofStartStart: '',
+      dateChemprofStartEnd: '',
+      dateChemprofEndStart: '',
+      dateChemprofEndEnd: '',
+      dateRegStart: '',
+      dateRegEnd: '',
+      diePreset: '',
 
       //#endregion
 
       //#region select поля
+
       selectFio: true,
       selectBirthDate: true,
       selectAddr: true,

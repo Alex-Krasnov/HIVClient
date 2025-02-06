@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
 import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
 import { SearchMainInfForm } from './search-main-inf-form.model';
 import { ListService } from 'src/app/services/list.service';
@@ -16,8 +15,7 @@ import { BaseSearchComponent } from '../../base/components/base-search.component
   templateUrl: './search-main-inf.component.html',
   styleUrls: ['./search-main-inf.component.css']
 })
-export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfModel, SearchMainInfForm>{
-  searchLists: SearchMainInfModelLists
+export class SearchMainInfComponent extends BaseSearchComponent<SearchMainInfModel, SearchMainInfForm, SearchMainInfModelLists> {
 
   constructor(
     searchService: UniversalSearchService<SearchMainInfModel>,
@@ -44,25 +42,17 @@ export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfMo
     this.initForm()
 
     this.shared.search$.subscribe(item => {
-      if(item == 'Общие данные')
+      if (item == 'Общие данные')
         this.setData(false)
     })
 
     this.shared.excel$.subscribe(item => {
-      if(item == 'Общие данные')
+      if (item == 'Общие данные')
         this.setData(true)
     })
   }
 
-  initForm(){
-    this.searchService.getLists(new SearchMainInfModel()).subscribe((item: SearchMainInfModelLists) => {
-      this.searchLists = item
-    })
-    
-    this.searchForm.setDefaultValues();
-  }
-
-  modalOpen(i: number){
+  modalOpen(i: number) {
     this.selectedList = i
 
     switch (i) {
@@ -81,7 +71,7 @@ export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfMo
       case 5:
         this.modalList = this.searchLists.listStage
         break
-      case 6:        
+      case 6:
         this.modal2ColList = this.searchLists.listCheckCourse
         this.modal.course2ColOpen()
         return null
@@ -114,7 +104,7 @@ export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfMo
     this.modal.open()
   }
 
-  giveList(lst: string[]){
+  giveList(lst: string[]) {
     switch (this.selectedList) {
       case 1:
         this.searchForm.form.controls['regionReg'].setValue(lst)

@@ -1,4 +1,4 @@
- export abstract class BaseSearchModel{
+export abstract class BaseSearchModel {
 
   //#region Общие поля
 
@@ -39,7 +39,7 @@
   patientId: string = ''
 
   // Регион (рег.)
-  regionReg: string[] = ['Все'] 
+  regionReg: string[] = ['Все']
   regionPreset: string = 'Все'
 
   // Регион (факт.)
@@ -68,7 +68,7 @@
   // УНРЗ
   unrzYNA: string = 'Все'
   unrz: string = ''
-    
+
   page: number = 1
   excel: boolean = false
 
