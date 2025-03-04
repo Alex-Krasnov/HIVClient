@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
-import { SearchPregnantForm } from './search-pregnant-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
 import { SearchPregnantListsModel } from 'src/app/_interfaces/search-pregnant-lists.model';
 import { LoadingService } from 'src/app/services/loading.service';
-import { BaseSearchComponent } from 'src/app/base/components/base-search.component';
 import { UniversalSearchService } from 'src/app/services/search/universal-search.service';
 import { SearchPregnantModel } from 'src/app/models/search/search-pregnant.model';
+import { BaseSearchComponent } from 'src/app/base/components/base-search.component';
 
 @Component({
   selector: 'app-search-pregnant',
   templateUrl: './search-pregnant.component.html',
   styleUrls: ['./search-pregnant.component.css']
 })
-export class SearchPregnantComponent extends BaseSearchComponent<SearchPregnantModel, SearchPregnantForm, SearchPregnantListsModel> {
+export class SearchPregnantComponent extends BaseSearchComponent<SearchPregnantModel, SearchPregnantListsModel> {
 
   constructor(
     searchService: UniversalSearchService<SearchPregnantModel>,
@@ -26,7 +25,6 @@ export class SearchPregnantComponent extends BaseSearchComponent<SearchPregnantM
     loading: LoadingService
   ) {
     super(searchService, fb, shared, listService, modal, loading)
-    this.searchForm = new SearchPregnantForm(this.listService)
   }
 
   createFormValue(): SearchPregnantModel {
@@ -117,55 +115,55 @@ export class SearchPregnantComponent extends BaseSearchComponent<SearchPregnantM
   giveList(lst: string[]) {
     switch (this.selectedList) {
       case 1:
-        this.searchForm.form.controls['regionReg'].setValue(lst)
+        this.searchModel.form.controls['regionReg'].setValue(lst)
         break
       case 2:
-        this.searchForm.form.controls['regionFact'].setValue(lst)
+        this.searchModel.form.controls['regionFact'].setValue(lst)
         break
       case 3:
-        this.searchForm.form.controls['country'].setValue(lst)
+        this.searchModel.form.controls['country'].setValue(lst)
         break
       case 4:
-        this.searchForm.form.controls['stage'].setValue(lst)
+        this.searchModel.form.controls['stage'].setValue(lst)
         break
       case 5:
-        this.searchForm.form.controls['checkCourse'].setValue(lst)
+        this.searchModel.form.controls['checkCourse'].setValue(lst)
         break
       case 6:
-        this.searchForm.form.controls['infectCourse'].setValue(lst)
+        this.searchModel.form.controls['infectCourse'].setValue(lst)
         break
       case 7:
-        this.searchForm.form.controls['showIllnes'].setValue(lst)
+        this.searchModel.form.controls['showIllnes'].setValue(lst)
         break
       case 8:
-        this.searchForm.form.controls['pregCheck'].setValue(lst)
+        this.searchModel.form.controls['pregCheck'].setValue(lst)
         break
       case 9:
-        this.searchForm.form.controls['birthType'].setValue(lst)
+        this.searchModel.form.controls['birthType'].setValue(lst)
         break
       case 10:
-        this.searchForm.form.controls['phpSchema1'].setValue(lst)
+        this.searchModel.form.controls['phpSchema1'].setValue(lst)
         break
       case 11:
-        this.searchForm.form.controls['phpSchema2'].setValue(lst)
+        this.searchModel.form.controls['phpSchema2'].setValue(lst)
         break
       case 12:
-        this.searchForm.form.controls['phpSchema3'].setValue(lst)
+        this.searchModel.form.controls['phpSchema3'].setValue(lst)
         break
       case 13:
-        this.searchForm.form.controls['medecineForSchema1'].setValue(lst)
+        this.searchModel.form.controls['medecineForSchema1'].setValue(lst)
         break
       case 14:
-        this.searchForm.form.controls['medecineForSchema2'].setValue(lst)
+        this.searchModel.form.controls['medecineForSchema2'].setValue(lst)
         break
       case 15:
-        this.searchForm.form.controls['medecineForSchema3'].setValue(lst)
+        this.searchModel.form.controls['medecineForSchema3'].setValue(lst)
         break
       case 16:
-        this.searchForm.form.controls['art'].setValue(lst)
+        this.searchModel.form.controls['art'].setValue(lst)
         break
       case 17:
-        this.searchForm.form.controls['materhome'].setValue(lst)
+        this.searchModel.form.controls['materhome'].setValue(lst)
         break
     }
   }

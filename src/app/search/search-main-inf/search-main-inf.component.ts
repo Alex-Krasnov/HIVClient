@@ -7,14 +7,14 @@ import { ModalService } from 'src/app/services/modal.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { UniversalSearchService } from 'src/app/services/search/universal-search.service';
 import { SearchMainInfModel } from 'src/app/models/search/search-main-inf.model';
-import { BaseSearchComponentV2 } from 'src/app/base/components/base-search.component-v2';
+import { BaseSearchComponent } from 'src/app/base/components/base-search.component';
 
 @Component({
   selector: 'app-search-main-inf',
   templateUrl: './search-main-inf.component.html',
   styleUrls: ['./search-main-inf.component.css']
 })
-export class SearchMainInfComponent extends BaseSearchComponentV2<SearchMainInfModel, SearchMainInfModelLists> {
+export class SearchMainInfComponent extends BaseSearchComponent<SearchMainInfModel, SearchMainInfModelLists> {
 
   constructor(
     searchService: UniversalSearchService<SearchMainInfModel>,

@@ -9,15 +9,14 @@ import { Search } from 'src/app/_interfaces/search.model';
 import { Course } from 'src/app/_interfaces/course.model';
 import { UniversalSearchService } from 'src/app/services/search/universal-search.service';
 import { BaseSearchModel } from 'src/app/base/models/base-search.model';
-import { BaseSearchForm } from '../models/base-search-form.model';
 
 @Component({
   template: ''
 })
-export abstract class BaseSearchComponent<TSearchModel extends BaseSearchModel, TForm extends BaseSearchForm, TListModel> implements OnInit {
+export abstract class BaseSearchComponent<TSearchModel extends BaseSearchModel, TListModel> implements OnInit {
 
   searchLists: TListModel
-  searchForm: TForm;
+  searchModel: TSearchModel;
   @Input() search: boolean;
   dataView: Search;
   resCount$ = new BehaviorSubject<number>(0);
@@ -43,16 +42,17 @@ export abstract class BaseSearchComponent<TSearchModel extends BaseSearchModel, 
 
   /** Инитим реактивную форму */
   initForm() {
-    this.searchService.getLists(this.createFormValue()).subscribe((item: TListModel) => {
+    this.searchModel = this.createFormValue()
+    this.searchModel.setDefaultValues();
+
+    this.searchService.getLists(this.searchModel).subscribe((item: TListModel) => {
       this.searchLists = item
     })
-
-    this.searchForm.setDefaultValues();
   }
 
   /** Подготовка данных для запроса поиска */
   setData(needXl: boolean) {
-    if (this.searchForm.form.valid) {
+    if (this.searchModel.form.valid) {
       this.dataView = { columName: [], resPage: [] };
       this.maxPage = 0;
       this.resCount$.next(0);
@@ -63,7 +63,7 @@ export abstract class BaseSearchComponent<TSearchModel extends BaseSearchModel, 
         if (key === 'page' || key === 'excel') {
           continue;
         }
-        formValue[key] = this.searchForm.form.controls[key].value;
+        formValue[key] = this.searchModel.form.controls[key].value;
       }
 
       formValue.page = this.page;
@@ -115,21 +115,21 @@ export abstract class BaseSearchComponent<TSearchModel extends BaseSearchModel, 
 
   /** Задать всем select значение true */
   markAll() {
-    for (let key of Object.keys(this.searchForm.form.controls)) {
+    for (let key of Object.keys(this.searchModel.form.controls)) {
       if (key.indexOf('select') == -1) {
         continue;
       }
-      this.searchForm.form.controls[key].setValue(true);
+      this.searchModel.form.controls[key].setValue(true);
     }
   }
 
   /** Задать всем select значение false */
   dismarkAll() {
-    for (let key of Object.keys(this.searchForm.form.controls)) {
+    for (let key of Object.keys(this.searchModel.form.controls)) {
       if (key.indexOf('select') == -1) {
         continue;
       }
-      this.searchForm.form.controls[key].setValue(false);
+      this.searchModel.form.controls[key].setValue(false);
     }
   }
 
