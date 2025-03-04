@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, firstValueFrom, Observable, Subscription } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ModalService } from 'src/app/services/modal.service';
