@@ -25,6 +25,7 @@
     "ngx-bootstrap": "^10.2.0",
     "ngx-mask": "^15.2.1",
     "postcss": "^8.5.1",
+    "reflect-metadata": "^0.2.2",
     "rxjs": "~7.8.0",
     "semver": "^7.6.3",
     "tslib": "^2.3.0",
