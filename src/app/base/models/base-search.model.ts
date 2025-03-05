@@ -223,7 +223,7 @@ export abstract class BaseSearchModel {
       selectFr: false,
       selectInfectCourse: false,
       selectInpDate: false,
-      selectPatientId: false,
+      selectPatientId: true,
       selectRegion: false,
       selectRegionFact: false,
       selectRegOnDate: false,
