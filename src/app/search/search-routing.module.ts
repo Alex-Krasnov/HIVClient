@@ -8,8 +8,6 @@ import { SearchMainInfComponent } from './search-main-inf/search-main-inf.compon
 import { SearchPregnantComponent } from './search-pregnant/search-pregnant.component';
 import { SearchChildComponent } from './search-child/search-child.component';
 import { SearchTreatmentComponent } from './search-treatment/search-treatment.component';
-import { SearchAnalysisComponent } from './search-analysis/search-analysis.component';
-import { SearchAclComponent } from './search-acl/search-acl.component';
 import { SearchVisitComponent } from './search-visit/search-visit.component';
 import { SearchEpidComponent } from './search-epid/search-epid.component';
 import { SearchHospComponent } from './search-hosp/search-hosp.component';
@@ -26,8 +24,6 @@ const routes: Routes = [
       { path: 'preg', component: SearchPregnantComponent, canActivate: [AuthGuard] },
       { path: 'child', component: SearchChildComponent, canActivate: [AuthGuard] },
       { path: 'treatment', component: SearchTreatmentComponent, canActivate: [AuthGuard] },
-      { path: 'analysis', component: SearchAnalysisComponent, canActivate: [AuthGuard] },
-      { path: 'acl', component: SearchAclComponent, canActivate: [AuthGuard] },
       { path: 'visit', component: SearchVisitComponent, canActivate: [AuthGuard] },
       { path: 'epid', component: SearchEpidComponent, canActivate: [AuthGuard] },
       { path: 'hosp', component: SearchHospComponent, canActivate: [AuthGuard] },

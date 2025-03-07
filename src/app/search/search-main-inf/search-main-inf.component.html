@@ -1,4 +1,4 @@
-<form class="pt-3" style="background-color: #ade8dd;" [formGroup]="searchForm.form" *ngIf="searchLists">
+<form class="pt-3" style="background-color: #ade8dd;" [formGroup]="searchModel.form" *ngIf="searchLists">
     <div class="row ms-1 mt-1">
         <div class="col-xl">
             <div class="row mb-1">
@@ -33,7 +33,10 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectSex">
                 <span class="w-auto my-auto">Пол</span>
-                <input type="text" class="form-control tbl w-auto" list="listSex" formControlName="sex">
+                <select class="form-control tbl" style="width: 100px;" formControlName="sex">
+                    <option value=""></option>
+                    <option *ngFor="let item of searchLists.listSex" [value]="item">{{ item }}</option>
+                </select>
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectBirthDate">
@@ -45,13 +48,17 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectRegion">
                 <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(1)">Регион (рег.)</button>
-                <input type="text" class="form-control tbl" style="width: 10%;" list="listRegionPreset" formControlName="regionPreset">
+                <select class="form-control tbl" style="width: 10%;" formControlName="regionPreset">
+                    <option *ngFor="let item of searchLists.listRegionPreset" [value]="item">{{ item }}</option>
+                </select>
                 <input type="text" class="form-control tbl" style="width: 78.5%;" formControlName="regionReg">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectRegionFact">
                 <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(2)">Регион (факт.)</button>
-                <input type="text" class="form-control tbl" style="width: 10%;" list="listRegionPreset" formControlName="factRegionPreset">
+                <select class="form-control tbl" style="width: 10%;" formControlName="factRegionPreset">
+                    <option *ngFor="let item of searchLists.listRegionPreset" [value]="item">{{ item }}</option>
+                </select>
                 <input type="text" class="form-control tbl" style="width: 77.8%;" formControlName="regionFact">
             </div>
             <div class="row row-control mb-1">
@@ -82,7 +89,10 @@
                 <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateUnRegStart">
                 <span class="w-auto my-auto">по</span>
                 <input type="date" class="form-control tbl w-auto" style="width: 10%;" formControlName="dateUnRegEnd">
-                <input type="text" class="form-control tbl ms-1" style="width: 13.5%;" list="listRegOff" formControlName="unRegCourse">
+                <select class="form-control tbl ms-1" style="width: 13.5%;" formControlName="unRegCourse">
+                    <option value=""></option>
+                    <option *ngFor="let item of searchLists.listRegOff" [value]="item">{{ item }}</option>
+                </select>
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectBlotCheckPlace">
@@ -113,7 +123,9 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectDieCourse">
                 <button type="button" class="btn btn-success w-auto mx-1 tbl" (click)="modalOpen(7)">Причина смерти</button>
-                <input type="text" class="form-control tbl" style="width: 10%;" list="listDiePreset" formControlName="diePreset">
+                <select class="form-control tbl" style="width: 10%;" formControlName="diePreset">
+                    <option *ngFor="let item of searchLists.listDiePreset" [value]="item">{{ item }}</option>
+                </select>
                 <input type="text" class="form-control tbl" style="width: 76.3%;" formControlName="dieCourse">
             </div>
             <div class="row row-control mb-1">
@@ -133,7 +145,10 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectIb">
                 <span class="w-auto my-auto">Результат референс</span>
-                <input type="text" class="form-control tbl" style="width: 15%;" list="listResIb" formControlName="ibRes">
+                <select class="form-control tbl" style="width: 15%;" formControlName="ibRes">
+                    <option value=""></option>
+                    <option *ngFor="let item of searchLists.listResIb" [value]="item">{{ item }}</option>
+                </select>
                 <span class="w-auto my-auto">Дата с </span>
                 <input type="date" class="form-control tbl w-auto" formControlName="dateIbResStart">
                 <span class="w-auto my-auto">по</span>
@@ -147,9 +162,15 @@
                 <span class="w-auto my-auto">по</span>
                 <input type="date" class="form-control tbl w-auto" formControlName="dateInpIbEnd">
                 <span class="w-auto my-auto">Выбор блотов</span>
-                <input type="text" class="form-control tbl" style="width: 15%;" list="listSelectBlot" formControlName="ibSelect">
+                <select class="form-control tbl" style="width: 15%;" formControlName="ibSelect">
+                    <option value=""></option>
+                    <option *ngFor="let item of searchLists.listSelectBlot" [value]="item">{{ item }}</option>
+                </select>
                 <span class="w-auto my-auto">Референс</span>
-                <input type="text" class="form-control tbl" style="width: 15%;" list="listReferenceMO" formControlName="referenceMO">
+                <select class="form-control tbl" style="width: 15%;" formControlName="referenceMO">
+                    <option value=""></option>
+                    <option *ngFor="let item of searchLists.listReferenceMO" [value]="item">{{ item }}</option>
+                </select>
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectHospCourse">
@@ -179,13 +200,17 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectArchive">
                 <span class="w-auto my-auto">Архив</span>
-                <input type="text" class="form-control tbl w-auto me-1" list="listYNA" formControlName="archiveYNA">
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="archiveYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
                 <input type="text" class="form-control tbl w-auto" formControlName="archive">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectTransfArea">
                 <span class="w-auto my-auto">Передан в район</span>
-                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="transfAreaYNA">
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="transfAreaYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
                 <span class="w-auto my-auto">Дата передачи с </span>
                 <input type="date" class="form-control tbl w-auto" formControlName="dateTransfAreaStart">
                 <span class="w-auto my-auto">по</span>
@@ -194,14 +219,20 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectFr">
                 <span class="w-auto my-auto">Внесено в ФР</span>
-                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="frYNA">
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="frYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
                 <span class="w-auto my-auto">Зав. АПО</span>
-                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="zavApoYNA">
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="zavApoYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectTransfFeder">
                 <span class="w-auto my-auto">Передан в Суб.Фед.</span>
-                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="transfFederYNA">
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="transfFederYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
                 <span class="w-auto my-auto">Дата передачи с </span>
                 <input type="date" class="form-control tbl w-auto" formControlName="dateTransfFederStart">
                 <span class="w-auto my-auto">по</span>
@@ -210,7 +241,9 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectUfsin">
                 <span class="w-auto my-auto">На учете в УФСИН</span>
-                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="ufsinYNA">
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="ufsinYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
                 <span class="w-auto my-auto">Дата постановки с </span>
                 <input type="date" class="form-control tbl w-auto" formControlName="dateUfsinStart">
                 <span class="w-auto my-auto">по</span>
@@ -219,23 +252,33 @@
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectAids12">
                 <span class="w-auto my-auto">ВИЧ 1/2</span>
-                <input type="text" class="form-control tbl w-auto" list="listAids12" formControlName="aids12">
+                <select class="form-control tbl" style="width: 10%;" formControlName="aids12">
+                    <option value=""></option>
+                    <option *ngFor="let item of searchLists.listAids12" [value]="item">{{ item }}</option>
+                </select>
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectUnrz">
                 <span class="w-auto my-auto">УНРЗ</span>
-                <input type="text" class="form-control tbl w-auto me-1" list="listYNA" formControlName="unrzYNA">
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="unrzYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
                 <input type="text" class="form-control tbl w-auto" formControlName="unrz">
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectDieDiag">
                 <span class="w-auto my-auto">Диагноз посмертно</span>
-                <input type="text" class="form-control tbl w-auto" list="listYNA" formControlName="dieDiagYNA">
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="dieDiagYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
             </div>
             <div class="row row-control mb-1">
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectChemprof">
                 <span class="w-auto my-auto">Химиопроф.</span>
-                <input type="text" class="form-control tbl" style="width: 10%;" list="listChemop" formControlName="chemprof">
+                <select class="form-control tbl" style="width: 10%;" formControlName="chemprof">
+                    <option value=""></option>
+                    <option *ngFor="let item of searchLists.listChemop" [value]="item">{{ item }}</option>
+                </select>
                 <span class="w-auto my-auto">Дата нач. с </span>
                 <input type="date" class="form-control tbl w-auto" formControlName="dateChemprofStartStart">
                 <span class="w-auto my-auto">по</span>
@@ -310,17 +353,6 @@
         </button>
     </div>
     <br>
-    
-    <datalist id="listSex"><option *ngFor="let item of searchLists.listSex" [value]="item"></option></datalist>
-    <datalist id="listRegOff"><option *ngFor="let item of searchLists.listRegOff" [value]="item"></option></datalist>
-    <datalist id="listResIb"><option *ngFor="let item of searchLists.listResIb" [value]="item"></option></datalist>
-    <datalist id="listSelectBlot"><option *ngFor="let item of searchLists.listSelectBlot" [value]="item"></option></datalist>
-    <datalist id="listYNA"><option *ngFor="let item of searchLists.listYNA" [value]="item"></option></datalist>
-    <datalist id="listChemop"><option *ngFor="let item of searchLists.listChemop" [value]="item"></option></datalist>
-    <datalist id="listAids12"><option *ngFor="let item of searchLists.listAids12" [value]="item"></option></datalist>
-    <datalist id="listDiePreset"><option *ngFor="let item of searchLists.listDiePreset" [value]="item"></option></datalist>
-    <datalist id="listRegionPreset"><option *ngFor="let item of searchLists.listRegionPreset" [value]="item"></option></datalist>
-    <datalist id="listReferenceMO"><option *ngFor="let item of searchLists.listReferenceMO" [value]="item"></option></datalist>
 </form>
 
 <app-modal-window *ngIf="modal.isVisible$ | async">

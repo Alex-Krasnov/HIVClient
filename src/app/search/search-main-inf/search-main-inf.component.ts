@@ -1,23 +1,20 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
 import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
-import { SearchMainInfForm } from './search-main-inf-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { SearchMainInfModelLists } from 'src/app/_interfaces/search-main-inf-lists.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { UniversalSearchService } from 'src/app/services/search/universal-search.service';
 import { SearchMainInfModel } from 'src/app/models/search/search-main-inf.model';
-import { BaseSearchComponent } from '../../base/components/base-search.component';
+import { BaseSearchComponent } from 'src/app/base/components/base-search.component';
 
 @Component({
   selector: 'app-search-main-inf',
   templateUrl: './search-main-inf.component.html',
   styleUrls: ['./search-main-inf.component.css']
 })
-export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfModel, SearchMainInfForm>{
-  searchLists: SearchMainInfModelLists
+export class SearchMainInfComponent extends BaseSearchComponent<SearchMainInfModel, SearchMainInfModelLists> {
 
   constructor(
     searchService: UniversalSearchService<SearchMainInfModel>,
@@ -28,7 +25,6 @@ export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfMo
     loading: LoadingService
   ) {
     super(searchService, fb, shared, listService, modal, loading)
-    this.searchForm = new SearchMainInfForm(this.listService)
   }
 
   createFormValue(): SearchMainInfModel {
@@ -44,25 +40,17 @@ export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfMo
     this.initForm()
 
     this.shared.search$.subscribe(item => {
-      if(item == 'Общие данные')
+      if (item == 'Общие данные')
         this.setData(false)
     })
 
     this.shared.excel$.subscribe(item => {
-      if(item == 'Общие данные')
+      if (item == 'Общие данные')
         this.setData(true)
     })
   }
 
-  initForm(){
-    this.searchService.getLists(new SearchMainInfModel()).subscribe((item: SearchMainInfModelLists) => {
-      this.searchLists = item
-    })
-    
-    this.searchForm.setDefaultValues();
-  }
-
-  modalOpen(i: number){
+  modalOpen(i: number) {
     this.selectedList = i
 
     switch (i) {
@@ -81,7 +69,7 @@ export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfMo
       case 5:
         this.modalList = this.searchLists.listStage
         break
-      case 6:        
+      case 6:
         this.modal2ColList = this.searchLists.listCheckCourse
         this.modal.course2ColOpen()
         return null
@@ -114,46 +102,46 @@ export class SearchMainInfComponent  extends BaseSearchComponent<SearchMainInfMo
     this.modal.open()
   }
 
-  giveList(lst: string[]){
+  giveList(lst: string[]) {
     switch (this.selectedList) {
       case 1:
-        this.searchForm.form.controls['regionReg'].setValue(lst)
+        this.searchModel.form.controls['regionReg'].setValue(lst)
         break
       case 2:
-        this.searchForm.form.controls['regionFact'].setValue(lst)
+        this.searchModel.form.controls['regionFact'].setValue(lst)
         break
       case 3:
-        this.searchForm.form.controls['country'].setValue(lst)
+        this.searchModel.form.controls['country'].setValue(lst)
         break
       case 4:
-        this.searchForm.form.controls['blotCheckPlace'].setValue(lst)
+        this.searchModel.form.controls['blotCheckPlace'].setValue(lst)
         break
       case 5:
-        this.searchForm.form.controls['stage'].setValue(lst)
+        this.searchModel.form.controls['stage'].setValue(lst)
         break
       case 6:
-        this.searchForm.form.controls['checkCourse'].setValue(lst)
+        this.searchModel.form.controls['checkCourse'].setValue(lst)
         break
       case 7:
-        this.searchForm.form.controls['dieCourse'].setValue(lst)
+        this.searchModel.form.controls['dieCourse'].setValue(lst)
         break
       case 8:
-        this.searchForm.form.controls['infectCourse'].setValue(lst)
+        this.searchModel.form.controls['infectCourse'].setValue(lst)
         break
       case 9:
-        this.searchForm.form.controls['showIllnes'].setValue(lst)
+        this.searchModel.form.controls['showIllnes'].setValue(lst)
         break
       case 10:
-        this.searchForm.form.controls['hospCourse'].setValue(lst)
+        this.searchModel.form.controls['hospCourse'].setValue(lst)
         break
       case 11:
-        this.searchForm.form.controls['age'].setValue(lst)
+        this.searchModel.form.controls['age'].setValue(lst)
         break
       case 12:
-        this.searchForm.form.controls['art'].setValue(lst)
+        this.searchModel.form.controls['art'].setValue(lst)
         break
       case 13:
-        this.searchForm.form.controls['mkb10'].setValue(lst)
+        this.searchModel.form.controls['mkb10'].setValue(lst)
         break
     }
   }

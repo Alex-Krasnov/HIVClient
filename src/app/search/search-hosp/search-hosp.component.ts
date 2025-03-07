@@ -1,48 +1,36 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable, Subscription, firstValueFrom } from 'rxjs';
-import { Search } from 'src/app/_interfaces/search.model';
-import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
-import { ListService } from 'src/app/services/list.service';
-import { ModalService } from 'src/app/services/modal.service';
-import { Course } from 'src/app/_interfaces/course.model';
-import { SearchHospForm } from './search-hosp-form.model';
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { SearchHospModelLists } from 'src/app/_interfaces/search-hosp-lists.model';
-import { SearchHospService } from 'src/app/services/search/search-hosp.service';
-import { SearchHospModel } from 'src/app/_interfaces/search-hosp.model';
+import { BaseSearchComponent } from 'src/app/base/components/base-search.component';
+import { SearchHospModel } from 'src/app/models/search/search-hosp.model';
+import { ListService } from 'src/app/services/list.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { ModalService } from 'src/app/services/modal.service';
+import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
+import { UniversalSearchService } from 'src/app/services/search/universal-search.service';
 
 @Component({
   selector: 'app-search-hosp',
   templateUrl: './search-hosp.component.html',
   styleUrls: ['./search-hosp.component.css']
 })
-export class SearchHospComponent implements OnInit{
-  private SearchForm: BehaviorSubject<FormGroup | undefined>
-  SearchForm$: Observable<FormGroup>
-  SearchFormSub: Subscription
-  searchLists: SearchHospModelLists
-
-  @Input() search: boolean
-  searchForm: FormGroup
-  dataView: Search
-  resCount$ = new BehaviorSubject<number>(0)
-  page = 1
-  maxPage = 0
-  modalList: string[]
-  modal2ColList: Course[]
-  selectedList: number
+export class SearchHospComponent  extends BaseSearchComponent<SearchHospModel, SearchHospModelLists> {
 
   constructor(
-    private searchService: SearchHospService,
-    private fb: FormBuilder,
-    public shared: SearchSharedServiceService,
-    private listService: ListService,
-    public modal: ModalService,
-    private loading: LoadingService
-  ){}
+    searchService: UniversalSearchService<SearchHospModel>,
+    fb: FormBuilder,
+    shared: SearchSharedServiceService,
+    listService: ListService,
+    modal: ModalService,
+    loading: LoadingService
+  ) {
+    super(searchService, fb, shared, listService, modal, loading)
+  }
 
-
+  createFormValue(): SearchHospModel {
+    return new SearchHospModel();
+  }
+  
   ngOnInit() {
     this.shared.switchVal('xl', true)
     this.shared.switchVal('print', false)
@@ -60,216 +48,6 @@ export class SearchHospComponent implements OnInit{
       if(item == 'Госпитализации')
         this.setData(true)
     })
-  }
-
-  initForm(){
-    this.searchService.getLists().subscribe((item: SearchHospModelLists) => {
-      this.searchLists = item
-    })
-
-    this.SearchForm = new BehaviorSubject(this.fb.group(new SearchHospForm(this.listService)));
-    this.SearchForm$ = this.SearchForm.asObservable();
-
-    this.SearchFormSub = this.SearchForm$
-      .subscribe(data => {
-        this.searchForm = data;
-    });
-  }
-
-  setData(needXl: boolean){
-    if(this.searchForm.valid){
-      this.dataView = {columName: [], resPage: []}
-      this.maxPage = 0
-      this.resCount$.next(0)
-      
-      let formValue: SearchHospModel = {
-        dateInpStart: this.searchForm.controls['dateInpStart'].value,
-        dateInpEnd: this.searchForm.controls['dateInpEnd'].value,
-        patientId: this.searchForm.controls['patientId'].value,
-        familyName: this.searchForm.controls['familyName'].value,
-        firstName: this.searchForm.controls['firstName'].value,
-        thirdName: this.searchForm.controls['thirdName'].value,
-        sex: this.searchForm.controls['sex'].value,
-        birthDateStart: this.searchForm.controls['birthDateStart'].value,
-        birthDateEnd: this.searchForm.controls['birthDateEnd'].value,
-        regionReg: this.searchForm.controls['regionReg'].value,
-        regionPreset: this.searchForm.controls['regionPreset'].value,
-        regionFact: this.searchForm.controls['regionFact'].value,
-        factRegionPreset: this.searchForm.controls['factRegionPreset'].value,
-        country: this.searchForm.controls['country'].value,
-        city: this.searchForm.controls['city'].value,
-        location: this.searchForm.controls['location'].value,
-        indx: this.searchForm.controls['indx'].value,
-        street: this.searchForm.controls['street'].value,
-        home: this.searchForm.controls['home'].value,
-        dateRegOnStart: this.searchForm.controls['dateRegOnStart'].value,
-        dateRegOnEnd: this.searchForm.controls['dateRegOnEnd'].value,
-        dateUnRegStart: this.searchForm.controls['dateUnRegStart'].value,
-        dateUnRegEnd: this.searchForm.controls['dateUnRegEnd'].value,
-        stage: this.searchForm.controls['stage'].value,
-        checkCourse: this.searchForm.controls['checkCourse'].value,
-        infectCourse: this.searchForm.controls['infectCourse'].value,
-        transfAreaYNA: this.searchForm.controls['transfAreaYNA'].value,
-        dateTransfAreaStart: this.searchForm.controls['dateTransfAreaStart'].value,
-        dateTransfAreaEnd: this.searchForm.controls['dateTransfAreaEnd'].value,
-        ufsinYNA: this.searchForm.controls['ufsinYNA'].value,
-        dateUfsinStart: this.searchForm.controls['dateUfsinStart'].value,
-        dateUfsinEnd: this.searchForm.controls['dateUfsinEnd'].value,
-        frYNA: this.searchForm.controls['frYNA'].value,
-        zavApoYNA: this.searchForm.controls['zavApoYNA'].value,
-        
-        dateHospInStart: this.searchForm.controls['dateHospInStart'].value,
-        dateHospInEnd: this.searchForm.controls['dateHospInEnd'].value,
-        dateHospOutStart: this.searchForm.controls['dateHospOutStart'].value,
-        dateHospOutEnd: this.searchForm.controls['dateHospOutEnd'].value,
-        lpu: this.searchForm.controls['lpu'].value,
-        hospCourse: this.searchForm.controls['hospCourse'].value,
-        hospResult: this.searchForm.controls['hospResult'].value,
-
-        
-        selectInpDate: this.searchForm.controls['selectInpDate'].value,
-        selectPatientId: this.searchForm.controls['selectPatientId'].value,
-        selectFio: this.searchForm.controls['selectFio'].value,
-        selectSex: this.searchForm.controls['selectSex'].value,
-        selectBirthDate: this.searchForm.controls['selectBirthDate'].value,
-        selectRegion: this.searchForm.controls['selectRegion'].value,
-        selectRegionFact: this.searchForm.controls['selectRegionFact'].value,
-        selectCountry: this.searchForm.controls['selectCountry'].value,
-        selectAddr: this.searchForm.controls['selectAddr'].value,
-        selectRegOnDate: this.searchForm.controls['selectRegOnDate'].value,
-        selectStage: this.searchForm.controls['selectStage'].value,
-        selectCheckCourse: this.searchForm.controls['selectCheckCourse'].value,
-        selectInfectCourse: this.searchForm.controls['selectInfectCourse'].value,
-        selectTransfArea: this.searchForm.controls['selectTransfArea'].value,
-        selectFr: this.searchForm.controls['selectFr'].value,
-        selectUfsin: this.searchForm.controls['selectUfsin'].value,
-        
-        selectDateHospIn: this.searchForm.controls['selectDateHospIn'].value,
-        selectDateHospOut: this.searchForm.controls['selectDateHospOut'].value,
-        selectLpu: this.searchForm.controls['selectLpu'].value,
-        selectHospCourse: this.searchForm.controls['selectHospCourse'].value,
-        selectHospResult: this.searchForm.controls['selectHospResult'].value,
-
-        page: this.page,
-        excel: needXl
-      }
-
-      if(needXl){
-        this.getExcel(formValue)
-      }else{
-        this.getSearchRes(formValue)
-      }
-    }
-  }
-  
-  async getSearchRes(value: SearchHospModel){
-    this.loading.open()
-    const res = firstValueFrom(this.searchService.getData(value))
-
-    this.dataView = {
-      columName: (await res.then()).columName,
-      resPage: (await res.then()).resPage
-    }
-    this.maxPage = Math.ceil((await res.then()).resCount / 100)
-    
-    this.resCount$.next((await res.then()).resCount)
-    this.shared.visibleData$.next(true)
-    this.shared.refreshData$.next(true)
-    this.loading.close()
-  }
-
-  async getExcel(value: SearchHospModel){
-    this.loading.open()
-
-    const data = firstValueFrom(this.searchService.downloadFile(value))
-    const blob = new Blob([await data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-  
-    const downloadLink = document.createElement('a');
-    downloadLink.href = URL.createObjectURL(blob);
-    downloadLink.download = 'res_search.xlsx';
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-
-    URL.revokeObjectURL(downloadLink.href);
-    document.body.removeChild(downloadLink);
-    
-    this.loading.close()
-    this.shared.visibleData$.next(false)
-    this.shared.refreshData$.next(false)
-  }
-
-  nextPage(){
-    if(this.page < this.maxPage){
-      this.page += 1
-      this.setData(false)
-    }
-  }
-
-  prevPage(){
-    if(this.page > 1){
-      this.page -= 1
-      this.setData(false)
-    }
-  }
-
-  firstPage(){
-    this.page = 1
-    this.setData(false)
-  }
-
-  lastPage(){
-    this.page = this.maxPage
-    this.setData(false)
-  }
-
-  markAll(){
-    this.searchForm.controls['selectInpDate'].setValue(true)
-    this.searchForm.controls['selectPatientId'].setValue(true)
-    this.searchForm.controls['selectFio'].setValue(true)
-    this.searchForm.controls['selectSex'].setValue(true)
-    this.searchForm.controls['selectBirthDate'].setValue(true)
-    this.searchForm.controls['selectRegion'].setValue(true)
-    this.searchForm.controls['selectRegionFact'].setValue(true)
-    this.searchForm.controls['selectCountry'].setValue(true)
-    this.searchForm.controls['selectAddr'].setValue(true)
-    this.searchForm.controls['selectRegOnDate'].setValue(true)
-    this.searchForm.controls['selectStage'].setValue(true)
-    this.searchForm.controls['selectCheckCourse'].setValue(true)
-    this.searchForm.controls['selectInfectCourse'].setValue(true)
-    this.searchForm.controls['selectTransfArea'].setValue(true)
-    this.searchForm.controls['selectFr'].setValue(true)
-    this.searchForm.controls['selectUfsin'].setValue(true)
-    
-    this.searchForm.controls['selectDateHospIn'].setValue(true)
-    this.searchForm.controls['selectDateHospOut'].setValue(true)
-    this.searchForm.controls['selectLpu'].setValue(true)
-    this.searchForm.controls['selectHospCourse'].setValue(true)
-    this.searchForm.controls['selectHospResult'].setValue(true)
-  }
-
-  dismarkAll(){
-    this.searchForm.controls['selectInpDate'].setValue(false)
-    this.searchForm.controls['selectPatientId'].setValue(false)
-    this.searchForm.controls['selectFio'].setValue(false)
-    this.searchForm.controls['selectSex'].setValue(false)
-    this.searchForm.controls['selectBirthDate'].setValue(false)
-    this.searchForm.controls['selectRegion'].setValue(false)
-    this.searchForm.controls['selectRegionFact'].setValue(false)
-    this.searchForm.controls['selectCountry'].setValue(false)
-    this.searchForm.controls['selectAddr'].setValue(false)
-    this.searchForm.controls['selectRegOnDate'].setValue(false)
-    this.searchForm.controls['selectStage'].setValue(false)
-    this.searchForm.controls['selectCheckCourse'].setValue(false)
-    this.searchForm.controls['selectInfectCourse'].setValue(false)
-    this.searchForm.controls['selectTransfArea'].setValue(false)
-    this.searchForm.controls['selectFr'].setValue(false)
-    this.searchForm.controls['selectUfsin'].setValue(false)
-    
-    this.searchForm.controls['selectDateHospIn'].setValue(false)
-    this.searchForm.controls['selectDateHospOut'].setValue(false)
-    this.searchForm.controls['selectLpu'].setValue(false)
-    this.searchForm.controls['selectHospCourse'].setValue(false)
-    this.searchForm.controls['selectHospResult'].setValue(false)
   }
 
   modalOpen(i: number){
@@ -313,31 +91,31 @@ export class SearchHospComponent implements OnInit{
   giveList(lst: string[]){
     switch (this.selectedList) {
       case 1:
-        this.searchForm.controls['regionReg'].setValue(lst)
+        this.searchModel.form.controls['regionReg'].setValue(lst)
         break
       case 2:
-        this.searchForm.controls['regionFact'].setValue(lst)
+        this.searchModel.form.controls['regionFact'].setValue(lst)
         break
       case 3:
-        this.searchForm.controls['country'].setValue(lst)
+        this.searchModel.form.controls['country'].setValue(lst)
         break
       case 4:
-        this.searchForm.controls['stage'].setValue(lst)
+        this.searchModel.form.controls['stage'].setValue(lst)
         break
       case 5:
-        this.searchForm.controls['checkCourse'].setValue(lst)
+        this.searchModel.form.controls['checkCourse'].setValue(lst)
         break
       case 6:
-        this.searchForm.controls['infectCourse'].setValue(lst)
+        this.searchModel.form.controls['infectCourse'].setValue(lst)
         break
       case 7:
-        this.searchForm.controls['lpu'].setValue(lst)
+        this.searchModel.form.controls['lpu'].setValue(lst)
         break
       case 8:
-        this.searchForm.controls['hospCourse'].setValue(lst)
+        this.searchModel.form.controls['hospCourse'].setValue(lst)
         break
       case 9:
-        this.searchForm.controls['hospResult'].setValue(lst)
+        this.searchModel.form.controls['hospResult'].setValue(lst)
         break
     }
   }
