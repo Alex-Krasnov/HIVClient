@@ -149,7 +149,7 @@ export class SearchTreatmentComponent  extends BaseSearchComponent<SearchTreatme
       case 9:
         this.searchModel.form.controls['invalid'].setValue(lst)
         break
-      case 10:
+      case 10:  
         this.searchModel.form.controls['correspIllnesses'].setValue(lst)
         break
       case 11:
