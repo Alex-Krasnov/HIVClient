@@ -43,15 +43,23 @@ export abstract class BaseSearchComponent<TSearchModel extends BaseSearchModel, 
   /** Инитим реактивную форму */
   initForm() {
     this.searchModel = this.createFormValue()
-    this.searchModel.setDefaultValues();
 
     this.searchService.getLists(this.searchModel).subscribe((item: TListModel) => {
       this.searchLists = item
     })
+    
+    this.searchModel.setDefaultValues()
   }
 
   /** Подготовка данных для запроса поиска */
-  setData(needXl: boolean) {
+  setData(needXl: boolean) {    
+    Object.keys(this.searchModel.form.controls).forEach(key => {
+      const control = this.searchModel.form.get(key);
+      if (control.invalid) {
+        console.log(`Поле "${key}" невалидно. Ошибки:`, control.errors, `значаение: `, this.searchModel.form.get(key).value);
+      }
+    });
+    
     if (this.searchModel.form.valid) {
       this.dataView = { columName: [], resPage: [] };
       this.maxPage = 0;

@@ -7,7 +7,7 @@ export function FormModel(constructor: Function) {
   const formControls = Object.keys(metadata).reduce((acc, key) => {
     const { value, disabled, validators = [], asyncValidators = [] } = metadata[key];
     acc[key] = new FormControl(
-      { value: value || '', disabled: disabled || false },
+      { value: value !== undefined ? value : '', disabled: disabled || false },
       validators,
       asyncValidators
     );

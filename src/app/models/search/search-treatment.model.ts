@@ -60,8 +60,8 @@ export class SearchTreatmentModel extends BaseSearchModel {
    schema: string[] = ['Все']
 
 
-   @FormField({ value: null })
-   schemaLast?: boolean = null
+   @FormField({ value: false })
+   schemaLast?: boolean = false
 
 
    @FormField({ value: ['Все'], disabled: true })

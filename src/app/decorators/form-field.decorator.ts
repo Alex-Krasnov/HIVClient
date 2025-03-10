@@ -12,7 +12,7 @@ export function FormField(config: FieldConfig) {
 
 // да простят меня боги
 class FieldConfig {
-  value?: any = '';
+  value?: any;
   disabled?: boolean = false;
   validators?: ValidatorFn[];
   asyncValidators?: AsyncValidatorFn[];
