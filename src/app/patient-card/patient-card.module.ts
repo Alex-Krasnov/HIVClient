@@ -156,7 +156,19 @@ import { HepCComponent } from './hep-c/hep-c.component';
   ],
   exports: [
     PatientCardMainComponent,
-    PatientCardEpidComponent
+    PatientCardEpidComponent,
+    PatientCardTreatmentComponent,
+    PatientCardVisitComponent,
+    PatientCardDiagnosticsComponent,
+    PatientCardResistenceComponent,
+    PatientCardDiagnosticConcomitantComponent,
+    PatientCardDiagnosticManualComponent,
+    PatientCardAclComponent,
+    PatientCardRecipeComponent,
+    PatientCardPregnantComponent,
+    PatientCardChildComponent,
+    PatientCardCovidComponent,
+    PatientCardFilesComponent
   ]
 })
 export class PatientCardModule { }

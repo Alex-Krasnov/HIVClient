@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalService } from 'src/app/services/modal.service';
 import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 import { PatientCardSubService } from 'src/app/services/patient-card/patient-card-sub.service';
 
@@ -15,7 +16,8 @@ export class PatientCardModalComponent implements OnInit{
 
   constructor(
     public modal: ModalPatientCardService,
-    private service: PatientCardSubService
+    private service: PatientCardSubService,
+    public sharedModal: ModalService
   ) { }
 
   ngOnInit(): void {

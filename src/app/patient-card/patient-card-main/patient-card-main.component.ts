@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 import { PatientCardMainService } from 'src/app/services/patient-card/patient-card-main.service';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators} from '@angular/forms';
@@ -46,10 +45,8 @@ export class PatientCardMainComponent implements OnInit {
   mask = '000-000-000 00'
 
   constructor(
-    private route: ActivatedRoute,
     private patientService: PatientCardMainService,
     private fb: FormBuilder,
-    private router: Router,
     private listService: ListService,
     public modal: ModalService,
     private roleService: ReceivedRolesService,
@@ -138,7 +135,8 @@ export class PatientCardMainComponent implements OnInit {
   deletePatient(){
     if(confirm(`Вы уверены, что хотите удалить карту пациента?`)){
       this.patientService.delPatientPatient(this.Id).subscribe()
-      this.router.navigate(["main"])
+      this.pcModal.currentPage.next('main')
+      this.pcModal.close()
     }
   }
 

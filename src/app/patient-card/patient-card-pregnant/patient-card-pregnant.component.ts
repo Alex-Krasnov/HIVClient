@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
@@ -8,6 +7,7 @@ import { PatientCardPregnantForm } from './patient-card-pregnant-form.model';
 import { PatientCardPregnantModel } from 'src/app/_interfaces/patient-card-pregnant.model';
 import { PatientCardPregnantService } from 'src/app/services/patient-card/patient-card-pregnant.service';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 
 @Component({
   selector: 'app-patient-card-pregnant',
@@ -17,11 +17,11 @@ import { ModalService } from 'src/app/services/modal.service';
 export class PatientCardPregnantComponent implements OnInit {
   private PatineCardPregnantForm: BehaviorSubject<FormGroup | undefined>
   PatineCardPregnantForm$: Observable<FormGroup>
-  
+
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
-  isVisibleMenu:boolean = false;
-  isVisibleAddit:boolean = false;
+  isVisibleMenu: boolean = false;
+  isVisibleAddit: boolean = false;
   sIsValid: boolean = true;
   IsErr: boolean = false;
   needUpd: boolean = false;
@@ -35,22 +35,23 @@ export class PatientCardPregnantComponent implements OnInit {
   pervValue: object;
 
   constructor(
-    private route: ActivatedRoute,
     private patientService: PatientCardPregnantService,
     private fb: FormBuilder,
-    private router: Router,
     private listService: ListService,
-    public modal: ModalService
-  ){}
+    public modal: ModalService,
+    private pcModal: ModalPatientCardService
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => { this.Id = params['id'] })
+
+    this.pcModal.patientId.subscribe(id => { this.Id = id })
+    this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
     this.getData()
   }
 
   getData(): void {
     this.patientService.getData(this.Id)
-      .subscribe((data:PatientCardPregnantModel) => {
+      .subscribe((data: PatientCardPregnantModel) => {
         this.patient = data;
         this.initForm();
         this.pervValue = {
@@ -61,129 +62,115 @@ export class PatientCardPregnantComponent implements OnInit {
       });
   }
 
-  initForm(){
+  initForm() {
     this.PatineCardPregnantForm = new BehaviorSubject(this.fb.group(new PatientCardPregnantForm(this.patient, this.listService)));
     this.PatineCardPregnantForm$ = this.PatineCardPregnantForm.asObservable();
 
     this.patientFormSub = this.PatineCardPregnantForm$
       .subscribe(data => {
         this.patientForm = data;
-    });
+      });
 
     this.patient.pregnantMs.map(
-        (item: any) => {
-          const sForm = new FormGroup ({
-            pregId: new FormControl(item.pregId, Validators.required),
-            pwCheck: new FormControl(item.pwCheck),
-            pwMonth: new FormControl(item.pwMonth),
-            pregDate: new FormControl(item.pregDate),
-            childBirthDate: new FormControl(item.childBirthDate),
-            birthType: new FormControl(item.birthType, {
-              asyncValidators: [InList.validateBirthType(this.listService)],
-              updateOn: 'blur'
-            }),
-            childCount: new FormControl(item.childCount, {
-              asyncValidators: [InList.validateChildCount(this.listService)],
-              updateOn: 'blur'
-            }),
-            childId: new FormControl(item.childId, {
-              asyncValidators: [InList.validatePatientCard(this.listService)],
-              updateOn: 'blur'
-            }),
-            startMonth: new FormControl(item.startMonth),
-            childFamilyName: new FormControl(item.childFamilyName),
-            childFirstName: new FormControl(item.childFirstName),
-            childThirdName: new FormControl(item.childThirdName),
-            pregDescr: new FormControl(item.pregDescr),
-            phpSchema1: new FormControl(item.phpSchema1, {
-              asyncValidators: [InList.validateCureSchemaName(this.listService)],
-              updateOn: 'blur'
-            }),
-            phpSchema2: new FormControl(item.phpSchema2, {
-              asyncValidators: [InList.validateCureSchemaName(this.listService)],
-              updateOn: 'blur'
-            }),
-            phpSchema3: new FormControl(item.phpSchema3, {
-              asyncValidators: [InList.validateCureSchemaName(this.listService)],
-              updateOn: 'blur'
-            })
-          });
-          this.patientPregMs.push(sForm);
-        }
+      (item: any) => {
+        const sForm = new FormGroup({
+          pregId: new FormControl(item.pregId, Validators.required),
+          pwCheck: new FormControl(item.pwCheck),
+          pwMonth: new FormControl(item.pwMonth),
+          pregDate: new FormControl(item.pregDate),
+          childBirthDate: new FormControl(item.childBirthDate),
+          birthType: new FormControl(item.birthType, {
+            asyncValidators: [InList.validateBirthType(this.listService)],
+            updateOn: 'blur'
+          }),
+          childCount: new FormControl(item.childCount, {
+            asyncValidators: [InList.validateChildCount(this.listService)],
+            updateOn: 'blur'
+          }),
+          childId: new FormControl(item.childId, {
+            asyncValidators: [InList.validatePatientCard(this.listService)],
+            updateOn: 'blur'
+          }),
+          startMonth: new FormControl(item.startMonth),
+          childFamilyName: new FormControl(item.childFamilyName),
+          childFirstName: new FormControl(item.childFirstName),
+          childThirdName: new FormControl(item.childThirdName),
+          pregDescr: new FormControl(item.pregDescr),
+          phpSchema1: new FormControl(item.phpSchema1, {
+            asyncValidators: [InList.validateCureSchemaName(this.listService)],
+            updateOn: 'blur'
+          }),
+          phpSchema2: new FormControl(item.phpSchema2, {
+            asyncValidators: [InList.validateCureSchemaName(this.listService)],
+            updateOn: 'blur'
+          }),
+          phpSchema3: new FormControl(item.phpSchema3, {
+            asyncValidators: [InList.validateCureSchemaName(this.listService)],
+            updateOn: 'blur'
+          })
+        });
+        this.patientPregMs.push(sForm);
+      }
     );
 
-    this.patientForm.statusChanges.subscribe( (status) => {
-      if(status == 'VALID')
+    this.patientForm.statusChanges.subscribe((status) => {
+      if (status == 'VALID')
         this.needUpd = true;
     })
   }
 
-  openDropdown(str:string): void{
-    switch(str){
-      case "Диагностика":
-        this.isVisibleDiagn = !this.isVisibleDiagn;
-        break;
-      case "Системные":
-        this.isVisibleSystem = !this.isVisibleSystem;
-        break;
-      case "Меню":
-        this.isVisibleMenu = !this.isVisibleMenu;
-        break;
-      case "Дополнительно":
-        this.isVisibleAddit = !this.isVisibleAddit;
-        break;
-    } 
+  giveSForUpd(isValid: boolean) {
+    this.sIsValid = isValid;
   }
 
-  giveSForUpd(isValid: boolean){
-     this.sIsValid = isValid;
-  }
-  
-  giveSchema (schema: string){
+  giveSchema(schema: string) {
     this.updSchema = schema
   }
 
-  updatePatient(){
+  updatePatient() {
     let curValue = {
       patientId: this.patientForm.controls['patientId'].value,
       pregCheck: this.patientForm.controls['pregCheck'].value,
       pregMonth: this.patientForm.controls['pregMonth'].value,
     };
-    
-    if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-      this.patientService.updatePatient( curValue.patientId, curValue.pregCheck, curValue.pregMonth ).subscribe()
+
+    if (!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))) {
+      this.patientService.updatePatient(curValue.patientId, curValue.pregCheck, curValue.pregMonth).subscribe()
 
       this.pervValue = {
-          patientId: this.Id,
-          pregCheck: curValue.pregCheck,
-          pregMonth: curValue.pregMonth
+        patientId: this.Id,
+        pregCheck: curValue.pregCheck,
+        pregMonth: curValue.pregMonth
       };
 
       this.patientForm.markAsPristine()
     }
   }
 
-  leaveComponent(name: string){
-    if(this.patientForm.valid && this.sIsValid){
-      if(this.needUpd)
+  leaveComponent(name: string) {
+    if (this.patientForm.valid && this.sIsValid) {
+
+      if (this.needUpd)
         this.updatePatient()
-      if(name == '/main'){
-        this.router.navigate([name]);
-        return null
+
+      if (name == 'close') {
+        this.pcModal.close()
+      } else {
+        this.pcModal.currentPage.next(name)
       }
-      this.router.navigate([name+this.Id])
-    } else{
+
+    } else {
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {
-          if(this.patientForm.controls[data].invalid)
-            console.log(data);          
+          if (this.patientForm.controls[data].invalid)
+            console.log("err", data);
         }
       )
       confirm(`Ошибка в заполнении данных!`)
     }
   }
 
-  openReferalAnalysis(){
+  openReferalAnalysis() {
     this.modal.referalAnalysisOpen()
   }
 }
