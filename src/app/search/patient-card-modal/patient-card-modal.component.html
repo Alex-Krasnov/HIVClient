@@ -1,0 +1,84 @@
+<div (click)="modal.close()" class="bg"></div>
+
+<div class="content">
+  <div class="navbar row bg-light container-fluid justify-content-between p-0 m-0">
+    <div class="col-xl-1 p-0 ps-1 d-flex justify-content-start">
+        <img class="ms-1" src="favicon.ico" width="35" height="35">
+    </div>
+    <div class="col-xl">
+        <div class="row g-0">
+            <div class="col-xl">
+                <input class="form-control m-0 ps-1 me-3" style="border-radius: 0px;" [(ngModel)]="patientFio" disabled>
+            </div>
+            <div class="col-xl-1">
+                <input class="form-control m-0 ps-1 me-3" style="border-radius: 0px;" [(ngModel)]="patientId" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 p-0 ps-1 d-flex justify-content-end navbar-expand-xxl">
+        <button class="navbar-toggler collapsed m-1" type="button" (click)="openDropdown()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-xxl bg-light">
+    <div class="container-fluid">
+        <div class="navbar-collapse collapse" [class.show]="isVisibleMenu">
+            <ul class="navbar-nav w-100 mb-2 mb-md-0 d-flex bd-highlight">
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'main'" (click)="modal.nextPage('main')">Общие данные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'epid'" (click)="modal.nextPage('epid')">Эпид. данные</a>
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link">Лечение</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Явка на приём</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle">Диагностика</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Диагностика общ.</a></li>
+                        <li><a class="dropdown-item">Резистентность</a></li>
+                        <li><a class="dropdown-item">Диагностика и сопут.</a></li>
+                        <li><a class="dropdown-item">Диагн. руч.</a></li>
+                        <li><a class="dropdown-item">ACL</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Рецепты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Беременные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Дети</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">COVID</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle">Системные</a>
+                    <ul class="dropdown-menu" >
+                        <li><a class="dropdown-item" >Направление на анализы</a></li>
+                        <li><a class="dropdown-item" >Направление на ИБ</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle">Дополнительно</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item">Сохранение файлов</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-auto" (click)="modal.nextPage('close')">
+                    <a class="nav-link">Назад</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <app-patient-card-main *ngIf="currentPage == 'main'"></app-patient-card-main>
+  <app-patient-card-epid *ngIf="currentPage == 'epid'"></app-patient-card-epid>
+</div>
