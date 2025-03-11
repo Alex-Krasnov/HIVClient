@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { PatientCardDiagnosticsModel } from 'src/app/_interfaces/patient-card-diagnostics.model';
 import { PatientCardDiagnosticsService } from 'src/app/services/patient-card/patient-card-diagnostics.service';
 import { PatientCardDiagnosticsForm } from './patient-card-diagnostics-form.model';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 
 @Component({
   selector: 'app-patient-card-diagnostics',
@@ -15,11 +15,11 @@ import { ModalService } from 'src/app/services/modal.service';
 export class PatientCardDiagnosticsComponent implements OnInit {
   private PatineCardDiagnosticsForm: BehaviorSubject<FormGroup | undefined>
   PatineCardDiagnosticsForm$: Observable<FormGroup>
-  
+
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
-  isVisibleMenu:boolean = false;
-  isVisibleAddit:boolean = false;
+  isVisibleMenu: boolean = false;
+  isVisibleAddit: boolean = false;
 
   Id: number;
   patient: PatientCardDiagnosticsModel | undefined;
@@ -34,48 +34,49 @@ export class PatientCardDiagnosticsComponent implements OnInit {
   patientImStatCD348 = new FormArray([]);
 
   constructor(
-    private route: ActivatedRoute,
     private patientService: PatientCardDiagnosticsService,
     private fb: FormBuilder,
     public modal: ModalService,
-    private router: Router
-  ){}
+    private pcModal: ModalPatientCardService
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => { this.Id = params['id'] })
+
+    this.pcModal.patientId.subscribe(id => { this.Id = id })
+    this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
     this.getData()
   }
 
   getData(): void {
     this.patientService.getData(this.Id)
-      .subscribe((data:PatientCardDiagnosticsModel) => {
+      .subscribe((data: PatientCardDiagnosticsModel) => {
         this.patient = data;
         this.initForm();
       });
   }
 
-  initForm(){
+  initForm() {
     this.PatineCardDiagnosticsForm = new BehaviorSubject(this.fb.group(new PatientCardDiagnosticsForm(this.patient)));
     this.PatineCardDiagnosticsForm$ = this.PatineCardDiagnosticsForm.asObservable();
 
-    this.patientFormSub = this.PatineCardDiagnosticsForm$.subscribe(data => {this.patientForm = data;});
-    
+    this.patientFormSub = this.PatineCardDiagnosticsForm$.subscribe(data => { this.patientForm = data; });
+
     this.patient.virusLoads.map(
-        (item: any) => {
-          const sForm = new FormGroup ({
-            date: new FormControl({value: item.date, disabled: true}),
-            result: new FormControl({value: item.result, disabled: true}),
-            resultDescr: new FormControl({value: item.resultDescr, disabled: true})
-          });
-          this.patientVirusLoad.push(sForm);
-        }
+      (item: any) => {
+        const sForm = new FormGroup({
+          date: new FormControl({ value: item.date, disabled: true }),
+          result: new FormControl({ value: item.result, disabled: true }),
+          resultDescr: new FormControl({ value: item.resultDescr, disabled: true })
+        });
+        this.patientVirusLoad.push(sForm);
+      }
     );
 
     this.patient.virusLoadsQuals.map(
       (item: any) => {
-        const sForm = new FormGroup ({
-          date: new FormControl({value: item.date, disabled: true}),
-          result: new FormControl({value: item.result, disabled: true})
+        const sForm = new FormGroup({
+          date: new FormControl({ value: item.date, disabled: true }),
+          result: new FormControl({ value: item.result, disabled: true })
         });
         this.patientVirusLoadQual.push(sForm);
       }
@@ -83,10 +84,10 @@ export class PatientCardDiagnosticsComponent implements OnInit {
 
     this.patient.cmVs.map(
       (item: any) => {
-        const sForm = new FormGroup ({
-          date: new FormControl({value: item.date, disabled: true}),
-          result: new FormControl({value: item.result, disabled: true}),
-          resultDescr: new FormControl({value: item.resultDescr, disabled: true})
+        const sForm = new FormGroup({
+          date: new FormControl({ value: item.date, disabled: true }),
+          result: new FormControl({ value: item.result, disabled: true }),
+          resultDescr: new FormControl({ value: item.resultDescr, disabled: true })
         });
         this.patientCMV.push(sForm);
       }
@@ -94,9 +95,9 @@ export class PatientCardDiagnosticsComponent implements OnInit {
 
     this.patient.ihLs.map(
       (item: any) => {
-        const sForm = new FormGroup ({
-          date: new FormControl({value: item.date, disabled: true}),
-          result: new FormControl({value: item.result, disabled: true})
+        const sForm = new FormGroup({
+          date: new FormControl({ value: item.date, disabled: true }),
+          result: new FormControl({ value: item.result, disabled: true })
         });
         this.patientIHL.push(sForm);
       }
@@ -104,10 +105,10 @@ export class PatientCardDiagnosticsComponent implements OnInit {
 
     this.patient.imStats.map(
       (item: any) => {
-        const sForm = new FormGroup ({
-          date: new FormControl({value: item.date, disabled: true}),
-          result: new FormControl({value: item.result, disabled: true}),
-          resultDescr: new FormControl({value: item.resultPercent, disabled: true})
+        const sForm = new FormGroup({
+          date: new FormControl({ value: item.date, disabled: true }),
+          result: new FormControl({ value: item.result, disabled: true }),
+          resultDescr: new FormControl({ value: item.resultPercent, disabled: true })
         });
         this.patientImStat.push(sForm);
       }
@@ -115,56 +116,44 @@ export class PatientCardDiagnosticsComponent implements OnInit {
 
     this.patient.imStatCD348s.map(
       (item: any) => {
-        const sForm = new FormGroup ({
-          date: new FormControl({value: item.date, disabled: true}),
-          resultCD3: new FormControl({value: item.resultCD3, disabled: true}),
-          resultCD4: new FormControl({value: item.resultCD4, disabled: true}),
-          resultCD8: new FormControl({value: item.resultCD8, disabled: true}),
-          resultCD4CD8: new FormControl({value: item.resultCD4CD8, disabled: true}),
-          resultCD4Percent: new FormControl({value: item.resultCD4Percent, disabled: true}),
-          resultCD8Percent: new FormControl({value: item.resultCD8Percent, disabled: true})
+        const sForm = new FormGroup({
+          date: new FormControl({ value: item.date, disabled: true }),
+          resultCD3: new FormControl({ value: item.resultCD3, disabled: true }),
+          resultCD4: new FormControl({ value: item.resultCD4, disabled: true }),
+          resultCD8: new FormControl({ value: item.resultCD8, disabled: true }),
+          resultCD4CD8: new FormControl({ value: item.resultCD4CD8, disabled: true }),
+          resultCD4Percent: new FormControl({ value: item.resultCD4Percent, disabled: true }),
+          resultCD8Percent: new FormControl({ value: item.resultCD8Percent, disabled: true })
         });
         this.patientImStatCD348.push(sForm);
       }
     );
   }
 
-  openDropdown(str:string): void{
-    switch(str){
-      case "Диагностика":
-        this.isVisibleDiagn = !this.isVisibleDiagn;
-        break;
-      case "Системные":
-        this.isVisibleSystem = !this.isVisibleSystem;
-        break;
-      case "Меню":
-        this.isVisibleMenu = !this.isVisibleMenu;
-        break;
-      case "Дополнительно":
-        this.isVisibleAddit = !this.isVisibleAddit;
-        break;
-    } 
-  }
+  leaveComponent(name: string) {
+    if (true) {
 
-  leaveComponent(name: string){
-    if(true){
-      if(name == '/main'){
-        this.router.navigate([name]);
-        return null
+      // if (this.needUpd)
+      //   this.updatePatient()
+
+      if (name == 'close') {
+        this.pcModal.close()
+      } else {
+        this.pcModal.currentPage.next(name)
       }
-      this.router.navigate([name+this.Id])
-    } else{
+
+    } else {
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {
-          if(this.patientForm.controls[data].invalid)
-            console.log(data);          
+          if (this.patientForm.controls[data].invalid)
+            console.log("err", data);
         }
       )
       confirm(`Ошибка в заполнении данных!`)
     }
   }
 
-  openReferalAnalysis(){
+  openReferalAnalysis() {
     this.modal.referalAnalysisOpen()
   }
 }

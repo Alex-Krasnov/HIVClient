@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Search } from 'src/app/_interfaces/search.model';
+import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
 
 @Component({
@@ -18,10 +19,17 @@ export class DisplayResultComponent implements OnInit, OnChanges{
   constructor(
     private fb: FormBuilder,
     public shared: SearchSharedServiceService,
-    private router: Router
+    public modal: ModalPatientCardService
   ){}
 
   ngOnInit() {
+    this.modal.isVisible$.subscribe((isVisible) => {
+      if (isVisible) {
+        document.body.classList.add('no-scroll');
+      } else {
+        document.body.classList.remove('no-scroll');
+      }
+    });
     this.initForm()
   }
 
@@ -52,12 +60,9 @@ export class DisplayResultComponent implements OnInit, OnChanges{
   }
 
   openPatient(i: number){
-    this.shared.visibleData$.next(false)
-    try{
-      this.router.navigate(["/patient_card/main/"+this.formGroup(i).get('PatientId').value])
-    }catch{
-      this.router.navigate(["/patient_card/main/"+this.formGroup(i).get('patient_id').value])
-    }
+    this.modal.open()
+    this.modal.currentPage.next('main')
+    this.modal.patientId.next(this.formGroup(i).get('patient_id').value)
   }
 
   ngOnChanges(changes: SimpleChanges) {

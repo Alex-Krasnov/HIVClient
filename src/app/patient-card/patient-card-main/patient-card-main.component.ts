@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 import { PatientCardMainService } from 'src/app/services/patient-card/patient-card-main.service';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators} from '@angular/forms';
@@ -10,6 +9,7 @@ import { InList } from 'src/app/validators/in-lst';
 import { pcMain } from 'src/app/_interfaces/pc-main.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { ReceivedRolesService } from 'src/app/services/received-roles.service';
+import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 
 @Component({
   selector: 'app-patient-card-main',
@@ -45,37 +45,21 @@ export class PatientCardMainComponent implements OnInit {
   mask = '000-000-000 00'
 
   constructor(
-    private route: ActivatedRoute,
     private patientService: PatientCardMainService,
     private fb: FormBuilder,
-    private router: Router,
     private listService: ListService,
     public modal: ModalService,
-    private roleService: ReceivedRolesService
+    private roleService: ReceivedRolesService,
+    private pcModal: ModalPatientCardService
   ){}
 
   ngOnInit() {
-    this.route.params.subscribe(params => { this.Id = params['id'] })
+    
+    this.pcModal.patientId.subscribe(id => {this.Id = id})
+    this.pcModal.goNext.subscribe(name => {this.leaveComponent(name)})
     this.isDeleter = this.roleService.IsDeleter
     
     this.getPatientData()
-  }
-
-  openDropdown(str:string): void{
-    switch(str){
-      case "Диагностика":
-        this.isVisibleDiagn = !this.isVisibleDiagn;
-        break;
-      case "Системные":
-        this.isVisibleSystem = !this.isVisibleSystem;
-        break;
-      case "Меню":
-        this.isVisibleMenu = !this.isVisibleMenu;
-        break;
-      case "Дополнительно":
-        this.isVisibleAddit = !this.isVisibleAddit;
-        break;
-    } 
   }
 
   getPatientData(): void {
@@ -151,7 +135,8 @@ export class PatientCardMainComponent implements OnInit {
   deletePatient(){
     if(confirm(`Вы уверены, что хотите удалить карту пациента?`)){
       this.patientService.delPatientPatient(this.Id).subscribe()
-      this.router.navigate(["main"])
+      this.pcModal.currentPage.next('main')
+      this.pcModal.close()
     }
   }
 
@@ -449,13 +434,16 @@ export class PatientCardMainComponent implements OnInit {
 
   leaveComponent(name: string){
     if(this.patientForm.valid){
+
       if(this.needUpd)
         this.updatePatient()
-      if(name == '/main'){
-        this.router.navigate([name]);
-        return null
+      
+      if(name == 'close'){
+        this.pcModal.close()
+      }else{
+        this.pcModal.currentPage.next(name)
       }
-      this.router.navigate([name+this.Id])
+      
     } else{
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {

@@ -153,6 +153,22 @@ import { HepCComponent } from './hep-c/hep-c.component';
     ListService,
     InList,
     provideNgxMask()
+  ],
+  exports: [
+    PatientCardMainComponent,
+    PatientCardEpidComponent,
+    PatientCardTreatmentComponent,
+    PatientCardVisitComponent,
+    PatientCardDiagnosticsComponent,
+    PatientCardResistenceComponent,
+    PatientCardDiagnosticConcomitantComponent,
+    PatientCardDiagnosticManualComponent,
+    PatientCardAclComponent,
+    PatientCardRecipeComponent,
+    PatientCardPregnantComponent,
+    PatientCardChildComponent,
+    PatientCardCovidComponent,
+    PatientCardFilesComponent
   ]
 })
 export class PatientCardModule { }

@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardChildForm } from './patient-card-child-form.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { PatientCardChildModel } from 'src/app/_interfaces/patient-card-child.model';
 import { PatientCardChildService } from 'src/app/services/patient-card/patient-card-child.service';
-import { pcChild } from 'src/app/_interfaces/pc-child.model';
+import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 
 @Component({
   selector: 'app-patient-card-child',
@@ -17,11 +16,11 @@ import { pcChild } from 'src/app/_interfaces/pc-child.model';
 export class PatientCardChildComponent implements OnInit {
   private PatineCardChildForm: BehaviorSubject<FormGroup | undefined>
   PatineCardChildForm$: Observable<FormGroup>
-  
+
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
-  isVisibleMenu:boolean = false;
-  isVisibleAddit:boolean = false;
+  isVisibleMenu: boolean = false;
+  isVisibleAddit: boolean = false;
   IsErr: boolean = false;
   needUpd: boolean = false;
 
@@ -33,22 +32,23 @@ export class PatientCardChildComponent implements OnInit {
   pervValue: object;
 
   constructor(
-    private route: ActivatedRoute,
     private patientService: PatientCardChildService,
     private fb: FormBuilder,
-    private router: Router,
     private listService: ListService,
-    public modal: ModalService
-  ){}
+    public modal: ModalService,
+    private pcModal: ModalPatientCardService
+  ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(params => { this.Id = params['id'] })
+
+    this.pcModal.patientId.subscribe(id => { this.Id = id })
+    this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
     this.getData()
   }
 
   getData(): void {
     this.patientService.getData(this.Id)
-      .subscribe((data:PatientCardChildModel) => {
+      .subscribe((data: PatientCardChildModel) => {
         this.patient = data;
         this.initForm();
         this.pervValue = {
@@ -75,39 +75,22 @@ export class PatientCardChildComponent implements OnInit {
       });
   }
 
-  initForm(){
+  initForm() {
     this.PatineCardChildForm = new BehaviorSubject(this.fb.group(new PatientCardChildForm(this.patient, this.listService)));
     this.PatineCardChildForm$ = this.PatineCardChildForm.asObservable();
 
     this.patientFormSub = this.PatineCardChildForm$
       .subscribe(data => {
         this.patientForm = data;
-    });
+      });
 
-    this.patientForm.statusChanges.subscribe( (status) => {
-      if(status == 'VALID')
+    this.patientForm.statusChanges.subscribe((status) => {
+      if (status == 'VALID')
         this.needUpd = true;
     })
   }
 
-  openDropdown(str:string): void{
-    switch(str){
-      case "Диагностика":
-        this.isVisibleDiagn = !this.isVisibleDiagn;
-        break;
-      case "Системные":
-        this.isVisibleSystem = !this.isVisibleSystem;
-        break;
-      case "Меню":
-        this.isVisibleMenu = !this.isVisibleMenu;
-        break;
-      case "Дополнительно":
-        this.isVisibleAddit = !this.isVisibleAddit;
-        break;
-    } 
-  }
-
-  updatePatient(){
+  updatePatient() {
     let curValue = {
       patientId: this.patientForm.controls['patientId'].value,
       familyType: this.patientForm.controls['familyType'].value,
@@ -130,23 +113,23 @@ export class PatientCardChildComponent implements OnInit {
       refusalTherapy: this.patientForm.controls['refusalTherapy'].value,
     };
 
-    if(typeof curValue.mId == 'string' && curValue.mId.length == 0)
+    if (typeof curValue.mId == 'string' && curValue.mId.length == 0)
       curValue.mId = null as number
 
-    if(typeof curValue.fId == 'string' && curValue.fId.length == 0)
+    if (typeof curValue.fId == 'string' && curValue.fId.length == 0)
       curValue.fId = null as number
 
-    if(typeof curValue.breastMonth == 'string' && curValue.breastMonth.length == 0)
+    if (typeof curValue.breastMonth == 'string' && curValue.breastMonth.length == 0)
       curValue.breastMonth = null as number
 
-    if(typeof curValue.growth == 'string' && curValue.growth.length == 0)
+    if (typeof curValue.growth == 'string' && curValue.growth.length == 0)
       curValue.growth = null as number
 
-    if(typeof curValue.weight == 'string' && curValue.weight.length == 0)
+    if (typeof curValue.weight == 'string' && curValue.weight.length == 0)
       curValue.weight = null as number
 
-    if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-      this.patientService.updatePatient( curValue).subscribe()
+    if (!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))) {
+      this.patientService.updatePatient(curValue).subscribe()
 
       this.pervValue = {
         patientId: this.Id,
@@ -174,27 +157,30 @@ export class PatientCardChildComponent implements OnInit {
     }
   }
 
-  leaveComponent(name: string){
-    if(this.patientForm.valid){
-      if(this.needUpd)
+  leaveComponent(name: string) {
+    if (this.patientForm.valid) {
+
+      if (this.needUpd)
         this.updatePatient()
-      if(name == '/main'){
-        this.router.navigate([name])
-        return null
+
+      if (name == 'close') {
+        this.pcModal.close()
+      } else {
+        this.pcModal.currentPage.next(name)
       }
-      this.router.navigate([name+this.Id])
-    } else{
+
+    } else {
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {
-          if(this.patientForm.controls[data].invalid)
-            console.log(data);          
+          if (this.patientForm.controls[data].invalid)
+            console.log("err", data);
         }
       )
       confirm(`Ошибка в заполнении данных!`)
     }
   }
 
-  openReferalAnalysis(){
+  openReferalAnalysis() {
     this.modal.referalAnalysisOpen()
   }
 }

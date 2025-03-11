@@ -6,6 +6,7 @@ import { PatientCardAclModel } from 'src/app/_interfaces/patient-card-acl.model'
 import { PatientCardAclService } from 'src/app/services/patient-card/patient-card-acl.service';
 import { PatientCardAclForm } from './patient-card-acl-form.model';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 
 @Component({
   selector: 'app-patient-card-acl',
@@ -34,11 +35,14 @@ export class PatientCardAclComponent implements OnInit {
       private patientService: PatientCardAclService,
       private fb: FormBuilder,
       public modal: ModalService,
-      private router: Router
+      private router: Router,
+      private pcModal: ModalPatientCardService
     ){}
   
     ngOnInit() {
-      this.route.params.subscribe(params => { this.Id = params['id'] })
+
+      this.pcModal.patientId.subscribe(id => { this.Id = id })
+      this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
       this.getData()
     }
   
@@ -121,35 +125,23 @@ export class PatientCardAclComponent implements OnInit {
     );
     }
   
-    openDropdown(str:string): void{
-      switch(str){
-        case "Диагностика":
-          this.isVisibleDiagn = !this.isVisibleDiagn;
-          break;
-        case "Системные":
-          this.isVisibleSystem = !this.isVisibleSystem;
-          break;
-        case "Меню":
-          this.isVisibleMenu = !this.isVisibleMenu;
-          break;
-        case "Дополнительно":
-          this.isVisibleAddit = !this.isVisibleAddit;
-          break;
-      } 
-    }
-  
     leaveComponent(name: string){
       if(true){
-        if(name == '/main'){
-          this.router.navigate([name]);
-          return null
+
+        // if (this.needUpd)
+        //   this.updatePatient()
+  
+        if (name == 'close') {
+          this.pcModal.close()
+        } else {
+          this.pcModal.currentPage.next(name)
         }
-        this.router.navigate([name+this.Id])
-      } else{
+  
+      } else {
         Object.keys(this.patientForm.controls).forEach(
           (data: any) => {
-            if(this.patientForm.controls[data].invalid)
-              console.log(data);          
+            if (this.patientForm.controls[data].invalid)
+              console.log("err", data);
           }
         )
         confirm(`Ошибка в заполнении данных!`)

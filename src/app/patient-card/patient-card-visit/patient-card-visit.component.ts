@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
@@ -8,9 +7,10 @@ import { PatientCardVisitService } from 'src/app/services/patient-card/patient-c
 import { PatientCardVisitModel } from 'src/app/_interfaces/patient-card-visit.model';
 import { PatientCardVisitForm } from './patient-card-visit-form.model';
 import { ModalService } from 'src/app/services/modal.service';
+import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 
 @Component({
-  selector: 'app-patient-visit',
+  selector: 'app-patient-card-visit',
   templateUrl: './patient-card-visit.component.html',
   styleUrls: ['./patient-card-visit.component.css']
 })
@@ -39,16 +39,17 @@ export class PatientCardVisitComponent implements OnInit {
   patientRegistries = new FormArray([]);
 
   constructor(
-    private route: ActivatedRoute,
     private patientService: PatientCardVisitService,
     private fb: FormBuilder,
-    private router: Router,
     private listService: ListService,
-    public modal: ModalService
+    public modal: ModalService,
+    private pcModal: ModalPatientCardService
   ){}
 
   ngOnInit() {
-    this.route.params.subscribe(params => { this.Id = params['id'] })
+    
+    this.pcModal.patientId.subscribe(id => {this.Id = id})
+    this.pcModal.goNext.subscribe(name => {this.leaveComponent(name)})
     this.getData()
   }
 
@@ -119,23 +120,6 @@ export class PatientCardVisitComponent implements OnInit {
     })
   }
 
-  openDropdown(str:string): void{
-    switch(str){
-      case "Диагностика":
-        this.isVisibleDiagn = !this.isVisibleDiagn;
-        break;
-      case "Системные":
-        this.isVisibleSystem = !this.isVisibleSystem;
-        break;
-      case "Меню":
-        this.isVisibleMenu = !this.isVisibleMenu;
-        break;
-      case "Дополнительно":
-        this.isVisibleAddit = !this.isVisibleAddit;
-        break;
-    } 
-  }
-
   giveCForUpd(isValid: boolean){
      this.cIsValid = isValid;
   }
@@ -150,16 +134,21 @@ export class PatientCardVisitComponent implements OnInit {
 
   leaveComponent(name: string){
     if(this.cIsValid && this.coIsValid && this.rIsValid){
-      if(name == '/main'){
-        this.router.navigate([name]);
-        return null
+
+      // if(this.needUpd)
+      //   this.updatePatient()
+      
+      if(name == 'close'){
+        this.pcModal.close()
+      }else{
+        this.pcModal.currentPage.next(name)
       }
-      this.router.navigate([name+this.Id])
+      
     } else{
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {
           if(this.patientForm.controls[data].invalid)
-            console.log(data);          
+            console.log("err", data);          
         }
       )
       confirm(`Ошибка в заполнении данных!`)

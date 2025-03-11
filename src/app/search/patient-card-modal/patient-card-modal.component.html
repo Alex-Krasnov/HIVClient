@@ -1,0 +1,96 @@
+<div (click)="modal.nextPage('close')" class="bg"></div>
+
+<div class="content">
+  <div class="navbar row bg-light container-fluid justify-content-between p-0 m-0">
+    <div class="col-xl-1 p-0 ps-1 d-flex justify-content-start">
+        <img class="ms-1" src="favicon.ico" width="35" height="35">
+    </div>
+    <div class="col-xl">
+        <div class="row g-0">
+            <div class="col-xl">
+                <input class="form-control m-0 ps-1 me-3" style="border-radius: 0px;" [(ngModel)]="patientFio" disabled>
+            </div>
+            <div class="col-xl-1">
+                <input class="form-control m-0 ps-1 me-3" style="border-radius: 0px;" [(ngModel)]="patientId" disabled>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-1 p-0 ps-1 d-flex justify-content-end navbar-expand-xxl">
+        <button class="navbar-toggler collapsed m-1" type="button" (click)="openDropdown()">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+  </div>
+  <nav class="navbar navbar-expand-xxl bg-light">
+    <div class="container-fluid">
+        <div class="navbar-collapse collapse" [class.show]="isVisibleMenu">
+            <ul class="navbar-nav w-100 mb-2 mb-md-0 d-flex bd-highlight">
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'main'" (click)="modal.nextPage('main')">Общие данные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'epid'" (click)="modal.nextPage('epid')">Эпид. данные</a>
+                </li>
+                <li class="nav-item"> 
+                    <a class="nav-link" [class.disabled]="currentPage == 'treatment'" (click)="modal.nextPage('treatment')">Лечение</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'visit'" (click)="modal.nextPage('visit')">Явка на приём</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle">Диагностика</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" [class.disabled]="currentPage == 'diagnostics'" (click)="modal.nextPage('diagnostics')">Диагностика общ.</a></li>
+                        <li><a class="dropdown-item" [class.disabled]="currentPage == 'resistence'" (click)="modal.nextPage('resistence')">Резистентность</a></li>
+                        <li><a class="dropdown-item" [class.disabled]="currentPage == 'diagnostic-concomitant'" (click)="modal.nextPage('diagnostic-concomitant')">Диагностика и сопут.</a></li>
+                        <li><a class="dropdown-item" [class.disabled]="currentPage == 'diagnostic-manual'" (click)="modal.nextPage('diagnostic-manual')">Диагн. руч.</a></li>
+                        <li><a class="dropdown-item" [class.disabled]="currentPage == 'acl'" (click)="modal.nextPage('acl')">ACL</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'recipe'" (click)="modal.nextPage('recipe')">Рецепты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'pregnant'" (click)="modal.nextPage('pregnant')">Беременные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'child'" (click)="modal.nextPage('child')">Дети</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [class.disabled]="currentPage == 'covid'" (click)="modal.nextPage('covid')">COVID</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle">Системные</a>
+                    <ul class="dropdown-menu" >
+                        <li><a class="dropdown-item" (click)="sharedModal.referalAnalysisOpen()">Направление на анализы</a></li>
+                        <li><a class="dropdown-item" (click)="sharedModal.referalAnalysisIbOpen()">Направление на ИБ</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle">Дополнительно</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" [class.disabled]="currentPage == 'files'" (click)="modal.nextPage('files')">Сохранение файлов</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-auto">
+                    <button type="button" class="btn btn-danger" (click)="modal.nextPage('close')">Назад</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </nav>
+  <app-patient-card-main *ngIf="currentPage == 'main'"></app-patient-card-main>
+  <app-patient-card-epid *ngIf="currentPage == 'epid'"></app-patient-card-epid>
+  <app-patient-card-treatment *ngIf="currentPage == 'treatment'"></app-patient-card-treatment>
+  <app-patient-card-visit *ngIf="currentPage == 'visit'"></app-patient-card-visit>
+  <app-patient-card-diagnostics *ngIf="currentPage == 'diagnostics'"></app-patient-card-diagnostics>
+  <app-patient-card-resistence *ngIf="currentPage == 'resistence'"></app-patient-card-resistence>
+  <app-patient-card-diagnostic-concomitant *ngIf="currentPage == 'diagnostic-concomitant'"></app-patient-card-diagnostic-concomitant>
+  <app-patient-card-diagnostic-manual *ngIf="currentPage == 'diagnostic-manual'"></app-patient-card-diagnostic-manual>
+  <app-patient-card-acl *ngIf="currentPage == 'acl'"></app-patient-card-acl>
+  <app-patient-card-recipe *ngIf="currentPage == 'recipe'"></app-patient-card-recipe>
+  <app-patient-card-pregnant *ngIf="currentPage == 'pregnant'"></app-patient-card-pregnant>
+  <app-patient-card-child *ngIf="currentPage == 'child'"></app-patient-card-child>
+  <app-patient-card-covid *ngIf="currentPage == 'covid'"></app-patient-card-covid>
+  <app-patient-card-files *ngIf="currentPage == 'files'"></app-patient-card-files>
+</div>
