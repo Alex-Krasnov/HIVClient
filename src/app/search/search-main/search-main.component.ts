@@ -21,6 +21,8 @@ export class SearchMainComponent implements OnInit{
 
   ngOnInit() {
     this.shared.nameSearch$.subscribe(item => this.name = item)
+    this.shared.search$.next('')
+    this.shared.excel$.next('')
   }
 
   reload(){
