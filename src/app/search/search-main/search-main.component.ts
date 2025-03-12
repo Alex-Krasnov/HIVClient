@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { NewPatientService } from 'src/app/services/new-patient.service';
+import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 import { SearchSharedServiceService } from 'src/app/services/search/search-shared-service.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class SearchMainComponent implements OnInit{
   constructor(
     public shared: SearchSharedServiceService,
     private router: Router,
-    private service: NewPatientService
+    private service: NewPatientService,
+    public modal: ModalPatientCardService
   ){}
 
   ngOnInit() {
@@ -39,6 +41,9 @@ export class SearchMainComponent implements OnInit{
 
   async newPatient(){
     let id = await firstValueFrom(this.service.getData()).then()
-    this.router.navigate(["/patient_card/main/"+id])
+
+    this.modal.open()
+    this.modal.currentPage.next('main')
+    this.modal.patientId.next(id)
   }
 }
