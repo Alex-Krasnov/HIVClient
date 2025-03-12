@@ -10,12 +10,13 @@
 .content {
     position: fixed;
     top: 0%;
-    left: 2%;
-    width: 96%;
+    left: 50%;
+    width: 80%;
     height: 100%;
     margin-left: 5px;
     overflow-y: auto;
     overflow-x: hidden;
+    transform: translate(-50%, 0);
 }
 
 .visibleDropdown {
