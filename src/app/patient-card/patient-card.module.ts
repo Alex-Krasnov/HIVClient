@@ -70,6 +70,7 @@ import { PatientCallComponent } from './patient-call/patient-call.component';
 import { PatientEpidChildComponent } from './patient-epid-child/patient-epid-child.component';
 import { ModalReferalAnalysisIbComponent } from './modal-referal-analysis-ib/modal-referal-analysis-ib.component';
 import { HepCComponent } from './hep-c/hep-c.component';
+import { PatientCardModalComponent } from './patient-card-modal/patient-card-modal.component';
 
 
 
@@ -131,7 +132,8 @@ import { HepCComponent } from './hep-c/hep-c.component';
     PatientCallComponent,
     PatientEpidChildComponent,
     ModalReferalAnalysisIbComponent,
-    HepCComponent
+    HepCComponent,
+    PatientCardModalComponent
   ],
   imports: [
     CommonModule, 
@@ -168,7 +170,8 @@ import { HepCComponent } from './hep-c/hep-c.component';
     PatientCardPregnantComponent,
     PatientCardChildComponent,
     PatientCardCovidComponent,
-    PatientCardFilesComponent
+    PatientCardFilesComponent,
+    PatientCardModalComponent
   ]
 })
 export class PatientCardModule { }

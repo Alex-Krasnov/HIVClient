@@ -19,7 +19,6 @@ import { SearchEpidComponent } from './search-epid/search-epid.component';
 import { SearchHospComponent } from './search-hosp/search-hosp.component';
 import { SearchNonresidentComponent } from './search-nonresident/search-nonresident.component';
 import { SearchCovidComponent } from './search-covid/search-covid.component';
-import { PatientCardModalComponent } from './patient-card-modal/patient-card-modal.component';
 import { PatientCardModule } from '../patient-card/patient-card.module';
 
 
@@ -42,8 +41,7 @@ import { PatientCardModule } from '../patient-card/patient-card.module';
     SearchEpidComponent,
     SearchHospComponent,
     SearchNonresidentComponent,
-    SearchCovidComponent,
-    PatientCardModalComponent
+    SearchCovidComponent
   ],
   imports: [
     CommonModule,
