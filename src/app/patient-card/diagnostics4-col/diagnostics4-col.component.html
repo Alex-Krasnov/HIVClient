@@ -1,0 +1,20 @@
+<table class="table border" [formGroup]="formS">
+    <thead style="position: sticky; top: 0; background: #ade8dd;">
+      <tr>
+        <th scope="col" style="width: 135px;">Текущая дата</th>
+        <th scope="col">Дата получения</th>
+        <th scope="col">Наименование</th>
+        <th scope="col">Остаток</th>
+      </tr>
+    </thead>
+    <tbody>
+        <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
+          <tr formGroupName="{{i}}">
+            <td><input type="date" class="form-control tbl" formControlName="currentDate"></td>
+            <td><input type="date" class="form-control tbl" formControlName="takeDrugDate"></td>
+            <td><input type="text" class="form-control tbl" formControlName="drugName" ></td>
+            <td><input type="text" class="form-control tbl" formControlName="drugCount"></td>
+          </tr>
+        </ng-container>
+    </tbody>
+</table>

@@ -2,6 +2,7 @@ import { Diag3Col } from "./diag3-col.model";
 import { Diag2Col } from "./diag2-col.model";
 import { ImStatCD348 } from "./im-stat-cd348.model";
 import { ImStat } from "./im-stat.model";
+import { DrugRemains } from "./drud-remains.model";
 
 
 export interface PatientCardDiagnosticsModel {
@@ -15,4 +16,5 @@ export interface PatientCardDiagnosticsModel {
   imStats?: ImStat[];
   imStatCD348s: ImStatCD348[];
   ihLs: Diag2Col[];
+  drugRemains: DrugRemains[];
 }

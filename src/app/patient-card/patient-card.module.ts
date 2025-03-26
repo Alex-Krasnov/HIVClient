@@ -71,6 +71,7 @@ import { PatientEpidChildComponent } from './patient-epid-child/patient-epid-chi
 import { ModalReferalAnalysisIbComponent } from './modal-referal-analysis-ib/modal-referal-analysis-ib.component';
 import { HepCComponent } from './hep-c/hep-c.component';
 import { PatientCardModalComponent } from './patient-card-modal/patient-card-modal.component';
+import { Diagnostics4ColComponent } from './diagnostics4-col/diagnostics4-col.component';
 
 
 
@@ -133,7 +134,8 @@ import { PatientCardModalComponent } from './patient-card-modal/patient-card-mod
     PatientEpidChildComponent,
     ModalReferalAnalysisIbComponent,
     HepCComponent,
-    PatientCardModalComponent
+    PatientCardModalComponent,
+    Diagnostics4ColComponent
   ],
   imports: [
     CommonModule, 

@@ -32,6 +32,7 @@ export class PatientCardDiagnosticsComponent implements OnInit {
   patientIHL = new FormArray([]);
   patientImStat = new FormArray([]);
   patientImStatCD348 = new FormArray([]);
+  patientDrugRemains = new FormArray([]);
 
   constructor(
     private patientService: PatientCardDiagnosticsService,
@@ -111,6 +112,18 @@ export class PatientCardDiagnosticsComponent implements OnInit {
           resultDescr: new FormControl({ value: item.resultPercent, disabled: true })
         });
         this.patientImStat.push(sForm);
+      }
+    );
+
+    this.patient.drugRemains.map(
+      (item: any) => {
+        const sForm = new FormGroup({
+          currentDate: new FormControl({ value: item.currentDate, disabled: true }),
+          takeDrugDate: new FormControl({ value: item.takeDrugDate, disabled: true }),
+          drugName: new FormControl({ value: item.drugName, disabled: true }),
+          drugCount: new FormControl({ value: item.drugCount, disabled: true })
+        });
+        this.patientDrugRemains.push(sForm);
       }
     );
 
