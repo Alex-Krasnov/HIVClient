@@ -4,7 +4,7 @@
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row ms-1 mt-1 me-1">
             <div class="row g-0 text-left">
-                <button [hidden]="!patient.isNonResident" type="button" class="btn btn-lg btn-outline-danger">Иногородние</button>
+                <button [hidden]="!patient.isNonResident" type="button" class="btn btn-lg btn-danger">Иногородние</button>
             </div>
         </div>
         <div class="row mx-1 mt-1">
@@ -42,7 +42,7 @@
                     <app-diagnostics2-col [(subArr)]="patientIHL"></app-diagnostics2-col>
                 </div>
             </div>
-            <div class="col-xl-4 border">
+            <div class="col-xl border me-1">
                 <div class="row"><h6 class="text-start m-0">Остаток препаратов</h6></div>
                 <div class="row" style="height: 220px; overflow: auto;">
                     <app-diagnostics4-col [(subArr)]="patientDrugRemains"></app-diagnostics4-col>
