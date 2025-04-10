@@ -161,7 +161,6 @@
                 <input type="date" class="form-control tbl w-auto" formControlName="dateInpIbEnd">
                 <span class="w-auto my-auto">Выбор блотов</span>
                 <select class="form-control tbl" style="width: 15%;" formControlName="ibSelect">
-                    <option value=""></option>
                     <option *ngFor="let item of searchLists.listSelectBlot" [value]="item">{{ item }}</option>
                 </select>
             </div>

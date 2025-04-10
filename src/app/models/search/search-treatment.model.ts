@@ -40,7 +40,7 @@ export class SearchTreatmentModel extends BaseSearchModel {
    dateInpIbStart: string = ''
    @FormField({})
    dateInpIbEnd: string = ''
-   @FormField({})
+   @FormField({value: 'Все'})
    ibSelect: string = ''
    @FormField({ value: 'Все' })
    ufsinYNA: string = 'Все'

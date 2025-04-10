@@ -42,7 +42,7 @@ export class SearchMainInfModel extends BaseSearchModel {
    dateInpIbStart: string = ''
    @FormField({})
    dateInpIbEnd: string = ''
-   @FormField({})
+   @FormField({ value: 'Все'})
    ibSelect: string = ''
    @FormField({})
    referenceMO: string = ''
@@ -193,7 +193,7 @@ export class SearchMainInfModel extends BaseSearchModel {
          referenceMO: '',
          dateInpIbStart: '',
          dateInpIbEnd: '',
-         ibSelect: '',
+         ibSelect: 'Все',
          hospCourse: ['Все'],
          age: ['Все'],
          cardNo: '',

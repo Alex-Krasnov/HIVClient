@@ -59,7 +59,7 @@ export class SearchEpidModel extends BaseSearchModel {
   @FormField({})
   dateInpIbEnd: string = ''
 
-  @FormField({})
+  @FormField({ value: 'Все' })
   ibSelect: string = ''
 
   @FormField({ value: ['Все'], disabled: true })
