@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardTreatmentModel } from 'src/app/_interfaces/patient-card-treatment.model';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardTreatmentService } from 'src/app/services/patient-card/patient-card-treatment.service';
@@ -14,9 +14,10 @@ import { ModalPatientCardService } from 'src/app/services/patient-card/modal-pat
   templateUrl: './patient-card-treatment.component.html',
   styleUrls: ['./patient-card-treatment.component.css']
 })
-export class PatientCardTreatmentComponent implements OnInit{
+export class PatientCardTreatmentComponent implements OnInit, OnDestroy{
   private PatineCardTreatmentForm: BehaviorSubject<FormGroup | undefined>
   PatineCardTreatmentForm$: Observable<FormGroup>
+    private destroy$ = new Subject<void>();
   
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
@@ -50,13 +51,29 @@ export class PatientCardTreatmentComponent implements OnInit{
 
   ngOnInit() {
     
-    this.pcModal.patientId.subscribe(id => {this.Id = id})
-    this.pcModal.goNext.subscribe(name => {this.leaveComponent(name)})
+    this.pcModal.patientId
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(id => {this.Id = id})
+    
+    this.pcModal.goNext
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(name => {
+      if(this.patientForm && !this.patientForm.pending){
+        this.leaveComponent(name)
+      }
+    })
+
     this.getData()
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
   }
 
   getData(): void {
     this.patientService.getData(this.Id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data:PatientCardTreatmentModel) => {
         this.patient = data;
         this.initForm();
@@ -76,6 +93,7 @@ export class PatientCardTreatmentComponent implements OnInit{
     this.PatineCardTreatmentForm$ = this.PatineCardTreatmentForm.asObservable();
 
     this.patientFormSub = this.PatineCardTreatmentForm$
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         this.patientForm = data;
     });
@@ -158,7 +176,9 @@ export class PatientCardTreatmentComponent implements OnInit{
       }
     );
 
-    this.patientForm.statusChanges.subscribe( (status) => {
+    this.patientForm.statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe( (status) => {
       if(status == 'VALID')
         this.needUpd = true;
     })
@@ -191,7 +211,10 @@ export class PatientCardTreatmentComponent implements OnInit{
     };
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-      this.patientService.updatePatient(curValue.patientId, curValue.stageCom, curValue.patientCom, curValue.invalidName, curValue.hepBdate, curValue.hepBDescr).subscribe()
+      this.patientService
+      .updatePatient(curValue.patientId, curValue.stageCom, curValue.patientCom, curValue.invalidName, curValue.hepBdate, curValue.hepBDescr)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe()
 
       this.pervValue = {
         patientId: curValue.patientId,

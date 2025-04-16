@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 import { PatientCardMainService } from 'src/app/services/patient-card/patient-card-main.service';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators} from '@angular/forms';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardMainForm } from './patient-card-main-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
@@ -16,9 +16,10 @@ import { ModalPatientCardService } from 'src/app/services/patient-card/modal-pat
   templateUrl: './patient-card-main.component.html',
   styleUrls: ['./patient-card-main.component.css']
 })
-export class PatientCardMainComponent implements OnInit {
-  private PatineCardMainForm: BehaviorSubject<FormGroup | undefined>
-  PatineCardMainForm$: Observable<FormGroup>
+export class PatientCardMainComponent implements OnInit, OnDestroy {
+  private PatineCardMainForm: BehaviorSubject<FormGroup | undefined>;
+  PatineCardMainForm$: Observable<FormGroup>;
+  private destroy$ = new Subject<void>();
 
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
@@ -54,16 +55,32 @@ export class PatientCardMainComponent implements OnInit {
   ){}
 
   ngOnInit() {
+
+    this.pcModal.patientId
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(id => {this.Id = id})
     
-    this.pcModal.patientId.subscribe(id => {this.Id = id})
-    this.pcModal.goNext.subscribe(name => {this.leaveComponent(name)})
+    this.pcModal.goNext
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(name => {
+      if(this.patientForm && !this.patientForm.pending){
+        this.leaveComponent(name)
+      }
+    })
+    
     this.isDeleter = this.roleService.IsDeleter
     
     this.getPatientData()
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
+  }
+
   getPatientData(): void {
     this.patientService.getPatientData(this.Id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data:PatientCardMainModel) => {
         this.patient = data;
         this.dieLong = this.patient.dieCourseLong
@@ -129,12 +146,16 @@ export class PatientCardMainComponent implements OnInit {
           snils: data.snils,
           fioChange: data.fioChange
         };
-      });
+      })
   }
 
   deletePatient(){
     if(confirm(`Вы уверены, что хотите удалить карту пациента?`)){
-      this.patientService.delPatientPatient(this.Id).subscribe()
+      
+      this.patientService.delPatientPatient(this.Id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe()
+        
       this.pcModal.currentPage.next('main')
       this.pcModal.close()
     }
@@ -198,7 +219,10 @@ export class PatientCardMainComponent implements OnInit {
     };
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-      this.patientService.updatePatient(curValue).subscribe()
+      
+      this.patientService.updatePatient(curValue)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe()
 
       this.pervValue = {
         patientId: curValue.patientId,
@@ -279,13 +303,14 @@ export class PatientCardMainComponent implements OnInit {
   }
 
   initForm(){
-    this.PatineCardMainForm = new BehaviorSubject(this.fb.group(new PatientCardMainForm(this.patient, this.listService)));
-    this.PatineCardMainForm$ = this.PatineCardMainForm.asObservable();
-
+    this.PatineCardMainForm = new BehaviorSubject(this.fb.group(new PatientCardMainForm(this.patient, this.listService)))
+    this.PatineCardMainForm$ = this.PatineCardMainForm.asObservable()
+    
     this.patientFormSub = this.PatineCardMainForm$
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
-        this.patientForm = data;
-    });
+        this.patientForm = data
+    })
 
     this.patient.secondDeseases.map(
         (des: any) => {
@@ -339,17 +364,29 @@ export class PatientCardMainComponent implements OnInit {
       }
     );
 
-    this.patientForm.statusChanges.subscribe( (status) => {
-      if(status == 'VALID')
-        this.needUpd = true;
+    this.patientForm.statusChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe( (status) => {
+        if(status == 'VALID')
+          this.needUpd = true;
     })
+
     this.syncLongNShort()
-    this.patientForm.controls['dieCourseShort'].valueChanges.subscribe(item => this.dieShort = item)
-    this.patientForm.controls['dieCourseLong'].valueChanges.subscribe(item => this.dieLong = item)
+    
+    this.patientForm.controls['dieCourseShort'].valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(item => this.dieShort = item)
+
+    this.patientForm.controls['dieCourseLong'].valueChanges
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(item => this.dieLong = item)
   }
 
   syncLongNShort(){
-    this.patientForm.controls['checkCourseShort'].statusChanges.subscribe((status) => {
+    
+    this.patientForm.controls['checkCourseShort'].statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((status) => {
       let index = this.patient.listCheckCourseShort.indexOf(this.patientForm.controls['checkCourseShort'].value)
       let indexLong = this.patient.listCheckCourseLong.indexOf(this.patientForm.controls['checkCourseLong'].value)
       if( index == indexLong || status != 'VALID')
@@ -362,7 +399,9 @@ export class PatientCardMainComponent implements OnInit {
       this.patientForm.controls['checkCourseLong'].setValue( this.patient.listCheckCourseLong.at(index))
     })
 
-    this.patientForm.controls['checkCourseLong'].statusChanges.subscribe((status) => {
+    this.patientForm.controls['checkCourseLong'].statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((status) => {
       let index = this.patient.listCheckCourseLong.indexOf(this.patientForm.controls['checkCourseLong'].value)
       let indexShort = this.patient.listCheckCourseShort.indexOf(this.patientForm.controls['checkCourseShort'].value)
       if( index == indexShort || status != 'VALID')
@@ -375,7 +414,9 @@ export class PatientCardMainComponent implements OnInit {
       this.patientForm.controls['checkCourseShort'].setValue( this.patient.listCheckCourseShort.at(index))
     })
 
-    this.patientForm.controls['infectCourseShort'].statusChanges.subscribe((status) => {
+    this.patientForm.controls['infectCourseShort'].statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((status) => {
       let index = this.patient.listInfectCourseShort.indexOf(this.patientForm.controls['infectCourseShort'].value)
       let indexLong = this.patient.listInfectCourseLong.indexOf(this.patientForm.controls['infectCourseLong'].value)
       if( index == indexLong || status != 'VALID')
@@ -388,7 +429,9 @@ export class PatientCardMainComponent implements OnInit {
       this.patientForm.controls['infectCourseLong'].setValue( this.patient.listInfectCourseLong.at(index))
     })
 
-    this.patientForm.controls['infectCourseLong'].statusChanges.subscribe((status) => {
+    this.patientForm.controls['infectCourseLong'].statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((status) => {
       let index = this.patient.listInfectCourseLong.indexOf(this.patientForm.controls['infectCourseLong'].value)
       let indexShort = this.patient.listInfectCourseShort.indexOf(this.patientForm.controls['infectCourseShort'].value)
       if( index == indexShort || status != 'VALID')
@@ -401,10 +444,9 @@ export class PatientCardMainComponent implements OnInit {
       this.patientForm.controls['infectCourseShort'].setValue( this.patient.listInfectCourseShort.at(index))
     })
 
-
-
-
-    this.patientForm.controls['dieCourseShort'].statusChanges.subscribe((status) => {
+    this.patientForm.controls['dieCourseShort'].statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((status) => {
       let index = this.patient.listDieCourseLong.findIndex(e => e.short == this.patientForm.controls['dieCourseShort'].value)
       if(index == this.patient.listDieCourseLong.findIndex(e => e.long == this.patientForm.controls['dieCourseLong'].value) || status != 'VALID')
         return null
@@ -417,7 +459,9 @@ export class PatientCardMainComponent implements OnInit {
       this.patientForm.controls['dieCourseLong'].setValue( this.patient.listDieCourseLong.at(index).long)
     })
 
-    this.patientForm.controls['dieCourseLong'].statusChanges.subscribe((status) => {
+    this.patientForm.controls['dieCourseLong'].statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((status) => {
       let index = this.patient.listDieCourseLong.findIndex(e => e.long == this.patientForm.controls['dieCourseLong'].value)
       
       if(index == this.patient.listDieCourseLong.findIndex(e => e.short == this.patientForm.controls['dieCourseShort'].value) || status != 'VALID')
@@ -435,8 +479,9 @@ export class PatientCardMainComponent implements OnInit {
   leaveComponent(name: string){
     if(this.patientForm.valid){
 
-      if(this.needUpd)
+      if(this.needUpd){
         this.updatePatient()
+      }
       
       if(name == 'close'){
         this.pcModal.close()
@@ -445,12 +490,14 @@ export class PatientCardMainComponent implements OnInit {
       }
       
     } else{
+
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {
           if(this.patientForm.controls[data].invalid)
             console.log("err", data);          
         }
       )
+
       confirm(`Ошибка в заполнении данных!`)
     }
   }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardDiagnosticsModel } from 'src/app/_interfaces/patient-card-diagnostics.model';
 import { PatientCardDiagnosticsService } from 'src/app/services/patient-card/patient-card-diagnostics.service';
 import { PatientCardDiagnosticsForm } from './patient-card-diagnostics-form.model';
@@ -12,9 +12,10 @@ import { ModalPatientCardService } from 'src/app/services/patient-card/modal-pat
   templateUrl: './patient-card-diagnostics.component.html',
   styleUrls: ['./patient-card-diagnostics.component.css']
 })
-export class PatientCardDiagnosticsComponent implements OnInit {
+export class PatientCardDiagnosticsComponent implements OnInit, OnDestroy {
   private PatineCardDiagnosticsForm: BehaviorSubject<FormGroup | undefined>
   PatineCardDiagnosticsForm$: Observable<FormGroup>
+    private destroy$ = new Subject<void>();
 
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
@@ -43,13 +44,28 @@ export class PatientCardDiagnosticsComponent implements OnInit {
 
   ngOnInit() {
 
-    this.pcModal.patientId.subscribe(id => { this.Id = id })
-    this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
+    this.pcModal.patientId
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(id => { this.Id = id })
+    
+    this.pcModal.goNext
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(name => { 
+      if(this.patientForm && !this.patientForm.pending){
+        this.leaveComponent(name)
+      }
+    })
     this.getData()
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
   }
 
   getData(): void {
     this.patientService.getData(this.Id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: PatientCardDiagnosticsModel) => {
         this.patient = data;
         this.initForm();
@@ -60,7 +76,9 @@ export class PatientCardDiagnosticsComponent implements OnInit {
     this.PatineCardDiagnosticsForm = new BehaviorSubject(this.fb.group(new PatientCardDiagnosticsForm(this.patient)));
     this.PatineCardDiagnosticsForm$ = this.PatineCardDiagnosticsForm.asObservable();
 
-    this.patientFormSub = this.PatineCardDiagnosticsForm$.subscribe(data => { this.patientForm = data; });
+    this.patientFormSub = this.PatineCardDiagnosticsForm$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => { this.patientForm = data; });
 
     this.patient.virusLoads.map(
       (item: any) => {

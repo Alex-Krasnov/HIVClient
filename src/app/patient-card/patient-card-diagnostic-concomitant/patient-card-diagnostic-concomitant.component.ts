@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardDiagnosticConcomitantModel } from 'src/app/_interfaces/patient-card-diagnostic-concomitant.model';
 import { PatientCardDiagnosticConcomitantService } from 'src/app/services/patient-card/patient-card-diagnostic-concomitant.service';
 import { PatientCardDiagnosticConcomitantForm } from './patient-card-diagnostic-concomintant-form.model';
@@ -13,9 +13,10 @@ import { ModalPatientCardService } from 'src/app/services/patient-card/modal-pat
   templateUrl: './patient-card-diagnostic-concomitant.component.html',
   styleUrls: ['./patient-card-diagnostic-concomitant.component.css']
 })
-export class PatientCardDiagnosticConcomitantComponent implements OnInit {
+export class PatientCardDiagnosticConcomitantComponent implements OnInit, OnDestroy {
   private PatineCardDiagnosticConcomitantForm: BehaviorSubject<FormGroup | undefined>
   PatineCardDiagnosticConcomitantForm$: Observable<FormGroup>
+    private destroy$ = new Subject<void>();
 
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
@@ -45,13 +46,29 @@ export class PatientCardDiagnosticConcomitantComponent implements OnInit {
 
   ngOnInit() {
 
-    this.pcModal.patientId.subscribe(id => { this.Id = id })
-    this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
+    this.pcModal.patientId
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(id => { this.Id = id })
+
+    this.pcModal.goNext
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(name => { 
+      if(this.patientForm && !this.patientForm.pending){
+        this.leaveComponent(name)
+      }
+    })
+
     this.getData()
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
   }
 
   getData(): void {
     this.patientService.getData(this.Id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: PatientCardDiagnosticConcomitantModel) => {
         this.patient = data;
         this.initForm();
@@ -62,7 +79,9 @@ export class PatientCardDiagnosticConcomitantComponent implements OnInit {
     this.PatineCardDiagnosticConcomitantForm = new BehaviorSubject(this.fb.group(new PatientCardDiagnosticConcomitantForm(this.patient)));
     this.PatineCardDiagnosticConcomitantForm$ = this.PatineCardDiagnosticConcomitantForm.asObservable();
 
-    this.patientFormSub = this.PatineCardDiagnosticConcomitantForm$.subscribe(data => { this.patientForm = data; });
+    this.patientFormSub = this.PatineCardDiagnosticConcomitantForm$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => { this.patientForm = data; });
 
     this.patient.hepCIfas.map(
       (item: any) => {

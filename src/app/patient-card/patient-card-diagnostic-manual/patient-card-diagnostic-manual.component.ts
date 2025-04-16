@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardDiagnosticManualModel } from 'src/app/_interfaces/patient-card-diagnostic-manual.model';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardDiagnosticManualService } from 'src/app/services/patient-card/patient-card-diagnostic-manual.service';
@@ -15,9 +15,10 @@ import { ModalPatientCardService } from 'src/app/services/patient-card/modal-pat
   templateUrl: './patient-card-diagnostic-manual.component.html',
   styleUrls: ['./patient-card-diagnostic-manual.component.css']
 })
-export class PatientCardDiagnosticManualComponent implements OnInit {
+export class PatientCardDiagnosticManualComponent implements OnInit, OnDestroy {
   private PatineCardEpidForm: BehaviorSubject<FormGroup | undefined>
   PatineCardEpidForm$: Observable<FormGroup>
+  private destroy$ = new Subject<void>();
 
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
@@ -53,9 +54,24 @@ export class PatientCardDiagnosticManualComponent implements OnInit {
 
   ngOnInit() {
 
-    this.pcModal.patientId.subscribe(id => { this.Id = id })
-    this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
+    this.pcModal.patientId
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(id => { this.Id = id })
+    
+    this.pcModal.goNext
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(name => { 
+      if(this.patientForm && !this.patientForm.pending){
+        this.leaveComponent(name)
+      }
+    })
+    
     this.getData()
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
   }
 
   getData(): void {

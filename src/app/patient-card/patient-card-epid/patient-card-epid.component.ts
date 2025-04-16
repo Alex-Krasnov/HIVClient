@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardEpidModel } from 'src/app/_interfaces/patient-card-epid.model';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardEpidService } from 'src/app/services/patient-card/patient-card-epid.service';
@@ -18,9 +17,10 @@ import { ModalPatientCardService } from 'src/app/services/patient-card/modal-pat
   templateUrl: './patient-card-epid.component.html',
   styleUrls: ['./patient-card-epid.component.css']
 })
-export class PatientCardEpidComponent implements OnInit {
+export class PatientCardEpidComponent implements OnInit, OnDestroy {
   private PatineCardEpidForm: BehaviorSubject<FormGroup | undefined>
   PatineCardEpidForm$: Observable<FormGroup>
+  private destroy$ = new Subject<void>();
   
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
@@ -60,7 +60,6 @@ export class PatientCardEpidComponent implements OnInit {
   pervValue: object;
 
   constructor(
-    private route: ActivatedRoute,
     private patientService: PatientCardEpidService,
     private fb: FormBuilder,
     public modal: ModalService,
@@ -70,14 +69,29 @@ export class PatientCardEpidComponent implements OnInit {
 
   ngOnInit() {
     
-    this.pcModal.patientId.subscribe(id => {this.Id = id})
-    this.pcModal.goNext.subscribe(name => {this.leaveComponent(name)})
+    this.pcModal.patientId
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(id => {this.Id = id})
+    
+    this.pcModal.goNext
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(name => {
+      if(this.patientForm && !this.patientForm.pending){
+        this.leaveComponent(name)
+      }
+    })
 
     this.getData()
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
+  }
+
   getData(): void {
     this.patientService.getData(this.Id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data:PatientCardEpidModel) => {
         this.patient = data;
         
@@ -107,6 +121,7 @@ export class PatientCardEpidComponent implements OnInit {
     this.PatineCardEpidForm$ = this.PatineCardEpidForm.asObservable();
 
     this.patientFormSub = this.PatineCardEpidForm$
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         this.patientForm = data;
     });
@@ -277,7 +292,9 @@ export class PatientCardEpidComponent implements OnInit {
       }
     );
 
-    this.patientForm.statusChanges.subscribe( (status) => {
+    this.patientForm.statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe( (status) => {
       if(status == 'VALID')
         this.needUpd = true;
     })
@@ -337,7 +354,9 @@ export class PatientCardEpidComponent implements OnInit {
     };
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-      this.patientService.updatePatient(curValue).subscribe()
+      this.patientService.updatePatient(curValue)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe()
 
       this.pervValue = {
         patientId: this.Id,
@@ -361,10 +380,11 @@ export class PatientCardEpidComponent implements OnInit {
   
   leaveComponent(name: string){
     if(this.patientForm.valid && this.ccIsValid && this.rcIsValid && this.ocIsValid && this.piIsValid && 
-      this.pniIsValid && this.cvIsValid && this.cIsValid && this.chIsValid && this.pcIsValid){
+       this.pniIsValid && this.cvIsValid && this.cIsValid && this.chIsValid && this.pcIsValid){
 
-        if(this.needUpd)
+        if(this.needUpd){
           this.updatePatient()
+        }
       
         if(name == 'close'){
           this.pcModal.close()
@@ -373,12 +393,14 @@ export class PatientCardEpidComponent implements OnInit {
         }  
       
     } else{
+
       Object.keys(this.patientForm.controls).forEach(
         (data: any) => {
           if(this.patientForm.controls[data].invalid)
             console.log("err", data);          
         }
       )
+      
       confirm(`Ошибка в заполнении данных!`)
     }
   }

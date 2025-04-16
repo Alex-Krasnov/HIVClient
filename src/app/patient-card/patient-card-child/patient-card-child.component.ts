@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardChildForm } from './patient-card-child-form.model';
 import { ModalService } from 'src/app/services/modal.service';
@@ -13,9 +13,10 @@ import { ModalPatientCardService } from 'src/app/services/patient-card/modal-pat
   templateUrl: './patient-card-child.component.html',
   styleUrls: ['./patient-card-child.component.css']
 })
-export class PatientCardChildComponent implements OnInit {
+export class PatientCardChildComponent implements OnInit, OnDestroy {
   private PatineCardChildForm: BehaviorSubject<FormGroup | undefined>
   PatineCardChildForm$: Observable<FormGroup>
+    private destroy$ = new Subject<void>();
 
   isVisibleSystem: boolean = false;
   isVisibleDiagn: boolean = false;
@@ -41,13 +42,28 @@ export class PatientCardChildComponent implements OnInit {
 
   ngOnInit() {
 
-    this.pcModal.patientId.subscribe(id => { this.Id = id })
-    this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
+    this.pcModal.patientId
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(id => { this.Id = id })
+    
+    this.pcModal.goNext
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(name => {
+      if(this.patientForm && !this.patientForm.pending){
+        this.leaveComponent(name)
+      }
+    })
     this.getData()
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
   }
 
   getData(): void {
     this.patientService.getData(this.Id)
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data: PatientCardChildModel) => {
         this.patient = data;
         this.initForm();
@@ -80,11 +96,14 @@ export class PatientCardChildComponent implements OnInit {
     this.PatineCardChildForm$ = this.PatineCardChildForm.asObservable();
 
     this.patientFormSub = this.PatineCardChildForm$
+      .pipe(takeUntil(this.destroy$))
       .subscribe(data => {
         this.patientForm = data;
       });
 
-    this.patientForm.statusChanges.subscribe((status) => {
+    this.patientForm.statusChanges
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((status) => {
       if (status == 'VALID')
         this.needUpd = true;
     })
@@ -129,7 +148,9 @@ export class PatientCardChildComponent implements OnInit {
       curValue.weight = null as number
 
     if (!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))) {
-      this.patientService.updatePatient(curValue).subscribe()
+      this.patientService.updatePatient(curValue)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe()
 
       this.pervValue = {
         patientId: this.Id,

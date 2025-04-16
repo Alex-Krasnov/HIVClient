@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardAclModel } from 'src/app/_interfaces/patient-card-acl.model';
 import { PatientCardAclService } from 'src/app/services/patient-card/patient-card-acl.service';
 import { PatientCardAclForm } from './patient-card-acl-form.model';
@@ -13,9 +12,10 @@ import { ModalPatientCardService } from 'src/app/services/patient-card/modal-pat
   templateUrl: './patient-card-acl.component.html',
   styleUrls: ['./patient-card-acl.component.css']
 })
-export class PatientCardAclComponent implements OnInit {
+export class PatientCardAclComponent implements OnInit,OnDestroy {
     private PatineCardResistenceForm: BehaviorSubject<FormGroup | undefined>
     PatineCardResistenceForm$: Observable<FormGroup>
+    private destroy$ = new Subject<void>();
     
     isVisibleSystem: boolean = false;
     isVisibleDiagn: boolean = false;
@@ -31,23 +31,36 @@ export class PatientCardAclComponent implements OnInit {
     patientGe = new FormArray([]);
   
     constructor(
-      private route: ActivatedRoute,
       private patientService: PatientCardAclService,
       private fb: FormBuilder,
       public modal: ModalService,
-      private router: Router,
       private pcModal: ModalPatientCardService
     ){}
   
     ngOnInit() {
 
-      this.pcModal.patientId.subscribe(id => { this.Id = id })
-      this.pcModal.goNext.subscribe(name => { this.leaveComponent(name) })
+      this.pcModal.patientId
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(id => { this.Id = id })
+      
+      this.pcModal.goNext
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(name => { 
+        if(this.patientForm && !this.patientForm.pending){
+          this.leaveComponent(name)
+        }
+      })
       this.getData()
+    }
+
+    ngOnDestroy() {
+      this.destroy$.next(); // Триггерим завершение
+      this.destroy$.complete(); // Очищаем память
     }
   
     getData(): void {
       this.patientService.getData(this.Id)
+        .pipe(takeUntil(this.destroy$)) 
         .subscribe((data:PatientCardAclModel) => {
           this.patient = data;
           this.initForm();
@@ -58,7 +71,9 @@ export class PatientCardAclComponent implements OnInit {
       this.PatineCardResistenceForm = new BehaviorSubject(this.fb.group(new PatientCardAclForm(this.patient)));
       this.PatineCardResistenceForm$ = this.PatineCardResistenceForm.asObservable();
   
-      this.patientFormSub = this.PatineCardResistenceForm$.subscribe(data => {this.patientForm = data;});
+      this.patientFormSub = this.PatineCardResistenceForm$
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(data => {this.patientForm = data;});
       
       this.patient.bhs.map(
           (item: any) => {
