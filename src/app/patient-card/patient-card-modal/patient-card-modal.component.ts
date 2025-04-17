@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { ModalService } from 'src/app/services/modal.service';
 import { ModalPatientCardService } from 'src/app/services/patient-card/modal-patient-card.service';
 import { PatientCardSubService } from 'src/app/services/patient-card/patient-card-sub.service';
@@ -8,11 +9,12 @@ import { PatientCardSubService } from 'src/app/services/patient-card/patient-car
   templateUrl: './patient-card-modal.component.html',
   styleUrls: ['./patient-card-modal.component.css']
 })
-export class PatientCardModalComponent implements OnInit{
+export class PatientCardModalComponent implements OnInit, OnDestroy{
   isVisibleMenu: boolean = false;
-  patientId: number
+  patientId: number | null
   patientFio: string
   currentPage: string
+  private destroy$ = new Subject<void>();
 
   constructor(
     public modal: ModalPatientCardService,
@@ -21,9 +23,33 @@ export class PatientCardModalComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    this.modal.patientId.subscribe(id => {this.patientId = id})
-    this.modal.currentPage.subscribe(name => {this.currentPage = name})
-    this.service.GetFio(this.patientId).subscribe(obj => {this.patientFio =  obj.patientFio})
+    this.modal.patientId
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(id => {
+
+      this.patientId = id
+
+      if(id == null){
+        this.patientFio = "Создание нового пациента"
+      }
+      else{
+        this.service.GetFio(id)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(obj => {this.patientFio =  obj.patientFio})
+      }
+
+    })
+
+    this.modal.currentPage
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(name => {this.currentPage = name})
+
+    
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
   }
 
   openDropdown(): void {

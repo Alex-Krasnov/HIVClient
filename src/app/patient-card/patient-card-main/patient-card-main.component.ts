@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PatientCardMainModel } from 'src/app/_interfaces/patient-card-main.model';
 import { PatientCardMainService } from 'src/app/services/patient-card/patient-card-main.service';
 import { FormGroup, FormBuilder, FormArray, FormControl, Validators} from '@angular/forms';
-import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardMainForm } from './patient-card-main-form.model';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
@@ -33,7 +33,7 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
 
   isDeleter: boolean = false;
 
-  Id: number;
+  Id: number | null;
   patient: PatientCardMainModel | undefined;
   patientForm: FormGroup;
   patientFormSub: Subscription;
@@ -161,7 +161,7 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
     }
   }
 
-  updatePatient(){
+  async updatePatient(){
     let curValue: pcMain = {
       patientId: this.patientForm.controls['patientId'].value,
       familyName: this.patientForm.controls['familyName'].value,
@@ -220,12 +220,19 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
       
-      this.patientService.updatePatient(curValue)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe()
+      var patientId = await firstValueFrom(
+        this.patientService.updatePatient(curValue)
+        .pipe(takeUntil(this.destroy$))
+      )
 
+      this.patientForm.get('patientId').setValue(patientId)
+
+      if(this.pervValue.patientId != patientId){
+        this.pcModal.patientId.next(patientId)
+      }
+      
       this.pervValue = {
-        patientId: curValue.patientId,
+        patientId: patientId,
         familyName: curValue.familyName,
         firstName: curValue.firstName,
         thirdName: curValue.thirdName,
@@ -476,11 +483,11 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
     })
   }
 
-  leaveComponent(name: string){
+  async leaveComponent(name: string){
     if(this.patientForm.valid){
 
       if(this.needUpd){
-        this.updatePatient()
+        await this.updatePatient()
       }
       
       if(name == 'close'){

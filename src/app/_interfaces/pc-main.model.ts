@@ -1,5 +1,5 @@
  export interface pcMain{
-  patientId: number
+  patientId?: number
   familyName?: string
   firstName?: string
   thirdName?: string

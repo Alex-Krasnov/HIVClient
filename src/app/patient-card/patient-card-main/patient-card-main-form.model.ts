@@ -144,5 +144,7 @@ export class PatientCardMainForm {
       this.arvt.setAsyncValidators(InList.validateArvt(this.listService))
       this.invalid.setValue(data.invalid)
       this.invalid.setAsyncValidators(InList.validateInvalid(this.listService))
+      this.firstName.setValidators(Validators.required)
+      this.familyName.setValidators(Validators.required)
     }
 }

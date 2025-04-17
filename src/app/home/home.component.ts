@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { logOut } from '../services/logout.service';
 import { Router } from '@angular/router';
-import { NewPatientService } from '../services/new-patient.service';
 import { firstValueFrom } from 'rxjs';
 import { ReceivedRolesService } from '../services/received-roles.service';
 import { ModalPatientCardService } from '../services/patient-card/modal-patient-card.service';
@@ -22,7 +21,6 @@ export class HomeComponent implements OnInit {
     private jwtHelper: JwtHelperService,
     private logout: logOut,
     private router: Router,
-    private service: NewPatientService,
     private roleService: ReceivedRolesService,
     public modal: ModalPatientCardService
   ) { }
@@ -65,12 +63,10 @@ export class HomeComponent implements OnInit {
     console.log(this.isWriter, "isWriter", this.isKlassif, "isKlassif", this.isAdmin, "isAdmin");
   }
 
-  async newPatient() {
-    let id = await firstValueFrom(this.service.getData()).then()
-
+  newPatient() {
     this.modal.open()
     this.modal.currentPage.next('main')
-    this.modal.patientId.next(id)
+    this.modal.patientId.next(null)
   }
 
   exit() {

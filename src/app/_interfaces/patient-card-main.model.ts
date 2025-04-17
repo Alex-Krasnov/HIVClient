@@ -4,7 +4,7 @@ import { SecondDeseases } from "./second-deseases.model";
 import { Course } from "./course.model";
 
 export interface PatientCardMainModel {
-  patientId: number;
+  patientId?: number;
   inputDate?: Date;
   familyName?: string;
   firstName?: string;

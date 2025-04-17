@@ -10,7 +10,12 @@ export class PatientCardMainService {
     url: string = `${environment.apiUrl}/api/PatientCard`;
     constructor(private http: HttpClient){}
 
-    getPatientData(id: number): Observable<PatientCardMainModel>{
+    getPatientData(id: number | null): Observable<PatientCardMainModel>{
+
+        if(id == null){
+            return this.http.get<PatientCardMainModel>(this.url);
+        }
+
         return this.http.get<PatientCardMainModel>(this.url+`?patientId=${id}`);
     };
 
@@ -100,7 +105,7 @@ export class PatientCardMainService {
         return this.http.delete(this.url+`/DelPatientPatient?patientId=${patientId}`)
     };
 
-    updatePatient(patient: pcMain){
-        return this.http.post(this.url+`/UpdatePatient`, patient)
+    updatePatient(patient: pcMain): Observable<number>{
+        return this.http.post<number>(this.url+`/UpdatePatient`, patient)
     };
 }

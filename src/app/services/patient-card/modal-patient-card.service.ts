@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ModalPatientCardService {
   
-  patientId = new BehaviorSubject<number>(1)
+  patientId = new BehaviorSubject<number | null>(null)
   isVisible$ = new BehaviorSubject<boolean>(false)
   currentPage = new BehaviorSubject<string>('main')
   goNext = new BehaviorSubject<string>('main')
