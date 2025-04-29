@@ -39,9 +39,10 @@
   vulnerableGroupId?: string
   heightOld?: number
   weightOld?: number
-  flgZamMedPart?: boolean
-  flgHeadPhysician?: boolean
-  flgDiagnosisAfterDeath?: boolean
+  flgZamMedPart: boolean
+  flgHeadPhysician: boolean
+  flgDiagnosisAfterDeath: boolean
+  deathTransferSub: boolean
 
   checkCourseId?: string
   infectCourseId?: string

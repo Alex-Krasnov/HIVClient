@@ -63,7 +63,8 @@ export interface PatientCardMainModel {
   invalid?: string;
   archive?: string;
   codeWord?: string;
-  flgDiagnosisAfterDeath?: boolean; 
+  flgDiagnosisAfterDeath: boolean; 
+  deathTransferSub: boolean; 
 
   listSex?: string[];
   listRegOffReason?: string[];

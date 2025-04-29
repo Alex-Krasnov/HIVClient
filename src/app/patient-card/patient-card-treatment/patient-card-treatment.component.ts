@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardTreatmentModel } from 'src/app/_interfaces/patient-card-treatment.model';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardTreatmentService } from 'src/app/services/patient-card/patient-card-treatment.service';
@@ -200,7 +200,7 @@ export class PatientCardTreatmentComponent implements OnInit, OnDestroy{
     this.hepCIsValid = isValid;    
   }
 
-  updatePatient(){
+  async updatePatient(){
     let curValue = {
       patientId: this.Id,
       invalidName: this.patientForm.controls['invalidName'].value,
@@ -211,10 +211,12 @@ export class PatientCardTreatmentComponent implements OnInit, OnDestroy{
     };
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-      this.patientService
-      .updatePatient(curValue.patientId, curValue.stageCom, curValue.patientCom, curValue.invalidName, curValue.hepBdate, curValue.hepBDescr)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe()
+      
+      await lastValueFrom(
+        this.patientService
+        .updatePatient(curValue.patientId, curValue.stageCom, curValue.patientCom, curValue.invalidName, curValue.hepBdate, curValue.hepBDescr)
+        .pipe(takeUntil(this.destroy$))
+      )
 
       this.pervValue = {
         patientId: curValue.patientId,
@@ -229,11 +231,11 @@ export class PatientCardTreatmentComponent implements OnInit, OnDestroy{
     }
   }
 
-  leaveComponent(name: string){
+  async leaveComponent(name: string){
     if(this.patientForm.valid && this.siIsValid && this.csIsValid && this.hrIsValid &&  this.hepCIsValid){
 
       if(this.needUpd)
-        this.updatePatient()
+        await this.updatePatient()
       
       if(name == 'close'){
         this.pcModal.close()

@@ -62,6 +62,7 @@ export class PatientCardMainForm {
     headPhysician = new FormControl()
     zamMedPart = new FormControl()
     flgDiagnosisAfterDeath = new FormControl()
+    deathTransferSub = new FormControl()
 
     constructor(data: PatientCardMainModel, private listService: ListService) 
     {
@@ -111,6 +112,7 @@ export class PatientCardMainForm {
       this.zamMedPart.setValue(data.zamMedPart)
       
       this.flgDiagnosisAfterDeath.setValue(data.flgDiagnosisAfterDeath)
+      this.deathTransferSub.setValue(data.deathTransferSub)
 
       this.sex.setValue(data.sex)
       this.sex.setAsyncValidators(InList.validateSex(this.listService))

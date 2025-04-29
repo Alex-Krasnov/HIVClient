@@ -18,9 +18,9 @@ export interface PatientCardChildModel {
   lastCareDate?: Date;
   communicationParentDate?: Date;
   callingDistrictSpecDate?: Date;
-  refusalPhp?: boolean;
-  refusalResearch?: boolean;
-  refusalTherapy?: boolean;
+  refusalPhp: boolean;
+  refusalResearch: boolean;
+  refusalTherapy: boolean;
 
   listFamilyType?: string[];
   listChildPlace?: string[];

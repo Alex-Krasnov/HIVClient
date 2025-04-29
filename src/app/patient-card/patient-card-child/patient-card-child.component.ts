@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardChildForm } from './patient-card-child-form.model';
 import { ModalService } from 'src/app/services/modal.service';
@@ -109,7 +109,7 @@ export class PatientCardChildComponent implements OnInit, OnDestroy {
     })
   }
 
-  updatePatient() {
+  async updatePatient() {
     let curValue = {
       patientId: this.patientForm.controls['patientId'].value,
       familyType: this.patientForm.controls['familyType'].value,
@@ -148,9 +148,11 @@ export class PatientCardChildComponent implements OnInit, OnDestroy {
       curValue.weight = null as number
 
     if (!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))) {
-      this.patientService.updatePatient(curValue)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe()
+      
+      await lastValueFrom(
+         this.patientService.updatePatient(curValue)
+        .pipe(takeUntil(this.destroy$))
+      )
 
       this.pervValue = {
         patientId: this.Id,
@@ -178,11 +180,11 @@ export class PatientCardChildComponent implements OnInit, OnDestroy {
     }
   }
 
-  leaveComponent(name: string) {
+  async leaveComponent(name: string) {
     if (this.patientForm.valid) {
 
       if (this.needUpd)
-        this.updatePatient()
+        await this.updatePatient()
 
       if (name == 'close') {
         this.pcModal.close()

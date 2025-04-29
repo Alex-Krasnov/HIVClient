@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { PatientCardEpidModel } from 'src/app/_interfaces/patient-card-epid.model';
 import { ListService } from 'src/app/services/list.service';
 import { PatientCardEpidService } from 'src/app/services/patient-card/patient-card-epid.service';
@@ -336,7 +336,7 @@ export class PatientCardEpidComponent implements OnInit, OnDestroy {
     this.pcIsValid = isValid;
   }
 
-  updatePatient(){
+  async updatePatient(){
     let curValue: pcEpid = {
       patientId: this.patientForm.controls['patientId'].value,
       dtMailReg: this.patientForm.controls['dtMailReg'].value,
@@ -354,9 +354,11 @@ export class PatientCardEpidComponent implements OnInit, OnDestroy {
     };
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
-      this.patientService.updatePatient(curValue)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe()
+      
+      await lastValueFrom(
+        this.patientService.updatePatient(curValue)
+        .pipe(takeUntil(this.destroy$))
+      )
 
       this.pervValue = {
         patientId: this.Id,
@@ -378,13 +380,12 @@ export class PatientCardEpidComponent implements OnInit, OnDestroy {
     }
   }
   
-  leaveComponent(name: string){
+  async leaveComponent(name: string){
     if(this.patientForm.valid && this.ccIsValid && this.rcIsValid && this.ocIsValid && this.piIsValid && 
        this.pniIsValid && this.cvIsValid && this.cIsValid && this.chIsValid && this.pcIsValid){
 
-        if(this.needUpd){
-          this.updatePatient()
-        }
+        if(this.needUpd)
+          await this.updatePatient()
       
         if(name == 'close'){
           this.pcModal.close()

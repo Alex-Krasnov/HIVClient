@@ -15,7 +15,7 @@
     lastCareDate?: string;
     communicationParentDate?: string;
     callingDistrictSpecDate?: string;
-    refusalPhp?: boolean;
-    refusalResearch?: boolean;
-    refusalTherapy?: boolean;
+    refusalPhp: boolean;
+    refusalResearch: boolean;
+    refusalTherapy: boolean;
  }

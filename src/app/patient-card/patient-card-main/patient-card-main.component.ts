@@ -144,7 +144,10 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
           snilsFedArchive: data.archive,
           codeword: data.codeWord,
           snils: data.snils,
-          fioChange: data.fioChange
+          fioChange: data.fioChange,
+
+          flgDiagnosisAfterDeath: data.flgDiagnosisAfterDeath,
+          deathTransferSub: data.deathTransferSub
         };
       })
   }
@@ -215,7 +218,8 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
       codeword: this.patientForm.controls['codeWord'].value,
       snils: this.patientForm.controls['snils'].value,
       fioChange: this.patientForm.controls['fioChange'].value,
-      flgDiagnosisAfterDeath: this.patientForm.controls['flgDiagnosisAfterDeath'].value
+      flgDiagnosisAfterDeath: this.patientForm.controls['flgDiagnosisAfterDeath'].value,
+      deathTransferSub: this.patientForm.controls['deathTransferSub'].value
     };
     
     if(!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))){
@@ -290,7 +294,8 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
         codeword: curValue.codeword,
         snils: curValue.snils,
         fioChange: curValue.fioChange,
-        flgDiagnosisAfterDeath: curValue.flgDiagnosisAfterDeath
+        flgDiagnosisAfterDeath: curValue.flgDiagnosisAfterDeath,
+        deathTransferSub: curValue.deathTransferSub
       };
 
       this.patientForm.markAsPristine()
@@ -486,9 +491,8 @@ export class PatientCardMainComponent implements OnInit, OnDestroy {
   async leaveComponent(name: string){
     if(this.patientForm.valid){
 
-      if(this.needUpd){
+      if(this.needUpd)
         await this.updatePatient()
-      }
       
       if(name == 'close'){
         this.pcModal.close()

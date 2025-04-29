@@ -304,6 +304,13 @@
                 <input type="checkbox" class="my-auto row-checkbox" formControlName="selectPasWhen">
                 <span class="w-auto my-auto">Дата выдачи</span>
             </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectDeathTransferSub">
+                <span class="w-auto my-auto">Смерть передана в суб.РФ</span>
+                <select class="form-control tbl me-1" style="width: 15%;" formControlName="deathTransferSubYNA">
+                    <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
+                </select>
+            </div>
         </div>
     </div>
     <br>

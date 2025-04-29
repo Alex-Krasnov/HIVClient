@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, Observable, Subject, Subscription, takeUntil } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { InList } from 'src/app/validators/in-lst';
 import { PatientCardPregnantForm } from './patient-card-pregnant-form.model';
@@ -146,7 +146,7 @@ export class PatientCardPregnantComponent implements OnInit, OnDestroy {
     this.updSchema = schema
   }
 
-  updatePatient() {
+  async updatePatient() {
     let curValue = {
       patientId: this.patientForm.controls['patientId'].value,
       pregCheck: this.patientForm.controls['pregCheck'].value,
@@ -154,9 +154,11 @@ export class PatientCardPregnantComponent implements OnInit, OnDestroy {
     };
 
     if (!(JSON.stringify(this.pervValue) === JSON.stringify(curValue))) {
-      this.patientService.updatePatient(curValue.patientId, curValue.pregCheck, curValue.pregMonth)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe()
+      
+      await lastValueFrom(
+        this.patientService.updatePatient(curValue.patientId, curValue.pregCheck, curValue.pregMonth)
+        .pipe(takeUntil(this.destroy$))
+      )
 
       this.pervValue = {
         patientId: this.Id,
@@ -168,11 +170,11 @@ export class PatientCardPregnantComponent implements OnInit, OnDestroy {
     }
   }
 
-  leaveComponent(name: string) {
+  async leaveComponent(name: string) {
     if (this.patientForm.valid && this.sIsValid) {
 
       if (this.needUpd)
-        this.updatePatient()
+        await this.updatePatient()
 
       if (name == 'close') {
         this.pcModal.close()
