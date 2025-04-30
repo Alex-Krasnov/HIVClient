@@ -50,7 +50,8 @@ export class UserComponent implements OnInit {
           write: new FormControl(item.write, {updateOn: 'blur'}),
           admin: new FormControl(item.admin, {updateOn: 'blur'}),
           deleter: new FormControl(item.deleter, {updateOn: 'blur'}),
-          klassif: new FormControl(item.klassif, {updateOn: 'blur'})
+          klassif: new FormControl(item.klassif, {updateOn: 'blur'}),
+          lab: new FormControl(item.lab, {updateOn: 'blur'})
         });
         this.listArray.push(itemForm);
       })
@@ -64,7 +65,8 @@ export class UserComponent implements OnInit {
       newWrite: new FormControl(false, {updateOn: 'blur'}),
       newAdmin: new FormControl(false, {updateOn: 'blur'}),
       newDeleter: new FormControl(false, {updateOn: 'blur'}),
-      newKlassif: new FormControl(false, {updateOn: 'blur'})
+      newKlassif: new FormControl(false, {updateOn: 'blur'}),
+      newLab: new FormControl(false, {updateOn: 'blur'})
     });
 
     this.listForm.controls['subs'].statusChanges.subscribe(() => {
@@ -98,10 +100,10 @@ export class UserComponent implements OnInit {
       write: this.listForm.get('newWrite').value,
       admin: this.listForm.get('newAdmin').value,
       deleter: this.listForm.get('newDeleter').value,
-      klassif: this.listForm.get('newKlassif').value
+      klassif: this.listForm.get('newKlassif').value,
+      lab: this.listForm.get('newLab').value
     }
 
-    console.log();
     if(JSON.stringify(this.pervValue).indexOf(user.uid) != -1){
       confirm(`Запись ${user.uid} уже существует`)
 
@@ -113,6 +115,7 @@ export class UserComponent implements OnInit {
       this.listForm.get('newAdmin').setValue(false)
       this.listForm.get('newDeleter').setValue(false)
       this.listForm.get('newKlassif').setValue(false)
+      this.listForm.get('newLab').setValue(false)
 
       this.listForm.get('newUid').markAsPristine()
       this.listForm.get('newPwd').markAsPristine()
@@ -122,6 +125,7 @@ export class UserComponent implements OnInit {
       this.listForm.get('newAdmin').markAsPristine()
       this.listForm.get('newDeleter').markAsPristine()
       this.listForm.get('newKlassif').markAsPristine()
+      this.listForm.get('newLab').markAsPristine()
       return null
     }
 
@@ -133,7 +137,8 @@ export class UserComponent implements OnInit {
       write: new FormControl(user.write, {updateOn: 'blur'}),
       admin: new FormControl(user.admin, {updateOn: 'blur'}),
       deleter: new FormControl(user.deleter, {updateOn: 'blur'}),
-      klassif: new FormControl(user.klassif, {updateOn: 'blur'})
+      klassif: new FormControl(user.klassif, {updateOn: 'blur'}),
+      lab: new FormControl(user.lab, {updateOn: 'blur'})
     });
 
     const rowData = {
@@ -144,7 +149,8 @@ export class UserComponent implements OnInit {
       write: user.write,
       admin: user.admin,
       deleter: user.deleter,
-      klassif: user.klassif
+      klassif: user.klassif,
+      lab: user.lab
     }
 
     this.listService.create(user).subscribe()
@@ -160,6 +166,7 @@ export class UserComponent implements OnInit {
     this.listForm.get('newAdmin').setValue(false)
     this.listForm.get('newDeleter').setValue(false)
     this.listForm.get('newKlassif').setValue(false)
+    this.listForm.get('newLab').setValue(false)
 
     this.listForm.get('newUid').markAsPristine()
     this.listForm.get('newPwd').markAsPristine()
@@ -169,6 +176,7 @@ export class UserComponent implements OnInit {
     this.listForm.get('newAdmin').markAsPristine()
     this.listForm.get('newDeleter').markAsPristine()
     this.listForm.get('newKlassif').markAsPristine()
+    this.listForm.get('newLab').markAsPristine()
   }
 
   updateRow(){

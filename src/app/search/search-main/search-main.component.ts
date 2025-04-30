@@ -6,8 +6,7 @@ import { SearchSharedServiceService } from 'src/app/services/search/search-share
 
 @Component({
   selector: 'app-search-main',
-  templateUrl: './search-main.component.html',
-  styleUrls: ['./search-main.component.css']
+  templateUrl: './search-main.component.html'
 })
 export class SearchMainComponent implements OnInit{
   name: string

@@ -82,6 +82,7 @@
         <div class="col-4 left-col-m" style="margin-top: 0.5rem;">
             <button class="w-70 btn btn-lg btn-outline-primary btn-w" [routerLink]="['/visit/sldocdabdaterange']">Запись на прием</button>
             <button class="w-70 btn btn-lg btn-outline-primary btn-w" [routerLink]="['/search-registry']">Выгрузка записей</button>
+            <button class="w-70 btn btn-lg btn-outline-primary btn-w" [routerLink]="['/analysis']" [disabled]="!isLab">Удаление анализов</button>
             <!-- <button class="w-70 btn btn-lg btn-outline-primary btn-w">Сохранение талонов</button> -->
         </div>
     </div>

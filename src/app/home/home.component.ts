@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   isKlassif: boolean = false;
   isAdmin: boolean = false;
   isWriter: boolean = false;
+  isLab: boolean = false;
 
   constructor(
     private jwtHelper: JwtHelperService,
@@ -26,31 +27,30 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.jwtHelper.decodeToken(localStorage.getItem("jwt")));
-    var roles = this.jwtHelper.decodeToken(localStorage.getItem("jwt"))["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    var rolesRaw = this.jwtHelper.decodeToken(localStorage.getItem("jwt"))["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    var roles = Array.isArray(rolesRaw) ? rolesRaw : [rolesRaw];
 
+    console.log(roles);
     console.log(this.jwtHelper.getTokenExpirationDate(localStorage.getItem("jwt")));
 
-    if (roles.find(e => e == "Klassif") != null) {
-      this.roleService.isKlassif = true
-      this.isKlassif = true;
-    }
-    if (roles.find(e => e == "Admin") != null) {
-      this.roleService.isAdmin = true
-      this.isAdmin = true;
-    }
-    if (roles.find(e => e == "Writer") != null) {
-      this.roleService.isWriter = true
-      this.isWriter = true;
-    }
+    if (roles.find(e => e == "Klassif") != null) 
+      this.roleService.isKlassif = this.isKlassif = true
 
+    if (roles.find(e => e == "Admin") != null)
+      this.roleService.isAdmin = this.isAdmin = true
+    
+    if (roles.find(e => e == "Writer") != null) 
+      this.roleService.isWriter = this.isWriter = true
+    
     if (roles.find(e => e == "Deleter") != null)
       this.roleService.IsDeleter = true
 
     if (roles.find(e => e == "Excel") != null)
       this.roleService.isExcel = true
 
-    
+    if (roles.find(e => e == "Lab") != null) 
+      this.roleService.isLab = this.isLab = true
+
     this.modal.isVisible$.subscribe((isVisible) => {
       if (isVisible) {
         document.body.classList.add('no-scroll');
@@ -58,9 +58,6 @@ export class HomeComponent implements OnInit {
         document.body.classList.remove('no-scroll');
       }
     });
-
-
-    console.log(this.isWriter, "isWriter", this.isKlassif, "isKlassif", this.isAdmin, "isAdmin");
   }
 
   newPatient() {

@@ -7,4 +7,5 @@ export interface ListUser{
   admin: boolean
   deleter: boolean
   klassif: boolean
+  lab: boolean
 }

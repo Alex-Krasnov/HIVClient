@@ -38,7 +38,8 @@ export class UserService {
         write: user.write,
         admin: user.admin,
         deleter: user.deleter,
-        klassif: user.klassif
+        klassif: user.klassif,
+        lab: user.lab
       })
   };
 
@@ -51,7 +52,8 @@ export class UserService {
         write: user.write,
         admin: user.admin,
         deleter: user.deleter,
-        klassif: user.klassif
+        klassif: user.klassif,
+        lab: user.lab
       })
   };
 }

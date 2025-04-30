@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ImportKorvetComponent } from './import-korvet/import-korvet.component';
 import { SerchRegistryComponent } from './serch-registry/serch-registry.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'lists', 
   loadChildren: () => import('./lists/lists.module').then(m => m.ListsModule), 
   canActivate: [AuthGuard]},
+  { path: 'analysis', component: AnalysisComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

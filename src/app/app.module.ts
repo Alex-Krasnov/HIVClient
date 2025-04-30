@@ -18,6 +18,7 @@ import { ImportKorvetComponent } from './import-korvet/import-korvet.component';
 import { SerchRegistryComponent } from './serch-registry/serch-registry.component';
 import { ErrInterceptor } from './http-interceptors/err-interceptor';
 import { ModalErrComponent } from './modal-err/modal-err.component';
+import { AnalysisComponent } from './analysis/analysis.component';
 
 
 export function tokenGetter() { 
@@ -31,7 +32,8 @@ export function tokenGetter() {
     LoginComponent,
     ImportKorvetComponent,
     SerchRegistryComponent,
-    ModalErrComponent
+    ModalErrComponent,
+    AnalysisComponent
   ],
   imports: [
     BrowserModule,

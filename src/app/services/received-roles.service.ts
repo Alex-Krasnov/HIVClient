@@ -10,4 +10,5 @@ export class ReceivedRolesService {
   isAdmin: boolean = false
   IsDeleter: boolean = false
   isKlassif: boolean = false
+  isLab: boolean = false
 }

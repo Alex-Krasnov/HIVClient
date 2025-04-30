@@ -1,95 +1,110 @@
 <form class="mx-auto modal-content p-1" style="background-color: #ade8dd;" [formGroup]="listForm" *ngIf="listForm">
-    <div>
-        <div class="row mt-1">
-            <div class="col-2">
-                <h5>Логин</h5>
+    <!-- Фиксированная шапка с учетом скроллбара -->
+    <div class="sticky-top py-2" style="z-index: 1; background-color: #ade8dd; padding-right: 17px;">
+        <div class="row gx-1 mx-0">
+            <div class="col-2 px-1">
+                <h5 class="mb-0 text-truncate">Логин</h5>
             </div>
-            <div class="col-2">
-                <h5>Пароль</h5>
+            <div class="col-2 px-1">
+                <h5 class="mb-0 text-truncate">Пароль</h5>
             </div>
-            <div class="col-2">
-                <h5>Имя пользователя</h5>
+            <div class="col-2 px-1">
+                <h5 class="mb-0 text-truncate">Имя пользователя</h5>
             </div>
-            <div class="col">
-                <h5>excel</h5>
+            <div class="col px-1 text-center">
+                <h5 class="mb-0 text-truncate">excel</h5>
             </div>
-            <div class="col">
-                <h5>write</h5>
+            <div class="col px-1 text-center">
+                <h5 class="mb-0 text-truncate">write</h5>
             </div>
-            <div class="col">
-                <h5>admin</h5>
+            <div class="col px-1 text-center">
+                <h5 class="mb-0 text-truncate">admin</h5>
             </div>
-            <div class="col">
-                <h5>deleter</h5>
+            <div class="col px-1 text-center">
+                <h5 class="mb-0 text-truncate">deleter</h5>
             </div>
-            <div class="col">
-                <h5>klassif</h5>
+            <div class="col px-1 text-center">
+                <h5 class="mb-0 text-truncate">klassif</h5>
             </div>
-            <div class="col-2">
+            <div class="col px-1 text-center">
+                <h5 class="mb-0 text-truncate">lab</h5>
+            </div>
+            <div class="col-2 px-1">
+                <!-- Пустая колонка для кнопки -->
             </div>
         </div>
     </div>
-    <div>
+
+    <!-- Прокручиваемое содержимое с постоянным скроллбаром -->
+    <div style="max-height: 80vh; overflow-y: scroll; margin-top: 5px; overflow-x: hidden;">
         <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
-            <div class="row mt-1" formGroupName="{{i}}">
-                <div class="col-2">
-                    <input type="text" class="form-control" formControlName="uid">
+            <div class="row gx-1 mx-0 my-1" formGroupName="{{i}}">
+                <div class="col-2 px-1">
+                    <input type="text" class="form-control w-100" formControlName="uid">
                 </div>
-                <div class="col-2 pe-0">
-                    <input type="text" class="form-control" formControlName="pwd">
+                <div class="col-2 px-1">
+                    <input type="text" class="form-control w-100" formControlName="pwd">
                 </div>
-                <div class="col-2 pe-0">
-                    <input type="text" class="form-control" formControlName="userName">
+                <div class="col-2 px-1">
+                    <input type="text" class="form-control w-100" formControlName="userName">
                 </div>
-                <div class="col pe-0">
+                <div class="col px-1 d-flex justify-content-center">
                     <input type="checkbox" class="form-check-input mt-2" formControlName="excel">
                 </div>
-                <div class="col pe-0">
+                <div class="col px-1 d-flex justify-content-center">
                     <input type="checkbox" class="form-check-input mt-2" formControlName="write">
                 </div>
-                <div class="col pe-0">
+                <div class="col px-1 d-flex justify-content-center">
                     <input type="checkbox" class="form-check-input mt-2" formControlName="admin">
                 </div>
-                <div class="col pe-0">
+                <div class="col px-1 d-flex justify-content-center">
                     <input type="checkbox" class="form-check-input mt-2" formControlName="deleter">
                 </div>
-                <div class="col pe-0">
+                <div class="col px-1 d-flex justify-content-center">
                     <input type="checkbox" class="form-check-input mt-2" formControlName="klassif">
                 </div>
-                <div class="col-2">
-                    <button type="button" class="btn btn-outline-danger" style="width: 100px !important;" (click)="delRow(i)">Удалить</button>
+                <div class="col px-1 d-flex justify-content-center">
+                    <input type="checkbox" class="form-check-input mt-2" formControlName="lab">
+                </div>
+                <div class="col-2 px-1">
+                    <button type="button" class="btn btn-outline-danger w-100" (click)="delRow(i)">Удалить</button>
                 </div>
             </div>
         </ng-container>
     </div>
-    <div>
-        <div class="row mt-1">
-            <div class="col-2">
-                <input type="text" class="form-control" formControlName="newUid">
+
+    <!-- Форма добавления с учетом скроллбара -->
+    <div class="mx-0 mt-1" style="padding-right: 17px;">
+        <div class="row gx-1 mx-0">
+            <div class="col-2 px-1">
+                <input type="text" class="form-control w-100" formControlName="newUid">
             </div>
-            <div class="col-2 pe-0">
-                <input type="text" class="form-control" formControlName="newPwd">
+            <div class="col-2 px-1">
+                <input type="text" class="form-control w-100" formControlName="newPwd">
             </div>
-            <div class="col-2 pe-0">
-                <input type="text" class="form-control" formControlName="newUserName">
+            <div class="col-2 px-1">
+                <input type="text" class="form-control w-100" formControlName="newUserName">
             </div>
-            <div class="col pe-0">
+            <div class="col px-1 d-flex justify-content-center">
                 <input type="checkbox" class="form-check-input mt-2" formControlName="newExcel">
             </div>
-            <div class="col pe-0">
+            <div class="col px-1 d-flex justify-content-center">
                 <input type="checkbox" class="form-check-input mt-2" formControlName="newWrite">
             </div>
-            <div class="col pe-0">
+            <div class="col px-1 d-flex justify-content-center">
                 <input type="checkbox" class="form-check-input mt-2" formControlName="newAdmin">
             </div>
-            <div class="col pe-0">
+            <div class="col px-1 d-flex justify-content-center">
                 <input type="checkbox" class="form-check-input mt-2" formControlName="newDeleter">
             </div>
-            <div class="col pe-0">
+            <div class="col px-1 d-flex justify-content-center">
                 <input type="checkbox" class="form-check-input mt-2" formControlName="newKlassif">
             </div>
-            <div class="col-2">
-                <button type="button" class="btn btn-outline-success" style="width: 100px !important;" (click)="createRow()">Добавить</button>
+            <div class="col px-1 d-flex justify-content-center">
+                <input type="checkbox" class="form-check-input mt-2" formControlName="newLab">
+            </div>
+            <div class="col-2 px-1">
+                <button type="button" class="btn btn-outline-success w-100" (click)="createRow()">Добавить</button>
             </div>
         </div>
     </div>
