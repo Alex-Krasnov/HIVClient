@@ -53,7 +53,7 @@ export class SearchChildModel extends BaseSearchModel{
    dateDieAidsEnd: string = ''
    @FormField({ value: ['Все'], disabled: true })
    materHome: string[] = ['Все']
-   @FormField({})
+   @FormField({ value: 'Все' })
    form309: string = ''
 
    //#endregion
