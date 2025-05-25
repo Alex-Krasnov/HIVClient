@@ -14,6 +14,7 @@ export class PatientCardModalComponent implements OnInit, OnDestroy{
   patientId: number | null
   patientFio: string
   currentPage: string
+  isNonResident: boolean
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -35,7 +36,10 @@ export class PatientCardModalComponent implements OnInit, OnDestroy{
       else{
         this.service.GetFio(id)
         .pipe(takeUntil(this.destroy$))
-        .subscribe(obj => {this.patientFio =  obj.patientFio})
+        .subscribe(obj => {
+          this.patientFio =  obj.patientFio
+          this.isNonResident = obj.isNonResident
+        })
       }
 
     })

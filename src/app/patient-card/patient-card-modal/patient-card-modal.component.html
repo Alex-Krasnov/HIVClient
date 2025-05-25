@@ -1,7 +1,7 @@
 <div (click)="modal.nextPage('close')" class="bg"></div>
 
 <div class="content">
-  <div class="navbar row bg-light container-fluid justify-content-between p-0 m-0">
+    <div class="navbar row bg-light container-fluid justify-content-between p-0 m-0">
     <div class="col-xl-1 p-0 ps-1 d-flex justify-content-start">
         <img class="ms-1" src="favicon.ico" width="35" height="35">
     </div>
@@ -20,8 +20,8 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
-  </div>
-  <nav class="navbar navbar-expand-xxl bg-light">
+    </div>
+    <nav class="navbar navbar-expand-xxl bg-light">
     <div class="container-fluid">
         <div class="navbar-collapse collapse" [class.show]="isVisibleMenu">
             <ul class="navbar-nav w-100 mb-2 mb-md-0 d-flex bd-highlight">
@@ -78,19 +78,24 @@
             </ul>
         </div>
     </div>
-  </nav>
-  <app-patient-card-main *ngIf="currentPage == 'main'"></app-patient-card-main>
-  <app-patient-card-epid *ngIf="currentPage == 'epid'"></app-patient-card-epid>
-  <app-patient-card-treatment *ngIf="currentPage == 'treatment'"></app-patient-card-treatment>
-  <app-patient-card-visit *ngIf="currentPage == 'visit'"></app-patient-card-visit>
-  <app-patient-card-diagnostics *ngIf="currentPage == 'diagnostics'"></app-patient-card-diagnostics>
-  <app-patient-card-resistence *ngIf="currentPage == 'resistence'"></app-patient-card-resistence>
-  <app-patient-card-diagnostic-concomitant *ngIf="currentPage == 'diagnostic-concomitant'"></app-patient-card-diagnostic-concomitant>
-  <app-patient-card-diagnostic-manual *ngIf="currentPage == 'diagnostic-manual'"></app-patient-card-diagnostic-manual>
-  <app-patient-card-acl *ngIf="currentPage == 'acl'"></app-patient-card-acl>
-  <app-patient-card-recipe *ngIf="currentPage == 'recipe'"></app-patient-card-recipe>
-  <app-patient-card-pregnant *ngIf="currentPage == 'pregnant'"></app-patient-card-pregnant>
-  <app-patient-card-child *ngIf="currentPage == 'child'"></app-patient-card-child>
-  <app-patient-card-covid *ngIf="currentPage == 'covid'"></app-patient-card-covid>
-  <app-patient-card-files *ngIf="currentPage == 'files'"></app-patient-card-files>
+    </nav>
+    <div [hidden]="!isNonResident" class="row bg-light">
+        <div class="row g-0 text-left">
+            <button type="button" class="btn btn-lg btn-danger">Иногородние</button>
+        </div>
+    </div>
+    <app-patient-card-main *ngIf="currentPage == 'main'"></app-patient-card-main>
+    <app-patient-card-epid *ngIf="currentPage == 'epid'"></app-patient-card-epid>
+    <app-patient-card-treatment *ngIf="currentPage == 'treatment'"></app-patient-card-treatment>
+    <app-patient-card-visit *ngIf="currentPage == 'visit'"></app-patient-card-visit>
+    <app-patient-card-diagnostics *ngIf="currentPage == 'diagnostics'"></app-patient-card-diagnostics>
+    <app-patient-card-resistence *ngIf="currentPage == 'resistence'"></app-patient-card-resistence>
+    <app-patient-card-diagnostic-concomitant *ngIf="currentPage == 'diagnostic-concomitant'"></app-patient-card-diagnostic-concomitant>
+    <app-patient-card-diagnostic-manual *ngIf="currentPage == 'diagnostic-manual'"></app-patient-card-diagnostic-manual>
+    <app-patient-card-acl *ngIf="currentPage == 'acl'"></app-patient-card-acl>
+    <app-patient-card-recipe *ngIf="currentPage == 'recipe'"></app-patient-card-recipe>
+    <app-patient-card-pregnant *ngIf="currentPage == 'pregnant'"></app-patient-card-pregnant>
+    <app-patient-card-child *ngIf="currentPage == 'child'"></app-patient-card-child>
+    <app-patient-card-covid *ngIf="currentPage == 'covid'"></app-patient-card-covid>
+    <app-patient-card-files *ngIf="currentPage == 'files'"></app-patient-card-files>
 </div>

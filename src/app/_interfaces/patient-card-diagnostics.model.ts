@@ -8,7 +8,6 @@ import { DrugRemains } from "./drud-remains.model";
 export interface PatientCardDiagnosticsModel {
   patientId: number;
   patientFio: string;
-  isNonResident: boolean;
 
   virusLoads?: Diag3Col[];
   virusLoadsQuals?: Diag2Col[]; 

@@ -2,11 +2,6 @@
     <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
     <div *ngIf="patientForm.invalid" class="alert alert-danger">Ошибка...</div>
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
-        <div class="row ms-1 mt-1 me-1">
-            <div class="row g-0 text-left">
-                <button [hidden]="!patient.isNonResident" type="button" class="btn btn-lg btn-danger">Иногородние</button>
-            </div>
-        </div>
         <div class="row mx-1 mt-1">
             <div class="col-xl-4 border">
                 <div class="row"><h6 class="text-start">Определение вирусной нагрузки</h6></div>
