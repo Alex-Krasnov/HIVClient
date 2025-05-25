@@ -94,6 +94,8 @@ export class SearchMainInfModel extends BaseSearchModel {
    diePreset: string = ''
    @FormField({ value: 'Все' })
    deathTransferSubYNA: string = 'Все'
+   @FormField({})
+   desc: string = ''
 
    //#endregion
 
@@ -167,6 +169,9 @@ export class SearchMainInfModel extends BaseSearchModel {
 
    @FormField({ value: true, validators: [Validators.required] })
    selectDeathTransferSub: boolean = true
+
+   @FormField({ value: true, validators: [Validators.required] })
+   selectDesc: boolean = true
 
    //#endregion
 

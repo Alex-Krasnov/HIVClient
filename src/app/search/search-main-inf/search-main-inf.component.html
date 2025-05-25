@@ -311,6 +311,11 @@
                     <option *ngFor="let item of searchLists.listYNA" [value]="item">{{ item }}</option>
                 </select>
             </div>
+            <div class="row row-control mb-1">
+                <input type="checkbox" class="my-auto row-checkbox" formControlName="selectDesc">
+                <span class="w-auto my-auto">Примечание</span>
+                <input type="text" class="form-control tbl" style="width: 82%;" formControlName="desc">
+            </div>
         </div>
     </div>
     <br>
