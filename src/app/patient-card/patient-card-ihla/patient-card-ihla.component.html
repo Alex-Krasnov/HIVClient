@@ -4,7 +4,7 @@
     <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
         <div class="row mx-1 mt-1">
             <div class="col-xl-4">
-                <div class="row"><h6 class="text-start">Вирусная нагрузка</h6></div>
+                <div class="row"><h6 class="text-start">ИХЛА</h6></div>
                 <div class="row">
                     <app-analysis-ihla [(subArr)]="patientIhla" [(patientId)]="Id" (isValid)="giveIhlaForUpd($event)"></app-analysis-ihla>
                 </div>
