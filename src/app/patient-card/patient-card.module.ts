@@ -72,6 +72,8 @@ import { ModalReferalAnalysisIbComponent } from './modal-referal-analysis-ib/mod
 import { HepCComponent } from './hep-c/hep-c.component';
 import { PatientCardModalComponent } from './patient-card-modal/patient-card-modal.component';
 import { Diagnostics4ColComponent } from './diagnostics4-col/diagnostics4-col.component';
+import { PatientCardIhlaComponent } from './patient-card-ihla/patient-card-ihla.component';
+import { AnalysisIhlaComponent } from './analysis-ihla/analysis-ihla.component';
 
 
 
@@ -135,7 +137,9 @@ import { Diagnostics4ColComponent } from './diagnostics4-col/diagnostics4-col.co
     ModalReferalAnalysisIbComponent,
     HepCComponent,
     PatientCardModalComponent,
-    Diagnostics4ColComponent
+    Diagnostics4ColComponent,
+    PatientCardIhlaComponent,
+    AnalysisIhlaComponent
   ],
   imports: [
     CommonModule, 

@@ -1,0 +1,18 @@
+<ng-container [formGroup]="patientForm" *ngIf="patientForm">
+    <div *ngIf="patientForm.pending" class="alert alert-warning">Валидация...</div>
+    <div *ngIf="patientForm.invalid || !ihlaIsValid " class="alert alert-danger">Ошибка...</div>
+    <form class="pt-1" [formGroup]="patientForm" *ngIf="patientForm" style="background-color: #ade8dd;">
+        <div class="row mx-1 mt-1">
+            <div class="col-xl-4">
+                <div class="row"><h6 class="text-start">Вирусная нагрузка</h6></div>
+                <div class="row">
+                    <app-analysis-ihla [(subArr)]="patientIhla" [(patientId)]="Id" (isValid)="giveIhlaForUpd($event)"></app-analysis-ihla>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <button style="display: none;" type="button"></button>
+    </form>
+
+</ng-container>

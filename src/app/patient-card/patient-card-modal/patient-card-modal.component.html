@@ -45,6 +45,7 @@
                         <li><a class="dropdown-item" [class.disabled]="currentPage == 'diagnostic-concomitant'" (click)="modal.nextPage('diagnostic-concomitant')">Диагностика и сопут.</a></li>
                         <li><a class="dropdown-item" [class.disabled]="currentPage == 'diagnostic-manual'" (click)="modal.nextPage('diagnostic-manual')">Диагн. руч.</a></li>
                         <li><a class="dropdown-item" [class.disabled]="currentPage == 'acl'" (click)="modal.nextPage('acl')">ACL</a></li>
+                        <li><a class="dropdown-item" [class.disabled]="currentPage == 'ihla'" (click)="modal.nextPage('ihla')">ИХЛА</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -98,4 +99,5 @@
     <app-patient-card-child *ngIf="currentPage == 'child'"></app-patient-card-child>
     <app-patient-card-covid *ngIf="currentPage == 'covid'"></app-patient-card-covid>
     <app-patient-card-files *ngIf="currentPage == 'files'"></app-patient-card-files>
+    <app-patient-card-ihla *ngIf="currentPage == 'ihla'"></app-patient-card-ihla>
 </div>

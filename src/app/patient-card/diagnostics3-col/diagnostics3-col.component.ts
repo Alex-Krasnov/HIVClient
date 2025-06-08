@@ -3,8 +3,7 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-diagnostics3-col',
-  templateUrl: './diagnostics3-col.component.html',
-  styleUrls: ['./diagnostics3-col.component.css']
+  templateUrl: './diagnostics3-col.component.html'
 })
 export class Diagnostics3ColComponent implements OnInit{
   formS: FormGroup;
