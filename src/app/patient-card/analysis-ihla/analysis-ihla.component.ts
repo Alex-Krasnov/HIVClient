@@ -27,7 +27,8 @@ export class AnalysisIhlaComponent implements OnInit{
     this.formS = this.fb.group({
       subs: this.subArr as FormArray,
       newDate: new FormControl(),
-      newResult: new FormControl()
+      newResult: new FormControl(),
+      newNumber: new FormControl(),
     },{updateOn: 'blur'});
     
     this.pervValue = this.subArr.value as FormArray;
@@ -55,16 +56,18 @@ export class AnalysisIhlaComponent implements OnInit{
   async create() {
     let date = this.formS.get('newDate').value
     let result = this.formS.get('newResult').value
+    let number = this.formS.get('newNumber').value
     
-    if(this.formS.controls['newResult'].valid && this.formS.controls['newDate'].value.length != 0)
+    if(this.formS.controls['newResult'].valid && this.formS.controls['newDate'].value.length != 0 && this.formS.controls['newNumber'].valid)
     {
-      let item = await firstValueFrom(this.patientService.create(this.patientId, date, result))
+      let item = await firstValueFrom(this.patientService.create(this.patientId, date, result, number))
       
       const sForm = new FormGroup({
         id: new FormControl(item.id),
         patientId: new FormControl(item.patientId),
         result: new FormControl(item.result),
         analysisDate: new FormControl(item.analysisDate),
+        analysisNumber: new FormControl(item.analysisNumber),
       });
 
       const sData = {
@@ -72,6 +75,7 @@ export class AnalysisIhlaComponent implements OnInit{
         patientId: item.patientId,
         result: item.result,
         analysisDate: item.analysisDate,
+        analysisNumber: item.analysisNumber,
       }
       
       this.subs.push(sForm)
@@ -82,6 +86,8 @@ export class AnalysisIhlaComponent implements OnInit{
     this.formS.get('newDate').markAsPristine()
     this.formS.get('newResult').setValue('')
     this.formS.get('newResult').markAsPristine()
+    this.formS.get('newNumber').setValue('')
+    this.formS.get('newNumber').markAsPristine()
   }
 
   update(){
@@ -96,7 +102,8 @@ export class AnalysisIhlaComponent implements OnInit{
             curValue[index].id,
             this.patientId,
             curValue[index].analysisDate,
-            curValue[index].result
+            curValue[index].result,
+            curValue[index].analysisNumber,
           ).subscribe()
           oldValue[index] = curValue[index]
         }

@@ -10,4 +10,5 @@ export interface AnalysisIhla{
   patientId: number
   result?: string
   analysisDate?: Date
+  analysisNumber?: string
 }

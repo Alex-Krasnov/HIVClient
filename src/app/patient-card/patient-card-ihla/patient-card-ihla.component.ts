@@ -85,6 +85,7 @@ export class PatientCardIhlaComponent implements OnInit, OnDestroy  {
           patientId: new FormControl(item.patientId),
           result: new FormControl(item.result),
           analysisDate: new FormControl(item.analysisDate),
+          analysisNumber: new FormControl(item.analysisNumber),
         });
         this.patientIhla.push(sForm);
       }

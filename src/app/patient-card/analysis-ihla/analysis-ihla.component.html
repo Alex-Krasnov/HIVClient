@@ -2,6 +2,7 @@
     <thead style="position: sticky; top: 0; background: #ade8dd;">
       <tr>
         <th scope="col" style="width: 135px;">Дата</th>
+        <th scope="col">№ Пробы</th>
         <th scope="col">Результат</th>
         <th scope="col"></th>
       </tr>
@@ -10,12 +11,14 @@
         <ng-container formArrayName="subs" *ngFor="let item of subs.controls; let i = index">
           <tr formGroupName="{{i}}">
             <td><input type="date" class="form-control tbl" formControlName="analysisDate"></td>
+            <td><input type="text" class="form-control tbl" formControlName="analysisNumber" ></td>
             <td><input type="text" class="form-control tbl" formControlName="result" ></td>
             <td><button type="button" class="btn btn-outline-danger" (click)="del(i)"></button></td>
           </tr>
         </ng-container>
         <tr>
             <td><input type="date" class="form-control tbl" formControlName="newDate"></td>
+            <td><input type="text" class="form-control tbl" formControlName="newNumber" ></td>
             <td><input type="text" class="form-control tbl" formControlName="newResult" ></td>
             <td><button type="button" class="btn btn-outline-success" (click)="create()"></button></td>
           </tr>

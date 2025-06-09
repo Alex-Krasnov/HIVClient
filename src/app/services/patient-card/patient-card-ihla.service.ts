@@ -19,20 +19,22 @@ export class PatientCardIhlaService {
     return this.http.delete(this.url+`/Delete?id=${id}`)
   };
 
-  create(patientId: number, date: Date, result: string): Observable<AnalysisIhla>{
+  create(patientId: number, date: Date, result: string, number: string): Observable<AnalysisIhla>{
     return this.http.post<AnalysisIhla>(this.url+`/Create`, {
         patientId: patientId,
         analysisDate: date,
-        result: result
+        result: result, 
+        analysisNumber: number
     })
   };
 
-  update(id: number, patientId: number, date: Date, result: string): Observable<AnalysisIhla>{
+  update(id: number, patientId: number, date: Date, result: string, number: string): Observable<AnalysisIhla>{
     return this.http.post<AnalysisIhla>(this.url+`/Update`, {
         id: id, 
         patientId: patientId,
         analysisDate: date,
-        result: result
+        result: result, 
+        analysisNumber: number
     })
   };
 }
