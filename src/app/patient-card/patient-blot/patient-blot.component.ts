@@ -62,6 +62,10 @@ export class PatientBlotComponent implements OnInit {
  }
 
  delBlot(index: number) {
+    if(this.patientId == 0 || this.patientId == null || this.patientId == undefined){
+      confirm(`Нельзя выполнить сохранение для новой карты, пока не будут сохранены основные данные. Для сохранения переключитесь на другую вкладку!`)
+      return
+    }
     let e = this.blots.at(index)
     this.patientService.delPatientBlot(this.patientId, e.get('blotId').value).subscribe();
     this.pervValue.splice(index, 1);
@@ -69,6 +73,11 @@ export class PatientBlotComponent implements OnInit {
   }
 
   createBlot(){
+    if(this.patientId == 0 || this.patientId == null || this.patientId == undefined){
+      confirm(`Нельзя выполнить сохранение для новой карты, пока не будут сохранены основные данные. Для сохранения переключитесь на другую вкладку!`)
+      return
+    }
+
     let BlotId = this.formB.get('newBlotId').value
     let BlotNo = this.formB.get('newBlotNo').value
     let BlotDate = this.formB.get('newBlotDate').value
@@ -154,6 +163,10 @@ export class PatientBlotComponent implements OnInit {
   }
 
   updateBlot(){
+    if(this.patientId == 0 || this.patientId == null || this.patientId == undefined){
+      confirm(`Нельзя выполнить сохранение для новой карты, пока не будут сохранены основные данные. Для сохранения переключитесь на другую вкладку!`)
+      return
+    }
     let oldValue = this.pervValue;
     let curValue = this.formB.controls['blots'].value;
     
