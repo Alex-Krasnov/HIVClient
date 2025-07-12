@@ -74,6 +74,7 @@ import { PatientCardModalComponent } from './patient-card-modal/patient-card-mod
 import { Diagnostics4ColComponent } from './diagnostics4-col/diagnostics4-col.component';
 import { PatientCardIhlaComponent } from './patient-card-ihla/patient-card-ihla.component';
 import { AnalysisIhlaComponent } from './analysis-ihla/analysis-ihla.component';
+import { SelectOnFocusDirective } from '../directives/select-on-focus-directive.directive';
 
 
 
@@ -139,7 +140,8 @@ import { AnalysisIhlaComponent } from './analysis-ihla/analysis-ihla.component';
     PatientCardModalComponent,
     Diagnostics4ColComponent,
     PatientCardIhlaComponent,
-    AnalysisIhlaComponent
+    AnalysisIhlaComponent,
+    SelectOnFocusDirective
   ],
   imports: [
     CommonModule, 
