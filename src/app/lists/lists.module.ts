@@ -35,6 +35,7 @@ import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { MedForSchemaComponent } from './med-for-schema/med-for-schema.component';
 import { SchemaSelectComponent } from './schema-select/schema-select.component';
 import { CallStatusComponent } from './call-status/call-status.component';
+import { MedForRecipeComponent } from './med-for-recipe/med-for-recipe.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { CallStatusComponent } from './call-status/call-status.component';
     ModalWindowComponent,
     MedForSchemaComponent,
     SchemaSelectComponent,
-    CallStatusComponent
+    CallStatusComponent,
+    MedForRecipeComponent
   ],
   imports: [
     CommonModule,
