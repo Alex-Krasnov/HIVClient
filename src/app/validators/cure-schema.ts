@@ -15,8 +15,6 @@ export function endDateValidator(): ValidatorFn {
       return null;
     }
 
-    console.log(!(last !== true && (endDate === null || endDate === '')));
-    
     if (last !== true && (endDate === null || endDate === '')) {
       
       // endDateControl.setErrors({ endDateRequired: true });

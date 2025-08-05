@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
+import { debounceTime, distinctUntilChanged, firstValueFrom, Subject, takeUntil } from 'rxjs';
 import { CureSchemas } from 'src/app/_interfaces/cure-schemas.model';
 import { ListService } from 'src/app/services/list.service';
 import { ModalService } from 'src/app/services/modal.service';
@@ -14,6 +14,8 @@ import { InList } from 'src/app/validators/in-lst';
   styleUrls: ['./patient-cure-schemas.component.css']
 })
 export class PatientCureSchemasComponent implements OnInit, OnChanges{
+  private destroy$ = new Subject<void>();
+  private isUpdating = false;
   formCS: FormGroup;
   pervValue: any;
   indForUpd: number;
@@ -56,24 +58,31 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
   );
     this.pervValue = this.cureSchemaArr.getRawValue();
 
-    this.formCS.controls['cureSchemas'].statusChanges.subscribe(() => {      
-      this.checkValidLast()
-      if (this.formCS.controls['cureSchemas'].valid){
+    this.formCS.controls['cureSchemas'].statusChanges
+    .pipe(
+      debounceTime(300),
+      takeUntil(this.destroy$)
+    )
+    .subscribe(() => {      
+      const needUpdate = this.checkValidLast();
+    
+      if (this.formCS.controls['cureSchemas'].valid) {
         this.updateCureSchemas();
         this.csIsValid.emit(true);
-      } else 
+      } else {
         this.csIsValid.emit(false);
+      }
 
-      let countLast = 0
-
-      this.cureSchemas.controls.forEach(item => {
-        if(item.get('last').value == true)
-          countLast += 1
-      });
-
-      if(countLast>1 || countLast == 0)
-        this.csIsValid.emit(false)
+      // Дополнительный вызов только если были изменения last
+      if (needUpdate && this.formCS.controls['cureSchemas'].valid) {
+        this.updateCureSchemas();
+      }
     })
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
   }
 
   get cureSchemas() {
@@ -83,7 +92,7 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
   delCureSchemas(index: number) {
     let e = this.cureSchemas.at(index);
     
-    this.patientService.delCureSchemas(this.patientId, e.get('cureSchemaName').value, e.get('startDate').value).subscribe();
+    this.patientService.delCureSchemas(this.patientId, e.get('cureSchemaName').value, e.get('startDate').value).pipe(takeUntil(this.destroy$)).subscribe();
     this.pervValue.splice(index, 1);
     this.cureSchemas.removeAt(index);
 
@@ -145,7 +154,8 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
       }
 
       this.patientService.createCureSchemas(this.patientId, name, date, endDate, schemaComm, cureChangeName, protNum, rangeTherapy, last)
-      .subscribe()
+        .pipe(takeUntil(this.destroy$))
+        .subscribe()
       
       this.cureSchemas.push(sForm)
       this.pervValue.push(sData)
@@ -172,9 +182,12 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
   }
 
   async updateCureSchemas(){
+    if (this.isUpdating) return;
+    
+    this.isUpdating = true;
     let oldValue = this.pervValue;
     let curValue = this.formCS.controls['cureSchemas'].getRawValue();
-    
+
     if(!(JSON.stringify(oldValue) === JSON.stringify(curValue)))
       for (let index = 0; index < oldValue.length; index++) {
         if(!(JSON.stringify(oldValue[index]) === JSON.stringify(curValue[index]))){
@@ -195,16 +208,19 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
           ))
           this.pervValue[index] = curValue[index]
         }
-      } 
+      }
+    this.isUpdating = false;
   }
 
   checkValidLast(){
-    let countUpd = 0
+    let countUpd = 0;
+    let needUpdate = false;
 
     this.cureSchemas.controls.forEach( (item, index) => {
       if(item.get('last').value == true){
         this.cureSchemas.at(index).get('last').setValue(false,{ emitEvent: false })
-        countUpd += 1
+        countUpd += 1;
+        needUpdate = true;
       }
     })
 
@@ -219,9 +235,9 @@ export class PatientCureSchemasComponent implements OnInit, OnChanges{
     if(countLast == 0)
       this.cureSchemas.at(maxInd).get('last').setValue(true,{ emitEvent: false })
 
-    if(countUpd>0)
-      this.updateCureSchemas()
-    
+    // if(countUpd>0)
+    //   this.updateCureSchemas()
+    return needUpdate;
   }
 
   writeInd(i: number){

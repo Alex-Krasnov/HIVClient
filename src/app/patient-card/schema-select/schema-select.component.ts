@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Subject, takeUntil } from 'rxjs';
 import { SelectSchemaModel } from 'src/app/_interfaces/select-schema.model';
 import { ModalService } from 'src/app/services/modal.service';
 import { SelectSchemaService } from 'src/app/services/select-schema.service';
@@ -11,6 +11,7 @@ import { SelectSchemaService } from 'src/app/services/select-schema.service';
   styleUrls: ['./schema-select.component.css']
 })
 export class SchemaSelectComponent implements OnInit{
+  private destroy$ = new Subject<void>();
   data: SelectSchemaModel[] | undefined;
   form: FormGroup;
   arr = new FormArray([]);
@@ -33,8 +34,14 @@ export class SchemaSelectComponent implements OnInit{
     })
   }
 
+  ngOnDestroy() {
+    this.destroy$.next(); // Триггерим завершение
+    this.destroy$.complete(); // Очищаем память
+  }
+
   getData(): void {
     this.patientService.getData()
+      .pipe(takeUntil(this.destroy$))
       .subscribe((data:SelectSchemaModel[]) => {
         this.data = data;
         this.initForm();
@@ -53,6 +60,7 @@ export class SchemaSelectComponent implements OnInit{
         }
     );
     this.arr.valueChanges
+    .pipe(takeUntil(this.destroy$))
     .subscribe((item: FormGroup[]) => {
 
       const indexes = this.arr.controls.reduce((acc, control, index) => {
@@ -92,13 +100,13 @@ export class SchemaSelectComponent implements OnInit{
       this.selectedMedicine.forEach(e => {
       lst.push(this.data[e].id)
       })
-      // this.patientService.getSchema(lst).subscribe()
-      let a = await firstValueFrom(this.patientService.getSchema(lst))
-      this.msg = a.b
+      this.msg = (await firstValueFrom(this.patientService.getSchema(lst))).cureSchemaLong
     }
   }
 
-  exit(){
+  async exit(){
+    await this.setSchema()
+
     if(this.msg == 'Выберите препараты' || this.msg.length == 0){
       this.msg = 'Выберите препараты'
       return null
